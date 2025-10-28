@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+body {
+  font-family: 'Inter' sans-serif;
+  @apply bg-dotbackground;
+}
+
+@theme {
+  --color-dotbackground: hsl(207deg 19% 98%);
+  --color-dotgreen: hsl(87deg 23% 44%);
+  --color-dotpurple: hsl(266deg 53% 70%);
+  --color-dotyellow: hsl(45deg 80% 59%);
+}
