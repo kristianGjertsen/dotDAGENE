@@ -1,4 +1,4 @@
-import type { ReactNode, MouseEvent } from 'react';
+import type { ReactNode } from 'react';
 
 type color = 'purple' | 'green' | 'yellow';
 

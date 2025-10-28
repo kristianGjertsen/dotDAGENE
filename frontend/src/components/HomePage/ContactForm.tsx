@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Button } from '../Button';
 
 type FormData = {
@@ -25,14 +25,20 @@ export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
 
+  /*
+  
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  */
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -48,7 +54,8 @@ Melding:
 ${formData.melding}
       `.trim();
 
-      const mailtoLink = `mailto:kontakt@dotdagene.no?subject=Henvendelse fra ${formData.bedriftsnavn}&body=${encodeURIComponent(emailBody)}`;
+      const mailtoLink = `mailto:kontakt@dotdagene.no?subject=Henvendelse fra ${formData.bedriftsnavn
+        }&body=${encodeURIComponent(emailBody)}`;
 
       window.location.href = mailtoLink;
 
@@ -72,7 +79,14 @@ ${formData.melding}
     <>
       <div className="mx-auto max-w-4xl">
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* …resten uendret… */}
+          {/* ... hele skjemaet uendret ... */}
+
+          <div className="flex flex-col items-stretch justify-center">
+            <Button color="green" type="submit" disabled={isSubmitting}>
+              Send Melding
+            </Button>
+          </div>
+
           {submitStatus === 'success' && (
             <div className="bg-dotgreen border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
@@ -80,9 +94,10 @@ ${formData.melding}
               </p>
             </div>
           )}
+
           {submitStatus === 'error' && (
             <div className="border-3 border-black bg-red-600 p-4 text-white">
-              Noe gikk galt ved åpning av e-postklienten.
+              Noe gikk galt ved åpning av e-postklienten. Vennligst prøv igjen.
             </div>
           )}
         </form>
