@@ -21,26 +21,19 @@ export const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null);
 
     try {
-      const emailBody = `
-Bedriftsnavn: ${formData.bedriftsnavn}
-Kontaktperson: ${formData.kontaktperson}
-Stilling: ${formData.stilling}
-E-post: ${formData.epost}
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-Melding:
-${formData.melding}
-      `.trim();
-
-      const mailtoLink = `mailto:kontakt@dotdagene.no?subject=Henvendelse fra ${
-        formData.bedriftsnavn
-      }&body=${encodeURIComponent(emailBody)}`;
-
-      window.location.href = mailtoLink;
+      if (!res.ok) throw new Error('Send failed');
 
       setFormData({
         bedriftsnavn: '',
@@ -50,13 +43,14 @@ ${formData.melding}
         melding: '',
       });
       setSubmitStatus('success');
-    } catch (error) {
-      console.error('Error opening email client:', error);
+    } catch (err) {
+      console.error(err);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <>
@@ -167,7 +161,14 @@ ${formData.melding}
           {submitStatus === 'success' && (
             <div className="bg-dotgreen border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
-                E-postklienten din skal nå åpne seg. Takk for din henvendelse!
+                Takk! Henvendelsen er sendt.
+              </p>
+            </div>
+          )}
+          {submitStatus === 'error' && (
+            <div className="bg-red-600 border-3 border-black p-6 text-white">
+              <p className="text-center text-lg font-medium">
+                Oisann! Klarte ikke å sende. Prøv igjen om litt.
               </p>
             </div>
           )}
