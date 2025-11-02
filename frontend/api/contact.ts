@@ -33,7 +33,7 @@ export default async function handler(req: any, res: any) {
     // ---- Send e-post ----
     await resend.emails.send({
       from: 'dotDAGENE <kontakt@dotdagene.no>',
-      to: ['kristiangjertsen5@gmail.com'],
+      to: ['kontakt@dotdagene.no'],
       subject: `Henvendelse fra ${bedriftsnavn}`,
       text: `
 Bedriftsnavn: ${bedriftsnavn}
