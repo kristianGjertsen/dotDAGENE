@@ -168,7 +168,7 @@ export const ContactForm = () => {
           {submitStatus === 'error' && (
             <div className="bg-red-600 border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
-                Oisann! Klarte ikke å sende. Prøv igjen om litt.
+                Oisann! Klarte ikke å sende. Kontakt oss direkte på kontakt@dotdagene.no
               </p>
             </div>
           )}
