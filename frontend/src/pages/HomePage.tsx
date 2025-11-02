@@ -103,7 +103,6 @@ export const HomePage = () => {
 
       <section className="px-8">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
-          <ContactUs />
           <div className="bg-dotyellow flex w-full flex-col gap-4 border-3 border-black p-8">
             <h3 className="text-3xl">INTERESSEMELDING</h3>
             <p>
@@ -112,6 +111,7 @@ export const HomePage = () => {
             </p>
             <ContactForm />
           </div>
+          <ContactUs />
         </section>
       </section>
       <Footer />

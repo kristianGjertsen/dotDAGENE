@@ -159,7 +159,7 @@ export const ContactForm = () => {
           </div>
 
           {submitStatus === 'success' && (
-            <div className="bg-dotgreen border-3 border-black p-6 text-white">
+            <div className="bg-dotpurple border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
                 Takk! Henvendelsen er sendt.
               </p>
