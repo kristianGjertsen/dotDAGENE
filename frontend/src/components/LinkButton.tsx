@@ -1,18 +1,11 @@
 import type { ReactNode } from 'react';
-
-type color = 'purple' | 'green' | 'yellow';
+import { colorMap, type color } from '../lib/colors';
 
 interface ButtonProps {
   children: ReactNode;
   link: string;
   color: color;
 }
-
-const colorMap = new Map<color, string>([
-  ['green', ' bg-dotgreen'],
-  ['purple', ' bg-dotpurple'],
-  ['yellow', ' bg-dotyellow'],
-]);
 
 export const LinkButton = ({ children, link, color }: ButtonProps) => {
   return (

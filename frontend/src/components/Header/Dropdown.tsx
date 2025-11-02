@@ -29,7 +29,7 @@ export const Dropdown = ({ isOpen, onClose, site }: MenuProps) => {
           <Link
             key={site.href}
             to={site.href}
-            className="bg-dotgreen fixed z-50 flex w-full cursor-pointer items-center justify-center gap-3 p-3 text-xl text-black md:hidden"
+            className=" fixed z-50 flex w-full cursor-pointer items-center justify-center gap-3 p-3 text-xl text-black md:hidden"
           >
             <section>{site.title}</section>
           </Link>
