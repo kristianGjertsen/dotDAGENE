@@ -59,7 +59,7 @@ export const HomePage = () => {
               titelChildren="STANDS"
               color="green"
               button={
-                <LinkButton link="/contact" color="green">
+                <LinkButton link="/contact" color="purple">
                   Legg til i kalender
                 </LinkButton>
               }
@@ -69,11 +69,12 @@ export const HomePage = () => {
               informatikkstudenter. Perfekt mulighet til å rekruttere de beste
               talentene innen digitalisering og teknologi.
             </InfoWithButton>
-            <InfoWithButton
+            <InfoWithButton 
               titelChildren="PITCHEKVELD"
               color="yellow"
+              textColor='black'
               button={
-                <LinkButton link="/contact" color="green">
+                <LinkButton link="/contact" color="purple">
                   Legg til i kalender
                 </LinkButton>
               }

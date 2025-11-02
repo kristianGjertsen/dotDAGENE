@@ -1,43 +1,47 @@
 export const Banner = () => {
   return (
-    <section className="mt-20 mb-32 flex h-[150px] w-full items-center justify-center overflow-clip md:h-[300px]">
+    <section className="mt-15 flex min-h-[250px] w-full items-center justify-center overflow-visible md:min-h-[300px]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-full w-full"
-        viewBox="0 10 1000 180"
+        viewBox="0 10 1000 250"
         preserveAspectRatio="xMidYMid slice"
       >
         <g>
+          //svart
           <path
             d="M0,30, L150,30 A30,30 0 0,1 180,60 A30,30 0 0,0 210,90 L330,90"
             stroke="#000000"
-            strokeWidth="5"
+            strokeWidth="7"
             strokeLinecap="round"
             fill="none"
           />
+          //lilla
           <path
             d="M550,90 L630,90 A20,20 0 0,1 630,130 L600,130"
             stroke="hsl(266deg 53% 70%)"
-            strokeWidth="5"
+            strokeWidth="7"
             strokeLinecap="round"
             fill="none"
           />
+          //grønn
           <path
             d="M450,130 L400,130 A20,20 0 0,0 400,170 L510,170"
             stroke="hsl(87deg 23% 44%)"
-            strokeWidth="5"
+            strokeWidth="7"
             strokeLinecap="round"
             fill="none"
           />
+          //gul
           <path
-            d="M700,170 L1000,170"
-            stroke="hsl(45deg 80% 59%)"
-            strokeWidth="5"
-            strokeLinecap="round"
-            fill="none"
+            d= "M700,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
+          stroke="hsl(45deg 80% 59%)"
+          strokeWidth="7"
+          strokeLinecap="round"
+          fill="none"
           />
 
-          <text x="300" y="70" fontSize="32" fontWeight="bold" fill="#000000">
+          <text x="290" y="65" fontSize="32" fontWeight="bold" fill="#000000">
             Helt nye
           </text>
 
@@ -50,14 +54,14 @@ export const Banner = () => {
           >
             karrieredager
           </text>
-          <text x="460" y="135" fontSize="32" fontWeight="bold">
+          <text x="455" y="140" fontSize="32" fontWeight="bold">
             <tspan fill="#000000">på </tspan>
             <tspan fill="hsl(87deg 23% 44%)">NTNU</tspan>
           </text>
 
           <text
             x="520"
-            y="175"
+            y="180"
             font-size="32"
             font-weight="bold"
             fill="#000000"
