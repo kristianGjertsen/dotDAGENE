@@ -54,7 +54,7 @@ export const ContactForm = () => {
 
   return (
     <>
-      <div id="kontakt" className="mx-auto max-w-4xl">
+      <div id="contact" className="mx-auto max-w-4xl scroll-mt-20">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Bedriftsnavn: full line */}
           <div className="space-y-3">

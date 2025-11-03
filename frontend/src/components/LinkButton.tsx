@@ -11,7 +11,7 @@ export const LinkButton = ({ children, link, color }: ButtonProps) => {
   return (
     <a
       href={link}
-      className="group relative inline-block cursor-pointer select-none focus:outline-none"
+      className="group relative inline-block cursor-pointer select-none focus:outline-none whitespace-nowrap"
     >
       {/* Bottom "shadow" chip */}
       <span aria-hidden="true" className="absolute inset-0 bg-black" />
