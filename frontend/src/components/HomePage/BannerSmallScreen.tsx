@@ -21,7 +21,7 @@ export const BannerSmall = () => {
 
             {/* lilla pil/løkke etter 'karrieredager' */}
             <path
-              d="M500,86 L600,86 A16,16 0 0,1 600,118 L570,118"
+              d="M520,80 L565,80 A16,16 0 0,1 565,115 L484,115"
               stroke="hsl(266deg 53% 70%)"
               strokeWidth="9"
               strokeLinecap="round"
@@ -30,7 +30,7 @@ export const BannerSmall = () => {
 
             {/* grønn løkke rundt 'NTNU' */}
             <path
-              d="M320,118 L270,118 A16,16 0 0,0 270,150 L380,150"
+              d="M315,118 L230,118 A16,16 0 0,0 230,153 L295,153"
               stroke="hsl(87deg 23% 44%)"
               strokeWidth="9"
               strokeLinecap="round"
@@ -39,7 +39,7 @@ export const BannerSmall = () => {
 
             {/* gul bunn-ut til høyre */}
             <path
-              d="M510,155 L620,160 A24,24 0 0,1 644,184 A24,24 0 0,0 668,192 L800,192"
+              d="M505,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
               stroke="hsl(45deg 80% 59%)"
               strokeWidth="9"
               strokeLinecap="round"
