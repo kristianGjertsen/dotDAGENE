@@ -8,7 +8,8 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header/Header';
 import { LinkButton } from '../components/LinkButton';
 import {
-  Banner,
+  BannerBig,
+  BannerSmall,
   ContactForm,
   ContactUs,
   Countdown,
@@ -20,46 +21,58 @@ export const HomePage = () => {
   return (
     <>
       <Header />
-      <Banner />
+      <div className="block md:hidden">
+        <BannerSmall />
+      </div>
+
+      {/* Vises kun på store skjermer */}
+      <div className="hidden md:block">
+        <BannerBig />
+      </div>
+
+
       <Countdown />
-      <section className="flex h-16 flex-row items-center justify-center"></section>
-      {/* <section className="flex h-16 flex-col items-center justify-center gap-8 pt-2 sm:flex-row">
-        <LinkButton link="/contact" color="green">
-          Kontakt oss
-        </LinkButton>
-        <LinkButton link="/about" color="yellow">
-          Les Mer
-        </LinkButton>
-      </section> */}
-      <section>
-        <section className="mt-16 flex flex-col items-center justify-center gap-2 px-8 sm:flex-row">
+
+      <section className="mt-16 px-8">
+        <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
           <Info
             titelChildren="500+ STUDENTER"
             color="purple"
             icon={UserGroupIcon}
           >
-            Møt kvalifiserte kandidater innen IT og teknologi
+            Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
           </Info>
-          <Info titelChildren="HELT NYTT" color="green" icon={SparklesIcon}>
-            Første dotDAGENE noensinne - vær med fra starten!
+
+          <Info
+            titelChildren="HELT NYTT"
+            color="green"
+            icon={SparklesIcon}
+          >
+            Vær blant de første som får oppleve et helt nytt arrangement for studenter og bedrifter innen IT og teknologi.
           </Info>
         </section>
       </section>
+
       <section>
         <div className="mt-16 flex flex-col flex-wrap items-center gap-4">
-          <h2 className="text-center text-4xl font-medium">
-            OPPDAG MULIGHETENE
-          </h2>
-          <p className="text-center">
-            dotDAGENE 2026 bringer sammen studenter og bedrifter gjennom en
-            rekke aktiviteter og muligheter
-          </p>
-          <section className="mt-5 flex w-full flex-col items-stretch justify-center gap-2 px-8 sm:mt-16 sm:flex-row">
+          <div className='px-8'>
+
+            <h2 className="text-center text-4xl font-medium">
+              OPPDAG MULIGHETENE
+            </h2>
+            <p className="mt-5 text-center">
+              dotDAGENE 2026 bringer sammen studenter og bedrifter.
+              Her får du sjansen til å bygge nettverk, utforske fremtidige karriereveier og oppleve hvordan teknologi og samarbeid skaper nye muligheter.
+              Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår
+            </p>
+          </div>
+
+          <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 px-8 sm:mt-20 sm:flex-row">
             <InfoWithButton
               titelChildren="STANDS"
               color="green"
               button={
-                <LinkButton link="/contact" color="purple">
+                <LinkButton link="http://localhost:3000/event.ics" color="purple">
                   Legg til i kalender
                 </LinkButton>
               }
@@ -69,12 +82,13 @@ export const HomePage = () => {
               informatikkstudenter. Perfekt mulighet til å rekruttere de beste
               talentene innen digitalisering og teknologi.
             </InfoWithButton>
-            <InfoWithButton 
+
+            <InfoWithButton
               titelChildren="PITCHEKVELD"
               color="yellow"
-              textColor='black'
+              textColor="black"
               button={
-                <LinkButton link="/contact" color="purple">
+                <LinkButton link="http://localhost:3000/event.ics" color="purple">
                   Legg til i kalender
                 </LinkButton>
               }
@@ -90,6 +104,7 @@ export const HomePage = () => {
           </section>
         </div>
       </section>
+
       <section className="mx-16 my-32">
         <div className="flex w-full flex-col items-center justify-center gap-8 border-3 border-black bg-white p-8 text-center lg:p-32 lg:py-16">
           <h2 className="text-4xl font-medium md:text-6xl">HVEM ER VI?</h2>
@@ -103,7 +118,6 @@ export const HomePage = () => {
 
       <section className="px-8">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
-          <ContactUs />
           <div className="bg-dotyellow flex w-full flex-col gap-4 border-3 border-black p-8">
             <h3 className="text-3xl">INTERESSEMELDING</h3>
             <p>
@@ -112,6 +126,7 @@ export const HomePage = () => {
             </p>
             <ContactForm />
           </div>
+          <ContactUs />
         </section>
       </section>
       <Footer />

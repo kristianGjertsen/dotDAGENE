@@ -54,7 +54,7 @@ export const ContactForm = () => {
 
   return (
     <>
-      <div id="kontakt" className="mx-auto max-w-4xl">
+      <div id="contact" className="mx-auto max-w-4xl scroll-mt-20">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Bedriftsnavn: full line */}
           <div className="space-y-3">
@@ -159,7 +159,7 @@ export const ContactForm = () => {
           </div>
 
           {submitStatus === 'success' && (
-            <div className="bg-dotgreen border-3 border-black p-6 text-white">
+            <div className="bg-dotpurple border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
                 Takk! Henvendelsen er sendt.
               </p>

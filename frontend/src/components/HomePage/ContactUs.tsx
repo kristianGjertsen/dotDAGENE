@@ -9,7 +9,6 @@ export const ContactUs = () => {
   return (
     <section
       className="bg-dotgreen flex w-full flex-col gap-4 border-3 border-black p-6 text-white"
-      id="contact"
     >
       <h3 className="text-3xl">KONTAKT DOTDAGENE</h3>
       <p>

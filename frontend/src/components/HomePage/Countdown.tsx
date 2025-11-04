@@ -58,9 +58,9 @@ export const Countdown = () => {
   }, [timeRemaining]);
 
   return (
-    <section className="-mt-20 flex flex-col items-center gap-8">
+    <section className=" flex flex-col items-center gap-8">
       <div className="flex flex-row flex-wrap items-center justify-center gap-2">
-        <div className="bg-dotgreen flex h-36 w-54 flex-col items-center justify-center border-3 border-black text-white">
+        <div className="bg-dotgreen flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
           <div className="number-container h-16">
             <div key={`prev-${animations.days.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
               {animations.days.prev}
@@ -71,7 +71,7 @@ export const Countdown = () => {
           </div>
           <p>DAGER</p>
         </div>
-        <div className="bg-dotpurple flex h-36 w-54 flex-col items-center justify-center border-3 border-black text-white">
+        <div className="bg-dotpurple flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
           <div className="number-container h-16">
             <div key={`prev-${animations.hours.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
               {animations.hours.prev}
@@ -82,7 +82,7 @@ export const Countdown = () => {
           </div>
           <p>TIMER</p>
         </div>
-        <div className="bg-dotyellow flex h-36 w-54 flex-col items-center justify-center border-3 border-black text-white">
+        <div className="bg-dotyellow flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
           <div className="number-container h-16">
             <div key={`prev-${animations.minutes.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
               {animations.minutes.prev}
@@ -93,7 +93,7 @@ export const Countdown = () => {
           </div>
           <p>MINUTTER</p>
         </div>
-        <div className="bg-dotgreen flex h-36 w-54 flex-col items-center justify-center border-3 border-black text-white">
+        <div className="bg-dotgreen flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
           <div className="number-container h-16">
             <div key={`prev-${animations.seconds.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
               {animations.seconds.prev}
