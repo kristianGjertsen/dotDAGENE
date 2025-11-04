@@ -1,7 +1,6 @@
 import Logo from '../assets/litenDfarget.svg';
 import Instagram from '../assets/instagram.svg';
 import Linkedin from '../assets/linkedin.svg';
-const a_className = 'text-gray-100 hover:text-dotyellow';
 
 export const Footer = () => {
   return (

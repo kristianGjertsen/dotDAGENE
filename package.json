@@ -4,5 +4,9 @@
     "d3-shape": "^3.2.0",
     "express": "^5.1.0",
     "svgpath": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0"
   }
 }
