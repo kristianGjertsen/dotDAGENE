@@ -72,7 +72,7 @@ export const HomePage = () => {
               titelChildren="STANDS"
               color="green"
               button={
-                <LinkButton link="http://localhost:3000/event.ics" color="purple">
+                <LinkButton link="https://dotdagene.no/event.ics" color="purple">
                   Legg til i kalender
                 </LinkButton>
               }
@@ -88,7 +88,7 @@ export const HomePage = () => {
               color="yellow"
               textColor="black"
               button={
-                <LinkButton link="http://localhost:3000/event.ics" color="purple">
+                <LinkButton link="https://dotdagene.no/event.ics" color="purple">
                   Legg til i kalender
                 </LinkButton>
               }
