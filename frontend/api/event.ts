@@ -82,8 +82,19 @@ function buildICS({
 
 export default async function handler(req: any, res: any) {
   try {
+    // Log at handler is being called
+    console.log('Event API handler called:', {
+      method: req.method,
+      url: req.url,
+      timestamp: new Date().toISOString()
+    });
+
     if (req.method !== 'GET') {
-      return res.status(405).end();
+      return res.status(405).json({ 
+        error: 'Method not allowed',
+        allowed: 'GET',
+        received: req.method
+      });
     }
 
     const uid = `${crypto.randomUUID()}@${HOSTNAME}`;
@@ -103,7 +114,11 @@ export default async function handler(req: any, res: any) {
     return res.status(200).send(ics);
   } catch (err) {
     console.error('event-api error:', err);
-    return res.status(500).json({ error: 'Internal error' });
+    return res.status(500).json({ 
+      error: 'Internal error',
+      message: err instanceof Error ? err.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    });
   }
 }
 
