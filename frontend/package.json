@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "generate-favicons": "node generate-favicons.js"
+    "generate-favicons": "node generate-favicons.js",
+    "generate-og-image": "node generate-og-image.js",
+    "generate-assets": "npm run generate-favicons && npm run generate-og-image"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
