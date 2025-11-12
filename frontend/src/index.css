@@ -16,3 +16,20 @@ body {
   --color-dotpurple: hsl(266deg 53% 70%);
   --color-dotyellow: hsl(45deg 80% 59%);
 }
+
+/* Header logo animasjon */
+@keyframes headerLogoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-logo-animate {
+  animation: headerLogoFadeIn 0.6s ease-out forwards;
+  opacity: 0; /* Start usynlig før animasjonen starter */
+}
