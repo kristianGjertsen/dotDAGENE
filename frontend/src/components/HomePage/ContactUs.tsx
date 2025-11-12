@@ -25,15 +25,6 @@ export const ContactUs = () => {
           <p>kontakt@dotdagene.no</p>
         </div>
       </section>
-      {/* <div className="bg-dotpurple flex flex-row border-3 border-black p-6">
-        <div className="w-16">
-          <PhoneIcon className="h-8 w-8" />
-        </div>
-        <div className="flex flex-col">
-          <p>TELEFON</p>
-          <p>+47 123 45 678</p>
-        </div>
-      </div> */}
       <div className="bg-dotpurple flex flex-row border-3 border-black p-6">
         <div className="w-16">
           <CalendarIcon className="h-8 w-8" />
