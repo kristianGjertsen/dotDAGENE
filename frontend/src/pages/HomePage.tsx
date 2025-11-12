@@ -6,10 +6,10 @@ import {
 } from '@heroicons/react/20/solid';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header/Header';
-import { LinkButton } from '../components/LinkButton';
 import {
   BannerBig,
   BannerSmall,
+  CalendarButton,
   ContactForm,
   ContactUs,
   Countdown,
@@ -71,11 +71,7 @@ export const HomePage = () => {
             <InfoWithButton
               titelChildren="STANDS"
               color="green"
-              button={
-                <LinkButton link="https://dotdagene.no/event.ics" color="purple">
-                  Legg til i kalender
-                </LinkButton>
-              }
+              button={<CalendarButton color="purple" />}
               icon={BuildingOffice2Icon}
             >
               Få egen stand på dotDAGENE og møt direkte med
@@ -87,11 +83,7 @@ export const HomePage = () => {
               titelChildren="PITCHEKVELD"
               color="yellow"
               textColor="black"
-              button={
-                <LinkButton link="https://dotdagene.no/event.ics" color="purple">
-                  Legg til i kalender
-                </LinkButton>
-              }
+              button={<CalendarButton color="purple" />}
               icon={MicrophoneIcon}
             >
               dotDAGENE inviterer til pitchekveld som avslutning på
@@ -119,8 +111,8 @@ export const HomePage = () => {
       <section className="px-8">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
           <div className="bg-dotyellow flex w-full flex-col gap-4 border-3 border-black p-8">
-            <h3 className="text-3xl">INTERESSEMELDING</h3>
-            <p>
+            <h3 className="text-3xl pl-8">INTERESSEMELDING</h3>
+            <p className='pl-8'>
               Fyll ut skjemaet så tar vi kontakt for å diskutere
               standmuligheter.
             </p>
