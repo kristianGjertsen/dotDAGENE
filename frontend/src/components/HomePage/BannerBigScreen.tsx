@@ -67,12 +67,14 @@ function MaskedStroke({ id, d, stroke, width = 7, dur, delay }: MaskedStrokeProp
 }
 
 export const BannerBig = () => {
-  const d1 = 0.35, d2 = 0.25, d3 = 0.25, d4 = 0.35, gap = -0.1;
+  // Delay i sekunder før linje-animasjonene starter
+  const LINE_ANIMATION_DELAY_SEC = 0.4;
+  const d1 = 0.4, d2 = 0.3, d3 = 0.3, d4 = 0.4, gap = -0.1;
   const t2 = d1 + gap;
   const t3 = d1 + gap + d2 + gap;
   const t4 = d1 + gap + d2 + gap + d3 + gap;
 
-   const stroke = 9;
+  const stroke = 10;
 
  return (
     <section className="mt-15 flex w-full items-center justify-center overflow-hidden md:min-h-[300px]">
@@ -89,15 +91,15 @@ export const BannerBig = () => {
             stroke="#000"
             width={stroke}
             dur={d1}
-            delay={0}
+            delay={LINE_ANIMATION_DELAY_SEC}
           />
           <MaskedStroke
             id="m-lilla"
             d="M550,90 L630,90 A20,20 0 0,1 630,130 L600,130"
             stroke="hsl(266deg 53% 70%)"
-            width={stroke}        // 👈 og her
+            width={stroke}
             dur={d2}
-            delay={t2}
+            delay={LINE_ANIMATION_DELAY_SEC + t2}
           />
           <MaskedStroke
             id="m-gronn"
@@ -105,7 +107,7 @@ export const BannerBig = () => {
             stroke="hsl(87deg 23% 44%)"
             width={stroke}
             dur={d3}
-            delay={t3}
+            delay={LINE_ANIMATION_DELAY_SEC + t3}
           />
           <MaskedStroke
             id="m-gul"
@@ -113,7 +115,7 @@ export const BannerBig = () => {
             stroke="hsl(45deg 80% 59%)"
             width={stroke}
             dur={d4}
-            delay={t4}
+            delay={LINE_ANIMATION_DELAY_SEC + t4}
           />
         </g>
 
