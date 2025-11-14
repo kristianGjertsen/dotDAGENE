@@ -58,47 +58,71 @@ export const Countdown = () => {
   }, [timeRemaining]);
 
   return (
-    <section className=" flex flex-col items-center gap-8">
-      <div className="flex flex-row flex-wrap items-center justify-center gap-2">
-        <div className="bg-dotgreen flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
-          <div className="number-container h-16">
-            <div key={`prev-${animations.days.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
+    <section className="flex flex-col items-center gap-6 px-4">
+      <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="bg-dotgreen flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+          <div className="number-container h-12 sm:h-16">
+            <div
+              key={`prev-${animations.days.prev}`}
+              className="text-3xl font-bold number-slide number-slide-exit sm:text-4xl"
+            >
               {animations.days.prev}
             </div>
-            <div key={`curr-${animations.days.value}`} className="text-4xl font-bold number-slide">
+            <div
+              key={`curr-${animations.days.value}`}
+              className="text-3xl font-bold number-slide sm:text-4xl"
+            >
               {animations.days.value}
             </div>
           </div>
           <p>DAGER</p>
         </div>
-        <div className="bg-dotpurple flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
-          <div className="number-container h-16">
-            <div key={`prev-${animations.hours.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
+        <div className="bg-dotpurple flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+          <div className="number-container h-12 sm:h-16">
+            <div
+              key={`prev-${animations.hours.prev}`}
+              className="text-3xl font-bold number-slide number-slide-exit sm:text-4xl"
+            >
               {animations.hours.prev}
             </div>
-            <div key={`curr-${animations.hours.value}`} className="text-4xl font-bold number-slide">
+            <div
+              key={`curr-${animations.hours.value}`}
+              className="text-3xl font-bold number-slide sm:text-4xl"
+            >
               {animations.hours.value}
             </div>
           </div>
           <p>TIMER</p>
         </div>
-        <div className="bg-dotyellow flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
-          <div className="number-container h-16">
-            <div key={`prev-${animations.minutes.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
+        <div className="bg-dotyellow flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+          <div className="number-container h-12 sm:h-16">
+            <div
+              key={`prev-${animations.minutes.prev}`}
+              className="text-3xl font-bold number-slide number-slide-exit sm:text-4xl"
+            >
               {animations.minutes.prev}
             </div>
-            <div key={`curr-${animations.minutes.value}`} className="text-4xl font-bold number-slide">
+            <div
+              key={`curr-${animations.minutes.value}`}
+              className="text-3xl font-bold number-slide sm:text-4xl"
+            >
               {animations.minutes.value}
             </div>
           </div>
           <p>MINUTTER</p>
         </div>
-        <div className="bg-dotgreen flex h-30 w-30 flex-col items-center justify-center border-3 border-black text-white">
-          <div className="number-container h-16">
-            <div key={`prev-${animations.seconds.prev}`} className="text-4xl font-bold number-slide number-slide-exit">
+        <div className="bg-dotgreen flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+          <div className="number-container h-12 sm:h-16">
+            <div
+              key={`prev-${animations.seconds.prev}`}
+              className="text-3xl font-bold number-slide number-slide-exit sm:text-4xl"
+            >
               {animations.seconds.prev}
             </div>
-            <div key={`curr-${animations.seconds.value}`} className="text-4xl font-bold number-slide">
+            <div
+              key={`curr-${animations.seconds.value}`}
+              className="text-3xl font-bold number-slide sm:text-4xl"
+            >
               {animations.seconds.value}
             </div>
           </div>

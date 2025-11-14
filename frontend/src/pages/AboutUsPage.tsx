@@ -65,14 +65,6 @@ export const AboutUsPage = () => {
               setter rammene for gode samtaler og lar både studenter og bedrifter
               vise frem hvem de er utenfor klassiske stands.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
-              <LinkButton link="/#contact" color="green">
-                Bli med oss
-              </LinkButton>
-              <LinkButton link="/" color="purple">
-                Til forsiden
-              </LinkButton>
-            </div>
           </div>
           <div className="relative flex w-full justify-center lg:justify-end">
             <div className="border-3 border-black bg-white p-6 shadow-[-20px_-20px_0px_0px_rgba(0,0,0,0.15)]">
