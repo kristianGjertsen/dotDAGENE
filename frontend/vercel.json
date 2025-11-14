@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/event.ics", "destination": "/api/event" }
+    { "source": "/event.ics", "destination": "/api/event" },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
-
