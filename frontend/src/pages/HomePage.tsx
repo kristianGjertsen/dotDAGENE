@@ -121,9 +121,11 @@ export const HomePage = () => {
       </section>
 
       <section className="mx-6 my-32 sm:mx-12 lg:mx-24">
-        <div className="flex w-full flex-col items-center justify-center gap-8 border-3 border-black bg-white p-8 text-center lg:p-32 lg:py-16">
-          <h2 className="text-4xl font-medium md:text-6xl">HVEM ER VI?</h2>
-          <p className="w-full md:px-48">
+        <div className="flex w-full flex-col items-center justify-center gap-6 border-3 border-black bg-white p-8 lg:px-32 lg:py-16">
+          <h2 className="text-center text-4xl font-medium md:text-6xl">
+            HVEM ER VI?
+          </h2>
+          <p className="mt-2 max-w-3xl text-center">
             NTNUs nyeste karrieredag innen digitalisering og teknologi.
             Arrangert av informatikkstudenter for å koble sammen fremtidens
             IT-talenter med bransjeledende bedrifter.

@@ -26,7 +26,7 @@ const faqs = [
   },
 ];
 
-const colorCycle = ['bg-dotpurple/70', 'bg-dotgreen/70', 'bg-dotyellow/70'];
+const colorCycle = ['bg-dotpurple/80', 'bg-dotgreen/80', 'bg-dotyellow/80'];
 
 export const FaqPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
