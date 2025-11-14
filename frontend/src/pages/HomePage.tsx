@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon,
   MicrophoneIcon,
@@ -18,14 +20,35 @@ import {
 } from '../components/HomePage';
 
 export const HomePage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) {
+      return;
+    }
+
+    const hash = location.hash.replace('#', '');
+
+    const element = document.getElementById(hash);
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(
+        null,
+        '',
+        `${window.location.pathname}${window.location.search}`,
+      );
+    }
+  }, [location]);
+
   return (
     <>
+      {/* Forskjellig banner på størrelse av skjermen*/}
       <Header />
       <div className="block md:hidden">
         <BannerSmall />
       </div>
 
-      {/* Vises kun på store skjermer */}
       <div className="hidden md:block">
         <BannerBig />
       </div>
@@ -33,7 +56,7 @@ export const HomePage = () => {
 
       <Countdown />
 
-      <section className="mt-16 px-8">
+      <section className="mt-16 px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
           <Info
             titelChildren="500+ STUDENTER"
@@ -53,9 +76,9 @@ export const HomePage = () => {
         </section>
       </section>
 
-      <section>
+      <section className="px-6 sm:px-12 lg:px-20">
         <div className="mt-16 flex flex-col flex-wrap items-center gap-4">
-          <div className='px-8'>
+          <div className="w-full">
 
             <h2 className="text-center text-4xl font-medium">
               OPPDAG MULIGHETENE
@@ -67,7 +90,7 @@ export const HomePage = () => {
             </p>
           </div>
 
-          <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 px-8 sm:mt-20 sm:flex-row">
+          <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:mt-20 sm:flex-row">
             <InfoWithButton
               titelChildren="STANDS"
               color="green"
@@ -97,7 +120,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="mx-16 my-32">
+      <section className="mx-6 my-32 sm:mx-12 lg:mx-24">
         <div className="flex w-full flex-col items-center justify-center gap-8 border-3 border-black bg-white p-8 text-center lg:p-32 lg:py-16">
           <h2 className="text-4xl font-medium md:text-6xl">HVEM ER VI?</h2>
           <p className="w-full md:px-48">
@@ -108,11 +131,11 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="px-8">
+      <section className="px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
           <div className="bg-dotyellow flex w-full flex-col gap-4 border-3 border-black p-8">
-            <h3 className="text-3xl pl-8">INTERESSEMELDING</h3>
-            <p className='pl-8'>
+            <h3 className="text-3xl">INTERESSEMELDING</h3>
+            <p>
               Fyll ut skjemaet så tar vi kontakt for å diskutere
               standmuligheter.
             </p>

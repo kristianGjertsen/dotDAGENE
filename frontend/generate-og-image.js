@@ -19,10 +19,10 @@ async function generateOGImage() {
     if (existsSync(logoPath)) {
       svgBuffer = readFileSync(logoPath);
       usingLogo = true;
-      console.log('✅ Using hovedlogo.svg');
+      console.log(' Using hovedlogo.svg');
     } else if (existsSync(svgPath)) {
       svgBuffer = readFileSync(svgPath);
-      console.log('✅ Using favicon.svg');
+      console.log(' Using favicon.svg');
     } else {
       throw new Error('No SVG file found');
     }
