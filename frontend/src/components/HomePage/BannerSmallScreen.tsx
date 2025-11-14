@@ -37,7 +37,7 @@ export const BannerSmall = () => {
             {/* lilla pil/løkke etter 'karrieredager' */}
             <MaskedStroke
               id="m-lilla-sm"
-              d="M520,80 L565,80 A16,16 0 0,1 565,115 L484,115"
+              d="M520,80 L555,80 A16,16 0 0,1 555,115 L484,115"
               stroke="hsl(266deg 53% 70%)"
               width={stroke}
               dur={d2}
@@ -47,7 +47,7 @@ export const BannerSmall = () => {
             {/* grønn løkke rundt 'NTNU' */}
             <MaskedStroke
               id="m-gronn-sm"
-              d="M315,118 L230,118 A16,16 0 0,0 230,153 L295,153"
+              d="M315,118 L240,118 A16,16 0 0,0 240,153 L295,153"
               stroke="hsl(87deg 23% 44%)"
               width={stroke}
               dur={d3}

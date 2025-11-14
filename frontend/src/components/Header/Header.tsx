@@ -33,42 +33,59 @@ export const Header = () => {
           </LinkButton>
         </nav>
         <button
-          className="md:hidden flex flex-col items-center justify-center gap-1.5 
-             rounded-md border-2 border-gray-500 p-2"
-          aria-label="Åpne meny"
+          className="md:hidden flex items-center justify-center rounded-md border-2 border-gray-500 p-2"
+          aria-label={isMenuOpen ? 'Lukk meny' : 'Åpne meny'}
           onClick={toggleMenu}
         >
-          <span
-            className={`h-0.5 w-5 bg-gray-900 transition-transform ${isMenuOpen ? 'translate-y-1.5 rotate-45' : ''
+          <span className="relative flex h-4 w-6 items-center justify-center">
+            <span
+              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${
+                isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
               }`}
-          />
-          <span
-            className={`h-0.5 w-5 bg-gray-900 transition-opacity ${isMenuOpen ? 'opacity-0' : 'opacity-100'
+            />
+            <span
+              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+            />
+            <span
+              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${
+                isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
               }`}
-          />
-          <span
-            className={`h-0.5 w-5 bg-gray-900 transition-transform ${isMenuOpen ? '-translate-y-1.5 -rotate-45' : ''
-              }`}
-          />
+            />
+          </span>
         </button>
       </section>
       {isMenuOpen && (
         <nav
-          className="md:hidden absolute right-2 top-full mt-2 px-6 py-4 flex flex-col items-end gap-3 bg-transparent z-50"
-          style={{ width: 'min(60vw, 200px)' }}
+          className="md:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-50"
+          style={{ width: 'min(60vw, 220px)' }}
         >
-          <div className="w-full text-right">
-            <LinkButton link="/" color="yellow" onClick={scrollToTop}>
+          <div className="w-full">
+            <LinkButton
+              link="/"
+              color="yellow"
+              onClick={scrollToTop}
+              className="w-full"
+            >
               Hjem
             </LinkButton>
           </div>
-          <div className="w-full text-right">
-            <LinkButton link="/faq" color="purple" onClick={closeMenu}>
+          <div className="w-full">
+            <LinkButton
+              link="/faq"
+              color="purple"
+              onClick={closeMenu}
+              className="w-full"
+            >
               FAQ
             </LinkButton>
           </div>
-          <div className="w-full text-right">
-            <LinkButton link="/#contact" color="green" onClick={closeMenu}>
+          <div className="w-full">
+            <LinkButton
+              link="/#contact"
+              color="green"
+              onClick={closeMenu}
+              className="w-full"
+            >
               Kontakt Oss
             </LinkButton>
           </div>
