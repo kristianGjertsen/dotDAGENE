@@ -4,9 +4,9 @@ type MaskedStrokeProps = {
   id: string;
   d: string;
   stroke: string;
-  width?: number; // synlig linje
-  dur: number;    // sek
-  delay: number;  // sek
+  width?: number;
+  dur: number;
+  delay: number;
 };
 
 function MaskedStroke({ id, d, stroke, width = 7, dur, delay }: MaskedStrokeProps) {

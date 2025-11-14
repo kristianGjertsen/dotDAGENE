@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { FaqPage } from './pages/FaqPage';
 import { HomePage } from './pages/HomePage';
+import { AboutUsPage } from './pages/AboutUsPage';
 
 const ScrollManager = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="/om" element={<AboutUsPage />} />
       </Routes>
     </Router>
   );

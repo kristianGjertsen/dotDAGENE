@@ -137,7 +137,7 @@ export const HomePage = () => {
             <h3 className="text-3xl">INTERESSEMELDING</h3>
             <p>
               Fyll ut skjemaet så tar vi kontakt for å diskutere
-              standmuligheter.
+              mulighetene.
             </p>
             <ContactForm />
           </div>
