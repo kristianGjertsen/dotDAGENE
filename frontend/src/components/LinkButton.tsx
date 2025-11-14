@@ -5,9 +5,17 @@ interface ButtonProps {
   children: ReactNode;
   link: string;
   color: color;
+  onClick?: () => void;
+  className?: string;
 }
 
-export const LinkButton = ({ children, link, color }: ButtonProps) => {
+export const LinkButton = ({
+  children,
+  link,
+  color,
+  onClick,
+  className = '',
+}: ButtonProps) => {
   var textColorClass = "";
   if (color === 'white' || color === 'yellow') {
     textColorClass = 'text-black'
@@ -18,7 +26,8 @@ export const LinkButton = ({ children, link, color }: ButtonProps) => {
   return (
     <a
       href={link}
-      className="group relative inline-block cursor-pointer select-none focus:outline-none whitespace-nowrap"
+      onClick={onClick}
+      className={`group relative inline-block cursor-pointer select-none focus:outline-none whitespace-nowrap ${className}`}
     >
       <span aria-hidden="true" className="absolute inset-0 bg-black" />
       <span
