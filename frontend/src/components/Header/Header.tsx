@@ -22,12 +22,15 @@ export const Header = () => {
           <img src={Logo} alt="Logo" className="w-80 max-w-full" />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 md:flex">
-          <LinkButton link="/" color="yellow">
+          <LinkButton link="/" color="green">
             Hjem
           </LinkButton>
-          <LinkButton link="/faq" color="purple">
-            FAQ
+          <LinkButton link="/om" color="purple">
+            Om oss
           </LinkButton>
+          <LinkButton link="/faq" color="yellow">
+            FAQ
+          </LinkButton> 
           <LinkButton link="/#contact" color="green">
             Kontakt Oss
           </LinkButton>
@@ -39,17 +42,15 @@ export const Header = () => {
         >
           <span className="relative flex h-4 w-6 items-center justify-center">
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${
-                isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
-              }`}
+              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+                }`}
             />
             <span
               className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${
-                isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
-              }`}
+              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+                }`}
             />
           </span>
         </button>
@@ -67,6 +68,16 @@ export const Header = () => {
               className="w-full"
             >
               Hjem
+            </LinkButton>
+          </div>
+          <div className="w-full">
+            <LinkButton
+              link="/about"
+              color="green"
+              onClick={closeMenu}
+              className="w-full"
+            >
+              Om oss
             </LinkButton>
           </div>
           <div className="w-full">
