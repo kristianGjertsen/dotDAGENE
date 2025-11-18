@@ -3,8 +3,6 @@ import { Header } from '../components/Header/Header';
 import { LinkButton } from '../components/LinkButton';
 //import TeamSection from '../components/AboutUsPage/TeamSection'
 import FellesBilde from '../assets/FellesBilde.jpg';
-import { MaskedStroke } from '../components/HomePage/MaskedStroke';
-
 /*
 const values = [
   {

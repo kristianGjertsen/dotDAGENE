@@ -76,9 +76,9 @@ const faqsForStudents = [
 //Alternerende farger, tonet ned 
 const colorCycle = ['bg-dotpurple/80', 'bg-dotgreen/80', 'bg-dotyellow/80'];
 
-// Togle knapp felles-stil (uten individuelle bakgrunner)
+// Togle knapp felles-stil
 const baseToggleButtonClasses =
-  'relative z-10 flex-1 px-10 text-lg font-bold cursor-pointer transition-colors duration-700 sm:px-8 sm:py-2 sm:text-lg';
+  'relative z-10 flex-1 px-6 py-2 text-base font-semibold cursor-pointer transition-colors duration-300 sm:px-8 sm:py-2 sm:text-lg';
 
 export const FaqPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -115,8 +115,9 @@ export const FaqPage = () => {
           <div className="mt-4 inline-flex w-full max-w-md items-stretch overflow-hidden border-3 border-black bg-white shadow-[6px_6px_0_0_rgba(0,0,0,0.15)] relative">
             <span
               aria-hidden="true"
-              className={`absolute inset-y-0 left-0 w-1/2 bg-dotgreen transition-transform duration-500 ${audience === 'bedrift' ? 'translate-x-full' : ''
-                }`}
+              className={`absolute inset-y-0 left-0 w-1/2 bg-dotgreen transition-transform duration-300 ${
+                audience === 'bedrift' ? 'translate-x-full' : ''
+              }`}
             />
             <button
               type="button"
@@ -124,10 +125,11 @@ export const FaqPage = () => {
                 setAudience('student');
                 setOpenIndex(null);
               }}
-              className={`${baseToggleButtonClasses} ${audience === 'student'
-                ? 'text-white'
-                : 'text-black hover:text-black/80'
-                }`}
+              className={`${baseToggleButtonClasses} ${
+                audience === 'student'
+                  ? 'text-white'
+                  : 'text-black hover:text-black/80'
+              }`}
             >
               For studenter
             </button>
@@ -137,10 +139,11 @@ export const FaqPage = () => {
                 setAudience('bedrift');
                 setOpenIndex(null);
               }}
-              className={`border-l-3 border-black ${baseToggleButtonClasses} ${audience === 'bedrift'
-                ? 'text-white'
-                : 'text-black hover:text-black/80'
-                }`}
+              className={`border-l-3 border-black ${baseToggleButtonClasses} ${
+                audience === 'bedrift'
+                  ? 'text-white'
+                  : 'text-black hover:text-black/80'
+              }`}
             >
               For bedrifter
             </button>
