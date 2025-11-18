@@ -3,7 +3,6 @@ import { Header } from '../components/Header/Header';
 import { LinkButton } from '../components/LinkButton';
 //import TeamSection from '../components/AboutUsPage/TeamSection'
 import FellesBilde from '../assets/FellesBilde.jpg';
-
 /*
 const values = [
   {
@@ -56,13 +55,13 @@ export const AboutUsPage = () => {
     <>
       <Header />
       <main className="bg-dotbackground">
-        <section className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 sm:px-12 lg:flex-row lg:items-center lg:gap-20">
+        <section className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 py-16 sm:px-12 lg:flex-row lg:items-center lg:gap-20">
           <div className="space-y-6 text-center lg:text-left">
             <p className="text-sm font-semibold tracking-[0.4em] text-gray-600">
               OM OSS
             </p>
             <h1 className="text-4xl font-medium md:text-6xl">
-              Vi gir NTNU en helt ny karrieredag
+              Vi gir <span className="text-[#00509e]"> NTNU</span><br></br>en helt ny karrieredag
             </h1>
             <p className="text-lg text-gray-700">
               dotDAGENE er initiert av studenter som ønsker en møteplass hvor
@@ -72,13 +71,13 @@ export const AboutUsPage = () => {
             </p>
           </div>
           <div className="relative flex w-full justify-center lg:justify-end">
-            <div className="border-3 border-black bg-white p-6 shadow-[-20px_-20px_0px_0px_rgba(0,0,0,0.15)]">
+            <div className="border-3 border-black bg-dotpurple/70 p-6 shadow-[-20px_-20px_0px_0px_rgba(0,0,0,0.15)]">
               <div className="flex flex-col gap-3 text-left">
-                <p className="text-sm tracking-[0.3em] text-gray-500">
+                <p className="text-sm tracking-[0.3em] text-gray-600">
                   STUDENTENE BAK
                 </p>
-                <h2 className="text-3xl font-semibold">Informatikk</h2>
-                <p className="text-gray-700">
+                <h2 className="text-3xl font-semibold">Bachelor- og masterstudenter i informatikk</h2>
+                <p className="text-gray-800">
                   Vi representerer studenter innen informatikk, AI, datasikkerhet
                   osv. Sammen bygger vi rom for samarbeid,
                   læring og muligheter.

@@ -22,16 +22,16 @@ export const Header = () => {
           <img src={Logo} alt="Logo" className="w-80 max-w-full" />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 md:flex">
-          <LinkButton link="/" color="green">
+          <LinkButton link="/" color="green" size="sm">
             Hjem
           </LinkButton>
-          <LinkButton link="/om" color="purple">
+          <LinkButton link="/om" color="purple" size="sm">
             Om oss
           </LinkButton>
-          <LinkButton link="/faq" color="yellow">
+          <LinkButton link="/faq" color="yellow" size="sm">
             FAQ
           </LinkButton> 
-          <LinkButton link="/#contact" color="green">
+          <LinkButton link="/#contact" color="green" size="sm">
             Kontakt Oss
           </LinkButton>
         </nav>

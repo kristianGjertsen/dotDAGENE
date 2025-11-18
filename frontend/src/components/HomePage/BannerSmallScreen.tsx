@@ -18,7 +18,6 @@ export const BannerSmall = () => {
     <section className="mt-15 mb-10 flex min-h-[200px] w-full items-center justify-center overflow-hidden">
       <div className="flex w-full justify-center">
         <svg
-          //xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 200"
           preserveAspectRatio="xMidYMid slice"
           className="h-auto w-full min-w-[800px] max-w-none"
