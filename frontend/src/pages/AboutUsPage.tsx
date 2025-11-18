@@ -68,7 +68,7 @@ export const AboutUsPage = () => {
               dotDAGENE er initiert av studenter som ønsker en møteplass hvor
               teknologi, kreativitet og reelle relasjoner står i sentrum. Vi
               setter rammene for gode samtaler og lar både studenter og bedrifter
-              vise frem hvem de er utenfor klassiske stands.
+              vise frem hvem de er.
             </p>
           </div>
           <div className="relative flex w-full justify-center lg:justify-end">
@@ -77,10 +77,10 @@ export const AboutUsPage = () => {
                 <p className="text-sm tracking-[0.3em] text-gray-500">
                   STUDENTENE BAK
                 </p>
-                <h2 className="text-3xl font-semibold">Linjeforeningen Online</h2>
+                <h2 className="text-3xl font-semibold">Informatikk</h2>
                 <p className="text-gray-700">
                   Vi representerer studenter innen informatikk, AI, datasikkerhet
-                  og komplekse systemer. Sammen bygger vi rom for samarbeid,
+                  osv. Sammen bygger vi rom for samarbeid,
                   læring og muligheter.
                 </p>
               </div>
