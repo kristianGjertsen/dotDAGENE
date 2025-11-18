@@ -1,8 +1,10 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header/Header';
 import { LinkButton } from '../components/LinkButton';
-import TeamSection from '../components/AboutUsPage/TeamSection'
+//import TeamSection from '../components/AboutUsPage/TeamSection'
+import FellesBilde from '../assets/FellesBilde.jpg';
 
+/*
 const values = [
   {
     title: 'STUDENTDREVET',
@@ -13,17 +15,19 @@ const values = [
   {
     title: 'NYSKAPENDE',
     description:
-      'Vi kombinerer stands med pitchekvelder og aktivitetssoner som gir rom for ekte møter.',
+      'Vi kombinerer stands med pitchekveld.',
     color: 'bg-dotgreen',
   },
   {
     title: 'TETT PÅ BRANSJEN',
     description:
-      'Bedrifter møter relevante kandidater fra online-miljøet, kybernetikk, datasikkerhet og mer.',
+      'Bedrifter møter relevante kandidater fra Informatikk og andre IT studier.',
     color: 'bg-dotyellow text-black',
   },
 ];
+*/
 
+/*
 const timeline = [
 
   {
@@ -45,6 +49,7 @@ const timeline = [
       'Vi åpner dørene for alle teknologistudenter på NTNU og inviterer bedrifter til å bli med på en helt ny møteplass.',
   },
 ];
+*/
 
 export const AboutUsPage = () => {
   return (
@@ -83,7 +88,8 @@ export const AboutUsPage = () => {
           </div>
         </section>
 
-        <section className="mx-auto mt-16 max-w-6xl px-6 sm:px-12">
+        { /*
+        <section className="mx-auto max-w-6xl px-6 sm:px-12">
           <div className="grid gap-6 md:grid-cols-3">
             {values.map((value) => (
               <article
@@ -93,10 +99,12 @@ export const AboutUsPage = () => {
                 <h3 className="text-2xl font-semibold">{value.title}</h3>
                 <p className="mt-4 text-base leading-relaxed">{value.description}</p>
               </article>
-            ))}
+            )) }
           </div>
         </section>
+        */}
 
+        { /*
         <section className="mx-auto mt-24 max-w-5xl px-6 sm:px-12">
           <div className="border-3 border-black bg-white p-8 text-center shadow-[8px_8px_0_0_rgba(0,0,0,0.1)]">
             <h2 className="text-4xl font-medium">Reisen vår</h2>
@@ -120,6 +128,7 @@ export const AboutUsPage = () => {
             </div>
           </div>
         </section>
+*/}
 
         <section className="mx-auto mt-24 max-w-6xl px-6 sm:px-12">
           <div className="text-center">
@@ -133,14 +142,16 @@ export const AboutUsPage = () => {
             <div className="mt-10 flex justify-center">
               <div className="w-full max-w-5xl border-3 border-black bg-dotpurple/10 overflow-hidden">
                 <img
-                  src=""
+                  src={FellesBilde}
                   alt="Gruppebilde"
-                  className="h-64 w-full object-cover"
+                  className="h-120 w-full object-cover object-[center_70%]"
                 />
               </div>
             </div>
           </div>
+          {/* 
           <TeamSection />
+          */}
         </section>
 
         <section className="mx-auto mt-24 mb-16 max-w-4xl px-6 text-center sm:px-12">
