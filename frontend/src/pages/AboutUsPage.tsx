@@ -27,6 +27,7 @@ const values = [
 ];
 */
 
+/*
 const timeline = [
 
   {
@@ -48,6 +49,7 @@ const timeline = [
       'Vi åpner dørene for alle teknologistudenter på NTNU og inviterer bedrifter til å bli med på en helt ny møteplass.',
   },
 ];
+*/
 
 export const AboutUsPage = () => {
   return (
