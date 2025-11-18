@@ -136,7 +136,7 @@ export const HomePage = () => {
       <section className="px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
           <div className="bg-dotyellow flex w-full flex-col gap-4 border-3 border-black p-8">
-            <h3 className="text-3xl">INTERESSEMELDING</h3>
+            <h3 className="text-3xl">Interesseskjema</h3>
             <p>
               Fyll ut skjemaet så tar vi kontakt for å diskutere
               mulighetene.
@@ -146,6 +146,7 @@ export const HomePage = () => {
           <ContactUs />
         </section>
       </section>
+
       <Footer />
     </>
   );
