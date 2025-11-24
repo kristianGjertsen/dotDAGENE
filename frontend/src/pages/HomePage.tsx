@@ -43,6 +43,9 @@ export const HomePage = () => {
 
   return (
     <>
+      {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
+      <h1 className="sr-only">dotDAGENE 2025</h1>
+
       {/* Forskjellig banner på størrelse av skjermen*/}
       <Header />
       <div className="block md:hidden">
