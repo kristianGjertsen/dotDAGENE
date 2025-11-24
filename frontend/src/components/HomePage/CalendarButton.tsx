@@ -16,7 +16,7 @@ const DEFAULT_EVENT_TITLE = 'dotDAGENE: Stands';
 const DEFAULT_EVENT_LOC = 'NTNU Realfagsbygget, U1';
 const DEFAULT_EVENT_DESC = 'Stands dotDAGENE velkommen!';
 const DEFAULT_DTSTART_UTC = '20260303T090000Z';
-const DEFAULT_DTEND_UTC = '20260303T160000Z';
+const DEFAULT_DTEND_UTC = '20260303T140000Z';
 const DEFAULT_ICS_URL = 'https://dotdagene.no/event.ics';
 
 function makeGoogleCalendarUrl({
@@ -110,4 +110,3 @@ export const CalendarButton = ({
     </div>
   );
 };
-

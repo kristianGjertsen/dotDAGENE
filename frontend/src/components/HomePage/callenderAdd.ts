@@ -19,11 +19,11 @@ const EVENT_LOC = "NTNU Realfagsbygget, U1";
 const EVENT_DESC = "Stands under dotDAGENE – velkommen!";
 
 /**
- * 3. mars 2026 kl. 10:00–17:00 Europe/Oslo (CET = UTC+1)
- * UTC blir 09:00–16:00Z (ingen DST i starten av mars).
+ * 3. mars 2026 kl. 10:00–15:00 Europe/Oslo (CET = UTC+1)
+ * UTC blir 09:00–14:00Z (ingen DST i starten av mars).
  */
 const DTSTART_UTC = "20260303T090000Z";
-const DTEND_UTC = "20260303T160000Z";
+const DTEND_UTC = "20260303T140000Z";
 
 // --- Hjelpefunksjoner ---
 function escapeICS(s: string) {
@@ -144,7 +144,7 @@ app.get("/", (_req, res) => {
 <body>
   <div class="wrap">
     <h1>${EVENT_TITLE}</h1>
-    <div class="meta">3. mars 2026, kl. 10:00–17:00 (Europe/Oslo) · ${EVENT_LOC}</div>
+    <div class="meta">3. mars 2026, kl. 10:00–15:00 (Europe/Oslo) · ${EVENT_LOC}</div>
 
     <div class="btns">
       <a class="button" href="/event.ics">Legg til i Apple-Kalender (.ics)</a>
