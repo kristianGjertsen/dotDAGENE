@@ -17,10 +17,10 @@ export const Footer = () => {
           <h2 className="text-lg md:text-2xl">Følg oss</h2>
           <section className="flex gap-3">
             <a href="https://www.instagram.com/dotdagene/">
-              <img src={Instagram} />
+              <img src={Instagram} alt="dotDAGENE på Instagram" />
             </a>
             <a href="https://www.linkedin.com/company/dotdagene/about/">
-              <img src={Linkedin} />
+              <img src={Linkedin} alt="dotDAGENE på LinkedIn" />
             </a>
             
           </section>
