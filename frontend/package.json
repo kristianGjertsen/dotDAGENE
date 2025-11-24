@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && node generate-sitemap.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
+    "generate-sitemap": "node generate-sitemap.mjs",
     "generate-favicons": "node generate-favicons.js",
     "generate-og-image": "node generate-og-image.js",
     "generate-assets": "npm run generate-favicons && npm run generate-og-image"

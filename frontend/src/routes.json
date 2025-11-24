@@ -1,0 +1,17 @@
+[
+  {
+    "path": "/",
+    "priority": 1.0,
+    "changefreq": "weekly"
+  },
+  {
+    "path": "/faq",
+    "priority": 0.8,
+    "changefreq": "weekly"
+  },
+  {
+    "path": "/om",
+    "priority": 0.8,
+    "changefreq": "weekly"
+  }
+]
