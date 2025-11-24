@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type JSX } from 'react';
 import {
   Route,
   BrowserRouter as Router,
@@ -8,6 +8,19 @@ import {
 import { FaqPage } from './pages/FaqPage';
 import { HomePage } from './pages/HomePage';
 import { AboutUsPage } from './pages/AboutUsPage';
+import routeManifest from './routes.json';
+
+type RouteDefinition = {
+  path: string;
+};
+
+const routes: RouteDefinition[] = routeManifest;
+
+const routeComponents: Record<string, JSX.Element> = {
+  '/': <HomePage />,
+  '/faq': <FaqPage />,
+  '/om': <AboutUsPage />,
+};
 
 const ScrollManager = () => {
   const location = useLocation();
@@ -32,9 +45,16 @@ export function App() {
     <Router>
       <ScrollManager />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/faq" element={<FaqPage />} />
-        <Route path="/om" element={<AboutUsPage />} />
+        {routes.map(({ path }) => {
+          const element = routeComponents[path];
+
+          if (!element) {
+            console.warn(`Missing component mapping for route "${path}"`);
+            return null;
+          }
+
+          return <Route key={path} path={path} element={element} />;
+        })}
       </Routes>
     </Router>
   );
