@@ -42,7 +42,7 @@ export const LinkButton = ({
     case 'xl':
       sizeClasses = 'px-8 py-4 text-3xl';
       break;
-    //standard ->
+    //standard hvis ingen størrelse blir valgt
     default:
       sizeClasses = 'px-6 py-3 text-2xl';
       break;
