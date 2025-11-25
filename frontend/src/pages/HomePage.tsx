@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon,
-  MicrophoneIcon,
   SparklesIcon,
   UserGroupIcon,
 } from '@heroicons/react/20/solid';
