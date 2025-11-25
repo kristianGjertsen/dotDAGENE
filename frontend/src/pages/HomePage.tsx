@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon,
-  MicrophoneIcon,
   SparklesIcon,
   UserGroupIcon,
 } from '@heroicons/react/20/solid';
@@ -94,31 +93,19 @@ export const HomePage = () => {
           </div>
 
           <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:mt-20 sm:flex-row">
-            <InfoWithButton
-              titelChildren="STANDS"
-              color="green"
-              button={<CalendarButton color="purple" />}
-              icon={BuildingOffice2Icon}
-            >
-              Få egen stand på dotDAGENE og møt direkte med
-              informatikkstudenter. Perfekt mulighet til å rekruttere de beste
-              talentene innen digitalisering og teknologi.
-            </InfoWithButton>
+            <div className="w-full sm:w-1/2">
+              <InfoWithButton
+                titelChildren="STANDS"
+                color="green"
+                button={<CalendarButton color="purple" />}
+                icon={BuildingOffice2Icon}
+              >
+                Få egen stand på dotDAGENE og møt direkte med
+                informatikkstudenter. Perfekt mulighet til å rekruttere de beste
+                talentene innen digitalisering og teknologi.
+              </InfoWithButton>
+            </div>
 
-            <InfoWithButton
-              titelChildren="PITCHEKVELD"
-              color="yellow"
-              textColor="black"
-              button={<CalendarButton color="purple" />}
-              icon={MicrophoneIcon}
-            >
-              dotDAGENE inviterer til pitchekveld som avslutning på
-              bedriftsdagen. Hver bedrift får 5-10 minutter til å presentere et
-              spesifikt prosjekt eller teknologi - mer som en TedTalk enn en
-              vanlig bedriftspresentasjon. Kvelden byr på konferansierer,
-              drikkeservering og god stemning, etterfulgt av mingling med
-              studentene.
-            </InfoWithButton>
           </section>
         </div>
       </section>

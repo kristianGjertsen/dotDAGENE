@@ -12,13 +12,16 @@
     "generate-sitemap": "node generate-sitemap.mjs",
     "generate-favicons": "node generate-favicons.js",
     "generate-og-image": "node generate-og-image.js",
-    "generate-assets": "npm run generate-favicons && npm run generate-og-image"
+    "generate-assets": "npm run generate-favicons && npm run generate-og-image",
+    "generate-qr": "node generate-qr.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^24.10.0",
     "express": "^5.1.0",
+    "qrcode": "^1.5.4",
+    "qrcode.react": "^4.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.3",
