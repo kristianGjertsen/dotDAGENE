@@ -1,4 +1,3 @@
-// frontend/api/contact.ts  (eller api/contact.ts der den ligger nå)
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
@@ -7,7 +6,6 @@ export default async function handler(req: any, res: any) {
   try {
     if (req.method !== 'POST') return res.status(405).end();
 
-    // ---- Parse body sikkert uansett runtime ----
     let body: any = req.body;
     if (!body) {
       // Vercel Node kan gi en stream
@@ -21,7 +19,7 @@ export default async function handler(req: any, res: any) {
 
     const { bedriftsnavn, kontaktperson, stilling, epost, melding } = body || {};
 
-    // ---- Valider ----
+    // Valider felter
     if (!bedriftsnavn || !kontaktperson || !stilling || !epost) {
       return res.status(400).json({ error: 'Mangler felt' });
     }
@@ -30,7 +28,7 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: 'Ugyldig e-post' });
     }
 
-    // ---- Send e-post ----
+    // Send e-post til oss
     await resend.emails.send({
       from: 'dotDAGENE <kontakt@dotdagene.no>',
       to: ['kontakt@dotdagene.no'],
@@ -45,10 +43,30 @@ Melding:
 ${melding || '(tom)'}
 `.trim(),
       replyTo: epost,
+    }); 
+
+    // Vertifikasjon til avsender
+    await resend.emails.send({
+      from: 'dotDAGENE <kontakt@dotdagene.no>',
+      to: [epost],
+      subject: 'Vi har mottatt henvendelsen din',
+      text: `
+Hei ${kontaktperson},
+
+Takk for henvendelsen om ${bedriftsnavn}. Vi tar kontakt så snart vi kan.
+
+
+Din melding:
+${melding || '(ingen melding sendt inn)'}
+
+
+Hilsen dotDAGENE
+`.trim(),
     });
 
     return res.status(200).json({ ok: true });
   } catch (err) {
+    //Error i mail, mailen kommer fortsatt frem til resend.com
     console.error('contact-api error:', err);
     return res.status(500).json({ error: 'Internal error' });
   }
