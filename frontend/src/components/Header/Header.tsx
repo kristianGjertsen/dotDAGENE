@@ -72,7 +72,7 @@ export const Header = () => {
           </div>
           <div className="w-full">
             <LinkButton
-              link="/about"
+              link="/om"
               color="green"
               onClick={closeMenu}
               className="w-full"
