@@ -29,8 +29,6 @@ export default async function handler(req: any, res: any) {
     }
 
     // Send e-post til oss
-    //test uten at alle får den levert
-    /*
     await resend.emails.send({
       from: 'dotDAGENE <kontakt@dotdagene.no>',
       to: ['kontakt@dotdagene.no'],
@@ -45,7 +43,7 @@ Melding:
 ${melding || '(tom)'}
 `.trim(),
       replyTo: epost,
-    }); */
+    }); 
 
     // Vertifikasjon til avsender
     await resend.emails.send({
@@ -68,6 +66,7 @@ Hilsen dotDAGENE
 
     return res.status(200).json({ ok: true });
   } catch (err) {
+    //Error i mail, mailen kommer fortsatt frem til resend.com
     console.error('contact-api error:', err);
     return res.status(500).json({ error: 'Internal error' });
   }
