@@ -7,7 +7,6 @@ import {
 } from '@heroicons/react/20/solid';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header/Header';
-import { LinkButton } from '../components/LinkButton';
 import {
   BannerBig,
   BannerSmall,
