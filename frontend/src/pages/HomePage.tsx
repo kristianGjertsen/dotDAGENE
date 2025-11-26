@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon,
   SparklesIcon,
@@ -45,8 +45,33 @@ export const HomePage = () => {
       {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
       <h1 className="sr-only">dotDAGENE 2025</h1>
 
-      {/* Forskjellig banner på størrelse av skjermen*/}
       <Header />
+      <section className="pt-15 px-4 sm:px-12 lg:px-20">
+        <div className="relative mx-auto w-full max-w-3xl overflow-visible">
+          <img
+            src="/santaHat.gif"
+            alt="nissehatt1"
+            className="pointer-events-none absolute -left-2 top-0 z-30 h-16 w-auto -translate-y-[70%] object-contain sm:left-0 sm:h-28 sm:-translate-y-[80%]"
+          />
+          <img
+            src="/santaHat.gif"
+            alt="nissehatt2"
+            className="pointer-events-none absolute -right-2 top-0 z-30 h-16 w-auto -translate-y-[70%] object-contain sm:right-0 sm:h-28 sm:-translate-y-[80%]"
+          />
+          <Link
+
+            to="/advent"
+            className="mt-10 flex flex-col items-center justify-center gap-2 border-3 border-black bg-red-500 p-4 text-center text-white shadow-[10px_10px_0_0_rgba(0,0,0,0.18)] transition-transform duration-150 hover:translate-y-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          >
+            <p className="text-sm font-semibold tracking-[0.35em] text-red-100">
+              NYHET
+            </p>
+            <h2 className="text-3xl font-semibold md:text-4xl">
+              dotDAGENE adventskalender 2025
+            </h2>
+          </Link>
+        </div>
+      </section>
       <div className="block md:hidden">
         <BannerSmall />
       </div>
@@ -54,9 +79,9 @@ export const HomePage = () => {
       <div className="hidden md:block">
         <BannerBig />
       </div>
-
-
       <Countdown />
+
+
 
       <section className="mt-16 px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">

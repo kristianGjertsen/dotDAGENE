@@ -16,12 +16,15 @@ export const Header = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b-2 border-gray-500 relative">
+    <header className="sticky top-0 z-40 bg-white border-b-2 border-gray-500 relative">
       <section className="flex flex-row items-center justify-between px-4 py-4 sm:px-6">
         <Link to="/" onClick={scrollToTop} className="shrink-0">
           <img src={Logo} alt="Logo" className="w-80 max-w-full" />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 md:flex">
+          <LinkButton link="/advent" color="red" size="sm">
+            Adventskalender
+          </LinkButton>
           <LinkButton link="/" color="green" size="sm">
             Hjem
           </LinkButton>
@@ -57,9 +60,19 @@ export const Header = () => {
       </section>
       {isMenuOpen && (
         <nav
-          className="md:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-50"
+          className="md:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-100"
           style={{ width: 'min(60vw, 220px)' }}
         >
+          <div className="w-full z-90">
+            <LinkButton
+              link="/advent"
+              color="red"
+              onClick={closeMenu}
+              className="w-full"
+            >
+              Advent
+            </LinkButton>
+          </div>
           <div className="w-full">
             <LinkButton
               link="/"
@@ -104,7 +117,7 @@ export const Header = () => {
       )}
       {isMenuOpen && (
         <button
-          className="fixed inset-0 z-40 bg-transparent cursor-default"
+          className="fixed inset-0 z-90 bg-transparent cursor-default"
           aria-label="Lukk meny"
           onClick={closeMenu}
         />
