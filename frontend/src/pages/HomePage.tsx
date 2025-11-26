@@ -48,15 +48,11 @@ export const HomePage = () => {
       <Header />
       <section className="pt-15 px-4 sm:px-12 lg:px-20">
         <div className="relative mx-auto w-full max-w-3xl overflow-visible">
-          <img
-            src="/santaHat.gif"
-            alt="nissehatt1"
-            className="pointer-events-none absolute -left-2 top-0 z-30 h-16 w-auto -translate-y-[70%] object-contain sm:left-0 sm:h-28 sm:-translate-y-[80%]"
-          />
+         
           <img
             src="/santaHat.gif"
             alt="nissehatt2"
-            className="pointer-events-none absolute -right-2 top-0 z-30 h-16 w-auto -translate-y-[70%] object-contain sm:right-0 sm:h-28 sm:-translate-y-[80%]"
+            className="pointer-events-none absolute  top-1 z-30 h-16 w-auto -translate-y-[74%] object-contain sm:-right-[8px] sm:h-28 sm:-translate-y-[82%]"
           />
           <Link
 
