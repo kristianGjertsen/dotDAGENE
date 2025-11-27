@@ -117,7 +117,7 @@ export const AdventCalendarPage = () => {
                     posten for å delta.
                   </span>
 
-                  <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-4">
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3 sm:mt-4 sm:justify-start max-[450px]:flex-col max-[450px]:items-center max-[450px]:justify-center">
                     <LinkButton link={instagramUrl} color="red" size="lg">
                       Instagram
                     </LinkButton>
@@ -127,7 +127,7 @@ export const AdventCalendarPage = () => {
                         link={dominosUrl}
                         color="white"
                         size="sm"
-                        className="ml-auto sm:ml-auto"
+                        className="sm:ml-auto"
                       >
                         <img
                           src={activeDrop.image}
