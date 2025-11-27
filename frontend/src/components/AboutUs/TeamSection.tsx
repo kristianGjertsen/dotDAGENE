@@ -44,6 +44,7 @@ const teamRoles = [
 ];
 const TeamSection = () => {
 
+    //Veldig mye kode for å få dem til å plasseres riktig i grid både på mobil og desktop, og alt mellom 
     return (
         <section className="mx-auto mt-24 max-w-6xl px-6 sm:px-12">
             <div className="text-center">

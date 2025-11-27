@@ -2,83 +2,17 @@ import { useState } from 'react';
 import { Footer } from '../components/PageSections/Footer';
 import { Header } from '../components/PageSections/Header';
 import { LinkButton } from '../components/Elements/LinkButton';
-
-const contactLinkClasses =
-  'underline decoration-2 decoration-black underline-offset-4 hover:text-dotgreen hover:decoration-dotgreen transition-colors duration-150';
-
-const faqsForCompanies = [
-  {
-    question: 'Hvem kan delta som bedrift på dotDAGENE?',
-    answer:
-      'dotDAGENE er åpent for bedrifter innen IT, teknologi og digitalisering som ønsker å møte studenter ved NTNU. Ta kontakt via interesseskjemaet for mer informasjon.',
-  },
-  {
-    question: 'Hvordan booker vi stand?',
-    answer: (
-      <>
-        Bedrifter må melde interesse via{' '}
-        <a href="/#contact" className={contactLinkClasses}>
-          interesseskjemaet
-        </a>{' '}
-        eller e-post. Vi følger opp med praktisk informasjon, standplassering
-        og avtale om videre samarbeid.
-      </>
-    ),
-  },
-  {
-    question: 'Hva skjer på pitchekvelden for bedrifter?',
-    answer:
-      'Etter standdagen inviteres bedriftene til korte sceneinnslag hvor dere kan vise frem prosjekter, teknologi eller kultur. Kvelden avsluttes med mingling med studentene i en mer uformell setting.',
-  },
-  {
-    question: 'Hvordan får vi beskjed om viktige frister?',
-    answer:
-      'Vi sender ut informasjon på e-post til alle påmeldte bedrifter, og holder nettsiden oppdatert med praktiske detaljer og frister.',
-  },
-  {
-    question: 'Hvor mye koster det å delta som bedrift?',
-    answer: (
-      <>
-        Pris og pakker tilpasses størrelsen på bedriften og hvordan dere ønsker
-        å delta. Ta kontakt med oss via{' '}
-        <a href="/#contact" className={contactLinkClasses}>
-          interesseskjemaet
-        </a>
-        , så finner vi en løsning som passer dere.
-      </>
-    ),
-  },
-];
-
-const faqsForStudents = [
-  {
-    question: 'Hvem kan delta som student på dotDAGENE?',
-    answer:
-      'Arrangementet er åpent for alle studenter ved NTNU som er nysgjerrige på IT, teknologi og digitalisering.',
-  },
-  {
-    question: 'Må jeg melde meg på for å besøke standene?',
-    answer:
-      'Nei, som student trenger du bare å møte opp på dagen. Det er gratis å delta, og du kan gå inn og ut av arrangementet som du vil.',
-  },
-  {
-    question: 'Hva får jeg ut av å komme på pitchekvelden?',
-    answer:
-      'På pitchekvelden får du korte presentasjoner fra bedrifter om ekte prosjekter, teknologi og muligheter. Etterpå blir det mingling hvor du kan stille spørsmål og bygge nettverk.',
-  },
-  {
-    question: 'Hvordan holder jeg meg oppdatert som student?',
-    answer:
-      'Følg med på nettsiden og våre kanaler for oppdateringer. Vi legger også ut viktig informasjon via linjeforeningene og relevante grupper.',
-  },
-];
+import {
+  contactLinkClasses,
+  faqsForCompanies,
+  faqsForStudents,
+} from '../components/Faq/FaqQuestions';
 
 //Alternerende farger, tonet ned 
 const colorCycle = ['bg-dotpurple/80', 'bg-dotgreen/80', 'bg-dotyellow/80'];
 
 // Togle knapp felles-stil
-const baseToggleButtonClasses =
-  'relative z-10 flex-1 px-6 py-2 text-base font-semibold cursor-pointer transition-colors duration-300 sm:px-8 sm:py-2 sm:text-lg';
+const baseToggleButtonClasses = 'relative z-10 flex-1 px-6 py-2 text-base font-semibold cursor-pointer transition-colors duration-300 sm:px-8 sm:py-2 sm:text-lg';
 
 export const FaqPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -112,12 +46,12 @@ export const FaqPage = () => {
           <p className="mt-2 pt-5  font-semibold uppercase tracking-[0.2em] text-gray-700">
             Velg målgruppe
           </p>
+          {/* Toggle knapp for student / bedrift */}
           <div className="mt-4 inline-flex w-full max-w-md items-stretch overflow-hidden border-3 border-black bg-white shadow-[6px_6px_0_0_rgba(0,0,0,0.15)] relative">
             <span
               aria-hidden="true"
-              className={`absolute inset-y-0 left-0 w-1/2 bg-dotgreen transition-transform duration-300 ${
-                audience === 'bedrift' ? 'translate-x-full' : ''
-              }`}
+              className={`absolute inset-y-0 left-0 w-1/2 bg-dotgreen transition-transform duration-300 ${audience === 'bedrift' ? 'translate-x-full' : ''
+                }`}
             />
             <button
               type="button"
@@ -125,11 +59,10 @@ export const FaqPage = () => {
                 setAudience('student');
                 setOpenIndex(null);
               }}
-              className={`${baseToggleButtonClasses} ${
-                audience === 'student'
-                  ? 'text-white'
-                  : 'text-black hover:text-black/80'
-              }`}
+              className={`${baseToggleButtonClasses} ${audience === 'student'
+                ? 'text-white'
+                : 'text-black hover:text-black/80'
+                }`}
             >
               For studenter
             </button>
@@ -139,17 +72,17 @@ export const FaqPage = () => {
                 setAudience('bedrift');
                 setOpenIndex(null);
               }}
-              className={`border-l-3 border-black ${baseToggleButtonClasses} ${
-                audience === 'bedrift'
-                  ? 'text-white'
-                  : 'text-black hover:text-black/80'
-              }`}
+              className={`border-l-3 border-black ${baseToggleButtonClasses} ${audience === 'bedrift'
+                ? 'text-white'
+                : 'text-black hover:text-black/80'
+                }`}
             >
               For bedrifter
             </button>
           </div>
         </section>
 
+        {/* FAQ seksjon */}
         <section className="mx-auto mt-12 grid max-w-5xl gap-4">
           {visibleFaqs.map((faq, index) => {
             const isOpen = openIndex === index;
