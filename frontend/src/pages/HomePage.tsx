@@ -52,7 +52,7 @@ export const HomePage = () => {
           <img
             src="/santaHat.gif"
             alt="nissehatt2"
-            className="pointer-events-none absolute  top-1 z-30 h-16 w-auto -translate-y-[74%] object-contain sm:-right-[8px] sm:h-28 sm:-translate-y-[82%]"
+            className="pointer-events-none absolute -right-4 top-1 z-30 h-20 w-auto -translate-y-[74%] object-contain sm:-right-[8px] sm:h-28 sm:-translate-y-[82%]"
           />
           <Link
 

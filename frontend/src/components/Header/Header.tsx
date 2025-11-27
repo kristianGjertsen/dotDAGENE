@@ -21,7 +21,7 @@ export const Header = () => {
         <Link to="/" onClick={scrollToTop} className="shrink-0">
           <img src={Logo} alt="Logo" className="w-80 max-w-full" />
         </Link>
-        <nav className="hidden items-center gap-2 sm:gap-2 md:flex">
+        <nav className="hidden items-center gap-2 sm:gap-2 lg:flex">
           <LinkButton link="/advent" color="red" size="sm">
             Adventskalender
           </LinkButton>
@@ -39,7 +39,7 @@ export const Header = () => {
           </LinkButton>
         </nav>
         <button
-          className="md:hidden flex items-center justify-center rounded-md border-2 border-gray-500 p-2"
+          className="lg:hidden flex items-center justify-center rounded-md border-2 border-gray-500 p-2"
           aria-label={isMenuOpen ? 'Lukk meny' : 'Åpne meny'}
           onClick={toggleMenu}
         >

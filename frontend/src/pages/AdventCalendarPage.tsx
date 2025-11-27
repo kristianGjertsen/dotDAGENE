@@ -1,6 +1,7 @@
 import dominosPizzaLogo from '../assets/dominosPizzaLogo.png';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header/Header';
+import { LinkButton } from '../components/LinkButton';
 
 type Drop = {
   id: number;
@@ -46,6 +47,7 @@ const drops: Drop[] = [
 
 //Endre denne linken til rktig post for hver uke
 const instagramUrl = 'https://www.instagram.com/p/DRjrkF3F7K4/?img_index=1';
+const dominosUrl = 'https://www.dominos.no/';
 
 export const AdventCalendarPage = () => {
   const activeDrop = drops.find((drop) => drop.status === 'active') ?? drops[0];
@@ -114,28 +116,28 @@ export const AdventCalendarPage = () => {
                     </a>{' '}
                     posten for å delta.
                   </span>
-                  <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-4">
-                    <a
-                      href={instagramUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center justify-center gap-2 border-3 border-black bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-white shadow-[6px_6px_0_rgba(0,0,0,0.15)] transition-transform duration-150 hover:translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                      Instagram
-                    </a>
-                  </div>
-                
-                </div>
 
-                {activeDrop.image && (
-                  <div className="w-full overflow-hidden border-3 border-black shadow-[8px_8px_0_rgba(0,0,0,0.12)] sm:w-auto">
-                    <img
-                      src={activeDrop.image}
-                      alt={activeDrop.title}
-                      className="h-30 w-auto object-cover"
-                    />
+                  <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-4">
+                    <LinkButton link={instagramUrl} color="red" size="lg">
+                      Instagram
+                    </LinkButton>
+
+                    {activeDrop.image && (
+                      <LinkButton
+                        link={dominosUrl}
+                        color="white"
+                        size="sm"
+                        className="ml-auto sm:ml-auto"
+                      >
+                        <img
+                          src={activeDrop.image}
+                          alt={activeDrop.title}
+                          className="h-30 w-auto object-cover"
+                        />
+                      </LinkButton>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
 
@@ -160,8 +162,8 @@ export const AdventCalendarPage = () => {
                     </h4>
                     <span
                       className={`flex items-center justify-center gap-2 border-2 px-4 py-2 text-sm font-semibold uppercase tracking-wide shadow-[3px_3px_0_rgba(0,0,0,0.12)] ${drop.status === 'done'
-                          ? 'border-green-700 bg-green-100 text-green-900'
-                          : 'border-amber-700 bg-amber-100 text-amber-900'
+                        ? 'border-green-700 bg-green-100 text-green-900'
+                        : 'border-amber-700 bg-amber-100 text-amber-900'
                         }`}
                     >
                       <span
@@ -176,11 +178,6 @@ export const AdventCalendarPage = () => {
                     <div className="flex-1">
                       <p className="text-lg font-medium text-gray-900">
                         {drop.description}
-                      </p>
-                      <p className="mt-2 text-gray-700">
-                        {drop.status === 'done'
-                          ? 'Premien ble delt denne søndagen.'
-                          : 'Premien holdes hemmelig til datoen over.'}
                       </p>
                     </div>
 
