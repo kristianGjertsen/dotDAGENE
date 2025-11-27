@@ -1,6 +1,5 @@
 import type { ReactNode, MouseEvent } from 'react';
-
-type color = 'purple' | 'green' | 'yellow';
+import { colorMap, type color } from '../../lib/colors';
 
 interface ButtonProps {
   children: ReactNode;
@@ -9,12 +8,6 @@ interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
 }
-
-const colorMap = new Map<color, string>([
-  ['green', ' bg-dotgreen'],
-  ['purple', ' bg-dotpurple'],
-  ['yellow', ' bg-dotyellow'],
-]);
 
 export const Button = ({
   children,

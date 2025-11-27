@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { colorMap, type color } from '../lib/colors';
+import { colorMap, type color } from '../../lib/colors';
 
 interface ButtonProps {
   children: ReactNode;

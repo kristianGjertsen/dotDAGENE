@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_No_Text.svg';
-import { LinkButton } from '../LinkButton';
+import { LinkButton } from '../Elements/LinkButton';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,7 +60,7 @@ export const Header = () => {
       </section>
       {isMenuOpen && (
         <nav
-          className="md:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-100"
+          className="lg:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-100"
           style={{ width: 'min(60vw, 220px)' }}
         >
           <div className="w-full z-90">

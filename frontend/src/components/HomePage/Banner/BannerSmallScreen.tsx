@@ -1,4 +1,4 @@
-import { MaskedStroke } from "./MaskedStroke";
+import { MaskedStroke } from "../MaskedStroke";
 
 export const BannerSmall = () => {
   const LINE_ANIMATION_DELAY_SEC = 0.4;
