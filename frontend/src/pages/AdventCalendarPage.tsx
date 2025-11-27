@@ -45,7 +45,7 @@ const drops: Drop[] = [
 ];
 
 //Endre denne linken til rktig post for hver uke
-const instagramUrl = 'https://www.instagram.com/dotdagene';
+const instagramUrl = 'https://www.instagram.com/p/DRjrkF3F7K4/?img_index=1';
 
 export const AdventCalendarPage = () => {
   const activeDrop = drops.find((drop) => drop.status === 'active') ?? drops[0];
