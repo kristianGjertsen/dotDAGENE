@@ -14,7 +14,7 @@ type Drop = {
 const drops: Drop[] = [
   {
     id: 1,
-    dateLabel: '1. desember',
+    dateLabel: '30. november',
     title: 'Første søndag',
     description:
       'Premie: 5 DOMINOS PIZZAER til en heldig vinner!',
@@ -23,21 +23,21 @@ const drops: Drop[] = [
   },
   {
     id: 2,
-    dateLabel: '8. desember',
+    dateLabel: '7. desember',
     title: 'Andre søndag',
     description: 'Slippes senere',
     status: 'upcoming',
   },
   {
     id: 3,
-    dateLabel: '15. desember',
+    dateLabel: '14. desember',
     title: 'Tredje søndag',
     description: 'Slippes senere',
     status: 'upcoming',
   },
   {
     id: 4,
-    dateLabel: '22. desember',
+    dateLabel: '21. desember',
     title: 'Fjerde søndag',
     description: 'Slippes senere',
     status: 'upcoming',
