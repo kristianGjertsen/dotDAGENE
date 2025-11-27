@@ -1,7 +1,7 @@
 import dominosPizzaLogo from '../assets/dominosPizzaLogo.png';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header/Header';
-import { LinkButton } from '../components/LinkButton';
+import { Footer } from '../components/PageSections/Footer';
+import { Header } from '../components/PageSections/Header';
+import { LinkButton } from '../components/Elements/LinkButton';
 
 type Drop = {
   id: number;
@@ -12,6 +12,7 @@ type Drop = {
   image?: string;
 };
 
+//Liste med alle drops i kalenderen, endre active og info for å bytte
 const drops: Drop[] = [
   {
     id: 1,
@@ -94,8 +95,8 @@ export const AdventCalendarPage = () => {
                   {activeDrop.title}
                 </h2>
                 <span className="flex items-center justify-center gap-2 border-2 border-green-700 bg-green-100 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-green-900 shadow-[4px_4px_0_rgba(0,0,0,0.12)]">
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-600" />
-                  Åpen nå
+                  <span className="h-2.5 w-2.5  rounded-full  bg-green-600" />
+                  Åpen
                 </span>
               </div>
 
@@ -113,11 +114,12 @@ export const AdventCalendarPage = () => {
                       rel="noreferrer"
                     >
                       denne
-                    </a>{' '}
+                    </a>
+                    {' ' /* Må ha med for mellomrom mellom ordene*/}
                     posten for å delta.
                   </span>
 
-                  <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-4">
+                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3 sm:mt-4 sm:justify-start max-[450px]:flex-col max-[450px]:items-center max-[450px]:justify-center">
                     <LinkButton link={instagramUrl} color="red" size="lg">
                       Instagram
                     </LinkButton>
@@ -127,7 +129,7 @@ export const AdventCalendarPage = () => {
                         link={dominosUrl}
                         color="white"
                         size="sm"
-                        className="ml-auto sm:ml-auto"
+                        className="sm:ml-auto"
                       >
                         <img
                           src={activeDrop.image}

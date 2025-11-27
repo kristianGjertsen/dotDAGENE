@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_No_Text.svg';
-import { LinkButton } from '../LinkButton';
+import { LinkButton } from '../Elements/LinkButton';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,8 +18,12 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-40 bg-white border-b-2 border-gray-500 relative">
       <section className="flex flex-row items-center justify-between px-4 py-4 sm:px-6">
-        <Link to="/" onClick={scrollToTop} className="shrink-0">
-          <img src={Logo} alt="Logo" className="w-80 max-w-full" />
+        <Link to="/" onClick={scrollToTop} className="min-w-0">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-80 max-w-full min-w-[10rem]"
+          />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 lg:flex">
           <LinkButton link="/advent" color="red" size="sm">
@@ -60,7 +64,7 @@ export const Header = () => {
       </section>
       {isMenuOpen && (
         <nav
-          className="md:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-100"
+          className="lg:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-100"
           style={{ width: 'min(60vw, 220px)' }}
         >
           <div className="w-full z-90">

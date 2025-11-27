@@ -1,21 +1,19 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  BuildingOffice2Icon,
-  SparklesIcon,
-  UserGroupIcon,
+  BuildingOffice2Icon, SparklesIcon, UserGroupIcon,
 } from '@heroicons/react/20/solid';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header/Header';
+
+import { Footer } from '../components/PageSections/Footer';
+import { Header } from '../components/PageSections/Header';
+import { Info } from '../components/Elements/Info';
+import { InfoWithButton } from '../components/Elements/InfoWithButton';
 import {
-  BannerBig,
-  BannerSmall,
+  BannerBig, BannerSmall,
   CalendarButton,
   ContactForm,
   ContactUs,
   Countdown,
-  Info,
-  InfoWithButton,
 } from '../components/HomePage';
 
 export const HomePage = () => {
@@ -48,7 +46,7 @@ export const HomePage = () => {
       <Header />
       <section className="pt-15 px-4 sm:px-12 lg:px-20">
         <div className="relative mx-auto w-full max-w-3xl overflow-visible">
-         
+
           <img
             src="/santaHat.gif"
             alt="nissehatt2"

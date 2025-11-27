@@ -1,6 +1,6 @@
-import Logo from '../assets/litenDfarget.svg';
-import Instagram from '../assets/instagram.svg';
-import Linkedin from '../assets/linkedin.svg';
+import Logo from '../../assets/litenDfarget.svg';
+import Instagram from '../../assets/instagram.svg';
+import Linkedin from '../../assets/linkedin.svg';
 
 export const Footer = () => {
   return (

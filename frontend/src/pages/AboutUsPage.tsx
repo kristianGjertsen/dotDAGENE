@@ -1,7 +1,6 @@
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header/Header';
-import { LinkButton } from '../components/LinkButton';
-//import TeamSection from '../components/AboutUsPage/TeamSection'
+import { Footer } from '../components/PageSections/Footer';
+import { Header } from '../components/PageSections/Header';
+import { LinkButton } from '../components/Elements/LinkButton';
 import FellesBilde from '../assets/FellesBilde.jpg';
 /*
 const values = [

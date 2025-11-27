@@ -1,4 +1,4 @@
-export type color = 'purple' | 'green' | 'yellow' | 'white' | 'red';
+export type color = 'purple' | 'green' | 'yellow' | 'white' | 'red' | 'blue';
 
 export const colorMap = new Map<color, string>([
   ['green', ' bg-dotgreen'],
@@ -6,4 +6,5 @@ export const colorMap = new Map<color, string>([
   ['yellow', ' bg-dotyellow'],
   ['white', ' bg-white'],
   ['red', ' bg-red-500'],
+  ['blue', ' bg-blue-500'],
 ]);
