@@ -60,6 +60,7 @@ export default async function handler(req: any, res: any) {
       access: 'public',
       contentType: 'application/json',
       allowOverwrite: true,
+      cacheControlMaxAge: 0,
     });
 
     return res.status(201).json({ ok: true });
