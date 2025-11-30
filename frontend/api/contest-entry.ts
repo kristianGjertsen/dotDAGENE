@@ -43,14 +43,23 @@ export default async function handler(req: any, res: any) {
     let existingEntries: ContestEntry[] = [];
     try {
       const metadata = await head(blobPath);
-      const response = await fetch(metadata.downloadUrl);
-      if (response.ok) {
-        const parsed = await response.json();
-        if (Array.isArray(parsed)) existingEntries = parsed;
+      const response = await fetch(metadata.downloadUrl, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Kunne ikke hente eksisterende svar');
+
+      const parsed = await response.json();
+      if (Array.isArray(parsed)) {
+        existingEntries = parsed;
+      } else {
+        throw new Error('Eksisterende svar er i feil format');
       }
     } catch (error) {
-      if (!(error instanceof BlobNotFoundError)) {
-        console.warn('Could not read existing entries', error);
+      if (error instanceof BlobNotFoundError) {
+        existingEntries = [];
+      } else {
+        console.error('Could not read existing entries', error);
+        return res.status(503).json({
+          error: 'Kunne ikke lese eksisterende svar. Vennligst prøv igjen snart',
+        });
       }
     }
 
