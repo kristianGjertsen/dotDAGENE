@@ -33,7 +33,7 @@ const drops: Drop[] = [
     id: 2,
     dateLabel: '7. desember',
     title: 'Andre søndag',
-    description: '4 vinnere av 4 pakker med Wabba snacks!',
+    description: '4 vinnere av gavepakke fra Wabba!',
     status: 'active',
     image: wabbaLogo,
     url: 'https://www.wabba.no/'
@@ -211,8 +211,8 @@ export const AdventCalendarPage = () => {
                     Hvilken sang blir dette?
                   </p>
 
-                  <div className="mt-4 border-2 border-dashed border-red-300 bg-white/70 px-5 py-4 text-center text-lg font-semibold text-gray-900">
-                    😁😁😁😁😁😁😁😁😁
+                  <div className="mt-4 border-2 border-dashed border-red-300 bg-black/10 px-5 py-4 text-center text-4xl font-semibold text-gray-900">
+                    🌙❄🌨️👼👥⬆☁
                   </div>
 
                   <div className="mt-5 space-y-4 text-sm font-medium text-gray-800">
@@ -238,7 +238,7 @@ export const AdventCalendarPage = () => {
                         className="block text-xs font-bold uppercase tracking-wide"
                         htmlFor="contest-answer"
                       >
-                        Hva heter sangen?
+                        Hva er tittelen på sangen?
                       </label>
                       <input
                         id="contest-answer"

@@ -63,6 +63,9 @@ export const HomePage = () => {
             <h2 className="text-3xl font-semibold md:text-4xl">
               dotDAGENE adventskalender 2025
             </h2>
+            <p className="text-2xl font-semibold tracking-[0.30em] text-red-100">
+              Klikk her for å delta!
+            </p>
           </Link>
         </div>
       </section>
