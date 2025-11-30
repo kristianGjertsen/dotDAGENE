@@ -1,5 +1,13 @@
 import { randomUUID } from 'node:crypto';
-import { put } from '@vercel/blob';
+import { BlobNotFoundError, head, put } from '@vercel/blob';
+
+type ContestEntry = {
+  id: string;
+  name: string;
+  answer: string;
+  createdAt: string;
+  userAgent?: string;
+};
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') return res.status(405).end();
@@ -22,20 +30,38 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: 'Navn og svar må fylles ut.' });
     }
 
-    const entry = {
+    const entry: Omit<ContestEntry, 'id'> = {
       name,
       answer,
       createdAt: new Date().toISOString(),
       userAgent: req.headers['user-agent'],
     };
 
-    const blobPath = `advent-entries/${new Date()
-      .toISOString()
-      .slice(0, 10)}-${randomUUID()}.json`;
+    const blobPath = 'advent-entries/entries.json';
 
-    await put(blobPath, JSON.stringify(entry, null, 2), {
+    let existingEntries: ContestEntry[] = [];
+    try {
+      const metadata = await head(blobPath);
+      const response = await fetch(metadata.downloadUrl);
+      if (response.ok) {
+        const parsed = await response.json();
+        if (Array.isArray(parsed)) existingEntries = parsed;
+      }
+    } catch (error) {
+      if (!(error instanceof BlobNotFoundError)) {
+        console.warn('Could not read existing entries', error);
+      }
+    }
+
+    existingEntries.push({
+      ...entry,
+      id: randomUUID(),
+    });
+
+    await put(blobPath, JSON.stringify(existingEntries, null, 2), {
       access: 'public',
       contentType: 'application/json',
+      allowOverwrite: true,
     });
 
     return res.status(201).json({ ok: true });
