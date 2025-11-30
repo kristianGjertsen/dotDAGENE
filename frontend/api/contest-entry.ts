@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { BlobNotFoundError, head, put } from '@vercel/blob';
+import { kv } from '@vercel/kv';
 
 type ContestEntry = {
   id: string;
@@ -30,39 +30,15 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: 'Navn og svar må fylles ut.' });
     }
 
-    const entry: Omit<ContestEntry, 'id'> = {
+    const entry: ContestEntry = {
+      id: randomUUID(),
       name,
       answer,
       createdAt: new Date().toISOString(),
       userAgent: req.headers['user-agent'],
     };
 
-    const blobPath = 'advent-entries/entries.json';
-
-    let existingEntries: ContestEntry[] = [];
-    try {
-      const metadata = await head(blobPath);
-      const response = await fetch(metadata.downloadUrl);
-      if (response.ok) {
-        const parsed = await response.json();
-        if (Array.isArray(parsed)) existingEntries = parsed;
-      }
-    } catch (error) {
-      if (!(error instanceof BlobNotFoundError)) {
-        console.warn('Could not read existing entries', error);
-      }
-    }
-
-    existingEntries.push({
-      ...entry,
-      id: randomUUID(),
-    });
-
-    await put(blobPath, JSON.stringify(existingEntries, null, 2), {
-      access: 'public',
-      contentType: 'application/json',
-      allowOverwrite: true,
-    });
+    await kv.rpush('advent-calendar:entries', JSON.stringify(entry));
 
     return res.status(201).json({ ok: true });
   } catch (error) {
