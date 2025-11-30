@@ -1,7 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { kv } from '@vercel/kv';
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
+import { BlobNotFoundError, head, put } from '@vercel/blob';
 
 type ContestEntry = {
   id: string;
@@ -40,41 +38,33 @@ export default async function handler(req: any, res: any) {
       userAgent: req.headers['user-agent'],
     };
 
-    const hasKvCredentials =
-      process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
+    const blobPath = 'advent-entries/entries.json';
 
-    let storage: 'kv' | 'local' = 'kv';
-
-    if (!hasKvCredentials) {
-      await appendToLocalFile(entry);
-      storage = 'local';
-    } else {
-      await kv.rpush('advent-calendar:entries', JSON.stringify(entry));
+    let existingEntries: ContestEntry[] = [];
+    try {
+      const metadata = await head(blobPath);
+      const response = await fetch(metadata.downloadUrl);
+      if (response.ok) {
+        const parsed = await response.json();
+        if (Array.isArray(parsed)) existingEntries = parsed;
+      }
+    } catch (error) {
+      if (!(error instanceof BlobNotFoundError)) {
+        console.warn('Could not read existing entries', error);
+      }
     }
 
-    return res.status(201).json({ ok: true, storage });
+    existingEntries.push(entry);
+
+    await put(blobPath, JSON.stringify(existingEntries, null, 2), {
+      access: 'public',
+      contentType: 'application/json',
+      allowOverwrite: true,
+    });
+
+    return res.status(201).json({ ok: true });
   } catch (error) {
     console.error('contest-entry error', error);
     return res.status(500).json({ error: 'Kunne ikke lagre svaret nå.' });
   }
-}
-
-async function appendToLocalFile(entry: ContestEntry) {
-  const dir = path.resolve(process.cwd(), '.data');
-  await fs.mkdir(dir, { recursive: true });
-  const filePath = path.join(dir, 'contest-entries.json');
-
-  let existing: ContestEntry[] = [];
-  try {
-    const raw = await fs.readFile(filePath, 'utf8');
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) {
-      existing = parsed;
-    }
-  } catch {
-    existing = [];
-  }
-
-  existing.push(entry);
-  await fs.writeFile(filePath, JSON.stringify(existing, null, 2), 'utf8');
 }
