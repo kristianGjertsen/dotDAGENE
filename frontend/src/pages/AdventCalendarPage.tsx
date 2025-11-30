@@ -1,4 +1,8 @@
 import dominosPizzaLogo from '../assets/dominosPizzaLogo.png';
+import wabbaLogo from '../assets/wabbaLogo.webp';
+
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { Footer } from '../components/PageSections/Footer';
 import { Header } from '../components/PageSections/Header';
 import { LinkButton } from '../components/Elements/LinkButton';
@@ -10,6 +14,7 @@ type Drop = {
   description: string;
   status: 'active' | 'upcoming' | 'done';
   image?: string;
+  url?: string;
 };
 
 //Liste med alle drops i kalenderen, endre active og info for å bytte
@@ -20,15 +25,18 @@ const drops: Drop[] = [
     title: 'Første søndag',
     description:
       'Premie: 5 DOMINOS PIZZAER til en heldig vinner!',
-    status: 'active',
+    status: 'done',
     image: dominosPizzaLogo,
+    url: 'https://www.dominos.no/',
   },
   {
     id: 2,
     dateLabel: '7. desember',
     title: 'Andre søndag',
-    description: 'Slippes senere',
-    status: 'upcoming',
+    description: '4 vinnere av gavepakke fra Wabba!',
+    status: 'active',
+    image: wabbaLogo,
+    url: 'https://www.wabba.no/'
   },
   {
     id: 3,
@@ -47,11 +55,54 @@ const drops: Drop[] = [
 ];
 
 //Endre denne linken til rktig post for hver uke
-const instagramUrl = 'https://www.instagram.com/p/DRjrkF3F7K4/?img_index=1';
-const dominosUrl = 'https://www.dominos.no/';
+const instagramUrl = 'https://www.instagram.com/dotdagene/';
 
 export const AdventCalendarPage = () => {
   const activeDrop = drops.find((drop) => drop.status === 'active') ?? drops[0];
+
+  const [name, setName] = useState('');
+  const [answer, setAnswer] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const trimmedName = name.trim();
+    const trimmedAnswer = answer.trim();
+
+    if (!trimmedName || !trimmedAnswer) {
+      setFeedbackMessage('Fyll inn både navn og sangtittel.');
+      setSubmitStatus('error');
+      return;
+    }
+
+    setSubmitStatus('loading');
+    setFeedbackMessage(null);
+
+    try {
+      const response = await fetch('/api/contest-entry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: trimmedName, answer: trimmedAnswer }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error ?? 'Kunne ikke lagre svaret.');
+      }
+
+      setSubmitStatus('success');
+      setFeedbackMessage('Takk! Svaret er registrert 🎄');
+      setName('');
+      setAnswer('');
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Noe gikk galt. Prøv igjen.';
+      setSubmitStatus('error');
+      setFeedbackMessage(message);
+    }
+  };
 
   const statusRank: Record<Drop['status'], number> = {
     active: 0,
@@ -90,7 +141,7 @@ export const AdventCalendarPage = () => {
                 {activeDrop.dateLabel}
               </div>
 
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-4">
                 <h2 className="text-4xl font-semibold text-red-700">
                   {activeDrop.title}
                 </h2>
@@ -100,7 +151,7 @@ export const AdventCalendarPage = () => {
                 </span>
               </div>
 
-              <div className="mt-5 flex flex-col gap-6 sm:flex-row sm:items-start">
+              <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start">
                 <div className="flex-1">
                   <p className="text-3xl font-medium text-gray-900">
                     {activeDrop.description}
@@ -116,30 +167,109 @@ export const AdventCalendarPage = () => {
                       denne
                     </a>
                     {' ' /* Må ha med for mellomrom mellom ordene*/}
-                    posten for å delta.
+                    posten og legg in svar her for å delta
                   </span>
 
-                  <div className="mt-3 flex flex-wrap items-center justify-between gap-3 sm:mt-4 sm:justify-start max-[450px]:flex-col max-[450px]:items-center max-[450px]:justify-center">
-                    <LinkButton link={instagramUrl} color="red" size="lg">
-                      Instagram
-                    </LinkButton>
+                  <div className="mt-6 flex flex-col pt-5 items-center gap-6 sm:mt-8">
+                    <div className="flex w-full  justify-center">
+                      <LinkButton link={instagramUrl} color="red" size="lg">
+                        Instagram
+                      </LinkButton>
+                    </div>
 
                     {activeDrop.image && (
-                      <LinkButton
-                        link={dominosUrl}
-                        color="white"
-                        size="sm"
-                        className="sm:ml-auto"
-                      >
-                        <img
-                          src={activeDrop.image}
-                          alt={activeDrop.title}
-                          className="h-30 w-auto object-cover"
-                        />
-                      </LinkButton>
+                      <div className="flex w-full lg:pt-25 justify-center">
+                        <a
+                          href={activeDrop.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex w-full max-w-lg border-3 border-black bg-white px-6 py-5 shadow-[10px_10px_0_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        >
+                          <img
+                            src={activeDrop.image}
+                            alt={activeDrop.title}
+                            className="h-auto w-full object-contain"
+                          />
+                        </a>
+                      </div>
                     )}
                   </div>
                 </div>
+
+                <form
+                  className="w-full max-w-sm self-center border-3 border-black bg-amber-50 px-6 py-6 text-left shadow-[8px_8px_0_rgba(0,0,0,0.16)] lg:ml-auto lg:self-start"
+                  onSubmit={handleSubmit}
+                  noValidate
+                >
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-amber-700">
+                    Ukens konkurranse
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold text-red-700">
+                    Gjett sangtittelen
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-700">
+                    Hvilken sang blir dette?
+                  </p>
+
+                  <div className="mt-4 border-2 border-dashed border-red-300 bg-black/10 px-5 py-4 text-center text-4xl font-semibold text-gray-900">
+                    🌙❄🌨️👼👥⬆☁
+                  </div>
+
+                  <div className="mt-5 space-y-4 text-sm font-medium text-gray-800">
+                    <div className="space-y-2">
+                      <label
+                        className="block text-xs font-bold uppercase tracking-wide"
+                        htmlFor="contest-name"
+                      >
+                        Navn
+                      </label>
+                      <input
+                        id="contest-name"
+                        type="text"
+                        placeholder="Ditt navn"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        className="w-full border-2 border-black bg-white px-4 py-2 text-sm font-medium text-gray-900 placeholder:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label
+                        className="block text-xs font-bold uppercase tracking-wide"
+                        htmlFor="contest-answer"
+                      >
+                        Hva er tittelen på sangen?
+                      </label>
+                      <input
+                        id="contest-answer"
+                        type="text"
+                        placeholder="Skriv tittelen her"
+                        value={answer}
+                        onChange={(event) => setAnswer(event.target.value)}
+                        className="w-full border-2 border-black bg-white px-4 py-2 text-sm font-medium text-gray-900 placeholder:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={submitStatus === 'loading'}
+                      className="inline-flex w-full items-center justify-center border-2 border-black bg-red-600 px-5 py-2 text-sm font-semibold uppercase tracking-wide text-white transition hover:-translate-y-0.5 hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      {submitStatus === 'loading' ? 'Sender...' : 'Send inn'}
+                    </button>
+                    <p className="text-xs text-gray-600">
+                      Vi kontakter vinneren via Instagram etter at fristen er ute.
+                    </p>
+                    {feedbackMessage && (
+                      <p
+                        className={`text-xs font-semibold ${submitStatus === 'success' ? 'text-green-700' : 'text-red-700'
+                          }`}
+                      >
+                        {feedbackMessage}
+                      </p>
+                    )}
+                  </div>
+                </form>
               </div>
             </div>
 
@@ -184,13 +314,18 @@ export const AdventCalendarPage = () => {
                     </div>
 
                     {drop.image && (
-                      <div className="w-full overflow-hidden border-3 border-black shadow-[6px_6px_0_rgba(0,0,0,0.12)] sm:w-52">
+                      <a
+                        href={drop.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block w-full overflow-hidden border-3 border-black shadow-[6px_6px_0_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black sm:w-52"
+                      >
                         <img
                           src={drop.image}
                           alt={drop.title}
                           className="h-full w-full object-cover"
                         />
-                      </div>
+                      </a>
                     )}
                   </div>
                 </div>
