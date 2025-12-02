@@ -209,6 +209,8 @@ export const AdventCalendarPage = () => {
                   </h3>
                   <p className="mt-2 text-sm text-gray-700">
                     Hvilken norsk sang blir dette?
+                    <br />
+                    Tips: DumDum Boys
                   </p>
 
                   <div className="mt-4 border-2 border-dashed border-red-300 bg-black/10 px-5 py-4 text-center text-4xl font-semibold text-gray-900">
