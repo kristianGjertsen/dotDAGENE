@@ -1,8 +1,9 @@
 import dominosPizzaLogo from '../assets/dominosPizzaLogo.png';
 import wabbaLogo from '../assets/wabbaLogo.webp';
+import lostacosAndSitLogo from '../assets/los_sit.png';
 
-import { useState } from 'react';
-import type { FormEvent } from 'react';
+//import { useState } from 'react';
+//import type { FormEvent } from 'react';
 import { Footer } from '../components/PageSections/Footer';
 import { Header } from '../components/PageSections/Header';
 import { LinkButton } from '../components/Elements/LinkButton';
@@ -33,8 +34,8 @@ const drops: Drop[] = [
     id: 2,
     dateLabel: '7. desember',
     title: 'Andre søndag',
-    description: '4 vinnere av gavepakke fra Wabba!',
-    status: 'active',
+    description: '4 vinnere av gavepakke fra Wabba! Riktig sang var Stjernesludd',
+    status: 'done',
     image: wabbaLogo,
     url: 'https://www.wabba.no/'
   },
@@ -42,8 +43,11 @@ const drops: Drop[] = [
     id: 3,
     dateLabel: '14. desember',
     title: 'Tredje søndag',
-    description: 'Slippes senere',
-    status: 'upcoming',
+    description:
+      '1. premie er gavekort på 500 kr hos Los Tacos \n\n2. premie er gavekort på 100 kr hos Sit',
+    image: lostacosAndSitLogo,
+    url: 'https://lostacos.no/',
+    status: 'active',
   },
   {
     id: 4,
@@ -55,22 +59,24 @@ const drops: Drop[] = [
 ];
 
 //Endre denne linken til rktig post for hver uke
-const instagramUrl = 'https://www.instagram.com/p/DRr7HjlFxKt/?img_index=1';
+const instagramUrl = 'https://www.instagram.com/p/DR99ctql9Np/?igsh=bno3NXBocm1sOWJ41';
 
 export const AdventCalendarPage = () => {
   const activeDrop = drops.find((drop) => drop.status === 'active') ?? drops[0];
 
+  /*
   const [name, setName] = useState('');
   const [answer, setAnswer] = useState('');
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  
+ const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const trimmedName = name.trim();
     const trimmedAnswer = answer.trim();
 
+    
     if (!trimmedName || !trimmedAnswer) {
       setFeedbackMessage('Fyll inn både navn og sangtittel.');
       setSubmitStatus('error');
@@ -103,6 +109,7 @@ export const AdventCalendarPage = () => {
       setFeedbackMessage(message);
     }
   };
+  */
 
   const statusRank: Record<Drop['status'], number> = {
     active: 0,
@@ -134,15 +141,15 @@ export const AdventCalendarPage = () => {
           </div>
         </section>
 
-        <section className="relative px-6 pb-16 sm:px-12 lg:px-20">
+        <section className="relative px-6 pb-8 sm:px-12 lg:px-20">
           <div className="mx-auto max-w-6xl grid gap-8 lg:grid-cols-[1.6fr,1fr]">
-            <div className="relative overflow-hidden border-3 border-black bg-white p-8 shadow-[12px_12px_0_0_rgba(0,0,0,0.16)]">
-              <div className="absolute left-[-10px] top-0 rotate-[-6deg] border-2 border-black bg-red-600 px-4 py-1 text-sm font-bold text-white shadow-[3px_3px_0_rgba(0,0,0,0.25)]">
+            <div className="relative overflow-hidden border-3 border-black bg-white p-4 shadow-[12px_12px_0_0_rgba(0,0,0,0.16)]">
+              <div className="absolute left-[-10px] top-0 rotate-[-6deg] border-2 border-black bg-red-600 px-3 py-0.5 text-xs font-bold text-white shadow-[3px_3px_0_rgba(0,0,0,0.25)]">
                 {activeDrop.dateLabel}
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-4xl font-semibold text-red-700">
+                <h2 className="text-3xl font-semibold text-red-700">
                   {activeDrop.title}
                 </h2>
                 <span className="flex items-center justify-center gap-2 border-2 border-green-700 bg-green-100 px-4 py-2 text-sm font-semibold uppercase tracking-wide text-green-900 shadow-[4px_4px_0_rgba(0,0,0,0.12)]">
@@ -151,9 +158,9 @@ export const AdventCalendarPage = () => {
                 </span>
               </div>
 
-              <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start">
+              <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-start">
                 <div className="flex-1">
-                  <p className="text-3xl font-medium text-gray-900">
+                  <p className="text-2xl font-medium text-gray-900 whitespace-pre-line">
                     {activeDrop.description}
                   </p>
                   <span className="mt-2 block text-sm font-medium text-red-800 sm:mt-3">
@@ -167,36 +174,36 @@ export const AdventCalendarPage = () => {
                       denne
                     </a>
                     {' ' /* Må ha med for mellomrom mellom ordene*/}
-                    posten og legg in svar her for å delta
+                    posten på Instagram for å delta!
                   </span>
 
-                  <div className="mt-6 flex flex-col pt-5 items-center gap-6 sm:mt-8">
-                    <div className="flex w-full  justify-center">
+                  <div className="mt-3 flex flex-col pt-2 items-center gap-3 sm:mt-4">
+                    <div className="flex w-full justify-start">
                       <LinkButton link={instagramUrl} color="red" size="lg">
                         Instagram
                       </LinkButton>
                     </div>
-
-                    {activeDrop.image && (
-                      <div className="flex w-full lg:pt-25 justify-center">
-                        <a
-                          href={activeDrop.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex w-full max-w-lg border-3 border-black bg-white px-6 py-5 shadow-[10px_10px_0_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                        >
-                          <img
-                            src={activeDrop.image}
-                            alt={activeDrop.title}
-                            className="h-auto w-full object-contain"
-                          />
-                        </a>
-                      </div>
-                    )}
                   </div>
                 </div>
 
-                <form
+                {activeDrop.image && (
+                  <div className="mt-4 flex w-full justify-center lg:mt-0 lg:w-auto lg:pl-4">
+                    <a
+                      href={activeDrop.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex w-full max-w-md border-3 border-black bg-white px-4 py-3 shadow-[10px_10px_0_rgba(0,0,0,0.16)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                      <img
+                        src={activeDrop.image}
+                        alt={activeDrop.title}
+                        className="h-auto w-full object-contain"
+                      />
+                    </a>
+                  </div>
+                )}
+
+                {/* <form
                   className="w-full max-w-sm self-center border-3 border-black bg-amber-50 px-6 py-6 text-left shadow-[8px_8px_0_rgba(0,0,0,0.16)] lg:ml-auto lg:self-start"
                   onSubmit={handleSubmit}
                   noValidate
@@ -271,7 +278,7 @@ export const AdventCalendarPage = () => {
                       </p>
                     )}
                   </div>
-                </form>
+                </form>*/}
               </div>
             </div>
 
