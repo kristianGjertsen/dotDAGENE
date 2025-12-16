@@ -1,6 +1,7 @@
 import dominosPizzaLogo from '../assets/dominosPizzaLogo.png';
 import wabbaLogo from '../assets/wabbaLogo.webp';
 import lostacosAndSitLogo from '../assets/los_sit.png';
+import egonLogo from '../assets/egonLogo.png';
 
 //import { useState } from 'react';
 //import type { FormEvent } from 'react';
@@ -47,19 +48,21 @@ const drops: Drop[] = [
       '1. premie er gavekort på 500 kr hos Los Tacos \n\n2. premie er gavekort på 100 kr hos Sit',
     image: lostacosAndSitLogo,
     url: 'https://lostacos.no/',
-    status: 'active',
+    status: 'done',
   },
   {
     id: 4,
     dateLabel: '21. desember',
     title: 'Fjerde søndag',
-    description: 'Slippes senere',
-    status: 'upcoming',
+    description: 'Gavekort på Egon Solsiden* med middag for 2 stk \n+ 2 gavekort på 100kr hos Sit to andre heldige vinnere!',
+    image: egonLogo,
+    url: 'https://egon.no/restauranter/troendelag/egon-solsiden',
+    status: 'active',
   },
 ];
 
 //Endre denne linken til rktig post for hver uke
-const instagramUrl = 'https://www.instagram.com/p/DR99ctql9Np/?igsh=bno3NXBocm1sOWJ41';
+const instagramUrl = 'https://www.instagram.com/dotdagene/';
 
 export const AdventCalendarPage = () => {
   const activeDrop = drops.find((drop) => drop.status === 'active') ?? drops[0];
@@ -327,12 +330,12 @@ export const AdventCalendarPage = () => {
                         href={drop.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="block w-full overflow-hidden border-3 border-black shadow-[6px_6px_0_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black sm:w-52"
+                        className="block w-32 mx-auto overflow-hidden border-3 border-black shadow-[6px_6px_0_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black sm:w-32"
                       >
                         <img
                           src={drop.image}
                           alt={drop.title}
-                          className="h-full w-full object-cover"
+                          className="h-auto w-full object-contain"
                         />
                       </a>
                     )}
