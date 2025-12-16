@@ -54,7 +54,7 @@ const drops: Drop[] = [
     id: 4,
     dateLabel: '21. desember',
     title: 'Fjerde søndag',
-    description: 'Gavekort på Egon Solsiden* med middag for 2 stk \n+ 2 gavekort på 100kr hos Sit to andre heldige vinnere!',
+    description: 'Gavekort på Egon Solsiden* med middag for 2 stk \n+ 2 gavekort på 100kr hos Sit til to andre heldige vinnere!',
     image: egonLogo,
     url: 'https://egon.no/restauranter/troendelag/egon-solsiden',
     status: 'active',
