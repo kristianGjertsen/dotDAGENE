@@ -2,6 +2,7 @@ import { Footer } from '../components/PageSections/Footer';
 import { Header } from '../components/PageSections/Header';
 import { LinkButton } from '../components/Elements/LinkButton';
 import FellesBilde from '../assets/FellesBilde.jpg';
+
 /*
 const values = [
   {
