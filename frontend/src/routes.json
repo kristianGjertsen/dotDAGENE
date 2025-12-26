@@ -13,10 +13,6 @@
     "path": "/om",
     "priority": 0.8,
     "changefreq": "weekly"
-  },
-  {
-    "path": "/advent",
-    "priority": 0.7,
-    "changefreq": "weekly"
   }
+  
 ]

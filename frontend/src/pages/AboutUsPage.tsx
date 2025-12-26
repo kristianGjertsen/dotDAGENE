@@ -2,6 +2,7 @@ import { Footer } from '../components/PageSections/Footer';
 import { Header } from '../components/PageSections/Header';
 import { LinkButton } from '../components/Elements/LinkButton';
 import FellesBilde from '../assets/FellesBilde.jpg';
+
 /*
 const values = [
   {
@@ -75,7 +76,7 @@ export const AboutUsPage = () => {
                 <p className="text-sm tracking-[0.3em] text-gray-600">
                   STUDENTENE BAK
                 </p>
-                <h2 className="text-3xl font-semibold">Bachelor- og masterstudenter i informatikk</h2>
+                <h2 className="text-3xl font-semibold">Bachelor- og masterstudenter på informatikk</h2>
                 <p className="text-gray-800">
                   Vi representerer studenter innen informatikk, AI, datasikkerhet
                   osv. Sammen bygger vi rom for samarbeid,

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon, SparklesIcon, UserGroupIcon,
 } from '@heroicons/react/20/solid';
@@ -44,35 +44,9 @@ export const HomePage = () => {
       <h1 className="sr-only">dotDAGENE 2025</h1>
 
       <Header />
-      <section className="pt-15 px-4 sm:px-12 lg:px-20">
-        <div className="relative mx-auto w-full max-w-3xl overflow-visible">
-
-          <img
-            src="/santaHat.gif"
-            alt="nissehatt2"
-            className="pointer-events-none absolute -right-4 top-1 z-30 h-20 w-auto -translate-y-[74%] object-contain sm:-right-[8px] sm:h-28 sm:-translate-y-[82%]"
-          />
-          <Link
-
-            to="/advent"
-            className="mt-10 flex flex-col items-center justify-center gap-2 border-3 border-black bg-red-500 p-4 text-center text-white shadow-[10px_10px_0_0_rgba(0,0,0,0.18)] transition-transform duration-150 hover:translate-y-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-          >
-            <p className="text-sm font-semibold tracking-[0.35em] text-red-100">
-              NYHET
-            </p>
-            <h2 className="text-3xl font-semibold md:text-4xl">
-              dotDAGENE adventskalender 2025
-            </h2>
-            <p className="text-2xl font-semibold tracking-[0.30em] text-red-100">
-              Klikk her for å delta!
-            </p>
-          </Link>
-        </div>
-      </section>
       <div className="block md:hidden">
         <BannerSmall />
       </div>
-
       <div className="hidden md:block">
         <BannerBig />
       </div>

@@ -26,9 +26,6 @@ export const Header = () => {
           />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 lg:flex">
-          <LinkButton link="/advent" color="red" size="sm">
-            Adventskalender
-          </LinkButton>
           <LinkButton link="/" color="green" size="sm">
             Hjem
           </LinkButton>
@@ -37,7 +34,7 @@ export const Header = () => {
           </LinkButton>
           <LinkButton link="/faq" color="yellow" size="sm">
             FAQ
-          </LinkButton> 
+          </LinkButton>
           <LinkButton link="/#contact" color="green" size="sm">
             Kontakt Oss
           </LinkButton>
@@ -68,14 +65,6 @@ export const Header = () => {
           style={{ width: 'min(60vw, 220px)' }}
         >
           <div className="w-full z-90">
-            <LinkButton
-              link="/advent"
-              color="red"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              Advent
-            </LinkButton>
           </div>
           <div className="w-full">
             <LinkButton

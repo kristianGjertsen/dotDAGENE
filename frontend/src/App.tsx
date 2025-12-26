@@ -5,7 +5,6 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { AdventCalendarPage } from './pages/AdventCalendarPage';
 import { FaqPage } from './pages/FaqPage';
 import { HomePage } from './pages/HomePage';
 import { AboutUsPage } from './pages/AboutUsPage';
@@ -21,7 +20,6 @@ const routeComponents: Record<string, JSX.Element> = {
   '/': <HomePage />,
   '/faq': <FaqPage />,
   '/om': <AboutUsPage />,
-  '/advent': <AdventCalendarPage />,
 };
 
 const ScrollManager = () => {
