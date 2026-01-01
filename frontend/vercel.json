@@ -1,6 +1,23 @@
 {
   "rewrites": [
-    { "source": "/event.ics", "destination": "/api/event" },
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/event.ics",
+      "destination": "/api/event"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors *"
+        }
+      ]
+    }
   ]
 }
