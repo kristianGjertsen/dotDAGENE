@@ -23,6 +23,7 @@
     "@vercel/blob": "^2.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "express": "^5.1.0",
+    "png-to-ico": "^3.0.1",
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.1",
