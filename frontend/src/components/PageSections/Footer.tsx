@@ -26,7 +26,7 @@ export const Footer = () => {
           </section>
         </section>
         <p className="mt-6 w-full border-t-1 border-gray-100 pt-6 text-center text-gray-100">
-          © 2025 dotDAGENE
+          © 2026 dotDAGENE
         </p>
       </section>
     </footer>
