@@ -1,0 +1,46 @@
+{
+    "companies": [
+        {
+            "name": "Tripletex",
+            "logo": "tripletex.svg",
+            "website": "https://www.tripletex.no/",
+            "logoScale": 1,
+            "description": "Tripletex utvikler et skybasert økonomisystem brukt av titusenvis av norske virksomheter. Systemene håndterer store datamengder og komplekse forretningsregler, og utviklingen innebærer arbeid med skalerbare backend-løsninger, moderne webteknologi og kontinuerlig videreutvikling av en etablert plattform."
+        },
+        {
+            "name": "Itera AS",
+            "logo": "Itera.png",
+            "website": "https://www.itera.com/",
+            "logoScale": 2,
+            "description": "Itera er et konsulentselskap som jobber med utvikling av digitale løsninger for både privat og offentlig sektor. Arbeidet spenner fra systemutvikling og arkitektur til dataanalyse og skyplattformer, ofte i tverrfaglige team og i tett samarbeid med kundene."
+        },
+        {
+            "name": "Norsk regnesentral",
+            "logo": "NorskRegnesentral.svg",
+            "website": "https://nr.no/",
+            "logoScale": 1,
+            "description": "Norsk regnesentral er et anvendt forskningsinstitutt med fokus på statistikk, maskinlæring og dataanalyse. De utvikler modeller, algoritmer og programvare som tas i bruk i reelle systemer, og samarbeider tett med både næringsliv og offentlig sektor."
+        },
+        {
+            "name": "Bekk",
+            "logo": "Bekk.png",
+            "website": "https://www.bekk.no/",
+            "logoScale": 1,
+            "description": "Bekk er et konsulentselskap som jobber med systemutvikling, design og produktutvikling. Utviklerne jobber ofte tett med kunder over tid, med fokus på kodekvalitet, arkitektur, smidige arbeidsmetoder og praktisk problemløsning."
+        },
+        {
+            "name": "Skatteetaten",
+            "logo": "Skatteetaten.svg",
+            "website": "https://www.skatteetaten.no/",
+            "logoScale": 1,
+            "description": "Skatteetaten utvikler og forvalter noen av Norges mest kritiske IT-systemer. Arbeidet omfatter store distribuerte systemer, komplekse dataløsninger og høy grad av automatisering, med fokus på sikkerhet, stabilitet og langsiktig forvaltning."
+        },
+        {
+            "name": "Mastercard",
+            "logo": "Mastercard.svg",
+            "website": "https://www.mastercard.com/no/nb.html",
+            "logoScale": 1,
+            "description": "Mastercard utvikler globale betalingssystemer som håndterer svært høye transaksjonsvolumer i sanntid. Teknologiarbeidet omfatter distribuerte systemer, sikkerhet, dataanalyse og høy tilgjengelighet i systemer som brukes over hele verden."
+        }
+    ]
+}
