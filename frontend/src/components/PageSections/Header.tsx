@@ -59,6 +59,8 @@ export const Header = () => {
           </span>
         </button>
       </section>
+
+      {/* Mobile menu */}
       {isMenuOpen && (
         <nav
           className="lg:hidden absolute right-1 top-full mt-2 px-4 py-4 flex flex-col items-end gap-3 bg-transparent z-100"

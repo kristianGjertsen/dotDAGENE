@@ -4,3 +4,5 @@ export * from './Countdown/Countdown';
 export * from './Contact/ContactForm';
 export * from './Contact/ContactUs';
 export * from './Calendar/CalendarButton';
+export * from './ParticipatingCompanies/CompLayout';
+export * from './ParticipatingCompanies/CompBox';

@@ -8,6 +8,7 @@ import { Footer } from '../components/PageSections/Footer';
 import { Header } from '../components/PageSections/Header';
 import { Info } from '../components/Elements/Info';
 import { InfoWithButton } from '../components/Elements/InfoWithButton';
+import { CompLayout } from '../components/HomePage/ParticipatingCompanies/CompLayout';
 import {
   BannerBig, BannerSmall,
   CalendarButton,
@@ -118,6 +119,10 @@ export const HomePage = () => {
           </p>
         </div>
       </section>
+
+      <CompLayout />
+
+
 
       <section className="px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
