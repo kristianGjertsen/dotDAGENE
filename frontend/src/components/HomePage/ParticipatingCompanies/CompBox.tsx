@@ -10,9 +10,10 @@ export type Company = {
 
 type CompBoxProps = {
     company: Company;
+    onClose?: () => void;
 };
 
-export const CompBox = ({ company }: CompBoxProps) => {
+export const CompBox = ({ company, onClose }: CompBoxProps) => {
     const logoSrc = company.logo
         ? new URL(`./Logos/${company.logo}`, import.meta.url).href
         : undefined;
@@ -20,6 +21,16 @@ export const CompBox = ({ company }: CompBoxProps) => {
 
     return (
         <div className="relative flex w-full flex-col items-center gap-6 overflow-hidden border-3 border-black bg-white px-8 py-12 text-center shadow-[10px_10px_0px_#000]">
+            {onClose && (
+                <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Lukk"
+                    className="absolute right-4 top-4 z-20 text-2xl font-bold text-gray-500 transition-colors hover:text-black focus:outline-none"
+                >
+                    ×
+                </button>
+            )}
             {logoSrc && (
                 <div className="relative z-0 flex w-full items-center justify-center">
                     <img

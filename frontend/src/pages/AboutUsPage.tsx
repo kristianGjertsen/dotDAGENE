@@ -158,7 +158,7 @@ export const AboutUsPage = () => {
             <h2 className="text-3xl font-semibold">Vil du samarbeide med oss?</h2>
             <p className="mt-4 text-lg pb-10">
               Vi er på jakt etter bedrifter og partnere som vil bidra
-              til å forme dotDAGENE. Ta kontakt vi skreddersyr en opplevelse for dere.
+              til å forme dotDAGENE. Ta kontakt, så skreddersyr vi en opplevelse for dere.
             </p>
             <LinkButton link="/#contact" color="yellow">
               Kontakt Oss

@@ -36,9 +36,9 @@ export const CompLayout = () => {
     }, [activeCompany]);
 
     return (
-        <section className="px-6 py-20 sm:px-12 lg:px-20">
+        <section className="px-6 sm:px-12 pb-20 lg:px-20">
             <h2 className="text-center text-4xl font-semibold text-gray-900">
-                Deltagene bedrifter i 2026
+                Deltakende bedrifter i 2026
             </h2>
             <div className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] justify-center gap-6">
                 {companies.map((company) => {
@@ -76,19 +76,13 @@ export const CompLayout = () => {
                     onClick={() => setActiveCompany(null)}
                 >
                     <div
-                        className="relative w-full max-w-2xl"
+                        className="relative w-full max-w-2xl animate-modal-drop"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <button
-                            type="button"
-                            onClick={() => setActiveCompany(null)}
-                            className="absolute right-4 top-4 rounded-full bg-white px-3 py-1 text-xl font-bold leading-none shadow-[3px_3px_0px_#000]"
-                            aria-label="Lukk"
-                        >
-                            ×
-                        </button>
-
-                        <CompBox company={activeCompany} />
+                        <CompBox
+                            company={activeCompany}
+                            onClose={() => setActiveCompany(null)}
+                        />
                     </div>
                 </div>
             )}
