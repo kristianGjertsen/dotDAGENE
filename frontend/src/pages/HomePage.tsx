@@ -85,7 +85,7 @@ export const HomePage = () => {
             <p className="mt-5 text-center">
               dotDAGENE 2026 bringer sammen studenter og bedrifter.
               Her får du sjansen til å bygge nettverk, utforske fremtidige karriereveier og oppleve hvordan teknologi og samarbeid skaper nye muligheter.
-              Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår
+              Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export const HomePage = () => {
         </div>
       </section>
 
-      <section className="mx-6 my-32 sm:mx-12 lg:mx-24">
+      <section className="mx-6 py-30 sm:mx-12 lg:mx-24">
         <div className="flex w-full flex-col items-center justify-center gap-6 border-3 border-black bg-white p-8 lg:px-32 lg:py-16">
           <h2 className="text-center text-4xl font-medium md:text-6xl">
             HVEM ER VI?

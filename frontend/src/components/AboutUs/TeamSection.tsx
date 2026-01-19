@@ -1,4 +1,6 @@
 const teamRoles = [
+
+    //Ikke i bruk i dag
     {
         title: 'Leder',
         name: 'Person Personsen',
