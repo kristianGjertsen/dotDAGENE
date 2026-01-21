@@ -62,7 +62,7 @@ export const HomePage = () => {
             color="purple"
             icon={UserGroupIcon}
           >
-            Velkommen til neste års møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
+            Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
           </Info>
 
           <Info
