@@ -1,6 +1,13 @@
 {
     "companies": [
         {
+            "name": "Maritime Optima",
+            "logo": "maritimeOptima.png",
+            "website": "https://maritimeoptima.com/",
+            "logoScale": 1,
+            "description": "Maritime Optima er et norsk eiet selskap som utvikler beslutningsstøtte system (ShipIntel) for selskap som er involvert i shipping. Systemet er basert på store data mengder som vi samler inn og strukturerer, og bruker til å lage modeller for å predikere ulike hendelser. Videre hjelper ShipIntel å automatisere interne manuelle arbeidsprosesser. Målet er å utvikle og selge et banebrytende nytt data drevet beslutningsstøtte system for selskap som er involvert i shipping."
+        },
+        {
             "name": "Tripletex",
             "logo": "tripletex.svg",
             "website": "https://www.tripletex.no/",
@@ -8,14 +15,14 @@
             "description": "Tripletex utvikler et skybasert økonomisystem brukt av titusenvis av norske virksomheter. Systemene håndterer store datamengder og komplekse forretningsregler, og utviklingen innebærer arbeid med skalerbare backend-løsninger, moderne webteknologi og kontinuerlig videreutvikling av en etablert plattform."
         },
         {
-            "name": "Itera AS",
+            "name": "Itera",
             "logo": "Itera.png",
             "website": "https://www.itera.com/",
             "logoScale": 2,
             "description": "Itera er et konsulentselskap som jobber med utvikling av digitale løsninger for både privat og offentlig sektor. Arbeidet spenner fra systemutvikling og arkitektur til dataanalyse og skyplattformer, ofte i tverrfaglige team og i tett samarbeid med kundene."
         },
         {
-            "name": "Norsk regnesentral",
+            "name": "Norsk Regnesentral",
             "logo": "NorskRegnesentral.svg",
             "website": "https://nr.no/",
             "logoScale": 1,
