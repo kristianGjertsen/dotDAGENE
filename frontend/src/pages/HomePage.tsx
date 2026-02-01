@@ -16,6 +16,7 @@ import {
   ContactUs,
   Countdown,
 } from '../components/HomePage';
+import StandMap from '../components/HomePage/StandMap/StandMap';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -121,8 +122,7 @@ export const HomePage = () => {
       </section>
 
       <CompLayout />
-
-
+      <StandMap />
 
       <section className="px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
