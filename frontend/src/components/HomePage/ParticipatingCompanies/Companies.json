@@ -1,53 +1,74 @@
 {
-    "companies": [
-        {
-            "name": "Maritime Optima",
-            "logo": "maritimeOptima.png",
-            "website": "https://maritimeoptima.com/",
-            "logoScale": 1,
-            "description": "Maritime Optima er et norskeid selskap som utvikler beslutningsstøttesystem (ShipIntel) for selskap som er involvert i shipping. Systemet er basert på store datamengder som vi samler inn og strukturerer, og bruker til å lage modeller for å predikere ulike hendelser. Videre hjelper ShipIntel å automatisere interne manuelle arbeidsprosesser. Målet er å utvikle og selge et banebrytende nytt datadrevet beslutningsstøttesystem for selskap som er involvert i shipping."
-        },
-        {
-            "name": "Tripletex",
-            "logo": "tripletex.svg",
-            "website": "https://www.tripletex.no/",
-            "logoScale": 1,
-            "description": "Tripletex utvikler et skybasert økonomisystem brukt av titusenvis av norske virksomheter. Systemene håndterer store datamengder og komplekse forretningsregler, og utviklingen innebærer arbeid med skalerbare backend-løsninger, moderne webteknologi og kontinuerlig videreutvikling av en etablert plattform."
-        },
-        {
-            "name": "Itera",
-            "logo": "Itera.png",
-            "website": "https://www.itera.com/",
-            "logoScale": 1,
-            "description": "Itera er et konsulentselskap som utvikler digitale løsninger for både privat og offentlig sektor. Hos oss får du tidlig ansvar og roller innen ditt fag, enten det er systemutvikling og arkitektur, UX og design eller dataanalyse, skyplattformer og sikkerhet. Du blir en del av tverrfaglige team som samarbeider tett med kundene – og får være med på å forme løsninger som faktisk betyr noe i samfunnet."
-        },
-        {
-            "name": "Norsk Regnesentral",
-            "logo": "NorskRegnesentral.svg",
-            "website": "https://nr.no/",
-            "logoScale": 1,
-            "description": "Norsk regnesentral er et anvendt forskningsinstitutt med fokus på statistikk, maskinlæring og dataanalyse. De utvikler modeller, algoritmer og programvare som tas i bruk i reelle systemer, og samarbeider tett med både næringsliv og offentlig sektor."
-        },
-        {
-            "name": "Bekk",
-            "logo": "Bekk.png",
-            "website": "https://www.bekk.no/",
-            "logoScale": 1,
-            "description": "Bekk er et konsulentselskap som jobber med systemutvikling, design og produktutvikling. Utviklerne jobber ofte tett med kunder over tid, med fokus på kodekvalitet, arkitektur, smidige arbeidsmetoder og praktisk problemløsning."
-        },
-        {
-            "name": "Skatteetaten",
-            "logo": "Skatteetaten.svg",
-            "website": "https://www.skatteetaten.no/",
-            "logoScale": 1,
-            "description": "Skatteetaten utvikler og forvalter noen av Norges mest kritiske IT-systemer. Arbeidet omfatter store distribuerte systemer, komplekse dataløsninger og høy grad av automatisering, med fokus på sikkerhet, stabilitet og langsiktig forvaltning."
-        },
-        {
-            "name": "Mastercard",
-            "logo": "Mastercard.svg",
-            "website": "https://www.mastercard.com/no/nb.html",
-            "logoScale": 1,
-            "description": "Mastercard utvikler globale betalingssystemer som håndterer svært høye transaksjonsvolumer i sanntid. Teknologiarbeidet omfatter distribuerte systemer, sikkerhet, dataanalyse og høy tilgjengelighet i systemer som brukes over hele verden."
-        }
-    ]
+  "companies": [
+    {
+      "name": "Maritime Optima",
+      "logo": "maritimeOptima.png",
+      "website": "https://maritimeoptima.com/",
+      "logoScale": 1,
+      "description": "Maritime Optima er et norskeid selskap som utvikler beslutningsstøttesystem (ShipIntel) for selskap som er involvert i shipping. Systemet er basert på store datamengder som vi samler inn og strukturerer, og bruker til å lage modeller for å predikere ulike hendelser. Videre hjelper ShipIntel å automatisere interne manuelle arbeidsprosesser. Målet er å utvikle og selge et banebrytende nytt datadrevet beslutningsstøttesystem for selskap som er involvert i shipping."
+    },
+    {
+      "name": "Tripletex",
+      "logo": "tripletex.svg",
+      "website": "https://www.tripletex.no/",
+      "logoScale": 1,
+      "description": "Tripletex utvikler et skybasert økonomisystem brukt av titusenvis av norske virksomheter. Systemene håndterer store datamengder og komplekse forretningsregler, og utviklingen innebærer arbeid med skalerbare backend-løsninger, moderne webteknologi og kontinuerlig videreutvikling av en etablert plattform."
+    },
+    {
+      "name": "Itera",
+      "logo": "Itera.png",
+      "website": "https://www.itera.com/",
+      "logoScale": 1,
+      "description": "Itera er et konsulentselskap som utvikler digitale løsninger for både privat og offentlig sektor. Hos oss får du tidlig ansvar og roller innen ditt fag, enten det er systemutvikling og arkitektur, UX og design eller dataanalyse, skyplattformer og sikkerhet. Du blir en del av tverrfaglige team som samarbeider tett med kundene – og får være med på å forme løsninger som faktisk betyr noe i samfunnet."
+    },
+    {
+      "name": "Norsk Regnesentral",
+      "logo": "NorskRegnesentral.svg",
+      "website": "https://nr.no/",
+      "logoScale": 2,
+      "description": "Norsk regnesentral er et anvendt forskningsinstitutt med fokus på statistikk, maskinlæring og dataanalyse. De utvikler modeller, algoritmer og programvare som tas i bruk i reelle systemer, og samarbeider tett med både næringsliv og offentlig sektor."
+    },
+    {
+      "name": "Bekk",
+      "logo": "Bekk.png",
+      "website": "https://www.bekk.no/",
+      "logoScale": 1.4,
+      "description": "Bekk er et konsulentselskap som jobber med systemutvikling, design og produktutvikling. Utviklerne jobber ofte tett med kunder over tid, med fokus på kodekvalitet, arkitektur, smidige arbeidsmetoder og praktisk problemløsning."
+    },
+    {
+      "name": "Skatteetaten",
+      "logo": "Skatteetaten.svg",
+      "website": "https://www.skatteetaten.no/",
+      "logoScale": 1,
+      "description": "Skatteetaten utvikler og forvalter noen av Norges mest kritiske IT-systemer. Arbeidet omfatter store distribuerte systemer, komplekse dataløsninger og høy grad av automatisering, med fokus på sikkerhet, stabilitet og langsiktig forvaltning."
+    },
+    {
+      "name": "Mastercard",
+      "logo": "Mastercard.svg",
+      "website": "https://www.mastercard.com/no/nb.html",
+      "logoScale": 1.2,
+      "description": "Mastercard utvikler globale betalingssystemer som håndterer svært høye transaksjonsvolumer i sanntid. Teknologiarbeidet omfatter distribuerte systemer, sikkerhet, dataanalyse og høy tilgjengelighet i systemer som brukes over hele verden."
+    },
+    {
+      "name": "Ruter",
+      "logo": "ruter.svg",
+      "website": "https://ruter.no/",
+      "logoScale": 1.8,
+      "description": "Ruter planlegger, bestiller og markedsfører kollektivtransport i Oslo og Viken."
+    },
+    {
+      "name": "Xledger",
+      "logo": "xledger.webp",
+      "website": "https://www.xledger.com/no/",
+      "logoScale": 1.6,
+      "description": "Xledger leverer et skybasert økonomi- og ERP-system for virksomheter og konsern."
+    },
+    {
+      "name": "DIPS",
+      "logo": "dips.png",
+      "website": "https://www.dips.com/",
+      "logoScale": 1.3,
+      "description": "DIPS utvikler digitale løsninger for sykehus og helsetjenesten."
+    }
+  ]
 }
