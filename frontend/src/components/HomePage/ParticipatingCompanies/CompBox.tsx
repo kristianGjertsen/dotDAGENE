@@ -6,6 +6,7 @@ export type Company = {
     website?: string;
     logoScale?: number;
     description?: string;
+    dontShow?: boolean;
 };
 
 type CompBoxProps = {

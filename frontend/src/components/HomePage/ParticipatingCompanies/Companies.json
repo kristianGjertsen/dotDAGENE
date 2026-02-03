@@ -51,10 +51,10 @@
     },
     {
       "name": "Xledger",
-      "logo": "xledger.webp",
+      "logo": "xledger.png",
       "website": "https://www.xledger.com/no/",
-      "logoScale": 1.6,
-      "description": "Xledger leverer et skybasert økonomi- og ERP-system for virksomheter og konsern."
+      "logoScale": 1.1,
+      "description": "Xledger utvikler og leverer et av markedets mest avanserte skybaserte ERP-systemer – designet for automatisering, innsikt og skalerbarhet. Hos oss får du en unik mulighet til å gjøre en konkret forskjell for tusenvis av brukere i over 60 land - ved å gjøre kompleks teknologi forståelig og tilgjengelig. Sammen bygger vi løsninger som forenkler hverdagen for økonomer, ledere og organisasjoner."
     },
     {
       "name": "DIPS",
@@ -62,6 +62,12 @@
       "website": "https://www.dips.com/",
       "logoScale": 1.3,
       "description": "DIPS utvikler digitale løsninger for sykehus og helsetjenesten."
+    },
+    {
+      "name": "dotDAGENE",
+      "logo": "dotDAGENEhovedlogo.svg",
+      "logoScale": 1,
+      "dontShow" : true
     }
   ]
 }
