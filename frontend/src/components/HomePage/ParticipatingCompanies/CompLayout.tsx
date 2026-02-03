@@ -7,6 +7,7 @@ export const CompLayout = () => {
     const companies: Company[] = Array.isArray(companiesData.companies)
         ? companiesData.companies
         : [];
+    const visibleCompanies = companies.filter((company) => !company.dontShow);
 
     useEffect(() => {
         if (activeCompany) {
@@ -41,7 +42,7 @@ export const CompLayout = () => {
                 Deltakende bedrifter i 2026
             </h2>
             <div className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] justify-center gap-6">
-                {companies.map((company) => {
+                {visibleCompanies.map((company) => {
                     return (
                         <button
                             key={company.name}
