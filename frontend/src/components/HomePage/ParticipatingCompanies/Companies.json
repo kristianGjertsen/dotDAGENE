@@ -50,13 +50,6 @@
       "description": "Mastercard utvikler globale betalingssystemer som håndterer svært høye transaksjonsvolumer i sanntid. Teknologiarbeidet omfatter distribuerte systemer, sikkerhet, dataanalyse og høy tilgjengelighet i systemer som brukes over hele verden."
     },
     {
-      "name": "Ruter",
-      "logo": "ruter.svg",
-      "website": "https://ruter.no/",
-      "logoScale": 1.8,
-      "description": "Ruter planlegger, bestiller og markedsfører kollektivtransport i Oslo og Viken."
-    },
-    {
       "name": "Xledger",
       "logo": "xledger.webp",
       "website": "https://www.xledger.com/no/",

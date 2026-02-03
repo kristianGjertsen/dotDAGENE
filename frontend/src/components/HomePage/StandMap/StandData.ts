@@ -22,7 +22,7 @@ export const standMap: Record<StandId, StandData> = {
   "stand-1": { label: "1", company: "Maritime Optima", logo: "maritimeOptima.png", logoScale: 1 },
   "stand-2": { label: "2", company: "Bekk", logo: "Bekk.png", logoScale: 1.4 },
   "stand-3": { label: "3", company: "Skatteetaten", logo: "Skatteetaten.svg", logoScale: 1 },
-  "stand-4": { label: "4", company: "Ruter", logo: "ruter.svg", logoScale: 1.5 },
+  "stand-4": { label: "4", company: "Kommer Snart" },
   "stand-5": { label: "5", company: "Norsk Regnesentral", logo: "NorskRegnesentral.svg", logoScale: 1.9 },
   "stand-6": { label: "6", company: "Tripletex", logo: "tripletex.svg", logoScale: 1 },
   "stand-7": { label: "7", company: "Xledger", logo: "xledger.webp", logoScale: 1.6 },
