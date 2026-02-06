@@ -31,7 +31,7 @@ const standCompanies: Record<StandId, { label: string; company: string }> = {
   "stand-1": { label: "1", company: "Maritime Optima" },
   "stand-2": { label: "2", company: "Bekk" },
   "stand-3": { label: "3", company: "Skatteetaten" },
-  "stand-4": { label: "4", company: "Kommer Snart" },
+  "stand-4": { label: "4", company: "Tet" },
   "stand-5": { label: "5", company: "Norsk Regnesentral" },
   "stand-6": { label: "6", company: "Tripletex" },
   "stand-7": { label: "7", company: "Xledger" },

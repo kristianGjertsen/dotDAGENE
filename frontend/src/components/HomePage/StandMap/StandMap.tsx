@@ -18,6 +18,9 @@ function StandMap() {
 
     useEffect(() => {
         let cleanup: (() => void) | undefined;
+        const supportsHover = () =>
+            window.matchMedia &&
+            window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
         (async () => {
             try {
@@ -59,10 +62,10 @@ function StandMap() {
                     const onEnter = () => {
                         const containerRect = ref.current?.getBoundingClientRect();
                         const rect = el.getBoundingClientRect();
-                        // Desktop: flytende tooltip. Mobil: fast boks under kartet.
-                        const mobile = window.innerWidth < 768;
+                        // Desktop: flytende tooltip. Touch: fast boks under kartet.
+                        const touchMode = !supportsHover();
 
-                        if (containerRect && !mobile) {
+                        if (containerRect && !touchMode) {
                             const rawLeft = rect.left - containerRect.left + rect.width / 2;
                             const half = tooltipWidth / 2;
                             const clampedLeft = Math.min(
