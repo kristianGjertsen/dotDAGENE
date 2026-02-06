@@ -41,7 +41,7 @@ export const CompLayout = () => {
             <h2 className="text-center text-4xl font-semibold text-gray-900">
                 Deltakende bedrifter i 2026
             </h2>
-            <div className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] justify-center gap-6">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {visibleCompanies.map((company) => {
                     return (
                         <button
