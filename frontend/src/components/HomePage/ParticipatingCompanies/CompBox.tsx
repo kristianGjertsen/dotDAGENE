@@ -47,7 +47,7 @@ export const CompBox = ({ company, onClose }: CompBoxProps) => {
                 {company.name}
             </p>
             {company.description && (
-                <p className="relative z-10 bg-white/80 px-2 text-base text-gray-700">
+                <p className="relative z-10 bg-white/80 px-2 text-base text-gray-700 whitespace-pre-line">
                     {company.description}
                 </p>
             )}
