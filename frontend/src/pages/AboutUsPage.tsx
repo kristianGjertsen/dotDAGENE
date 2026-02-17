@@ -78,9 +78,7 @@ export const AboutUsPage = () => {
                 </p>
                 <h2 className="text-3xl font-semibold">Bachelor- og masterstudenter på informatikk</h2>
                 <p className="text-gray-800">
-                  Vi representerer studenter innen informatikk, AI, datasikkerhet
-                  osv. Sammen bygger vi rom for samarbeid,
-                  læring og muligheter.
+                  Vi representerer bachelor- og masterstudenter i informatikk ved NTNU. Sammen legger vi til rette for samarbeid, læring og faglige muligheter.
                 </p>
               </div>
             </div>

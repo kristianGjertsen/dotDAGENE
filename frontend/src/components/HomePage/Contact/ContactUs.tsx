@@ -49,7 +49,7 @@ export const ContactUs = () => {
         </div>
         <div className="flex flex-col">
           <p>MÅLGRUPPE</p>
-          <p>500+ studenter ved informatikk på NTNU</p>
+          <p>500+ studenter fra informatikk og andre relevante studieretninger ved NTNU</p>
         </div>
       </div>
     </section>
