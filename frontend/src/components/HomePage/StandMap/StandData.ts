@@ -12,6 +12,7 @@ export type StandId =
   | "stand-9"
   | "stand-10"
   | "stand-11"
+  | "stand-12";
 
 export type StandData = {
   label: string;
@@ -30,15 +31,16 @@ const getCompanyData = (name: string) => companies.find((company) => company.nam
 const standCompanies: Record<StandId, { label: string; company: string }> = {
   "stand-1": { label: "1", company: "Maritime Optima" },
   "stand-2": { label: "2", company: "Bekk" },
-  "stand-3": { label: "3", company: "Skatteetaten" },
-  "stand-4": { label: "4", company: "Tet" },
-  "stand-5": { label: "5", company: "Norsk Regnesentral" },
-  "stand-6": { label: "6", company: "Tripletex" },
-  "stand-7": { label: "7", company: "Xledger" },
-  "stand-8": { label: "8", company: "Itera" },
-  "stand-9": { label: "9", company: "DIPS" },
-  "stand-10": { label: "10", company: "Mastercard" },
-  "stand-11": { label: "11", company: "dotDAGENE" },
+  "stand-3": { label: "3", company: "Politiets IT-enhet" },
+  "stand-4": { label: "4", company: "Skatteetaten" },
+  "stand-5": { label: "5", company: "Tet" },
+  "stand-6": { label: "6", company: "Norsk Regnesentral" },
+  "stand-7": { label: "7", company: "Tripletex" },
+  "stand-8": { label: "8", company: "Xledger" },
+  "stand-9": { label: "9", company: "Itera" },
+  "stand-10": { label: "10", company: "DIPS" },
+  "stand-11": { label: "11", company: "Mastercard" },
+  "stand-12": { label: "12", company: "dotDAGENE" },
 };
 
 //Exporterer json data med logo info og logo skala

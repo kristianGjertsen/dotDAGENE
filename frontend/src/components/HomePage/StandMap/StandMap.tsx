@@ -130,9 +130,18 @@ function StandMap() {
     return (
         <div className="relative mb-20 max-w-4xl mx-auto">
 
-            <h2 className="text-center text-4xl font-medium pb-8">
-                Stands 3. mars 2026
-            </h2>
+
+            <div>
+                <h2 className="text-center text-4xl font-medium ">
+                    Stands 3. mars 2026
+                </h2>
+                <p className="text-center text-m font-meduim p-4 text-slate-600">
+                    Hover eller trykk på standene for å se hvem som står hvor.
+                </p>
+            </div>
+
+
+
 
             <div ref={ref} className="w-full [&_svg]:w-full [&_svg]:h-auto" />
 
