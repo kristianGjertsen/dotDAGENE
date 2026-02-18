@@ -71,6 +71,13 @@
       "description": "Heisann! \n Vi er TET Digital – et teknologiselskap eid av Ruter, Skyss og AKT med høye ambisjoner og et viktig samfunnsoppdrag. Hos oss jobber over 300 utviklere, designere, produktledere og datafolk i tverrfaglige produktteam som bygger digitale løsninger for bærekraftig mobilitet. Vi har et arbeidsmiljø preget av samarbeid, faglig nysgjerrighet og stor grad av tillit. Her får du være med å forme løsninger som er tett på livet til folk – og som brukes hver eneste dag."
     },
     {
+      "name": "Politiets IT-enhet",
+      "logo": "Politiet-it.png",
+      "website": "https://www.politiet.no/om-politiet/organisasjonen/sarorganene/pit",
+      "logoScale": 1,
+      "description": "Politiets IT-enhet (PIT) er politiets egen IT-organisasjon. Vi bidrar til å løse Politiets samfunnsoppdrag med teknologi som virkemiddel. Med over 850 medarbeidere er vi på jobb for hele Norges befolkning. Vi rekrutterer hver høst både sommerstudenter, og til faste stillinger for nyutdannede."
+    },
+    {
       "name": "dotDAGENE",
       "logo": "dotDAGENEhovedlogo.svg",
       "logoScale": 1,
