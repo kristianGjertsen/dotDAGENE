@@ -8,6 +8,7 @@ import {
 import { FaqPage } from './pages/FaqPage';
 import { HomePage } from './pages/HomePage';
 import { AboutUsPage } from './pages/AboutUsPage';
+import { TestPage } from './pages/TestPage';
 import routeManifest from './routes.json';
 
 type RouteDefinition = {
@@ -20,6 +21,7 @@ const routeComponents: Record<string, JSX.Element> = {
   '/': <HomePage />,
   '/faq': <FaqPage />,
   '/om': <AboutUsPage />,
+  '/test': <TestPage />,
 };
 
 const ScrollManager = () => {

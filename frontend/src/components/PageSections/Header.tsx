@@ -35,6 +35,9 @@ export const Header = () => {
           <LinkButton link="/faq" color="yellow" size="sm">
             FAQ
           </LinkButton>
+          <LinkButton link="/test" color="purple" size="sm">
+            Test
+          </LinkButton>
           <LinkButton link="/#contact" color="green" size="sm">
             Kontakt Oss
           </LinkButton>
@@ -106,6 +109,16 @@ export const Header = () => {
               className="w-full"
             >
               Kontakt Oss
+            </LinkButton>
+          </div>
+          <div className="w-full">
+            <LinkButton
+              link="/test"
+              color="yellow"
+              onClick={closeMenu}
+              className="w-full"
+            >
+              Test
             </LinkButton>
           </div>
         </nav>
