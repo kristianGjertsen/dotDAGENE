@@ -27,7 +27,9 @@ export const CompBox = ({ company, onClose }: CompBoxProps) => {
                     type="button"
                     onClick={onClose}
                     aria-label="Lukk"
-                    className="absolute right-4 top-4 z-20 text-2xl font-bold text-gray-500 transition-colors hover:text-black focus:outline-none"
+                    className="absolute right-4 top-4 z-20 text-2xl font-bold text-gray-500 transition-colors hover:text-black focus:outline-none cursor-pointer
+
+"
                 >
                     ×
                 </button>
