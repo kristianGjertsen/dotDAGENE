@@ -15,7 +15,7 @@ const BASE_HTTP = `https://${HOSTNAME}`;
 
 // --- Eventinformasjon ---
 const EVENT_TITLE = "dotDAGENE: Stands";
-const EVENT_LOC = "NTNU Realfagsbygget, U1";
+const EVENT_LOC = "NTNU Realfagbygget, U1";
 const EVENT_DESC = "Stands under dotDAGENE – velkommen!";
 
 /**
