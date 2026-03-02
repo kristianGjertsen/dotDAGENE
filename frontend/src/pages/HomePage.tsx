@@ -18,6 +18,8 @@ import {
 } from '../components/HomePage';
 import StandMap from '../components/HomePage/StandMap/StandMap';
 
+import { DotdageneHeader } from '../components/HomePage/Banner/DotdageneHeader';
+
 export const HomePage = () => {
   const location = useLocation();
 
@@ -46,16 +48,16 @@ export const HomePage = () => {
       <h1 className="sr-only">dotDAGENE 2025</h1>
 
       <Header />
+      <DotdageneHeader />
+
       <div className="block md:hidden">
         <BannerSmall />
       </div>
       <div className="hidden md:block">
         <BannerBig />
       </div>
-      <Countdown />
 
-
-
+    <Countdown />
       <section className="mt-16 px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
           <Info
