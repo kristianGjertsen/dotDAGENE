@@ -26,7 +26,7 @@ export const Countdown = () => {
           className="font-medium underline"
           target="_blank"
         >
-          Realfagsbygget U1, Gløshaugen
+          Realfagbygget U1, Gløshaugen
         </a>
       </div>
     </section>

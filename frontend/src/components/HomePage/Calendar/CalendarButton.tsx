@@ -13,7 +13,7 @@ interface CalendarButtonProps {
 
 // Eventinformasjon
 const DEFAULT_EVENT_TITLE = 'dotDAGENE: Stands';
-const DEFAULT_EVENT_LOC = 'NTNU Realfagsbygget, U1';
+const DEFAULT_EVENT_LOC = 'NTNU Realfagbygget, U1';
 const DEFAULT_EVENT_DESC = 'Stands dotDAGENE velkommen!';
 const DEFAULT_DTSTART_UTC = '20260303T090000Z';
 const DEFAULT_DTEND_UTC = '20260303T140000Z';

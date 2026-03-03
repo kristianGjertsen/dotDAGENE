@@ -40,7 +40,7 @@ export const ContactUs = () => {
         </div>
         <div className="flex flex-col">
           <p>LOKASJON</p>
-          <p>Realfagsbygget U1 NTNU Gløshaugen, Trondheim</p>
+          <p>Realfagbygget U1 NTNU Gløshaugen, Trondheim</p>
         </div>
       </div>
       <div className="bg-dotpurple flex flex-row border-3 border-black p-6">
