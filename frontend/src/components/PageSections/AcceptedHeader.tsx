@@ -16,7 +16,7 @@ export const AcceptedHeader = () => {
           Klikk her for å lese mer og melde interesse
         </span>
         <span className=" block text-xs font-medium">
-          *Kun for informatikk studenter ved NTNU
+          *Kun for informatikkstudenter ved NTNU
         </span>
       </LinkButton>
     </section>
