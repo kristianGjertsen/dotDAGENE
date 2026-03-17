@@ -17,7 +17,6 @@ import {
   Countdown,
 } from '../components/HomePage';
 import StandMap from '../components/HomePage/StandMap/StandMap';
-import { AcceptedHeader } from '../components/PageSections/AcceptedHeader';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -47,8 +46,6 @@ export const HomePage = () => {
       <h1 className="sr-only">dotDAGENE 2025</h1>
 
       <Header />
-    <AcceptedHeader />
-
       <div className="block md:hidden">
         <BannerSmall />
       </div>
