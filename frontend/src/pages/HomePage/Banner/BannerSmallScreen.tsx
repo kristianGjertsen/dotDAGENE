@@ -23,41 +23,41 @@ export const BannerSmall = () => {
           className="h-auto w-full min-w-[800px] max-w-none"
         >
           <g transform="translate(0,-6)">
-            {/* svart topp-inn */}
+            {/* linje 1: primary */}
             <MaskedStroke
               id="m-svart-sm"
               d="M0,10 H240 A17,17 0 0,1 257,27 V28 A17,17 0 0,0 274,45 H320"
-              stroke="#000000"
+              stroke="#677B4C"
               width={stroke}
               dur={d1}
               delay={LINE_ANIMATION_DELAY_SEC}
             />
 
-            {/* lilla pil/løkke etter 'karrieredager' */}
+            {/* linje 2: secondary */}
             <MaskedStroke
               id="m-lilla-sm"
               d="M520,80 L555,80 A16,16 0 0,1 555,115 L484,115"
-              stroke="hsl(266deg 53% 70%)"
+              stroke="#87A067"
               width={stroke}
               dur={d2}
               delay={LINE_ANIMATION_DELAY_SEC + t2}
             />
 
-            {/* grønn løkke rundt 'NTNU' */}
+            {/* linje 3: tertiary */}
             <MaskedStroke
               id="m-gronn-sm"
               d="M315,118 L240,118 A16,16 0 0,0 240,153 L295,153"
-              stroke="hsl(87deg 23% 44%)"
+              stroke="#ABBC93"
               width={stroke}
               dur={d3}
               delay={LINE_ANIMATION_DELAY_SEC + t3}
             />
 
-            {/* gul bunn-ut til høyre */}
+            {/* linje 4: quaternary */}
             <MaskedStroke
               id="m-gul-sm"
               d="M505,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
-              stroke="hsl(45deg 80% 59%)"
+              stroke="#D5DEC9"
               width={stroke}
               dur={d4}
               delay={LINE_ANIMATION_DELAY_SEC + t4}
@@ -70,9 +70,9 @@ export const BannerSmall = () => {
               textAnchor="middle"
               fontSize="36"
               fontWeight="bold"
-              fill="#000000"
+              fill="black"
             >
-              Helt nye
+              Nyeste
             </text>
 
             <text
@@ -81,9 +81,9 @@ export const BannerSmall = () => {
               textAnchor="middle"
               fontSize="36"
               fontWeight="bold"
-              fill="hsl(266deg 53% 70%)"
+              fill="#677B4C"
             >
-              karrieredager
+              karrieredagen
             </text>
 
             <text
@@ -94,7 +94,7 @@ export const BannerSmall = () => {
               fontWeight="bold"
             >
               <tspan fill="#000000">på </tspan>
-              <tspan fill="hsl(87deg 23% 44%)">NTNU</tspan>
+              <tspan fill="#87A067">NTNU</tspan>
             </text>
 
             <text
@@ -106,7 +106,7 @@ export const BannerSmall = () => {
               fill="#000000"
             >
               <tspan>den </tspan>
-              <tspan fill="hsl(45deg 80% 59%)">3. mars</tspan>
+              <tspan fill="#ABBC93">3. mars</tspan>
             </text>
           </g>
         </svg>

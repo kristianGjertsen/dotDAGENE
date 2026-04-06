@@ -24,41 +24,41 @@ export const BannerBig = () => {
         preserveAspectRatio="xMidYMid slice"
       >
         <g>
-          {/* svart linje */}
+          {/* linje 1: primary */}
           <MaskedStroke
             id="m-svart"
             d="M0,30 L150,30 A30,30 0 0,1 180,60 A30,30 0 0,0 210,90 L330,90"
-            stroke="#000"
+            stroke="#677B4C"
             width={stroke}
             dur={d1}
             delay={LINE_ANIMATION_DELAY_SEC}
           />
 
-          {/* lilla */}
+          {/* linje 2: secondary */}
           <MaskedStroke
             id="m-lilla"
             d="M550,90 L630,90 A20,20 0 0,1 630,130 L600,130"
-            stroke="hsl(266deg 53% 70%)"
+            stroke="#87A067"
             width={stroke}
             dur={d2}
             delay={LINE_ANIMATION_DELAY_SEC + t2}
           />
 
-          {/* grønn */}
+          {/* linje 3: tertiary */}
           <MaskedStroke
             id="m-gronn"
             d="M450,130 L400,130 A20,20 0 0,0 400,170 L510,170"
-            stroke="hsl(87deg 23% 44%)"
+            stroke="#ABBC93"
             width={stroke}
             dur={d3}
             delay={LINE_ANIMATION_DELAY_SEC + t3}
           />
 
-          {/* gul */}
+          {/* linje 4: quaternary */}
           <MaskedStroke
             id="m-gul"
             d="M700,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
-            stroke="hsl(45deg 80% 59%)"
+            stroke="#D5DEC9"
             width={stroke}
             dur={d4}
             delay={LINE_ANIMATION_DELAY_SEC + t4}
@@ -67,8 +67,8 @@ export const BannerBig = () => {
 
         {/* Tekst */}
         <g>
-          <text x="290" y="65" fontSize="32" fontWeight="bold" fill="#000">
-            Helt nye
+          <text x="290" y="65" fontSize="32" fontWeight="bold" fill="black">
+            Nyeste
           </text>
 
           <text
@@ -76,19 +76,19 @@ export const BannerBig = () => {
             y="100"
             fontSize="32"
             fontWeight="bold"
-            fill="hsl(266deg 53% 70%)"
+            fill="#677B4C"
           >
-            karrieredager
+            karrieredagen
           </text>
 
           <text x="455" y="140" fontSize="32" fontWeight="bold">
             <tspan fill="#000">på </tspan>
-            <tspan fill="hsl(87deg 23% 44%)">NTNU</tspan>
+            <tspan fill="#87A067">NTNU</tspan>
           </text>
 
           <text x="520" y="180" fontSize="32" fontWeight="bold" fill="#000">
             <tspan>den </tspan>
-            <tspan fill="hsl(45deg 80% 59%)">3. mars</tspan>
+            <tspan fill="#ABBC93">3. mars</tspan>
           </text>
         </g>
       </svg>
