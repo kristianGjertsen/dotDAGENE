@@ -5,9 +5,9 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { FaqPage } from './pages/FaqPage';
-import { HomePage } from './pages/HomePage';
-import { AboutUsPage } from './pages/AboutUsPage';
+import { FaqPage } from './pages/FaqPage/FaqPage';
+import { HomePage } from './pages/HomePage/HomePage';
+import { AboutUsPage } from './pages/AboutUsPage/AboutUsPage';
 import routeManifest from './routes.json';
 
 type RouteDefinition = {

@@ -8,7 +8,7 @@ import {
 export const ContactUs = () => {
   return (
     <section
-      className="bg-dotgreen flex w-full flex-col gap-4 border-3 border-black p-6 text-white"
+      className="bg-white flex w-full flex-col gap-4 justify-between border-3 border-black p-6 text-black"
     >
       <h3 className="text-3xl">KONTAKT DOTDAGENE</h3>
       <p>
@@ -16,7 +16,7 @@ export const ContactUs = () => {
         teknologi. Kontakt oss for å sikre din bedrift en plass på
         arrangementet.
       </p>
-      <section className="bg-dotpurple flex flex-row border-3 border-black p-6">
+      <section className="bg-tertiary  flex flex-row border-3 border-black p-6">
         <div className="w-16">
           <EnvelopeIcon className="h-8 w-8" />
         </div>
@@ -25,7 +25,7 @@ export const ContactUs = () => {
           <p>kontakt@dotdagene.no</p>
         </div>
       </section>
-      <div className="bg-dotpurple flex flex-row border-3 border-black p-6">
+      <div className="bg-tertiary flex flex-row border-3 border-black p-6">
         <div className="w-16">
           <CalendarIcon className="h-8 w-8" />
         </div>
@@ -34,7 +34,7 @@ export const ContactUs = () => {
           <p>3. mars 2026</p>
         </div>
       </div>
-      <div className="bg-dotpurple flex flex-row border-3 border-black p-6">
+      <div className="bg-tertiary flex flex-row border-3 border-black p-6">
         <div className="w-16">
           <MapPinIcon className="h-8 w-8" />
         </div>
@@ -43,7 +43,7 @@ export const ContactUs = () => {
           <p>Realfagbygget U1 NTNU Gløshaugen, Trondheim</p>
         </div>
       </div>
-      <div className="bg-dotpurple flex flex-row border-3 border-black p-6">
+      <div className="bg-tertiary flex flex-row border-3 border-black p-6">
         <div className="w-16">
           <UserGroupIcon className="h-8 w-8" />
         </div>

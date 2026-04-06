@@ -20,7 +20,7 @@ export const LinkButton = ({
   size = 'lg',
 }: ButtonProps) => {
   var textColorClass = "";
-  if (color === 'white' || color === 'yellow') {
+  if (color === 'white' || color === 'tertiary' || color === 'quaternary') {
     textColorClass = 'text-black'
   }
   else {

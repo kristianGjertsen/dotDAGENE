@@ -13,13 +13,14 @@ export const InfoWithButton = ({
   titelChildren,
   children,
   color,
-  textColor = 'white',
+  textColor = undefined,
   icon: Icon,
   button,
 }: InfoWithButtonProps) => {
+  const resolvedTextColor = textColor ?? (color === 'tertiary' || color === 'quaternary' || color === 'white' ? 'black' : 'white');
   return (
     <section
-      className={`${colorMap.get(color)} relative w-full flex flex-col gap-4 border-3 border-black p-6 pb-12 text-${textColor}`}
+      className={`${colorMap.get(color)} relative w-full flex flex-col gap-4 border-3 border-black p-6 pb-12 text-${resolvedTextColor}`}
     >
       <section>{Icon && <Icon className="h-16 w-16" />}</section>
       <p className="text-2xl">{titelChildren}</p>

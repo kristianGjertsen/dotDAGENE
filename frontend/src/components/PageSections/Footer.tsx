@@ -4,7 +4,7 @@ import Linkedin from '../../assets/linkedin.svg';
 
 export const Footer = () => {
   return (
-    <footer className="mt-20 flex justify-center border-t-3 bg-black">
+    <footer className="mt-20 flex justify-center border-t-3 bg-secondary">
       <section className="m-8 mt-12 flex w-full flex-col justify-around gap-2 md:flex-row md:flex-wrap md:gap-8">
         <section>
           <img src={Logo} alt="Logo" className="w-16 md:mb-4" />
@@ -16,10 +16,11 @@ export const Footer = () => {
         <section className="flex flex-col gap-3 text-gray-100">
           <h2 className="text-lg md:text-2xl">Følg oss</h2>
           <section className="flex gap-3">
-            <a href="https://www.instagram.com/dotdagene/">
+            <a className='w-10' href="https://www.instagram.com/dotdagene/">
               <img src={Instagram} alt="dotDAGENE på Instagram" />
             </a>
-            <a href="https://www.linkedin.com/company/dotdagene/about/">
+            <a className='w-10' href="https://www.linkedin.com/company/dotdagene/about/">
+
               <img src={Linkedin} alt="dotDAGENE på LinkedIn" />
             </a>
             

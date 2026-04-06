@@ -52,6 +52,7 @@ export const CalendarButton = ({
   icsUrl = DEFAULT_ICS_URL,
 }: CalendarButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const textColorClass = (color === 'tertiary' || color === 'quaternary' || color === 'white') ? 'text-black' : 'text-white';
 
   const googleCalendarUrl = makeGoogleCalendarUrl({
     title: eventTitle,
@@ -77,7 +78,9 @@ export const CalendarButton = ({
           {/* Top actual button chip */}
           <span
             className={
-              'relative block border-3 border-black px-6 py-3 text-center text-2xl font-medium text-white transition-transform duration-150 ' +
+              'relative block border-3 border-black px-6 py-3 text-center text-2xl font-medium ' +
+              textColorClass +
+              ' transition-transform duration-150 ' +
               'group-hover:translate-x-1 group-hover:translate-y-1 ' +
               colorMap.get(color)
             }

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 const contactLinkClasses =
-  'underline decoration-2 decoration-black underline-offset-4 hover:text-dotgreen hover:decoration-dotgreen transition-colors duration-150';
+  'underline decoration-2 decoration-black underline-offset-4 hover:text-primary hover:decoration-primary transition-colors duration-150';
 
 type FaqItem = {
   question: string;

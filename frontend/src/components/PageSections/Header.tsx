@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_No_Text.svg';
 import { LinkButton } from '../Elements/LinkButton';
 
+type NavItem = {
+  label: string;
+  href: string;
+  color: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'white';
+  sizeDesktop?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  sizeMobile?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+};
+
+const navItems: NavItem[] = [
+  { label: 'Hjem', href: '/', color: 'secondary'},
+  { label: 'Om oss', href: '/om', color: 'secondary' },
+  { label: 'FAQ', href: '/faq', color: 'secondary', },
+  { label: 'Kontakt Oss', href: '/#contact', color: 'primary' },
+];
+
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -26,18 +41,16 @@ export const Header = () => {
           />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 lg:flex">
-          <LinkButton link="/" color="green" size="sm">
-            Hjem
-          </LinkButton>
-          <LinkButton link="/om" color="purple" size="sm">
-            Om oss
-          </LinkButton>
-          <LinkButton link="/faq" color="yellow" size="sm">
-            FAQ
-          </LinkButton>
-          <LinkButton link="/#contact" color="green" size="sm">
-            Kontakt Oss
-          </LinkButton>
+          {navItems.map((item) => (
+            <LinkButton
+              key={`desktop-${item.href}`}
+              link={item.href}
+              color={item.color}
+              size={'sm'}
+            >
+              {item.label}
+            </LinkButton>
+          ))}
         </nav>
         <button
           className="lg:hidden flex items-center justify-center rounded-md border-2 border-gray-500 p-2"
@@ -68,46 +81,22 @@ export const Header = () => {
         >
           <div className="w-full z-90">
           </div>
-          <div className="w-full">
-            <LinkButton
-              link="/"
-              color="yellow"
-              onClick={scrollToTop}
-              className="w-full"
-            >
-              Hjem
-            </LinkButton>
-          </div>
-          <div className="w-full">
-            <LinkButton
-              link="/om"
-              color="green"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              Om oss
-            </LinkButton>
-          </div>
-          <div className="w-full">
-            <LinkButton
-              link="/faq"
-              color="purple"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              FAQ
-            </LinkButton>
-          </div>
-          <div className="w-full">
-            <LinkButton
-              link="/#contact"
-              color="green"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              Kontakt Oss
-            </LinkButton>
-          </div>
+          {navItems.map((item) => {
+            const onClick = item.href === '/' ? scrollToTop : closeMenu;
+            return (
+              <div className="w-full" key={`mobile-${item.href}`}>
+                <LinkButton
+                  link={item.href}
+                  color={item.color}
+                  size={item.sizeMobile ?? 'lg'}
+                  onClick={onClick}
+                  className="w-full"
+                >
+                  {item.label}
+                </LinkButton>
+              </div>
+            );
+          })}
         </nav>
       )}
       {isMenuOpen && (

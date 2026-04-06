@@ -1,4 +1,4 @@
-import { LinkButton } from "../../Elements/LinkButton";
+import { LinkButton } from "../../../components/Elements/LinkButton";
 
 export type Company = {
     name: string;
@@ -55,7 +55,7 @@ export const CompBox = ({ company, onClose }: CompBoxProps) => {
             )}
             {company.website && (
 
-                <LinkButton link={company.website ?? ''} color="green" size="sm">
+                <LinkButton link={company.website ?? ''} color="primary" size="sm">
                     Besøk nettside
                 </LinkButton>
 

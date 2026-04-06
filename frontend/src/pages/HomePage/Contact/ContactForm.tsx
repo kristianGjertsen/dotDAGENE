@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../Elements/Button';
+import { Button } from '../../../components/Elements/Button';
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -153,13 +153,13 @@ export const ContactForm = () => {
           </div>
 
           <div className="flex flex-col items-stretch justify-center">
-            <Button color="green" type="submit" disabled={isSubmitting}>
+            <Button color="primary" type="submit" disabled={isSubmitting}>
               Send Melding
             </Button>
           </div>
 
           {submitStatus === 'success' && (
-            <div className="bg-dotpurple border-3 border-black p-6 text-white">
+            <div className="bg-secondary border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
                 Takk! Henvendelsen er sendt.
               </p>

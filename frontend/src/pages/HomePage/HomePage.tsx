@@ -4,19 +4,19 @@ import {
   BuildingOffice2Icon, SparklesIcon, UserGroupIcon,
 } from '@heroicons/react/20/solid';
 
-import { Footer } from '../components/PageSections/Footer';
-import { Header } from '../components/PageSections/Header';
-import { Info } from '../components/Elements/Info';
-import { InfoWithButton } from '../components/Elements/InfoWithButton';
-import { CompLayout } from '../components/HomePage/ParticipatingCompanies/CompLayout';
+import { Footer } from '../../components/PageSections/Footer';
+import { Header } from '../../components/PageSections/Header';
+import { Info } from '../../components/Elements/Info';
+import { InfoWithButton } from '../../components/Elements/InfoWithButton';
+import { CompLayout } from './ParticipatingCompanies/CompLayout';
 import {
   BannerBig, BannerSmall,
   CalendarButton,
   ContactForm,
   ContactUs,
   Countdown,
-} from '../components/HomePage';
-import StandMap from '../components/HomePage/StandMap/StandMap';
+} from '.';
+import StandMap from './StandMap/StandMap';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -58,7 +58,7 @@ export const HomePage = () => {
         <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
           <Info
             titelChildren="500+ STUDENTER"
-            color="purple"
+            color="secondary"
             icon={UserGroupIcon}
           >
             Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
@@ -66,7 +66,7 @@ export const HomePage = () => {
 
           <Info
             titelChildren="HELT NYTT"
-            color="green"
+            color="primary"
             icon={SparklesIcon}
           >
             Vær blant de første som får oppleve et helt nytt arrangement for studenter og bedrifter innen IT og teknologi.
@@ -92,8 +92,8 @@ export const HomePage = () => {
             <div className="w-full sm:w-1/2">
               <InfoWithButton
                 titelChildren="STANDS"
-                color="green"
-                button={<CalendarButton color="purple" />}
+                color="primary"
+                button={<CalendarButton color="secondary" />}
                 icon={BuildingOffice2Icon}
               >
                 Få egen stand på dotDAGENE og møt direkte med
@@ -124,7 +124,7 @@ export const HomePage = () => {
 
       <section className="px-6 sm:px-12 lg:px-20">
         <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
-          <div className="bg-dotyellow flex w-full flex-col gap-4 border-3 border-black p-8">
+          <div className="bg-tertiary flex w-full flex-col gap-4 border-3 border-black p-8 text-black">
             <h3 className="text-3xl">Interesseskjema</h3>
             <p>
               Fyll ut skjemaet så tar vi kontakt for å diskutere

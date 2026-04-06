@@ -2,19 +2,19 @@ export const Countdown = () => {
   return (
     <section className="flex flex-col items-center gap-6 px-4">
       <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="bg-dotgreen flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+        <div className="bg-primary flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
           <p className="text-3xl font-bold sm:text-4xl">0</p>
           <p>DAGER</p>
         </div>
-        <div className="bg-dotpurple flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+        <div className="bg-secondary flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
           <p className="text-3xl font-bold sm:text-4xl">0</p>
           <p>TIMER</p>
         </div>
-        <div className="bg-dotyellow flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+        <div className="bg-tertiary flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-black sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
           <p className="text-3xl font-bold sm:text-4xl">0</p>
           <p>MINUTTER</p>
         </div>
-        <div className="bg-dotgreen flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
+        <div className="bg-primary flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30 mx-auto">
           <p className="text-3xl font-bold sm:text-4xl">0</p>
           <p>SEKUNDER</p>
         </div>

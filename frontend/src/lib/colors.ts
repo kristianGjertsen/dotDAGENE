@@ -1,10 +1,9 @@
-export type color = 'purple' | 'green' | 'yellow' | 'white' | 'red' | 'blue';
+export type color = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'white';
 
 export const colorMap = new Map<color, string>([
-  ['green', ' bg-dotgreen'],
-  ['purple', ' bg-dotpurple'],
-  ['yellow', ' bg-dotyellow'],
+  ['primary', ' bg-primary'],
+  ['secondary', ' bg-secondary'],
+  ['tertiary', ' bg-tertiary'],
+  ['quaternary', ' bg-quaternary'],
   ['white', ' bg-white'],
-  ['red', ' bg-red-500'],
-  ['blue', ' bg-blue-500'],
 ]);

@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { Footer } from '../components/PageSections/Footer';
-import { Header } from '../components/PageSections/Header';
-import { LinkButton } from '../components/Elements/LinkButton';
+import { Footer } from '../../components/PageSections/Footer';
+import { Header } from '../../components/PageSections/Header';
+import { LinkButton } from '../../components/Elements/LinkButton';
 import {
   contactLinkClasses,
   faqsForCompanies,
   faqsForStudents,
-} from '../components/Faq/FaqQuestions';
+} from './FaqQuestions';
 
 //Alternerende farger, tonet ned 
-const colorCycle = ['bg-dotpurple/80', 'bg-dotgreen/80', 'bg-dotyellow/80'];
+const colorCycle = ['bg-secondary/80', 'bg-primary/80', 'bg-tertiary/80'];
 
 // Togle knapp felles-stil
 const baseToggleButtonClasses = 'relative z-10 flex-1 px-6 py-2 text-base font-semibold cursor-pointer transition-colors duration-300 sm:px-8 sm:py-2 sm:text-lg';
@@ -50,7 +50,7 @@ export const FaqPage = () => {
           <div className="mt-4 inline-flex w-full max-w-md items-stretch overflow-hidden border-3 border-black bg-white shadow-[6px_6px_0_0_rgba(0,0,0,0.15)] relative">
             <span
               aria-hidden="true"
-              className={`absolute inset-y-0 left-0 w-1/2 bg-dotgreen transition-transform duration-300 ${audience === 'bedrift' ? 'translate-x-full' : ''
+              className={`absolute inset-y-0 left-0 w-1/2 bg-primary transition-transform duration-300 ${audience === 'bedrift' ? 'translate-x-full' : ''
                 }`}
             />
             <button
@@ -125,7 +125,7 @@ export const FaqPage = () => {
             </a>
             , så hjelper vi deg med alt fra praktiske spørsmål til samarbeid.
           </p>
-          <LinkButton link="/#contact" color="green" size="xl">
+          <LinkButton link="/#contact" color="primary" size="xl">
             Kontakt Oss
           </LinkButton>
         </section>
