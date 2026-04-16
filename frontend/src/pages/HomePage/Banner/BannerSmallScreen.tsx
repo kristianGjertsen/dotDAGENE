@@ -53,11 +53,11 @@ export const BannerSmall = () => {
               delay={LINE_ANIMATION_DELAY_SEC + t3}
             />
 
-            {/* linje 4: quaternary */}
+            {/* linje 4: tertiary (tidligere quaternary) */}
             <MaskedStroke
               id="m-gul-sm"
               d="M505,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
-              stroke="#D5DEC9"
+              stroke="#ABBC93"
               width={stroke}
               dur={d4}
               delay={LINE_ANIMATION_DELAY_SEC + t4}

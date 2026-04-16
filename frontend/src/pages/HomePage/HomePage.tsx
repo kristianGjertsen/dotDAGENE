@@ -17,6 +17,7 @@ import {
   Countdown,
 } from '.';
 import StandMap from './StandMap/StandMap';
+import { AppLayout } from '../../components/Layout/AppLayout';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -42,100 +43,101 @@ export const HomePage = () => {
 
   return (
     <>
-      {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
-      <h1 className="sr-only">dotDAGENE 2025</h1>
-
       <Header />
-      <div className="block md:hidden">
-        <BannerSmall />
-      </div>
-      <div className="hidden md:block">
-        <BannerBig />
-      </div>
+      <AppLayout>
+        {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
+        <h1 className="sr-only">dotDAGENE 2025</h1>
 
-      <Countdown />
-      <section className="mt-16 px-6 sm:px-12 lg:px-20">
-        <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
-          <Info
-            titelChildren="500+ STUDENTER"
-            color="secondary"
-            icon={UserGroupIcon}
-          >
-            Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
-          </Info>
+        <div className="block md:hidden">
+          <BannerSmall />
+        </div>
+        <div className="hidden md:block">
+          <BannerBig />
+        </div>
 
-          <Info
-            titelChildren="HELT NYTT"
-            color="primary"
-            icon={SparklesIcon}
-          >
-            Vær blant de første som får oppleve et helt nytt arrangement for studenter og bedrifter innen IT og teknologi.
-          </Info>
+        <Countdown />
+        <section className="mt-16 px-6 sm:px-12 lg:px-20">
+          <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
+            <Info
+              titelChildren="500+ STUDENTER"
+              color="secondary"
+              icon={UserGroupIcon}
+            >
+              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
+            </Info>
+
+            <Info
+              titelChildren="HELT NYTT"
+              color="primary"
+              icon={SparklesIcon}
+            >
+              Vær blant de første som får oppleve et helt nytt arrangement for studenter og bedrifter innen IT og teknologi.
+            </Info>
+          </section>
         </section>
-      </section>
 
-      <section className="px-6 sm:px-12 lg:px-20">
-        <div className="mt-16 flex flex-col flex-wrap items-center gap-4">
-          <div className="w-full">
+        <section className="px-6 sm:px-12 lg:px-20">
+          <div className="mt-16 flex flex-col flex-wrap items-center gap-4">
+            <div className="w-full">
 
-            <h2 className="text-center text-4xl font-medium">
-              OPPDAG MULIGHETENE
-            </h2>
-            <p className="mt-5 text-center">
-              dotDAGENE 2026 bringer sammen studenter og bedrifter.
-              Her får du sjansen til å bygge nettverk, utforske fremtidige karriereveier og oppleve hvordan teknologi og samarbeid skaper nye muligheter.
-              Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår.
-            </p>
-          </div>
-
-          <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:mt-20 sm:flex-row">
-            <div className="w-full sm:w-1/2">
-              <InfoWithButton
-                titelChildren="STANDS"
-                color="primary"
-                button={<CalendarButton color="secondary" />}
-                icon={BuildingOffice2Icon}
-              >
-                Få egen stand på dotDAGENE og møt direkte med
-                informatikkstudenter. Perfekt mulighet til å rekruttere de beste
-                talentene innen digitalisering og teknologi.
-              </InfoWithButton>
+              <h2 className="text-center text-4xl font-medium">
+                OPPDAG MULIGHETENE
+              </h2>
+              <p className="mt-5 text-center">
+                dotDAGENE 2026 bringer sammen studenter og bedrifter.
+                Her får du sjansen til å bygge nettverk, utforske fremtidige karriereveier og oppleve hvordan teknologi og samarbeid skaper nye muligheter.
+                Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår.
+              </p>
             </div>
 
-          </section>
-        </div>
-      </section>
+            <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:mt-20 sm:flex-row">
+              <div className="w-full sm:w-1/2">
+                <InfoWithButton
+                  titelChildren="STANDS"
+                  color="primary"
+                  button={<CalendarButton color="secondary" />}
+                  icon={BuildingOffice2Icon}
+                >
+                  Få egen stand på dotDAGENE og møt direkte med
+                  informatikkstudenter. Perfekt mulighet til å rekruttere de beste
+                  talentene innen digitalisering og teknologi.
+                </InfoWithButton>
+              </div>
 
-      <section className="mx-6 py-30 sm:mx-12 lg:mx-24">
-        <div className="flex w-full flex-col items-center justify-center gap-6 border-3 border-black bg-white p-8 lg:px-32 lg:py-16">
-          <h2 className="text-center text-4xl font-medium md:text-6xl">
-            HVEM ER VI?
-          </h2>
-          <p className="mt-2 max-w-3xl text-center">
-            NTNUs nyeste karrieredag innen digitalisering og teknologi.
-            Arrangert av informatikkstudenter for å koble sammen fremtidens
-            IT-talenter med bransjeledende bedrifter.
-          </p>
-        </div>
-      </section>
-
-      <CompLayout />
-      <StandMap />
-
-      <section className="px-6 sm:px-12 lg:px-20">
-        <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
-          <div className="bg-tertiary flex w-full flex-col gap-4 border-3 border-black p-8 text-black">
-            <h3 className="text-3xl">Interesseskjema</h3>
-            <p>
-              Fyll ut skjemaet så tar vi kontakt for å diskutere
-              mulighetene.
-            </p>
-            <ContactForm />
+            </section>
           </div>
-          <ContactUs />
         </section>
-      </section>
 
+        <section className="mx-6 py-30 sm:mx-12 lg:mx-24">
+          <div className="flex w-full flex-col items-center justify-center gap-6 border-3 border-black bg-white p-8 lg:px-32 lg:py-16">
+            <h2 className="text-center text-4xl font-medium md:text-6xl">
+              HVEM ER VI?
+            </h2>
+            <p className="mt-2 max-w-3xl text-center">
+              NTNUs nyeste karrieredag innen digitalisering og teknologi.
+              Arrangert av informatikkstudenter for å koble sammen fremtidens
+              IT-talenter med bransjeledende bedrifter.
+            </p>
+          </div>
+        </section>
+
+        <CompLayout />
+        <StandMap />
+
+        <section className="px-6 sm:px-12 lg:px-20 mb-20">
+          <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
+            <div className="bg-tertiary flex w-full flex-col gap-4 border-3 border-black p-8 text-black">
+              <h3 className="text-3xl">Interesseskjema</h3>
+              <p>
+                Fyll ut skjemaet så tar vi kontakt for å diskutere
+                mulighetene.
+              </p>
+              <ContactForm />
+            </div>
+            <ContactUs />
+          </section>
+        </section>
+      </AppLayout>
       <Footer />
     </>
   );

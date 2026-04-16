@@ -10,7 +10,7 @@ body {
 }
 
 @theme {
-  --color-dotbackground: hsl(207deg 19% 98%);
+  --color-dotbackground: #EAEFE4;
   --color-primary: #677B4C;
   --color-secondary: #87A067;
   --color-tertiary: #ABBC93;

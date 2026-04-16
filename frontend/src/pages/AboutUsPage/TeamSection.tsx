@@ -23,7 +23,7 @@ const teamRoles = [
         title: 'Bedriftsansvarlig',
         name: 'Person Personsen',
         initial: 'B',
-        avatarBg: 'bg-quaternary',
+        avatarBg: 'bg-tertiary text-black',
     },
     {
         title: 'Nettside og grafisk ansvarlig',

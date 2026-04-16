@@ -4,8 +4,8 @@ import Linkedin from '../../assets/linkedin.svg';
 
 export const Footer = () => {
   return (
-    <footer className="mt-20 flex justify-center border-t-3 bg-secondary">
-      <section className="m-8 mt-12 flex w-full flex-col justify-around gap-2 md:flex-row md:flex-wrap md:gap-8">
+    <footer className="flex justify-center border-t-3 bg-secondary pt-12">
+      <section className="m-8 flex w-full flex-col justify-around gap-2 md:flex-row md:flex-wrap md:gap-8">
         <section>
           <img src={Logo} alt="Logo" className="w-16 md:mb-4" />
           <p className="mb-5 w-3/4 text-gray-100 md:w-4/5 md:text-xl">

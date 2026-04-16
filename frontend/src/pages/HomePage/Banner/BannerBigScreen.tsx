@@ -54,11 +54,11 @@ export const BannerBig = () => {
             delay={LINE_ANIMATION_DELAY_SEC + t3}
           />
 
-          {/* linje 4: quaternary */}
+          {/* linje 4: tertiary (tidligere quaternary) */}
           <MaskedStroke
             id="m-gul"
             d="M700,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
-            stroke="#D5DEC9"
+            stroke="#ABBC93"
             width={stroke}
             dur={d4}
             delay={LINE_ANIMATION_DELAY_SEC + t4}

@@ -3,12 +3,13 @@ import { Header } from '../../components/PageSections/Header';
 import { LinkButton } from '../../components/Elements/LinkButton';
 import GroupImg from '../../assets/groupImg.jpg';
 import TeamSection from './TeamSection';
+import { AppLayout } from '../../components/Layout/AppLayout';
 
 export const AboutUsPage = () => {
   return (
     <>
       <Header />
-      <main className="bg-dotbackground">
+      <AppLayout>
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-8 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
             <div className="space-y-6">
@@ -76,7 +77,7 @@ export const AboutUsPage = () => {
             </LinkButton>
           </div>
         </section>
-      </main>
+      </AppLayout>
       <Footer />
     </>
   );
