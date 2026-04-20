@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import companiesData from './Companies.json';
 import { CompBox, type Company } from './CompBox';
 
-export const CompLayout = () => {
+type CompLayoutProps = {
+    title?: string;
+};
+
+export const CompLayout = ({ title = 'Deltakende bedrifter i 2026' }: CompLayoutProps) => {
     const [activeCompany, setActiveCompany] = useState<Company | null>(null);
     const companies: Company[] = Array.isArray(companiesData.companies)
         ? companiesData.companies
@@ -39,7 +43,7 @@ export const CompLayout = () => {
     return (
         <section className="px-6 sm:px-12 pb-20 lg:px-20">
             <h2 className="text-center text-4xl font-semibold text-gray-900">
-                Deltakende bedrifter i 2026
+                {title}
             </h2>
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
                 {visibleCompanies.map((company) => {
@@ -47,10 +51,10 @@ export const CompLayout = () => {
                         <button
                             key={company.name}
                             type="button"
-                            className="block h-full cursor-pointer text-left"
+                            className="block w-full cursor-pointer text-left"
                             onClick={() => setActiveCompany(company)}
                         >
-                            <div className="relative flex h-full min-h-[220px] flex-col items-center justify-between gap-6 overflow-hidden border-3 border-black bg-white px-6 py-10 text-center shadow-[6px_6px_0px_#000] transition-transform duration-150 hover:-translate-y-1">
+                            <div className="relative flex aspect-square w-full flex-col items-center justify-between gap-6 overflow-hidden border-3 border-black bg-white px-6 py-10 text-center shadow-[6px_6px_0px_#000] transition-transform duration-150 hover:-translate-y-1">
                                 {company.logo && (
                                     <div className="relative z-0 flex w-full items-center justify-center">
                                         <img

@@ -2,7 +2,6 @@ import {
   CalendarIcon,
   EnvelopeIcon,
   MapPinIcon,
-  UserGroupIcon,
 } from '@heroicons/react/20/solid';
 
 export const ContactUs = () => {
@@ -41,15 +40,6 @@ export const ContactUs = () => {
         <div className="flex flex-col">
           <p>LOKASJON</p>
           <p>Realfagbygget U1 NTNU Gløshaugen, Trondheim</p>
-        </div>
-      </div>
-      <div className="bg-tertiary flex flex-row border-3 border-black p-6">
-        <div className="w-16">
-          <UserGroupIcon className="h-8 w-8" />
-        </div>
-        <div className="flex flex-col">
-          <p>MÅLGRUPPE</p>
-          <p>500+ studenter fra informatikk og andre relevante studieretninger ved NTNU</p>
         </div>
       </div>
     </section>

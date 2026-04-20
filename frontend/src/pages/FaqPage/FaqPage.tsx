@@ -122,12 +122,12 @@ export const FaqPage = () => {
             </p>
             <p className="mt-3 text-gray-700 pb-10">
               Send oss en e-post eller meld interesse via{' '}
-              <a href="/#contact" className={contactLinkClasses}>
+              <a href="/kontakt" className={contactLinkClasses}>
                 interesseskjemaet
               </a>
               , så hjelper vi deg med alt fra praktiske spørsmål til samarbeid.
             </p>
-            <LinkButton link="/#contact" color="primary" size="xl">
+            <LinkButton link="/kontakt" color="primary" size="xl">
               Kontakt Oss
             </LinkButton>
           </section>

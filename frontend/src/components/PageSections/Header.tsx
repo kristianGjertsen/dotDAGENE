@@ -12,10 +12,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: 'Hjem', href: '/', color: 'secondary'},
+  { label: 'Hjem', href: '/', color: 'secondary' },
   { label: 'Om oss', href: '/om', color: 'secondary' },
   { label: 'FAQ', href: '/faq', color: 'secondary', },
-  { label: 'Kontakt Oss', href: '/#contact', color: 'primary' },
+  { label: 'Kontakt Oss', href: '/kontakt', color: 'primary' },
 ];
 
 export const Header = () => {
@@ -31,9 +31,12 @@ export const Header = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b-2 border-gray-500 relative">
+    <header className="bg-header sticky top-0 z-40 border-b-2 border-black relative">
       <section className="flex flex-row items-center justify-between px-4 py-4 sm:px-6">
-        <Link to="/" onClick={scrollToTop} className="min-w-0">
+        <Link
+          to="/"
+          onClick={scrollToTop}
+          className="min-w-0 px-3 py-2">
           <img
             src={Logo}
             alt="Logo"
@@ -53,20 +56,20 @@ export const Header = () => {
           ))}
         </nav>
         <button
-          className="lg:hidden flex items-center justify-center rounded-md border-2 border-gray-500 p-2"
+          className="lg:hidden flex items-center justify-center rounded-md border-2 border-white p-2"
           aria-label={isMenuOpen ? 'Lukk meny' : 'Åpne meny'}
           onClick={toggleMenu}
         >
           <span className="relative flex h-4 w-6 items-center justify-center">
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+              className={`absolute h-0.5 w-full bg-white transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
                 }`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+              className={`absolute h-0.5 w-full bg-white transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+              className={`absolute h-0.5 w-full bg-white transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
                 }`}
             />
           </span>

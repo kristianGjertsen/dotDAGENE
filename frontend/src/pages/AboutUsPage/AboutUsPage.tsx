@@ -25,8 +25,8 @@ export const AboutUsPage = () => {
               </p>
 
               <div className="relative">
-                <div className="absolute left-4 top-4 h-full w-full bg-black/10" aria-hidden />
-                <div className="relative border-3 border-black bg-secondary/70 p-6 shadow-[12px_12px_0_0_rgba(0,0,0,0.12)]">
+                <div className="absolute left-4 top-4 h-full w-full" aria-hidden />
+                <div className="relative border-3 border-black bg-secondary/70 p-6">
                   <p className="text-sm tracking-[0.3em] text-gray-700 uppercase">
                     Studentene bak
                   </p>
@@ -41,7 +41,7 @@ export const AboutUsPage = () => {
               </div>
             </div>
 
-            <div className="border-3 border-black bg-white p-6 shadow-[14px_14px_0_0_rgba(0,0,0,0.12)] space-y-4">
+            <div className="border-3 border-black bg-white p-6 space-y-4">
               <div>
                 <p className="text-sm font-semibold tracking-[0.3em] text-gray-600">
                   TEAMET
@@ -66,13 +66,13 @@ export const AboutUsPage = () => {
         <TeamSection />
 
         <section className="mx-auto mt-24 mb-16 max-w-6xl px-4 text-center sm:px-8 lg:px-10">
-          <div className="border-3 border-black bg-primary p-10 text-white shadow-[10px_10px_0_0_rgba(0,0,0,0.2)]">
+          <div className="border-3 border-black bg-primary p-10 text-white">
             <h2 className="text-3xl font-semibold">Vil du samarbeide med oss?</h2>
             <p className="mt-4 text-lg pb-10">
               Vi er på jakt etter bedrifter og partnere som vil bidra
               til å forme dotDAGENE. Ta kontakt, så skreddersyr vi en opplevelse for dere.
             </p>
-            <LinkButton link="/#contact" color="tertiary">
+            <LinkButton link="/kontakt" color="tertiary">
               Kontakt Oss
             </LinkButton>
           </div>

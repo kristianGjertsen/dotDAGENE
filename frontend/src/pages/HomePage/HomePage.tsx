@@ -1,22 +1,18 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  BuildingOffice2Icon, SparklesIcon, UserGroupIcon,
+  BuildingOffice2Icon, ClockIcon, SparklesIcon, UserGroupIcon,
 } from '@heroicons/react/20/solid';
 
 import { Footer } from '../../components/PageSections/Footer';
 import { Header } from '../../components/PageSections/Header';
 import { Info } from '../../components/Elements/Info';
 import { InfoWithButton } from '../../components/Elements/InfoWithButton';
-import { CompLayout } from './ParticipatingCompanies/CompLayout';
+import { LinkButton } from '../../components/Elements/LinkButton';
 import {
   BannerBig, BannerSmall,
   CalendarButton,
-  ContactForm,
-  ContactUs,
-  Countdown,
 } from '.';
-import StandMap from './StandMap/StandMap';
 import { AppLayout } from '../../components/Layout/AppLayout';
 
 export const HomePage = () => {
@@ -55,7 +51,7 @@ export const HomePage = () => {
           <BannerBig />
         </div>
 
-        <Countdown />
+        {/*<Countdown /> */}
         <section className="mt-16 px-6 sm:px-12 lg:px-20">
           <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
             <Info
@@ -66,13 +62,19 @@ export const HomePage = () => {
               Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
             </Info>
 
-            <Info
-              titelChildren="HELT NYTT"
+            <InfoWithButton
+              titelChildren="FORRIGE DOTDAGENE"
               color="primary"
-              icon={SparklesIcon}
+              icon={ClockIcon}
+              button={(
+                <LinkButton link="/forrige-dotdagene" color="primary" size="md">
+                  Utforsk
+                </LinkButton>
+              )}
             >
-              Vær blant de første som får oppleve et helt nytt arrangement for studenter og bedrifter innen IT og teknologi.
-            </Info>
+              Se tilbake på forrige arrangement. Her kan vi samle høydepunkter,
+              bilder, program og annet innhold fra tidligere dotDAGENE.
+            </InfoWithButton>
           </section>
         </section>
 
@@ -104,6 +106,17 @@ export const HomePage = () => {
                 </InfoWithButton>
               </div>
 
+              <div className="w-full sm:w-1/2">
+                <Info
+                  titelChildren="KVELDSARRANGEMENT"
+                  color="secondary"
+                  icon={SparklesIcon}
+                >
+                 
+                  Etter en dag full av stands , inviterer vi til et sosialt kveldsarrangement. Her kan studenter og bedrifter mingle i en mer uformell setting, bygge relasjoner
+                </Info>
+              </div>
+
             </section>
           </div>
         </section>
@@ -114,28 +127,12 @@ export const HomePage = () => {
               HVEM ER VI?
             </h2>
             <p className="mt-2 max-w-3xl text-center">
-              NTNUs nyeste karrieredag innen digitalisering og teknologi.
-              Arrangert av informatikkstudenter for å koble sammen fremtidens
-              IT-talenter med bransjeledende bedrifter.
+              dotDAGENE er en karrieredag innen digitalisering og teknologi,
+              nå gjennomført for andre gang av informatikkstudenter ved NTNU.
+              Vi bygger videre på erfaringene fra første arrangement og kobler
+              sammen fremtidens IT-talenter med bransjeledende bedrifter.
             </p>
           </div>
-        </section>
-
-        <CompLayout />
-        <StandMap />
-
-        <section className="px-6 sm:px-12 lg:px-20 mb-20">
-          <section className="flex flex-col items-stretch justify-center gap-8 lg:flex-row">
-            <div className="bg-tertiary flex w-full flex-col gap-4 border-3 border-black p-8 text-black">
-              <h3 className="text-3xl">Interesseskjema</h3>
-              <p>
-                Fyll ut skjemaet så tar vi kontakt for å diskutere
-                mulighetene.
-              </p>
-              <ContactForm />
-            </div>
-            <ContactUs />
-          </section>
         </section>
       </AppLayout>
       <Footer />

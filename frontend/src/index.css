@@ -10,11 +10,13 @@ body {
 }
 
 @theme {
-  --color-dotbackground: #EAEFE4;
+  --color-dotbackground: #FFFBF1;
   --color-primary: #677B4C;
   --color-secondary: #87A067;
   --color-tertiary: #ABBC93;
   --color-quaternary: #D5DEC9;
+  --color-header: #FFFBF1;
+  --color-footer: #3B462B;
 }
 
 /* Header logo animasjon */

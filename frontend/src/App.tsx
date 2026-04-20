@@ -8,6 +8,8 @@ import {
 import { FaqPage } from './pages/FaqPage/FaqPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { AboutUsPage } from './pages/AboutUsPage/AboutUsPage';
+import { ContactPage } from './pages/ContactPage/ContactPage';
+import { PreviousDotdagenePage } from './pages/PreviousDotdagenePage/PreviousDotdagenePage';
 import routeManifest from './routes.json';
 
 type RouteDefinition = {
@@ -18,6 +20,8 @@ const routes: RouteDefinition[] = routeManifest;
 
 const routeComponents: Record<string, JSX.Element> = {
   '/': <HomePage />,
+  '/kontakt': <ContactPage />,
+  '/forrige-dotdagene': <PreviousDotdagenePage />,
   '/faq': <FaqPage />,
   '/om': <AboutUsPage />,
 };

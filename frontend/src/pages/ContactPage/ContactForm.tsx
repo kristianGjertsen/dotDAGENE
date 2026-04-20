@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../../components/Elements/Button';
+import { Button } from '../../components/Elements/Button';
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -133,7 +133,7 @@ export const ContactForm = () => {
             />
           </div>
 
-          {/* Melding: textarea, about 4 lines */}
+          {/* Melding: textarea, about 6 lines */}
           <div className="space-y-3">
             <label
               htmlFor="melding"
@@ -146,9 +146,9 @@ export const ContactForm = () => {
               name="melding"
               value={formData.melding}
               onChange={handleInputChange}
-              rows={4}
+              rows={6}
               placeholder="Fortell oss om deres interesse for dotDAGENE, hvilke studenter dere ønsker å møte, eller andre spørsmål..."
-              className="resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg"
+              className="min-h-40 resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg"
             />
           </div>
 

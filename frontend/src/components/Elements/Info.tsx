@@ -20,7 +20,7 @@ export const Info = ({
       className={
         colorMap.get(color) +
         //må være mellomrom før flex-1 (ellers blir det feil css class)
-        ` flex-1 basis-0 min-w-0 flex flex-col items-center justify-center gap-4 border-2 border-black p-6 ${textColorClass} text-center`}
+        ` flex-1 basis-0 min-w-0 flex flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 ${textColorClass} text-center`}
     >
       {/* icon */}
       <section>{Icon && <Icon className="h-16 w-16" />}</section>

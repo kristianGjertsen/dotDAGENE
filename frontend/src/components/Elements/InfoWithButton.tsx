@@ -8,6 +8,7 @@ interface InfoWithButtonProps {
   textColor?: 'white' | 'black';
   icon?: ElementType;
   button: ReactNode;
+  className?: string;
 }
 export const InfoWithButton = ({
   titelChildren,
@@ -16,11 +17,12 @@ export const InfoWithButton = ({
   textColor = undefined,
   icon: Icon,
   button,
+  className = '',
 }: InfoWithButtonProps) => {
   const resolvedTextColor = textColor ?? (color === 'tertiary' || color === 'quaternary' || color === 'white' ? 'black' : 'white');
   return (
     <section
-      className={`${colorMap.get(color)} relative w-full flex flex-col gap-4 border-3 border-black p-6 pb-12 text-${resolvedTextColor}`}
+      className={`${colorMap.get(color)} relative flex-1 basis-0 min-w-0 flex flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center text-${resolvedTextColor} ${className}`}
     >
       <section>{Icon && <Icon className="h-16 w-16" />}</section>
       <p className="text-2xl">{titelChildren}</p>

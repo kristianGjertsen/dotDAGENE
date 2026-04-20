@@ -9,7 +9,15 @@ type HoverState = {
     logoScale?: number;
 };
 
-function StandMap() {
+type StandMapProps = {
+    title?: string;
+    description?: string;
+};
+
+function StandMap({
+    title = 'Stands 3. mars 2026',
+    description = 'Hover eller trykk på standene for å se hvem som står hvor.',
+}: StandMapProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [hovered, setHovered] = useState<HoverState | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -133,10 +141,10 @@ function StandMap() {
 
             <div>
                 <h2 className="text-center text-4xl font-medium ">
-                    Stands 3. mars 2026
+                    {title}
                 </h2>
                 <p className="text-center text-m font-meduim p-4 text-slate-600">
-                    Hover eller trykk på standene for å se hvem som står hvor.
+                    {description}
                 </p>
             </div>
 

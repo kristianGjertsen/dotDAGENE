@@ -37,7 +37,7 @@ export const BannerSmall = () => {
             <MaskedStroke
               id="m-lilla-sm"
               d="M520,80 L555,80 A16,16 0 0,1 555,115 L484,115"
-              stroke="#87A067"
+              stroke="#677B4C"
               width={stroke}
               dur={d2}
               delay={LINE_ANIMATION_DELAY_SEC + t2}
@@ -47,7 +47,7 @@ export const BannerSmall = () => {
             <MaskedStroke
               id="m-gronn-sm"
               d="M315,118 L240,118 A16,16 0 0,0 240,153 L295,153"
-              stroke="#ABBC93"
+              stroke="#677B4C"
               width={stroke}
               dur={d3}
               delay={LINE_ANIMATION_DELAY_SEC + t3}
@@ -57,7 +57,7 @@ export const BannerSmall = () => {
             <MaskedStroke
               id="m-gul-sm"
               d="M505,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
-              stroke="#ABBC93"
+              stroke="#677B4C"
               width={stroke}
               dur={d4}
               delay={LINE_ANIMATION_DELAY_SEC + t4}
