@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { label: 'Hjem', href: '/', color: 'secondary' },
   { label: 'Om oss', href: '/om', color: 'secondary' },
   { label: 'FAQ', href: '/faq', color: 'secondary', },
-  { label: 'Kontakt Oss', href: '/kontakt', color: 'primary' },
+  { label: 'Kontakt oss', href: '/kontakt', color: 'primary' },
 ];
 
 export const Header = () => {

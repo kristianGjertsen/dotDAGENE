@@ -154,7 +154,7 @@ export const ContactForm = () => {
 
           <div className="flex flex-col items-stretch justify-center">
             <Button color="primary" type="submit" disabled={isSubmitting}>
-              Send Melding
+              Send melding
             </Button>
           </div>
 
