@@ -86,7 +86,7 @@ export const HomePage = () => {
                 OPPDAG MULIGHETENE
               </h2>
               <p className="mt-5 text-center">
-                dotDAGENE 2026 bringer sammen studenter og bedrifter.
+                dotDAGENE 2027 bringer sammen studenter og bedrifter.
                 Her får du sjansen til å bygge nettverk, utforske fremtidige karriereveier og oppleve hvordan teknologi og samarbeid skaper nye muligheter.
                 Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår.
               </p>
