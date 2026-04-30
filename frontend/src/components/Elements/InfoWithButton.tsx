@@ -12,7 +12,7 @@ interface InfoWithButtonProps {
   backImg?: BackImg;
   textColor?: 'white' | 'black';
   icon?: ElementType;
-  button: ReactNode;
+  button?: ReactNode | null;
   className?: string;
 }
 export const InfoWithButton = ({

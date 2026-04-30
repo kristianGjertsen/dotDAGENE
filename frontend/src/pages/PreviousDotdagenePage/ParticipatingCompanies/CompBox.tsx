@@ -5,6 +5,8 @@ export type Company = {
     logo?: string;
     website?: string;
     logoScale?: number;
+    logoScaleMobile?: number;
+    logoScaleDesktop?: number;
     description?: string;
     dontShow?: boolean;
 };

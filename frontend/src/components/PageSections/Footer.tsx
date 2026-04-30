@@ -52,7 +52,7 @@ export const Footer = () => {
             <CalendarIcon className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[220px]">
               <p className="text-md font-semibold tracking-[0.2em]">Dato</p>
-              <p>9 og 10. feberuar 2027</p>
+              <p>9 og 10. februar 2027</p>
             </div>
           </div>
 

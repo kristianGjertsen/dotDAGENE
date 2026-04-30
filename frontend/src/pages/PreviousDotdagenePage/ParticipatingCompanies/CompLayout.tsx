@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 import companiesData from './Companies.json';
 import { CompBox, type Company } from './CompBox';
 
-type CompLayoutProps = {
-    title?: string;
-};
-
-export const CompLayout = ({ title = 'Deltakende bedrifter i 2026' }: CompLayoutProps) => {
+export const CompLayout = () => {
     const [activeCompany, setActiveCompany] = useState<Company | null>(null);
     const companies: Company[] = Array.isArray(companiesData.companies)
         ? companiesData.companies
@@ -43,7 +39,7 @@ export const CompLayout = ({ title = 'Deltakende bedrifter i 2026' }: CompLayout
     return (
         <section className="px-6 sm:px-12 pb-20 lg:px-20">
             <h2 className="text-center text-4xl font-semibold text-gray-900">
-                {title}
+                Deltakende bedrifter i 2026
             </h2>
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
                 {visibleCompanies.map((company) => {
@@ -54,19 +50,19 @@ export const CompLayout = ({ title = 'Deltakende bedrifter i 2026' }: CompLayout
                             className="block w-full cursor-pointer text-left"
                             onClick={() => setActiveCompany(company)}
                         >
-                            <div className="relative flex aspect-square w-full flex-col items-center justify-between gap-6 overflow-hidden border-3 border-black bg-white px-6 py-10 text-center shadow-[6px_6px_0px_#000] transition-transform duration-150 hover:-translate-y-1">
+                            <div className="relative flex aspect-square w-full flex-col items-center overflow-hidden border-3 border-black bg-white px-4 py-6 text-center shadow-[6px_6px_0px_#000] transition-transform duration-150 hover:-translate-y-1 sm:px-5 sm:py-7">
                                 {company.logo && (
-                                    <div className="relative z-0 flex w-full items-center justify-center">
+                                    <div className="relative z-0 flex min-h-0 flex-1 w-full items-center justify-center">
                                         <img
                                             src={new URL(`./Logos/${company.logo}`, import.meta.url).href}
                                             alt={company.name}
-                                            className="h-20 w-auto object-contain"
+                                            className="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
                                             style={{ transform: `scale(${company.logoScale ?? 1})` }}
                                             loading="lazy"
                                         />
                                     </div>
                                 )}
-                                <p className="relative z-10 bg-white/80 px-2 text-lg font-semibold">
+                                <p className="relative z-10 mt-4 px-2 text-base font-semibold sm:text-lg">
                                     {company.name}
                                 </p>
                             </div>

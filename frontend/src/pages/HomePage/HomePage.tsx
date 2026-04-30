@@ -71,30 +71,35 @@ export const HomePage = () => {
           </InfoWithButton>
         </section>
         <section className="px-6 py-20 sm:px-12 lg:px-20">
-          <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
-            <Info
-              titelChildren="500+ STUDENTER"
-              color="white"
-              backImg="white"
-              icon={UserGroupIcon}>
-              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagene samler over 500 studenter fra informatikk og relaterte studieretninger.
-            </Info>
 
-            <InfoWithButton
-              titelChildren="Forrige dotDAGENE"
-              color="primary"
-              icon={ClockIcon}
-              backImg="green"
-              button={(
-                <LinkButton link="/forrige-dotdagene" color="white" size="md">
+          <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
+              <div className="flex w-full sm:w-1/2">
+                <InfoWithButton
+                  titelChildren="500+ STUDENTER"
+                  color="white"
+                  backImg="white"
+                  button={null}
+                  icon={UserGroupIcon}
+                >              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagene samler over 500 studenter fra informatikk og relaterte studieretninger.
+
+                </InfoWithButton>
+              </div>
+
+              <div className="flex w-full sm:w-1/2">
+                <InfoWithButton
+                  titelChildren="Forrige dotDAGENE"
+                  color="primary"
+                  backImg="green"
+                  icon={ClockIcon}
+                  button={<LinkButton link="/forrige-dotdagene" color="white" size="md">
                   Se forrige dotDAGENE
-                </LinkButton>
-              )}
-            >
-              Se tilbake på forrige arrangement. Her kan vi samle høydepunkter,
-              bilder, program og annet innhold fra tidligere dotDAGENE.
-            </InfoWithButton>
-          </section>
+                </LinkButton>}
+                >
+
+Se tilbake på forrige arrangement. Her kan vi samle høydepunkter, bilder, program og annet innhold fra tidligere dotDAGENE.                </InfoWithButton>
+              </div>
+
+            </section>
         </section>
 
         <section className="px-6 py-20  sm:px-12 lg:px-20">
