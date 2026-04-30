@@ -31,7 +31,7 @@ export const PreviousDotdagenePage = () => {
             </div>
 
             <div>
-              <CompLayout title="Deltakende bedrifter" />
+              <CompLayout/>
             </div>
           </div>
         </section>

@@ -64,42 +64,42 @@ export const HomePage = () => {
               </LinkButton>
             )}
           >
-            dotDAGENE er karrieredagene innen digitalisering og teknologi, 
-            og etter suksessen fra i fjor gjennomføres arrangementet nå for 
-            andre gang av informatikkstudenter ved NTNU. Vi bygger videre på erfaringene 
+            dotDAGENE er karrieredagene innen digitalisering og teknologi,
+            og etter suksessen fra i fjor gjennomføres arrangementet nå for
+            andre gang av informatikkstudenter ved NTNU. Vi bygger videre på erfaringene
             fra det første arrangementet og samler fremtidens IT-talenter med bransjeledende bedrifter.
           </InfoWithButton>
         </section>
         <section className="px-6 py-20 sm:px-12 lg:px-20">
 
           <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
-              <div className="flex w-full sm:w-1/2">
-                <InfoWithButton
-                  titelChildren="500+ STUDENTER"
-                  color="white"
-                  backImg="white"
-                  button={null}
-                  icon={UserGroupIcon}
-                >              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagene samler over 500 studenter fra informatikk og relaterte studieretninger.
+            <div className="flex w-full sm:w-1/2">
+              <InfoWithButton
+                titelChildren="500+ STUDENTER"
+                color="white"
+                backImg="white"
+                button={null}
+                icon={UserGroupIcon}
+              >              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagene samler over 500 studenter fra informatikk og relaterte studieretninger.
 
-                </InfoWithButton>
-              </div>
+              </InfoWithButton>
+            </div>
 
-              <div className="flex w-full sm:w-1/2">
-                <InfoWithButton
-                  titelChildren="Forrige dotDAGENE"
-                  color="primary"
-                  backImg="green"
-                  icon={ClockIcon}
-                  button={<LinkButton link="/forrige-dotdagene" color="white" size="md">
+            <div className="flex w-full sm:w-1/2">
+              <InfoWithButton
+                titelChildren="Forrige dotDAGENE"
+                color="primary"
+                backImg="green"
+                icon={ClockIcon}
+                button={<LinkButton link="/forrige-dotdagene" color="white" size="md">
                   Se forrige dotDAGENE
                 </LinkButton>}
-                >
+              >
+                Se tilbake på forrige arrangement. Her kan vi samle høydepunkter, bilder, program og annet innhold fra tidligere dotDAGENE.
+              </InfoWithButton>
+            </div>
 
-Se tilbake på forrige arrangement. Her kan vi samle høydepunkter, bilder, program og annet innhold fra tidligere dotDAGENE.                </InfoWithButton>
-              </div>
-
-            </section>
+          </section>
         </section>
 
         <section className="px-6 py-20  sm:px-12 lg:px-20">
@@ -109,9 +109,9 @@ Se tilbake på forrige arrangement. Her kan vi samle høydepunkter, bilder, prog
                 Oppdag mulighetene
               </h2>
               <p className="mt-5 text-center">
-                dotDAGENE 2027 samler studenter og bedrifter innen teknologi og digitalisering. 
-                Her kan du bygge nettverk, utforske karrieremuligheter og møte aktører fra bransjen. 
-                Arrangementet er en arena for nye kontakter, 
+                dotDAGENE 2027 samler studenter og bedrifter innen teknologi og digitalisering.
+                Her kan du bygge nettverk, utforske karrieremuligheter og møte aktører fra bransjen.
+                Arrangementet er en arena for nye kontakter,
                 faglig inspirasjon og samarbeid mellom studenter og næringsliv.
               </p>
             </div>

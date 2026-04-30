@@ -2,8 +2,10 @@ import { Footer } from '../../components/PageSections/Footer';
 import { Header } from '../../components/PageSections/Header';
 import { LinkButton } from '../../components/Elements/LinkButton';
 import GroupImg from '../../assets/groupImg.jpg';
-import TeamSection from './TeamSection';
+//import TeamSection from './TeamSection';
 import { AppLayout } from '../../components/Layout/AppLayout';
+import { InfoWithButton } from '../../components/Elements/InfoWithButton';
+import { Info } from '../../components/Elements/Info';
 
 export const AboutUsPage = () => {
   return (
@@ -24,20 +26,20 @@ export const AboutUsPage = () => {
                 der teknologi, kreativitet og ekte relasjoner står i sentrum.
               </p>
 
-              <div className="relative">
+              <div className="relative mt-20">
                 <div className="absolute left-4 top-4 h-full w-full" aria-hidden />
-                <div className="relative border-3 border-black bg-secondary/70 p-6">
-                  <p className="text-sm tracking-[0.3em] text-gray-700 uppercase">
-                    Studentene bak
-                  </p>
-                  <h2 className="mt-2 text-3xl font-semibold">
-                    Bachelor- og masterstudenter på informatikk
-                  </h2>
-                  <p className="mt-3 text-gray-800">
-                    Vi representerer bachelor- og masterstudenter i informatikk ved NTNU.
-                    Sammen legger vi til rette for samarbeid, læring og faglige muligheter.
-                  </p>
-                </div>
+
+                <Info
+                  titelChildren="Bachelor- og masterstudenter på informatikk"
+                  color="primary"
+                  backImg="green"
+                >
+
+                  Vi representerer bachelor- og masterstudenter i informatikk ved NTNU.
+                  Sammen legger vi til rette for samarbeid, læring og faglige muligheter.               
+                 </Info>
+
+
               </div>
             </div>
 
@@ -64,19 +66,25 @@ export const AboutUsPage = () => {
         </section>
 
 
+
         <section className="mx-auto mt-24 mb-16 max-w-6xl px-4 text-center sm:px-8 lg:px-10">
-          <div className="border-3 border-black bg-primary p-10 text-white">
-            <h2 className="text-3xl font-semibold">Vil du samarbeide med oss?</h2>
-            <p className="mt-4 text-lg pb-10">
-              Vi er på jakt etter bedrifter og partnere som vil bidra
-              til å forme dotDAGENE. Ta kontakt, så skreddersyr vi en opplevelse for dere.
-            </p>
-            <LinkButton link="/kontakt" color="tertiary">
+
+          <InfoWithButton
+            titelChildren="Vil du samarbeide med oss?"
+            color="primary"
+            backImg="green"
+            button={<LinkButton link="/kontakt" color="white">
               Kontakt Oss
-            </LinkButton>
-          </div>
+            </LinkButton>}
+
+          >
+            Vi er på jakt etter bedrifter og partnere som vil bidra
+            til å forme dotDAGENE. Ta kontakt, så skreddersyr vi en opplevelse for dere.
+
+          </InfoWithButton>
+
         </section>
-      </AppLayout>
+      </AppLayout >
       <Footer />
     </>
   );
