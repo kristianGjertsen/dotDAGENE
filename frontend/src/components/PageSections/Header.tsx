@@ -12,9 +12,9 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: 'Hjem', href: '/', color: 'secondary' },
-  { label: 'Om oss', href: '/om', color: 'secondary' },
-  { label: 'FAQ', href: '/faq', color: 'secondary', },
+  { label: 'Hjem', href: '/', color: 'white' },
+  { label: 'Om oss', href: '/om', color: 'white' },
+  { label: 'FAQ', href: '/faq', color: 'white', },
   { label: 'Kontakt oss', href: '/kontakt', color: 'primary' },
 ];
 
@@ -56,20 +56,20 @@ export const Header = () => {
           ))}
         </nav>
         <button
-          className="lg:hidden flex items-center justify-center rounded-md border-2 border-white p-2"
+          className="lg:hidden flex items-center justify-center rounded-md border-2 border-black p-2"
           aria-label={isMenuOpen ? 'Lukk meny' : 'Åpne meny'}
           onClick={toggleMenu}
         >
           <span className="relative flex h-4 w-6 items-center justify-center">
             <span
-              className={`absolute h-0.5 w-full bg-white transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+              className={`absolute h-0.5 w-full bg-black transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
                 }`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-white transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+              className={`absolute h-0.5 w-full bg-black transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-white transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+              className={`absolute h-0.5 w-full bg-black transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
                 }`}
             />
           </span>

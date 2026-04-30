@@ -1,4 +1,4 @@
-import companiesData from "../ParticipatingCompanies/Companies.json";
+import companiesData from "../../PreviousDotdagenePage/ParticipatingCompanies/Companies.json";
 
 export type StandId =
   | "stand-1"

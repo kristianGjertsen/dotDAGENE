@@ -24,11 +24,13 @@ export const ContactPage = () => {
 
           <section className="mt-12">
             <div className="bg-tertiary mx-auto flex w-full max-w-4xl flex-col gap-4 border-3 border-black p-8 text-black">
-              <h2 className="text-3xl">Interesseskjema</h2>
-              <p>
-                Fyll ut skjemaet så tar vi kontakt for å diskutere
-                mulighetene.
-              </p>
+              <div className="text-center">
+                <h2 className="text-3xl">Interesseskjema</h2>
+                <p className="mt-2">
+                  Fyll ut skjemaet så tar vi kontakt for å diskutere
+                  mulighetene.
+                </p>
+              </div>
               <ContactForm />
             </div>
            

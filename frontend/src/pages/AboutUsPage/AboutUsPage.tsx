@@ -63,7 +63,6 @@ export const AboutUsPage = () => {
           </div>
         </section>
 
-        <TeamSection />
 
         <section className="mx-auto mt-24 mb-16 max-w-6xl px-4 text-center sm:px-8 lg:px-10">
           <div className="border-3 border-black bg-primary p-10 text-white">

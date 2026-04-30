@@ -26,8 +26,8 @@ export const BannerSmall = () => {
             {/* linje 1: primary */}
             <MaskedStroke
               id="m-svart-sm"
-              d="M0,10 H240 A17,17 0 0,1 257,27 V28 A17,17 0 0,0 274,45 H320"
-              stroke="#677B4C"
+
+d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280"              stroke="#677B4C"
               width={stroke}
               dur={d1}
               delay={LINE_ANIMATION_DELAY_SEC}
@@ -46,7 +46,7 @@ export const BannerSmall = () => {
             {/* linje 3: tertiary */}
             <MaskedStroke
               id="m-gronn-sm"
-              d="M315,118 L240,118 A16,16 0 0,0 240,153 L295,153"
+              d="M315,118 L240,118 A16,16 0 0,0 240,153 L285,153"
               stroke="#677B4C"
               width={stroke}
               dur={d3}
@@ -56,7 +56,7 @@ export const BannerSmall = () => {
             {/* linje 4: tertiary (tidligere quaternary) */}
             <MaskedStroke
               id="m-gul-sm"
-              d="M505,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
+              d="M515,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
               stroke="#677B4C"
               width={stroke}
               dur={d4}
@@ -94,7 +94,7 @@ export const BannerSmall = () => {
               fontWeight="bold"
             >
               <tspan fill="#000000">på </tspan>
-              <tspan fill="#87A067">NTNU</tspan>
+              <tspan fill="#000000">NTNU</tspan>
             </text>
 
             <text
@@ -105,8 +105,7 @@ export const BannerSmall = () => {
               fontWeight="bold"
               fill="#000000"
             >
-              <tspan>den </tspan>
-              <tspan fill="#ABBC93">3. mars</tspan>
+              <tspan fill="#00000">9 og 10. mars</tspan>
             </text>
           </g>
         </svg>

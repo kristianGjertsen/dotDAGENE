@@ -1,6 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { standMap, type StandId } from "./StandData";
 
+const logoModules = import.meta.glob(
+    "../../PreviousDotdagenePage/ParticipatingCompanies/Logos/*",
+    { eager: true, import: "default", query: "?url" },
+) as Record<string, string>;
+
+const getLogoSrc = (logo?: string) => {
+    if (!logo) {
+        return null;
+    }
+
+    const logoPath = Object.keys(logoModules).find((path) => path.endsWith(`/${logo}`));
+    return logoPath ? logoModules[logoPath] : null;
+};
+
 type HoverState = {
     id: StandId;
     label: string;
@@ -128,9 +142,7 @@ function StandMap({
         return () => cleanup?.();
     }, []);
 
-    const logoSrc = hovered?.logo
-        ? new URL(`../ParticipatingCompanies/Logos/${hovered.logo}`, import.meta.url).href
-        : null;
+    const logoSrc = getLogoSrc(hovered?.logo);
     const logoScaleClamped = hovered?.logoScale
         ? Math.min(2, Math.max(0.9, hovered.logoScale))
         : 1;

@@ -10,7 +10,7 @@ import {
 import { AppLayout } from '../../components/Layout/AppLayout';
 
 //Alternerende farger, tonet ned 
-const colorCycle = ['bg-secondary/80', 'bg-primary/80', 'bg-tertiary/80'];
+const colorCycle = ['bg-white'];
 
 // Togle knapp felles-stil
 const baseToggleButtonClasses = 'relative z-10 flex-1 px-6 py-2 text-base font-semibold cursor-pointer transition-colors duration-300 sm:px-8 sm:py-2 sm:text-lg';
@@ -102,15 +102,27 @@ export const FaqPage = () => {
                     aria-expanded={isOpen}
                   >
                     <h2 className="text-2xl font-semibold">{faq.question}</h2>
-                    <span className="text-3xl font-bold text-black">
+                    <span
+                      className={`text-3xl font-bold text-black transition-transform duration-300 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                    >
                       {isOpen ? '−' : '+'}
                     </span>
                   </button>
-                  {isOpen && (
-                    <p className="px-6 pb-6 text-lg leading-relaxed text-black">
-                      {faq.answer}
-                    </p>
-                  )}
+                  <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                      isOpen
+                        ? 'grid-rows-[1fr] opacity-100'
+                        : 'grid-rows-[0fr] opacity-0'
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-6 pb-6 text-lg leading-relaxed text-black">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
                 </article>
               );
             })}

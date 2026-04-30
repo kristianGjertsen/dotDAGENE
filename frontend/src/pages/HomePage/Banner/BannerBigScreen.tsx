@@ -37,7 +37,7 @@ export const BannerBig = () => {
           {/* linje 2: secondary */}
           <MaskedStroke
             id="m-lilla"
-            d="M550,90 L630,90 A20,20 0 0,1 630,130 L600,130"
+            d="M555,90 L630,90 A20,20 0 0,1 630,130 L590,130"
             stroke="#677B4C"
             width={stroke}
             dur={d2}
@@ -47,7 +47,7 @@ export const BannerBig = () => {
           {/* linje 3: tertiary */}
           <MaskedStroke
             id="m-gronn"
-            d="M450,130 L400,130 A20,20 0 0,0 400,170 L510,170"
+            d="M448,130 L400,130 A20,20 0 0,0 400,170 L510,170"
             stroke="#677B4C"
             width={stroke}
             dur={d3}
@@ -57,7 +57,7 @@ export const BannerBig = () => {
           {/* linje 4: tertiary (tidligere quaternary) */}
           <MaskedStroke
             id="m-gul"
-            d="M765,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
+            d="M760,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
             stroke="#677B4C"
             width={stroke}
             dur={d4}
@@ -87,7 +87,7 @@ export const BannerBig = () => {
           </text>
 
           <text x="520" y="180" fontSize="32" fontWeight="bold" fill="#000">
-            <tspan fill="#000000">xx og xx februar</tspan>
+            <tspan fill="#000000">9 og 10. februar</tspan>
           </text>
         </g>
       </svg>

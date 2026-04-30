@@ -19,11 +19,13 @@ const EVENT_LOC = "NTNU Realfagbygget, U1";
 const EVENT_DESC = "Stands under dotDAGENE – velkommen!";
 
 /**
- * 3. mars 2026 kl. 10:00–15:00 Europe/Oslo (CET = UTC+1)
+ * 9. og 10. mars 2027 kl. 10:00–15:00 Europe/Oslo (CET = UTC+1)
  * UTC blir 09:00–14:00Z (ingen DST i starten av mars).
  */
-const DTSTART_UTC = "20260303T090000Z";
-const DTEND_UTC = "20260303T140000Z";
+const DTSTART_UTC_DAY_1 = "20270309T090000Z";
+const DTEND_UTC_DAY_1 = "20270309T140000Z";
+const DTSTART_UTC_DAY_2 = "20270310T090000Z";
+const DTEND_UTC_DAY_2 = "20270310T140000Z";
 
 // --- Hjelpefunksjoner ---
 function escapeICS(s: string) {
@@ -47,46 +49,6 @@ function nowUtcStamp() {
         pad(d.getUTCSeconds()) +
         "Z"
     );
-}
-
-function buildICS({
-    uid,
-    dtstampUtc,
-    dtstartUtc,
-    dtendUtc,
-    summary,
-    location,
-    description,
-    url,
-}: {
-    uid: string;
-    dtstampUtc: string;
-    dtstartUtc: string;
-    dtendUtc: string;
-    summary: string;
-    location: string;
-    description?: string;
-    url?: string;
-}) {
-    const lines = [
-        "BEGIN:VCALENDAR",
-        "VERSION:2.0",
-        "PRODID:-//dotDAGENE//Add-to-Calendar//EN",
-        "CALSCALE:GREGORIAN",
-        "METHOD:PUBLISH",
-        "BEGIN:VEVENT",
-        `UID:${uid}`,
-        `DTSTAMP:${dtstampUtc}`,
-        `DTSTART:${dtstartUtc}`,
-        `DTEND:${dtendUtc}`,
-        `SUMMARY:${escapeICS(summary)}`,
-        `LOCATION:${escapeICS(location)}`,
-        description ? `DESCRIPTION:${escapeICS(description)}` : "",
-        url ? `URL:${url}` : "",
-        "END:VEVENT",
-        "END:VCALENDAR",
-    ].filter(Boolean);
-    return lines.join("\r\n");
 }
 
 function makeGoogleCalendarUrl({
@@ -116,12 +78,19 @@ function makeGoogleCalendarUrl({
 
 // 1) Landingsside med knapper
 app.get("/", (_req, res) => {
-    const googleUrl = makeGoogleCalendarUrl({
-        title: EVENT_TITLE,
+    const googleUrlDay1 = makeGoogleCalendarUrl({
+        title: `${EVENT_TITLE} - 9. mars`,
         details: EVENT_DESC,
         location: EVENT_LOC,
-        dtstartUtc: DTSTART_UTC,
-        dtendUtc: DTEND_UTC,
+        dtstartUtc: DTSTART_UTC_DAY_1,
+        dtendUtc: DTEND_UTC_DAY_1,
+    });
+    const googleUrlDay2 = makeGoogleCalendarUrl({
+        title: `${EVENT_TITLE} - 10. mars`,
+        details: EVENT_DESC,
+        location: EVENT_LOC,
+        dtstartUtc: DTSTART_UTC_DAY_2,
+        dtendUtc: DTEND_UTC_DAY_2,
     });
 
     const html = `<!doctype html>
@@ -144,12 +113,13 @@ app.get("/", (_req, res) => {
 <body>
   <div class="wrap">
     <h1>${EVENT_TITLE}</h1>
-    <div class="meta">3. mars 2026, kl. 10:00–15:00 (Europe/Oslo) · ${EVENT_LOC}</div>
+    <div class="meta">9. og 10. mars 2027, kl. 10:00–15:00 begge dager (Europe/Oslo) · ${EVENT_LOC}</div>
 
     <div class="btns">
       <a class="button" href="/event.ics">Legg til i Apple-Kalender (.ics)</a>
       <a class="button" href="webcal://${HOSTNAME}/feed.ics">Abonner i Apple-Kalender (webcal)</a>
-      <a class="button" href="${googleUrl}" target="_blank" rel="noreferrer">Legg til i Google Kalender</a>
+      <a class="button" href="${googleUrlDay1}" target="_blank" rel="noreferrer">Google Kalender 9. mars</a>
+      <a class="button" href="${googleUrlDay2}" target="_blank" rel="noreferrer">Google Kalender 10. mars</a>
     </div>
 
     <p style="margin-top:1.5rem;color:#666">
@@ -165,17 +135,35 @@ app.get("/", (_req, res) => {
 
 // 2) Enkelt event (.ics)
 app.get("/event.ics", (_req, res) => {
-    const uid = `${crypto.randomUUID()}@${HOSTNAME}`;
-    const ics = buildICS({
-        uid,
-        dtstampUtc: nowUtcStamp(),
-        dtstartUtc: DTSTART_UTC,
-        dtendUtc: DTEND_UTC,
-        summary: EVENT_TITLE,
-        location: EVENT_LOC,
-        description: EVENT_DESC,
-        url: `${BASE_HTTP}/`,
-    });
+    const dtstampUtc = nowUtcStamp();
+    const ics = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//dotDAGENE//Add-to-Calendar//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        `UID:${crypto.randomUUID()}@${HOSTNAME}`,
+        `DTSTAMP:${dtstampUtc}`,
+        `DTSTART:${DTSTART_UTC_DAY_1}`,
+        `DTEND:${DTEND_UTC_DAY_1}`,
+        `SUMMARY:${escapeICS(`${EVENT_TITLE} - 9. mars`)}`,
+        `LOCATION:${escapeICS(EVENT_LOC)}`,
+        `DESCRIPTION:${escapeICS(EVENT_DESC)}`,
+        `URL:${BASE_HTTP}/`,
+        "END:VEVENT",
+        "BEGIN:VEVENT",
+        `UID:${crypto.randomUUID()}@${HOSTNAME}`,
+        `DTSTAMP:${dtstampUtc}`,
+        `DTSTART:${DTSTART_UTC_DAY_2}`,
+        `DTEND:${DTEND_UTC_DAY_2}`,
+        `SUMMARY:${escapeICS(`${EVENT_TITLE} - 10. mars`)}`,
+        `LOCATION:${escapeICS(EVENT_LOC)}`,
+        `DESCRIPTION:${escapeICS(EVENT_DESC)}`,
+        `URL:${BASE_HTTP}/`,
+        "END:VEVENT",
+        "END:VCALENDAR",
+    ].join("\r\n");
 
     res.setHeader("Content-Type", "text/calendar; charset=utf-8");
     res.setHeader("Content-Disposition", 'inline; filename="dotdagene-stands.ics"');
@@ -184,7 +172,7 @@ app.get("/event.ics", (_req, res) => {
 
 // 3) Feed for abonnement (webcal://dotdagene.no/feed.ics)
 app.get("/feed.ics", (_req, res) => {
-    const uid = `feed-${crypto.randomUUID()}@${HOSTNAME}`;
+    const dtstampUtc = nowUtcStamp();
     const lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
@@ -193,11 +181,21 @@ app.get("/feed.ics", (_req, res) => {
         "METHOD:PUBLISH",
         "X-WR-CALNAME:dotDAGENE",
         "BEGIN:VEVENT",
-        `UID:${uid}`,
-        `DTSTAMP:${nowUtcStamp()}`,
-        `DTSTART:${DTSTART_UTC}`,
-        `DTEND:${DTEND_UTC}`,
-        `SUMMARY:${escapeICS(EVENT_TITLE)}`,
+        `UID:feed-${crypto.randomUUID()}@${HOSTNAME}`,
+        `DTSTAMP:${dtstampUtc}`,
+        `DTSTART:${DTSTART_UTC_DAY_1}`,
+        `DTEND:${DTEND_UTC_DAY_1}`,
+        `SUMMARY:${escapeICS(`${EVENT_TITLE} - 9. mars`)}`,
+        `LOCATION:${escapeICS(EVENT_LOC)}`,
+        `DESCRIPTION:${escapeICS(EVENT_DESC)}`,
+        `URL:${BASE_HTTP}/`,
+        "END:VEVENT",
+        "BEGIN:VEVENT",
+        `UID:feed-${crypto.randomUUID()}@${HOSTNAME}`,
+        `DTSTAMP:${dtstampUtc}`,
+        `DTSTART:${DTSTART_UTC_DAY_2}`,
+        `DTEND:${DTEND_UTC_DAY_2}`,
+        `SUMMARY:${escapeICS(`${EVENT_TITLE} - 10. mars`)}`,
         `LOCATION:${escapeICS(EVENT_LOC)}`,
         `DESCRIPTION:${escapeICS(EVENT_DESC)}`,
         `URL:${BASE_HTTP}/`,

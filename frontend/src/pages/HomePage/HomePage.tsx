@@ -12,6 +12,7 @@ import { LinkButton } from '../../components/Elements/LinkButton';
 import {
   BannerBig, BannerSmall,
   CalendarButton,
+  Countdown,
 } from '.';
 import { AppLayout } from '../../components/Layout/AppLayout';
 
@@ -44,31 +45,49 @@ export const HomePage = () => {
         {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
         <h1 className="sr-only">dotDAGENE 2025</h1>
 
-        <div className="block md:hidden">
+        <div className="relative left-1/2 block w-screen -translate-x-1/2 md:hidden">
           <BannerSmall />
         </div>
-        <div className="hidden md:block">
+        <div className="relative left-1/2 hidden w-screen -translate-x-1/2 md:block">
           <BannerBig />
         </div>
 
-        {/*<Countdown /> */}
-        <section className="mt-16 px-6 sm:px-12 lg:px-20">
+        <Countdown />
+        <section className="px-6 py-20 sm:px-12 lg:px-20">
+          <InfoWithButton
+            titelChildren="Vi gjenntar suksessen fra i fjor"
+            color="white"
+            backImg="white"
+            button={(
+              <LinkButton link="/kontakt" color="primary" size="md">
+                Kontakt oss
+              </LinkButton>
+            )}
+          >
+            dotDAGENE er karrieredagene innen digitalisering og teknologi, 
+            og etter suksessen fra i fjor gjennomføres arrangementet nå for 
+            andre gang av informatikkstudenter ved NTNU. Vi bygger videre på erfaringene 
+            fra det første arrangementet og samler fremtidens IT-talenter med bransjeledende bedrifter.
+          </InfoWithButton>
+        </section>
+        <section className="px-6 py-20 sm:px-12 lg:px-20">
           <section className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-stretch">
             <Info
               titelChildren="500+ STUDENTER"
-              color="secondary"
-              icon={UserGroupIcon}
-            >
-              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagen samler over 500 studenter fra informatikk og relaterte studieretninger.
+              color="white"
+              backImg="white"
+              icon={UserGroupIcon}>
+              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagene samler over 500 studenter fra informatikk og relaterte studieretninger.
             </Info>
 
             <InfoWithButton
-              titelChildren="FORRIGE DOTDAGENE"
+              titelChildren="Forrige dotDAGENE"
               color="primary"
               icon={ClockIcon}
+              backImg="green"
               button={(
-                <LinkButton link="/forrige-dotdagene" color="primary" size="md">
-                  Utforsk
+                <LinkButton link="/forrige-dotdagene" color="white" size="md">
+                  Se forrige dotDAGENE
                 </LinkButton>
               )}
             >
@@ -78,26 +97,27 @@ export const HomePage = () => {
           </section>
         </section>
 
-        <section className="px-6 sm:px-12 lg:px-20">
-          <div className="mt-16 flex flex-col flex-wrap items-center gap-4">
-            <div className="w-full">
-
+        <section className="px-6 py-20  sm:px-12 lg:px-20">
+          <div className="flex flex-col flex-wrap items-center gap-20">
+            <div className="mx-auto max-w-5xl">
               <h2 className="text-center text-4xl font-medium">
-                OPPDAG MULIGHETENE
+                Oppdag mulighetene
               </h2>
               <p className="mt-5 text-center">
-                dotDAGENE 2027 bringer sammen studenter og bedrifter.
-                Her får du sjansen til å bygge nettverk, utforske fremtidige karriereveier og oppleve hvordan teknologi og samarbeid skaper nye muligheter.
-                Enten du kommer for å møte potensielle arbeidsgivere, vise frem bedriften din, eller bare bli inspirert, er dotDAGENE stedet der nye ideer og kontakter oppstår.
+                dotDAGENE 2027 samler studenter og bedrifter innen teknologi og digitalisering. 
+                Her kan du bygge nettverk, utforske karrieremuligheter og møte aktører fra bransjen. 
+                Arrangementet er en arena for nye kontakter, 
+                faglig inspirasjon og samarbeid mellom studenter og næringsliv.
               </p>
             </div>
 
-            <section className="mt-20 flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:mt-20 sm:flex-row">
-              <div className="w-full sm:w-1/2">
+            <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
+              <div className="flex w-full sm:w-1/2">
                 <InfoWithButton
-                  titelChildren="STANDS"
+                  titelChildren="Stands"
                   color="primary"
-                  button={<CalendarButton color="secondary" />}
+                  backImg="green"
+                  button={<CalendarButton color="white" />}
                   icon={BuildingOffice2Icon}
                 >
                   Få egen stand på dotDAGENE og møt direkte med
@@ -106,13 +126,14 @@ export const HomePage = () => {
                 </InfoWithButton>
               </div>
 
-              <div className="w-full sm:w-1/2">
+              <div className="flex w-full sm:w-1/2">
                 <Info
-                  titelChildren="KVELDSARRANGEMENT"
-                  color="secondary"
+                  titelChildren="Kveldsarrangement"
+                  color="white"
+                  backImg="white"
                   icon={SparklesIcon}
                 >
-                 
+
                   Etter en dag full av stands , inviterer vi til et sosialt kveldsarrangement. Her kan studenter og bedrifter mingle i en mer uformell setting, bygge relasjoner
                 </Info>
               </div>
@@ -121,20 +142,8 @@ export const HomePage = () => {
           </div>
         </section>
 
-        <section className="mx-6 py-30 sm:mx-12 lg:mx-24">
-          <div className="flex w-full flex-col items-center justify-center gap-6 border-3 border-black bg-white p-8 lg:px-32 lg:py-16">
-            <h2 className="text-center text-4xl font-medium md:text-6xl">
-              HVEM ER VI?
-            </h2>
-            <p className="mt-2 max-w-3xl text-center">
-              dotDAGENE er en karrieredag innen digitalisering og teknologi,
-              nå gjennomført for andre gang av informatikkstudenter ved NTNU.
-              Vi bygger videre på erfaringene fra første arrangement og kobler
-              sammen fremtidens IT-talenter med bransjeledende bedrifter.
-            </p>
-          </div>
-        </section>
-      </AppLayout>
+
+      </AppLayout >
       <Footer />
     </>
   );

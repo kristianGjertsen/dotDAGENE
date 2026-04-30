@@ -4,28 +4,28 @@
       "name": "Maritime Optima",
       "logo": "maritimeOptima.png",
       "website": "https://maritimeoptima.com/",
-      "logoScale": 1,
+      "logoScale": 1.3,
       "description": "Maritime Optima er et norskeid selskap som utvikler beslutningsstøttesystem (ShipIntel) for selskap som er involvert i shipping. Systemet er basert på store datamengder som vi samler inn og strukturerer, og bruker til å lage modeller for å predikere ulike hendelser. Videre hjelper ShipIntel å automatisere interne manuelle arbeidsprosesser. Målet er å utvikle og selge et banebrytende nytt datadrevet beslutningsstøttesystem for selskap som er involvert i shipping."
     },
     {
       "name": "Tripletex",
       "logo": "tripletex.svg",
       "website": "https://www.tripletex.no/",
-      "logoScale": 1,
+      "logoScale": 1.2,
       "description": "Med over 150 000 bedrifter (dette tallet er sikkert utdatert når du leser denne teksten – vi vokser nemlig i rakettfart) på kundelisten, er Tripletex Norges ledende skybaserte regnskapsprogram. Vi har et stort produkt- og utviklingsmiljø med over 130 kolleger i avdelingen, og i jobber i autonome, tverrfaglige team med moderne teknologi, stor påvirkningskraft og ekte brukere i andre enden av koden. Sammen releaser vi 8000 ganger i året!"
     },
     {
       "name": "Itera",
       "logo": "Itera.png",
       "website": "https://www.itera.com/",
-      "logoScale": 1,
+      "logoScale": 1.5,
       "description": "x'Itera er et konsulentselskap som utvikler digitale løsninger for både privat og offentlig sektor. Hos oss får du tidlig ansvar og roller innen ditt fag, enten det er systemutvikling og arkitektur, UX og design eller dataanalyse, skyplattformer og sikkerhet. Du blir en del av tverrfaglige team som samarbeider tett med kundene – og får være med på å forme løsninger som faktisk betyr noe i samfunnet."
     },
     {
       "name": "Norsk Regnesentral",
       "logo": "NorskRegnesentral.svg",
       "website": "https://nr.no/",
-      "logoScale": 2,
+      "logoScale": 1.6,
       "description": "Norsk regnesentral er et anvendt forskningsinstitutt med fokus på statistikk, maskinlæring og dataanalyse. De utvikler modeller, algoritmer og programvare som tas i bruk i reelle systemer, og samarbeider tett med både næringsliv og offentlig sektor."
     },
     {
@@ -39,48 +39,48 @@
       "name": "Skatteetaten",
       "logo": "Skatteetaten.svg",
       "website": "https://www.skatteetaten.no/",
-      "logoScale": 1,
+      "logoScale": 1.4,
       "description": "Skatteetaten utvikler og forvalter noen av Norges mest kritiske IT-systemer. Arbeidet omfatter store distribuerte systemer, komplekse dataløsninger og høy grad av automatisering, med fokus på sikkerhet, stabilitet og langsiktig forvaltning."
     },
     {
       "name": "Mastercard",
       "logo": "Mastercard.svg",
       "website": "https://www.mastercard.com/no/nb.html",
-      "logoScale": 1.2,
+      "logoScale": 1.1,
       "description": "Mastercard utvikler globale betalingssystemer som håndterer svært høye transaksjonsvolumer i sanntid. Teknologiarbeidet omfatter distribuerte systemer, sikkerhet, dataanalyse og høy tilgjengelighet i systemer som brukes over hele verden."
     },
     {
       "name": "Xledger",
       "logo": "xledger.png",
       "website": "https://www.xledger.com/no/",
-      "logoScale": 1.1,
+      "logoScale": 1.3,
       "description": "Xledger utvikler og leverer et av markedets mest avanserte skybaserte ERP-systemer – designet for automatisering, innsikt og skalerbarhet. Hos oss får du en unik mulighet til å gjøre en konkret forskjell for tusenvis av brukere i over 60 land - ved å gjøre kompleks teknologi forståelig og tilgjengelig. Sammen bygger vi løsninger som forenkler hverdagen for økonomer, ledere og organisasjoner."
     },
     {
       "name": "DIPS",
       "logo": "dips.png",
       "website": "https://www.dips.com/",
-      "logoScale": 1.3,
+      "logoScale": 1.5,
       "description": "DIPS utvikler digitale løsninger for sykehus og helsetjenesten, med mål om å forbedre pasientbehandling, samhandling og informasjonsflyt i klinisk arbeid. Gjennom teknologi som støtter helsepersonell i hverdagen, bidrar vi til mer effektive arbeidsprosesser, bedre beslutningsgrunnlag og tryggere tjenester for både pasienter og ansatte."
     },
     {
       "name": "Tet",
       "logo": "tet.svg",
       "website": "https://ruter.no/en/this-is-how-we-are-organized",
-      "logoScale": 0.9,
+      "logoScale": 1.2,
       "description": "Heisann! \n Vi er TET Digital – et teknologiselskap eid av Ruter, Skyss og AKT med høye ambisjoner og et viktig samfunnsoppdrag. Hos oss jobber over 300 utviklere, designere, produktledere og datafolk i tverrfaglige produktteam som bygger digitale løsninger for bærekraftig mobilitet. Vi har et arbeidsmiljø preget av samarbeid, faglig nysgjerrighet og stor grad av tillit. Her får du være med å forme løsninger som er tett på livet til folk – og som brukes hver eneste dag."
     },
     {
       "name": "Politiets IT-enhet",
       "logo": "Politiet-it.png",
       "website": "https://www.politiet.no/om-politiet/organisasjonen/sarorganene/pit",
-      "logoScale": 1,
+      "logoScale": 1.3,
       "description": "Politiets IT-enhet (PIT) er politiets egen IT-organisasjon. Vi bidrar til å løse Politiets samfunnsoppdrag med teknologi som virkemiddel. Med over 850 medarbeidere er vi på jobb for hele Norges befolkning. Vi rekrutterer hver høst både sommerstudenter, og til faste stillinger for nyutdannede."
     },
     {
       "name": "dotDAGENE",
       "logo": "dotDAGENEhovedlogo.svg",
-      "logoScale": 1,
+      "logoScale": 2.4,
       "dontShow": true
     }
   ]

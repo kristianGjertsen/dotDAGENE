@@ -6,7 +6,7 @@ import {
 import Logo from '../../assets/litenDfarget.svg';
 import Instagram from '../../assets/instagram.svg';
 import Linkedin from '../../assets/linkedin.svg';
-import backtemp from '../../assets/backtemp.png';
+import backtemp from '../../assets/footerImage.png';
 
 export const Footer = () => {
   return (
@@ -38,7 +38,7 @@ export const Footer = () => {
           <div className="flex items-start gap-4 md:justify-self-center">
             <EnvelopeIcon className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[220px]">
-              <p className="text-sm font-semibold tracking-[0.2em]">E-POST</p>
+              <p className="text-md font-semibold tracking-[0.2em]">E-Post</p>
               <a
                 href="mailto:kontakt@dotdagene.no"
                 className="transition-colors duration-150 hover:text-tertiary"
@@ -51,15 +51,15 @@ export const Footer = () => {
           <div className="flex items-start gap-4 md:justify-self-center">
             <CalendarIcon className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[220px]">
-              <p className="text-sm font-semibold tracking-[0.2em]">DATO</p>
-              <p>3. mars 2026</p>
+              <p className="text-md font-semibold tracking-[0.2em]">Dato</p>
+              <p>9 og 10. feberuar 2027</p>
             </div>
           </div>
 
           <div className="flex items-start gap-4 md:justify-self-center">
             <MapPinIcon className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[260px]">
-              <p className="text-sm font-semibold tracking-[0.2em]">LOKASJON</p>
+              <p className="text-md font-semibold tracking-[0.2em]">Lokasjon</p>
               <a
                 href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
                 target="_blank"
