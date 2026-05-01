@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { colorMap, type color } from '../../../lib/colors';
+import type { color } from '../../../lib/colors';
+import { LinkButton } from '../../../components/Elements/LinkButton';
 
 interface CalendarButtonProps {
   color: color;
@@ -15,8 +16,10 @@ interface CalendarButtonProps {
 const DEFAULT_EVENT_TITLE = 'dotDAGENE: Stands';
 const DEFAULT_EVENT_LOC = 'NTNU Realfagbygget, U1';
 const DEFAULT_EVENT_DESC = 'Stands dotDAGENE velkommen!';
-const DEFAULT_DTSTART_UTC = '20260303T090000Z';
-const DEFAULT_DTEND_UTC = '20260303T140000Z';
+const DEFAULT_DTSTART_UTC = '20270309T090000Z';
+const DEFAULT_DTEND_UTC = '20270309T140000Z';
+const DEFAULT_SECOND_DAY_DTSTART_UTC = '20270310T090000Z';
+const DEFAULT_SECOND_DAY_DTEND_UTC = '20270310T140000Z';
 const DEFAULT_ICS_URL = 'https://dotdagene.no/event.ics';
 
 function makeGoogleCalendarUrl({
@@ -54,11 +57,18 @@ export const CalendarButton = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const googleCalendarUrl = makeGoogleCalendarUrl({
-    title: eventTitle,
+    title: `${eventTitle} - 9. mars`,
     details: eventDescription,
     location: eventLocation,
     dtstartUtc: eventStart,
     dtendUtc: eventEnd,
+  });
+  const secondDayGoogleCalendarUrl = makeGoogleCalendarUrl({
+    title: `${eventTitle} - 10. mars`,
+    details: eventDescription,
+    location: eventLocation,
+    dtstartUtc: DEFAULT_SECOND_DAY_DTSTART_UTC,
+    dtendUtc: DEFAULT_SECOND_DAY_DTEND_UTC,
   });
 
   return (
@@ -69,22 +79,9 @@ export const CalendarButton = ({
     >
       {/* Main Button */}
       <div>
-        <button
-          className="group relative inline-block cursor-pointer select-none focus:outline-none whitespace-nowrap"
-        >
-          {/* Bottom "shadow" chip */}
-          <span aria-hidden="true" className="absolute inset-0 bg-black" />
-          {/* Top actual button chip */}
-          <span
-            className={
-              'relative block border-3 border-black px-6 py-3 text-center text-2xl font-medium text-white transition-transform duration-150 ' +
-              'group-hover:translate-x-1 group-hover:translate-y-1 ' +
-              colorMap.get(color)
-            }
-          >
-            <span className="pointer-events-none">Legg til i kalender</span>
-          </span>
-        </button>
+        <LinkButton link={googleCalendarUrl} size="md" color={color}>
+          Legg til i kalender
+        </LinkButton>
       </div>
 
       {/* Dropdown Menu */}
@@ -96,7 +93,15 @@ export const CalendarButton = ({
             rel="noopener noreferrer"
             className="block w-full px-6 py-3  border-1 text-left text-xl font-medium text-black transition-colors hover:bg-gray-200"
           >
-            Google Calendar
+            Google Calendar 9. mars
+          </a>
+          <a
+            href={secondDayGoogleCalendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full px-6 py-3  border-1 text-left text-xl font-medium text-black transition-colors hover:bg-gray-200"
+          >
+            Google Calendar 10. mars
           </a>
           <a
             href={icsUrl}

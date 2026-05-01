@@ -1,15 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 import { standMap, type StandId } from "./StandData";
+import { CompanyLogo } from "../../PreviousDotdagenePage/ParticipatingCompanies/CompanyLogo";
+
+const logoModules = import.meta.glob(
+    "../../PreviousDotdagenePage/ParticipatingCompanies/Logos/*",
+    { eager: true, import: "default", query: "?url" },
+) as Record<string, string>;
+
+const getLogoSrc = (logo?: string) => {
+    if (!logo) {
+        return null;
+    }
+
+    const logoPath = Object.keys(logoModules).find((path) => path.endsWith(`/${logo}`));
+    return logoPath ? logoModules[logoPath] : null;
+};
 
 type HoverState = {
     id: StandId;
     label: string;
     company: string;
     logo?: string;
-    logoScale?: number;
+    logoScaleStand?: number;
+    logoScaleMobile?: number;
+    logoScaleDesktop?: number;
 };
 
-function StandMap() {
+type StandMapProps = {
+    title?: string;
+    description?: string;
+};
+
+function StandMap({
+    title = 'Stands 3. mars 2026',
+    description = 'Hover eller trykk på standene for å se hvem som står hvor.',
+}: StandMapProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [hovered, setHovered] = useState<HoverState | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -89,7 +114,9 @@ function StandMap() {
                             label: data.label,
                             company: data.company,
                             logo: data.logo,
-                            logoScale: data.logoScale,
+                            logoScaleStand: data.logoScaleStand,
+                            logoScaleMobile: data.logoScaleMobile,
+                            logoScaleDesktop: data.logoScaleDesktop,
                         });
                     };
 
@@ -120,12 +147,7 @@ function StandMap() {
         return () => cleanup?.();
     }, []);
 
-    const logoSrc = hovered?.logo
-        ? new URL(`../ParticipatingCompanies/Logos/${hovered.logo}`, import.meta.url).href
-        : null;
-    const logoScaleClamped = hovered?.logoScale
-        ? Math.min(2, Math.max(0.9, hovered.logoScale))
-        : 1;
+    const logoSrc = getLogoSrc(hovered?.logo);
 
     return (
         <div className="relative mb-20 max-w-4xl mx-auto">
@@ -133,10 +155,10 @@ function StandMap() {
 
             <div>
                 <h2 className="text-center text-4xl font-medium ">
-                    Stands 3. mars 2026
+                    {title}
                 </h2>
                 <p className="text-center text-m font-meduim p-4 text-slate-600">
-                    Hover eller trykk på standene for å se hvem som står hvor.
+                    {description}
                 </p>
             </div>
 
@@ -156,13 +178,13 @@ function StandMap() {
                     <div className="text-base font-semibold">Stand {hovered.label}</div>
                     <div className="text-slate-700">{hovered.company}</div>
                     {logoSrc ? (
-                        <div className="mt-3 pl-5 flex items-center justify-start">
-                            <img
+                        <div className="mt-3 flex items-center justify-start">
+                            <CompanyLogo
                                 src={logoSrc}
                                 alt={hovered.company}
-                                className="h-14 w-auto max-w-[240px] object-contain"
-                                style={{ transform: `scale(${logoScaleClamped})` }}
-                                loading="lazy"
+                                scale={hovered.logoScaleStand}
+                                frameClassName="h-12 max-w-[220px]"
+                                imageClassName="h-full w-full"
                             />
                         </div>
                     ) : (
@@ -185,12 +207,12 @@ function StandMap() {
                     <div className="text-slate-700">{hovered.company}</div>
                     {logoSrc ? (
                         <div className="mt-3 flex items-center justify-center">
-                            <img
+                            <CompanyLogo
                                 src={logoSrc}
                                 alt={hovered.company}
-                                className="h-14 w-auto max-w-[240px] object-contain"
-                                style={{ transform: `scale(${logoScaleClamped})` }}
-                                loading="lazy"
+                                scale={hovered.logoScaleStand}
+                                frameClassName="h-12 max-w-[220px]"
+                                imageClassName="h-full w-full"
                             />
                         </div>
                     ) : (

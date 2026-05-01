@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import companiesData from './Companies.json';
 import { CompBox, type Company } from './CompBox';
+import { CompanyLogo } from './CompanyLogo';
 
 export const CompLayout = () => {
     const [activeCompany, setActiveCompany] = useState<Company | null>(null);
@@ -41,30 +42,28 @@ export const CompLayout = () => {
             <h2 className="text-center text-4xl font-semibold text-gray-900">
                 Deltakende bedrifter i 2026
             </h2>
-            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                 {visibleCompanies.map((company) => {
                     return (
                         <button
                             key={company.name}
                             type="button"
-                            className="block h-full cursor-pointer text-left"
+                            aria-label={company.name}
+                            className="block w-full cursor-pointer text-left"
                             onClick={() => setActiveCompany(company)}
                         >
-                            <div className="relative flex h-full min-h-[220px] flex-col items-center justify-between gap-6 overflow-hidden border-3 border-black bg-white px-6 py-10 text-center shadow-[6px_6px_0px_#000] transition-transform duration-150 hover:-translate-y-1">
+                            <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden border-3 border-black bg-white px-6 py-6 text-center shadow-[6px_6px_0px_#000] transition-transform duration-150 hover:-translate-y-1 sm:px-8 sm:py-8">
                                 {company.logo && (
-                                    <div className="relative z-0 flex w-full items-center justify-center">
-                                        <img
+                                    <div className="relative z-0 flex h-full min-h-0 w-full items-center justify-center">
+                                        <CompanyLogo
                                             src={new URL(`./Logos/${company.logo}`, import.meta.url).href}
                                             alt={company.name}
-                                            className="h-20 w-auto object-contain"
-                                            style={{ transform: `scale(${company.logoScale ?? 1})` }}
-                                            loading="lazy"
+                                            scaleMobile={company.logoScaleMobile}
+                                            scaleDesktop={company.logoScaleDesktop}
+                                            frameClassName="h-full w-full"
                                         />
                                     </div>
                                 )}
-                                <p className="relative z-10 bg-white/80 px-2 text-lg font-semibold">
-                                    {company.name}
-                                </p>
                             </div>
                         </button>
                     );

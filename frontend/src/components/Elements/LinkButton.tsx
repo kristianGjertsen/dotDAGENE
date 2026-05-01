@@ -20,7 +20,7 @@ export const LinkButton = ({
   size = 'lg',
 }: ButtonProps) => {
   var textColorClass = "";
-  if (color === 'white' || color === 'yellow') {
+  if (color === 'white' || color === 'tertiary' || color === 'quaternary') {
     textColorClass = 'text-black'
   }
   else {
@@ -57,7 +57,7 @@ export const LinkButton = ({
       <span aria-hidden="true" className="absolute inset-0 bg-black" />
       <span
         className={
-          `relative block border-3 border-black ${sizeClasses} text-center font-medium ${textColorClass} transition-transform duration-150 ` +
+          `relative block border-2 border-black ${sizeClasses} text-center font-medium ${textColorClass} transition-transform duration-150 ` +
           'group-hover:translate-x-1 group-hover:translate-y-1' +
           colorMap.get(color)
         }

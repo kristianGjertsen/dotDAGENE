@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../Elements/Button';
+import { Button } from '../../components/Elements/Button';
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -133,7 +133,7 @@ export const ContactForm = () => {
             />
           </div>
 
-          {/* Melding: textarea, about 4 lines */}
+          {/* Melding: textarea, about 6 lines */}
           <div className="space-y-3">
             <label
               htmlFor="melding"
@@ -146,20 +146,20 @@ export const ContactForm = () => {
               name="melding"
               value={formData.melding}
               onChange={handleInputChange}
-              rows={4}
+              rows={6}
               placeholder="Fortell oss om deres interesse for dotDAGENE, hvilke studenter dere ønsker å møte, eller andre spørsmål..."
-              className="resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg"
+              className="min-h-40 resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg"
             />
           </div>
 
           <div className="flex flex-col items-stretch justify-center">
-            <Button color="green" type="submit" disabled={isSubmitting}>
-              Send Melding
+            <Button color="primary" type="submit" disabled={isSubmitting}>
+              Send melding
             </Button>
           </div>
 
           {submitStatus === 'success' && (
-            <div className="bg-dotpurple border-3 border-black p-6 text-white">
+            <div className="bg-secondary border-3 border-black p-6 text-white">
               <p className="text-center text-lg font-medium">
                 Takk! Henvendelsen er sendt.
               </p>

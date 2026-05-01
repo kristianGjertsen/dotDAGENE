@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 const contactLinkClasses =
-  'underline decoration-2 decoration-black underline-offset-4 hover:text-dotgreen hover:decoration-dotgreen transition-colors duration-150';
+  'underline decoration-2 decoration-black underline-offset-4 hover:text-primary hover:decoration-primary transition-colors duration-150';
 
 type FaqItem = {
   question: string;
@@ -38,7 +38,7 @@ export const faqsForCompanies: FaqItem[] = [
     answer: (
       <>
         Bedrifter må melde interesse via{' '}
-        <a href="/#contact" className={contactLinkClasses}>
+        <a href="/kontakt" className={contactLinkClasses}>
           interesseskjemaet
         </a>{' '}
         eller e-post. Vi følger opp med praktisk informasjon, standplassering
@@ -57,7 +57,7 @@ export const faqsForCompanies: FaqItem[] = [
       <>
         Pris og pakker tilpasses størrelsen på bedriften og hvordan dere ønsker
         å delta. Ta kontakt med oss via{' '}
-        <a href="/#contact" className={contactLinkClasses}>
+        <a href="/kontakt" className={contactLinkClasses}>
           interesseskjemaet
         </a>
         , så finner vi en løsning som passer dere.

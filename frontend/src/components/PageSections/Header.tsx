@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo_No_Text.svg';
 import { LinkButton } from '../Elements/LinkButton';
 
+type NavItem = {
+  label: string;
+  href: string;
+  color: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'white';
+  sizeDesktop?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  sizeMobile?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+};
+
+const navItems: NavItem[] = [
+  { label: 'Hjem', href: '/', color: 'white' },
+  { label: 'Om oss', href: '/om', color: 'white' },
+  { label: 'FAQ', href: '/faq', color: 'white', },
+  { label: 'Kontakt oss', href: '/kontakt', color: 'primary' },
+];
+
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,9 +31,12 @@ export const Header = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b-2 border-gray-500 relative">
+    <header className="bg-header sticky top-0 z-40 border-b-2 border-black relative">
       <section className="flex flex-row items-center justify-between px-4 py-4 sm:px-6">
-        <Link to="/" onClick={scrollToTop} className="min-w-0">
+        <Link
+          to="/"
+          onClick={scrollToTop}
+          className="min-w-0 px-3 py-2">
           <img
             src={Logo}
             alt="Logo"
@@ -26,34 +44,32 @@ export const Header = () => {
           />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 lg:flex">
-          <LinkButton link="/" color="green" size="sm">
-            Hjem
-          </LinkButton>
-          <LinkButton link="/om" color="purple" size="sm">
-            Om oss
-          </LinkButton>
-          <LinkButton link="/faq" color="yellow" size="sm">
-            FAQ
-          </LinkButton>
-          <LinkButton link="/#contact" color="green" size="sm">
-            Kontakt Oss
-          </LinkButton>
+          {navItems.map((item) => (
+            <LinkButton
+              key={`desktop-${item.href}`}
+              link={item.href}
+              color={item.color}
+              size={'sm'}
+            >
+              {item.label}
+            </LinkButton>
+          ))}
         </nav>
         <button
-          className="lg:hidden flex items-center justify-center rounded-md border-2 border-gray-500 p-2"
+          className="lg:hidden flex items-center justify-center rounded-md border-2 border-black p-2"
           aria-label={isMenuOpen ? 'Lukk meny' : 'Åpne meny'}
           onClick={toggleMenu}
         >
           <span className="relative flex h-4 w-6 items-center justify-center">
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
+              className={`absolute h-0.5 w-full bg-black transition-all duration-200 ease-out ${isMenuOpen ? 'rotate-45' : '-translate-y-1.5'
                 }`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+              className={`absolute h-0.5 w-full bg-black transition-all duration-150 ease-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
             />
             <span
-              className={`absolute h-0.5 w-full bg-gray-900 transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
+              className={`absolute h-0.5 w-full bg-black transition-all duration-200 ease-out ${isMenuOpen ? '-rotate-45' : 'translate-y-1.5'
                 }`}
             />
           </span>
@@ -68,46 +84,22 @@ export const Header = () => {
         >
           <div className="w-full z-90">
           </div>
-          <div className="w-full">
-            <LinkButton
-              link="/"
-              color="yellow"
-              onClick={scrollToTop}
-              className="w-full"
-            >
-              Hjem
-            </LinkButton>
-          </div>
-          <div className="w-full">
-            <LinkButton
-              link="/om"
-              color="green"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              Om oss
-            </LinkButton>
-          </div>
-          <div className="w-full">
-            <LinkButton
-              link="/faq"
-              color="purple"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              FAQ
-            </LinkButton>
-          </div>
-          <div className="w-full">
-            <LinkButton
-              link="/#contact"
-              color="green"
-              onClick={closeMenu}
-              className="w-full"
-            >
-              Kontakt Oss
-            </LinkButton>
-          </div>
+          {navItems.map((item) => {
+            const onClick = item.href === '/' ? scrollToTop : closeMenu;
+            return (
+              <div className="w-full" key={`mobile-${item.href}`}>
+                <LinkButton
+                  link={item.href}
+                  color={item.color}
+                  size={item.sizeMobile ?? 'lg'}
+                  onClick={onClick}
+                  className="w-full"
+                >
+                  {item.label}
+                </LinkButton>
+              </div>
+            );
+          })}
         </nav>
       )}
       {isMenuOpen && (

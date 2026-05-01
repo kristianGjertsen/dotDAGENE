@@ -1,4 +1,4 @@
-import companiesData from "../ParticipatingCompanies/Companies.json";
+import companiesData from "../../PreviousDotdagenePage/ParticipatingCompanies/Companies.json";
 
 export type StandId =
   | "stand-1"
@@ -18,7 +18,9 @@ export type StandData = {
   label: string;
   company: string;
   logo?: string;
-  logoScale?: number;
+  logoScaleStand?: number;
+  logoScaleMobile?: number;
+  logoScaleDesktop?: number;
 };
 
 const companies = Array.isArray(companiesData.companies)
@@ -54,7 +56,9 @@ export const standMap: Record<StandId, StandData> = Object.fromEntries(
           label: stand.label,
           company: stand.company,
           logo: companyData?.logo,
-          logoScale: companyData?.logoScale,
+          logoScaleStand: companyData?.logoScaleStand,
+          logoScaleMobile: companyData?.logoScaleMobile,
+          logoScaleDesktop: companyData?.logoScaleDesktop,
         },
       ];
     },

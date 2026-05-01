@@ -1,10 +1,13 @@
-import { LinkButton } from "../../Elements/LinkButton";
+import { LinkButton } from "../../../components/Elements/LinkButton";
+import { CompanyLogo } from "./CompanyLogo";
 
 export type Company = {
     name: string;
     logo?: string;
     website?: string;
-    logoScale?: number;
+    logoScaleStand?: number;
+    logoScaleMobile?: number;
+    logoScaleDesktop?: number;
     description?: string;
     dontShow?: boolean;
 };
@@ -18,7 +21,6 @@ export const CompBox = ({ company, onClose }: CompBoxProps) => {
     const logoSrc = company.logo
         ? new URL(`./Logos/${company.logo}`, import.meta.url).href
         : undefined;
-    const scale = company.logoScale ?? 1;
 
     return (
         <div className="relative flex w-full flex-col items-center gap-6 overflow-hidden border-3 border-black bg-white px-8 py-12 text-center shadow-[10px_10px_0px_#000]">
@@ -36,12 +38,12 @@ export const CompBox = ({ company, onClose }: CompBoxProps) => {
             )}
             {logoSrc && (
                 <div className="relative z-0 flex w-full items-center justify-center">
-                    <img
+                    <CompanyLogo
                         src={logoSrc}
                         alt={company.name}
-                        className="h-24 w-auto object-contain"
-                        style={{ transform: `scale(${scale})` }}
-                        loading="lazy"
+                        scaleMobile={company.logoScaleMobile}
+                        scaleDesktop={company.logoScaleDesktop}
+                        frameClassName="h-20 max-w-sm sm:h-24"
                     />
                 </div>
             )}
@@ -55,7 +57,7 @@ export const CompBox = ({ company, onClose }: CompBoxProps) => {
             )}
             {company.website && (
 
-                <LinkButton link={company.website ?? ''} color="green" size="sm">
+                <LinkButton link={company.website ?? ''} color="primary" size="sm">
                     Besøk nettside
                 </LinkButton>
 
