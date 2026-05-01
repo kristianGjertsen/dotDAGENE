@@ -2,7 +2,7 @@ import { AppLayout } from '../../components/Layout/AppLayout';
 import { Footer } from '../../components/PageSections/Footer';
 import { Header } from '../../components/PageSections/Header';
 import { CompLayout } from './ParticipatingCompanies/CompLayout';
-import StandMap from '../HomePage/StandMap/StandMap';
+import StandMap from './StandMap/StandMap';
 
 export const PreviousDotdagenePage = () => {
   return (

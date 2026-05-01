@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   CalendarIcon,
   EnvelopeIcon,
@@ -6,13 +7,24 @@ import {
 import Logo from '../../assets/litenDfarget.svg';
 import Instagram from '../../assets/instagram.svg';
 import Linkedin from '../../assets/linkedin.svg';
-import backtemp from '../../assets/footerImage.png';
+import backtemp from '../../assets/backgroundInv.svg';
+
+const getRandomBackImageRotation = () => {
+  return Math.random() < 0.5 ? 'rotate-180' : '';
+};
 
 export const Footer = () => {
+  const backImageRotation = useMemo(() => getRandomBackImageRotation(), []);
+
   return (
-    <footer className="border-t-3 border-black  bg-cover bg-center"
-      style={{ backgroundImage: `url(${backtemp})` }}>
-      <section className="mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 py-12 sm:px-12 lg:px-16">
+    <footer className="relative overflow-hidden border-t-3 border-black bg-footer">
+      <div
+        className={`absolute inset-0 bg-cover bg-center opacity-[0.28] ${backImageRotation}`}
+        style={{ backgroundImage: `url(${backtemp})` }}
+        aria-hidden="true"
+      />
+
+      <section className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 py-12 sm:px-12 lg:px-16">
         <div className="flex flex-col gap-8 border-b-1 border-gray-100/80 pb-8 md:flex-row md:items-start md:justify-between">
           <section className="max-w-md">
             <img src={Logo} alt="Logo" className="w-16 md:mb-4" />
@@ -27,7 +39,10 @@ export const Footer = () => {
               <a className="w-10" href="https://www.instagram.com/dotdagene/">
                 <img src={Instagram} alt="dotDAGENE på Instagram" />
               </a>
-              <a className="w-10" href="https://www.linkedin.com/company/dotdagene/about/">
+              <a
+                className="w-10"
+                href="https://www.linkedin.com/company/dotdagene/about/"
+              >
                 <img src={Linkedin} alt="dotDAGENE på LinkedIn" />
               </a>
             </section>
@@ -59,7 +74,9 @@ export const Footer = () => {
           <div className="flex items-start gap-4 md:justify-self-center">
             <MapPinIcon className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[260px]">
-              <p className="text-md font-semibold tracking-[0.2em]">Lokasjon</p>
+              <p className="text-md font-semibold tracking-[0.2em]">
+                Lokasjon
+              </p>
               <a
                 href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
                 target="_blank"

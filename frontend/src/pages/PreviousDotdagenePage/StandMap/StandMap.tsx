@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { standMap, type StandId } from "./StandData";
+import { CompanyLogo } from "../../PreviousDotdagenePage/ParticipatingCompanies/CompanyLogo";
 
 const logoModules = import.meta.glob(
     "../../PreviousDotdagenePage/ParticipatingCompanies/Logos/*",
@@ -20,7 +21,9 @@ type HoverState = {
     label: string;
     company: string;
     logo?: string;
-    logoScale?: number;
+    logoScaleStand?: number;
+    logoScaleMobile?: number;
+    logoScaleDesktop?: number;
 };
 
 type StandMapProps = {
@@ -111,7 +114,9 @@ function StandMap({
                             label: data.label,
                             company: data.company,
                             logo: data.logo,
-                            logoScale: data.logoScale,
+                            logoScaleStand: data.logoScaleStand,
+                            logoScaleMobile: data.logoScaleMobile,
+                            logoScaleDesktop: data.logoScaleDesktop,
                         });
                     };
 
@@ -143,9 +148,6 @@ function StandMap({
     }, []);
 
     const logoSrc = getLogoSrc(hovered?.logo);
-    const logoScaleClamped = hovered?.logoScale
-        ? Math.min(2, Math.max(0.9, hovered.logoScale))
-        : 1;
 
     return (
         <div className="relative mb-20 max-w-4xl mx-auto">
@@ -176,13 +178,13 @@ function StandMap({
                     <div className="text-base font-semibold">Stand {hovered.label}</div>
                     <div className="text-slate-700">{hovered.company}</div>
                     {logoSrc ? (
-                        <div className="mt-3 pl-5 flex items-center justify-start">
-                            <img
+                        <div className="mt-3 flex items-center justify-start">
+                            <CompanyLogo
                                 src={logoSrc}
                                 alt={hovered.company}
-                                className="h-14 w-auto max-w-[240px] object-contain"
-                                style={{ transform: `scale(${logoScaleClamped})` }}
-                                loading="lazy"
+                                scale={hovered.logoScaleStand}
+                                frameClassName="h-12 max-w-[220px]"
+                                imageClassName="h-full w-full"
                             />
                         </div>
                     ) : (
@@ -205,12 +207,12 @@ function StandMap({
                     <div className="text-slate-700">{hovered.company}</div>
                     {logoSrc ? (
                         <div className="mt-3 flex items-center justify-center">
-                            <img
+                            <CompanyLogo
                                 src={logoSrc}
                                 alt={hovered.company}
-                                className="h-14 w-auto max-w-[240px] object-contain"
-                                style={{ transform: `scale(${logoScaleClamped})` }}
-                                loading="lazy"
+                                scale={hovered.logoScaleStand}
+                                frameClassName="h-12 max-w-[220px]"
+                                imageClassName="h-full w-full"
                             />
                         </div>
                     ) : (

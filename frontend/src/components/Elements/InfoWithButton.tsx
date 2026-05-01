@@ -1,9 +1,13 @@
-import type { ElementType, ReactNode } from 'react';
+import { useMemo, type ElementType, type ReactNode } from 'react';
 import { colorMap, type color } from '../../lib/colors';
-import backImgWhite from '../../assets/backgroundWhite.png';
-import backImgGreen from '../../assets/backgroundGreen.png';
+import backgroundImage from '../../assets/backgroundInv.svg';
 
 type BackImg = boolean | 'green' | 'white';
+
+const backImgOpacity = {
+  green: 0.07,
+  white: 0.03,
+} as const;
 
 interface InfoWithButtonProps {
   titelChildren: string;
@@ -25,32 +29,51 @@ export const InfoWithButton = ({
   button,
   className = '',
 }: InfoWithButtonProps) => {
-  const resolvedTextColor = textColor ?? (color === 'tertiary' || color === 'quaternary' || color === 'white' ? 'black' : 'white');
-  const resolvedBackImg =
+  const isBackImgUpsideDown = useMemo(() => Math.random() < 0.5, []);
+
+  const resolvedTextColor =
+    textColor ??
+    (color === 'tertiary' || color === 'quaternary' || color === 'white'
+      ? 'black'
+      : 'white');
+
+  const resolvedBackImgVariant =
     backImg === true
       ? color === 'white'
-        ? backImgWhite
-        : backImgGreen
-      : backImg === 'white'
-        ? backImgWhite
-        : backImg === 'green'
-          ? backImgGreen
-          : undefined;
+        ? 'white'
+        : 'green'
+      : backImg || undefined;
+
+  const resolvedBackImgOpacity = resolvedBackImgVariant
+    ? backImgOpacity[resolvedBackImgVariant]
+    : undefined;
 
   return (
     <section
-      className={`${colorMap.get(color)} relative flex h-full flex-1 basis-0 min-w-0 flex-col items-center justify-center gap-4 border-2 border-black bg-cover bg-center p-6 pb-12 text-center text-${resolvedTextColor} ${className}`}
-      style={
-        resolvedBackImg
-          ? { backgroundImage: `url(${resolvedBackImg})` }
-          : undefined
-      }
+      className={`${colorMap.get(color)} relative flex h-full flex-1 basis-0 min-w-0 flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center text-${resolvedTextColor} ${className}`}
     >
-      <section>{Icon && <Icon className="h-16 w-16" />}</section>
-      <p className="text-2xl">{titelChildren}</p>
-      <p>{children}</p>
+      {resolvedBackImgOpacity && (
+        <div
+          className={`absolute inset-0 bg-cover bg-center ${
+            isBackImgUpsideDown ? 'rotate-180' : ''
+          }`}
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            opacity: resolvedBackImgOpacity,
+          }}
+          aria-hidden="true"
+        />
+      )}
+
+      <section className="relative z-10">
+        {Icon && <Icon className="h-16 w-16" />}
+      </section>
+
+      <p className="relative z-10 text-2xl">{titelChildren}</p>
+      <p className="relative z-10">{children}</p>
+
       {button && (
-        <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2">
+        <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 translate-y-1/2">
           {button}
         </div>
       )}
