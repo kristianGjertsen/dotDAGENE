@@ -15,14 +15,14 @@ export const AboutUsPage = () => {
           <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
 
             <div className="space-y-6">
-              
+
               <p className="text-sm font-semibold tracking-[0.4em] text-gray-600">
                 OM OSS
               </p>
               <h1 className="text-4xl font-semibold md:text-5xl">
                 Karrieredager skreddersydd for IT-studenter
               </h1>
-              
+
               <p className="text-left">
                 dotDAGENE er karrieredager skreddersydd for studenter innen IT, teknologi og digitalisering. Vårt mål er enkelt: å skape reelle møteplasser der studenter og bedrifter kan ha gode, faglige samtaler som faktisk leder til muligheter.
               </p>
@@ -46,8 +46,9 @@ export const AboutUsPage = () => {
 
             <div className="border-3 border-black bg-white p-6 space-y-4">
               <div>
-                <h2 className="text-3xl font-semibold">Menneskene bak dotDAGENE</h2>
-
+                <h2 className="text-3xl pb-4 font-semibold">Menneskene bak dotDAGENE</h2>
+                <p>Vi representerer bachelor- og masterstudenter i informatikk ved NTNU.
+                  Sammen legger vi til rette for samarbeid, læring og faglige muligheter.</p>
               </div>
               <div className="overflow-hidden border-3 border-black bg-secondary/10">
                 <img
