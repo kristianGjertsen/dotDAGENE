@@ -13,60 +13,48 @@ export const AboutUsPage = () => {
       <Header />
       <AppLayout>
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-8 lg:px-10">
-          <div className="mx-auto w-full max-w-5xl xl:max-w-none">
-            <h1 className="mb-8 text-center text-4xl md:text-5xl">
-              Om dotDAGENE
-            </h1>
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
 
-            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-[1.15fr_1fr] xl:gap-12 xl:items-start">
-              <div className="contents xl:block xl:space-y-6">
-                <Info
-                  titelChildren=""
-                  color="white"
-                  backImg="white"
-                  className="!h-auto !flex-none !basis-auto xl:mr-28"
-                >
-                  <p className="text-left">
-                    dotDAGENE er karrieredager skreddersydd for studenter innen IT,
-                    teknologi og digitalisering. Målet vårt er å skape reelle møteplasser
-                    der studenter og bedrifter kan ha gode faglige samtaler som leder
-                    til muligheter. Vi skiller oss fra tradisjonelle karrieredager ved å
-                    prioritere kvalitet fremfor kvantitet, med et mer spisset utvalg av relevante bedrifter.
-                  </p>
-                </Info>
+            <div className="space-y-6">
+              
+              <p className="text-sm font-semibold tracking-[0.4em] text-gray-600">
+                OM OSS
+              </p>
+              <h1 className="text-4xl font-semibold md:text-5xl">
+                Karrieredag skredder for IT-studenter
+              </h1>
+              
+              <p className="text-left">
+                dotDAGENE er karrieredager skreddersydd for studenter innen IT, teknologi og digitalisering. Vårt mål er enkelt: å skape reelle møteplasser der studenter og bedrifter kan ha gode, faglige samtaler som faktisk leder til muligheter.
+              </p>
+              <p className='text-left'>
+                Vi skiller oss fra tradisjonelle karrieredager ved å prioritere kvalitet fremfor kvantitet. Der andre arrangementer ofte fyller lokalet med et stort antall stands, mange med begrenset relevans for IT-studenter, kuraterer vi et mer spisset utvalg av bedrifter. Resultatet er mindre støy og mer tid til innsikt, relasjonsbygging og konkrete karrieremuligheter.
+              </p>
+              <p className='text-left'>
+                Hos oss møter du relevante arbeidsgivere som aktivt søker teknologikompetanse, og som er til stede for å snakke med deg, ikke bare samle CV-er. Dette gir bedre samtaler, mer treffsikre matcher og en mer verdifull opplevelse for alle parter.
+                dotDAGENE er for deg som ønsker mer enn bare en rask introduksjon. Her legger vi til rette for ekte dialog mellom studenter og bransjen.
+              </p>
 
-                <Info
-                  titelChildren=""
-                  color="white"
-                  backImg="white"
-                  className="!h-auto !flex-none !basis-auto xl:ml-28"
-                >
-                  <p className="text-left">
-                    Resultatet er mindre støy og mer tid til innsikt,
-                    relasjoner og konkrete karrieremuligheter.
-                    Hos oss møter du arbeidsgivere som aktivt søker
-                    teknologikompetanse og ønsker gode samtaler, ikke bare CV-er.
-                    dotDAGENE er for deg som vil mer enn en rask introduksjon,
-                    med ekte dialog mellom studenter og bransjen.
-                  </p>
-                </Info>
+              <p className='text-left'>
+                dotDAGENE er for deg som ønsker mer enn bare en rask introduksjon. Her legger vi til rette for ekte dialog mellom studenter og bransjen.
+              </p>
+
+
+              <div className="relative mt-20">
+                <div className="absolute left-4 top-4 h-full w-full" aria-hidden />
               </div>
+            </div>
 
-              <div className="contents xl:block xl:ml-6">
-                <Info
-                  titelChildren="Menneskene bak dotDAGENE"
-                  color="primary"
-                  backImg="green"
-                  className="!h-auto !flex-none !basis-auto"
-                >
-                  Vi representerer bachelor- og masterstudenter i informatikk ved NTNU.
-                  Sammen legger vi til rette for samarbeid, læring og faglige muligheter.
-                </Info>
+            <div className="border-3 border-black bg-white p-6 space-y-4">
+              <div>
+                <h2 className="text-3xl font-semibold">Menneskene bak dotDAGENE</h2>
 
+              </div>
+              <div className="overflow-hidden border-3 border-black bg-secondary/10">
                 <img
                   src={GroupImg}
                   alt="Gruppebilde"
-                  className="h-auto w-full border-2 border-black xl:mt-5"
+                  className="w-full h-[28rem] md:h-[32rem] object-cover object-[center_top]"
                 />
               </div>
             </div>
