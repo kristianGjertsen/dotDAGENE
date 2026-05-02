@@ -5,7 +5,6 @@ import GroupImg from '../../assets/groupImg.jpg';
 //import TeamSection from './TeamSection';
 import { AppLayout } from '../../components/Layout/AppLayout';
 import { InfoWithButton } from '../../components/Elements/InfoWithButton';
-import { Info } from '../../components/Elements/Info';
 
 export const AboutUsPage = () => {
   return (
