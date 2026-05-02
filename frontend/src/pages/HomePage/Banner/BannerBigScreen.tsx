@@ -24,7 +24,7 @@ export const BannerBig = () => {
         preserveAspectRatio="xMidYMid slice"
       >
         <g>
-          {/* linje 1: primary */}
+          {/* linje 1 */}
           <MaskedStroke
             id="m-svart"
             d="M0,30 L150,30 A30,30 0 0,1 180,60 A30,30 0 0,0 210,90 L330,90"
@@ -34,7 +34,7 @@ export const BannerBig = () => {
             delay={LINE_ANIMATION_DELAY_SEC}
           />
 
-          {/* linje 2: secondary */}
+          {/* linje 2 */}
           <MaskedStroke
             id="m-lilla"
             d="M555,90 L630,90 A20,20 0 0,1 630,130 L590,130"
@@ -44,7 +44,7 @@ export const BannerBig = () => {
             delay={LINE_ANIMATION_DELAY_SEC + t2}
           />
 
-          {/* linje 3: tertiary */}
+          {/* linje 3*/}
           <MaskedStroke
             id="m-gronn"
             d="M448,130 L400,130 A20,20 0 0,0 400,170 L510,170"
@@ -54,7 +54,7 @@ export const BannerBig = () => {
             delay={LINE_ANIMATION_DELAY_SEC + t3}
           />
 
-          {/* linje 4: tertiary (tidligere quaternary) */}
+          {/* linje 4:*/}
           <MaskedStroke
             id="m-gul"
             d="M760,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
@@ -65,7 +65,7 @@ export const BannerBig = () => {
           />
         </g>
 
-        {/* Tekst */}
+        {/* Tekst, hardkodet på kordinater*/}
         <g>
           <text x="290" y="65" fontSize="32" fontWeight="bold" fill="black">
             Nyeste

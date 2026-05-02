@@ -8,6 +8,13 @@ interface TimeRemaining {
   seconds: number;
 }
 
+const countdownItems: { key: keyof TimeRemaining; label: string }[] = [
+  { key: 'days', label: 'Dager' },
+  { key: 'hours', label: 'Timer' },
+  { key: 'minutes', label: 'Minutter' },
+  { key: 'seconds', label: 'Sekunder' },
+];
+
 const targetDate = new Date('2027-02-09T10:00:00');
 
 const calculateTimeRemaining = (): TimeRemaining => {
@@ -60,74 +67,29 @@ export const Countdown = () => {
   return (
     <section className="flex flex-col items-center gap-6 px-4">
       <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30">
-          <div className="number-container h-12 sm:h-16">
-            <div
-              key={`prev-days-${animations.days.prev}`}
-              className="number-slide number-slide-exit text-3xl font-bold sm:text-4xl"
-            >
-              {animations.days.prev}
+        {/*  */}
+        {countdownItems.map(({ key, label }) => (
+          <div
+            key={key}
+            className="bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-2 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30"
+          >
+            <div className="number-container h-12 sm:h-16">
+              <div
+                key={`prev-${key}-${animations[key].prev}`}
+                className="number-slide number-slide-exit text-3xl font-bold sm:text-4xl"
+              >
+                {animations[key].prev}
+              </div>
+              <div
+                key={`curr-${key}-${animations[key].value}`}
+                className="number-slide text-3xl font-bold sm:text-4xl"
+              >
+                {animations[key].value}
+              </div>
             </div>
-            <div
-              key={`curr-days-${animations.days.value}`}
-              className="number-slide text-3xl font-bold sm:text-4xl"
-            >
-              {animations.days.value}
-            </div>
+            <p>{label}</p>
           </div>
-          <p>DAGER</p>
-        </div>
-        <div className="bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30">
-          <div className="number-container h-12 sm:h-16">
-            <div
-              key={`prev-hours-${animations.hours.prev}`}
-              className="number-slide number-slide-exit text-3xl font-bold sm:text-4xl"
-            >
-              {animations.hours.prev}
-            </div>
-            <div
-              key={`curr-hours-${animations.hours.value}`}
-              className="number-slide text-3xl font-bold sm:text-4xl"
-            >
-              {animations.hours.value}
-            </div>
-          </div>
-          <p>TIMER</p>
-        </div>
-        <div className="bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30">
-          <div className="number-container h-12 sm:h-16">
-            <div
-              key={`prev-minutes-${animations.minutes.prev}`}
-              className="number-slide number-slide-exit text-3xl font-bold sm:text-4xl"
-            >
-              {animations.minutes.prev}
-            </div>
-            <div
-              key={`curr-minutes-${animations.minutes.value}`}
-              className="number-slide text-3xl font-bold sm:text-4xl"
-            >
-              {animations.minutes.value}
-            </div>
-          </div>
-          <p>MINUTTER</p>
-        </div>
-        <div className="bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-3 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30">
-          <div className="number-container h-12 sm:h-16">
-            <div
-              key={`prev-seconds-${animations.seconds.prev}`}
-              className="number-slide number-slide-exit text-3xl font-bold sm:text-4xl"
-            >
-              {animations.seconds.prev}
-            </div>
-            <div
-              key={`curr-seconds-${animations.seconds.value}`}
-              className="number-slide text-3xl font-bold sm:text-4xl"
-            >
-              {animations.seconds.value}
-            </div>
-          </div>
-          <p>SEKUNDER</p>
-        </div>
+        ))}
       </div>
       <div>
         9 og 10. februar 2027 ·&nbsp;
