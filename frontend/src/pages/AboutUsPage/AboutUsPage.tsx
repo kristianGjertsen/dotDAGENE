@@ -13,52 +13,60 @@ export const AboutUsPage = () => {
       <Header />
       <AppLayout>
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
-            <div className="space-y-6">
-              <p className="text-sm font-semibold tracking-[0.4em] text-gray-600">
-                OM OSS
-              </p>
-              <h1 className="text-4xl font-semibold md:text-5xl">
-                Vi gir NTNU en helt ny karrieredag
-              </h1>
-              <p className="text-lg text-gray-700 max-w-2xl">
-                dotDAGENE skapes av studenter for studenter og bedrifter. Vi bygger en møteplass
-                der teknologi, kreativitet og ekte relasjoner står i sentrum.
-              </p>
+          <div className="mx-auto w-full max-w-5xl xl:max-w-none">
+            <h1 className="mb-8 text-center text-4xl md:text-5xl">
+              Om dotDAGENE
+            </h1>
 
-              <div className="relative mt-20">
-                <div className="absolute left-4 top-4 h-full w-full" aria-hidden />
+            <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-[1.15fr_1fr] xl:gap-12 xl:items-start">
+              <div className="contents xl:block xl:space-y-6">
+                <Info
+                  titelChildren=""
+                  color="white"
+                  backImg="white"
+                  className="!h-auto !flex-none !basis-auto xl:mr-28"
+                >
+                  <p className="text-left">
+                    dotDAGENE er karrieredager skreddersydd for studenter innen IT,
+                    teknologi og digitalisering. Målet vårt er å skape reelle møteplasser
+                    der studenter og bedrifter kan ha gode faglige samtaler som leder
+                    til muligheter. Vi skiller oss fra tradisjonelle karrieredager ved å
+                    prioritere kvalitet fremfor kvantitet, med et mer spisset utvalg av relevante bedrifter.
+                  </p>
+                </Info>
 
                 <Info
-                  titelChildren="Bachelor- og masterstudenter på informatikk"
+                  titelChildren=""
+                  color="white"
+                  backImg="white"
+                  className="!h-auto !flex-none !basis-auto xl:ml-28"
+                >
+                  <p className="text-left">
+                    Resultatet er mindre støy og mer tid til innsikt,
+                    relasjoner og konkrete karrieremuligheter.
+                    Hos oss møter du arbeidsgivere som aktivt søker
+                    teknologikompetanse og ønsker gode samtaler, ikke bare CV-er.
+                    dotDAGENE er for deg som vil mer enn en rask introduksjon,
+                    med ekte dialog mellom studenter og bransjen.
+                  </p>
+                </Info>
+              </div>
+
+              <div className="contents xl:block xl:ml-6">
+                <Info
+                  titelChildren="Menneskene bak dotDAGENE"
                   color="primary"
                   backImg="green"
+                  className="!h-auto !flex-none !basis-auto"
                 >
-
                   Vi representerer bachelor- og masterstudenter i informatikk ved NTNU.
-                  Sammen legger vi til rette for samarbeid, læring og faglige muligheter.               
-                 </Info>
+                  Sammen legger vi til rette for samarbeid, læring og faglige muligheter.
+                </Info>
 
-
-              </div>
-            </div>
-
-            <div className="border-3 border-black bg-white p-6 space-y-4">
-              <div>
-                <p className="text-sm font-semibold tracking-[0.3em] text-gray-600">
-                  TEAMET
-                </p>
-                <h2 className="text-3xl font-semibold">Menneskene bak dotDAGENE</h2>
-                <p className="text-gray-700">
-                  Et lite, dedikert team som kombinerer erfaring fra studentfrivillighet.
-                  Vi planlegger, designer og gjennomfører karrieredagen sammen.
-                </p>
-              </div>
-              <div className="overflow-hidden border-3 border-black bg-secondary/10">
                 <img
                   src={GroupImg}
                   alt="Gruppebilde"
-                  className="w-full h-[28rem] md:h-[32rem] object-cover object-[center_top]"
+                  className="h-auto w-full border-2 border-black xl:mt-5"
                 />
               </div>
             </div>

@@ -55,7 +55,7 @@ export const HomePage = () => {
         <Countdown />
         <section className="px-6 py-20 sm:px-12 lg:px-20">
           <InfoWithButton
-            titelChildren="Vi gjenntar suksessen fra i fjor"
+            titelChildren="Vi gjentar suksessen fra i fjor"
             color="white"
             backImg="white"
             button={(
@@ -75,12 +75,12 @@ export const HomePage = () => {
           <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
             <div className="flex w-full sm:w-1/2">
               <InfoWithButton
-                titelChildren="500+ STUDENTER"
+                titelChildren="Flere hundre studenter"
                 color="white"
                 backImg="white"
                 button={null}
                 icon={UserGroupIcon}
-              >              Velkommen til årets møteplass for morgendagens teknologer! Karrieredagene samler over 500 studenter fra informatikk og relaterte studieretninger.
+              >              Velkommen til neste års møteplass for morgendagens teknologer! Karrieredagene samler flere hundre studenter fra informatikk og relaterte studieretninger.
 
               </InfoWithButton>
             </div>
