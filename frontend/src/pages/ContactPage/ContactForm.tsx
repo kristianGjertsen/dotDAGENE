@@ -60,7 +60,7 @@ export const ContactForm = () => {
           <div className="space-y-3">
             <label
               htmlFor="bedriftsnavn"
-              className="text-lg font-bold text-gray-800"
+              className="text-xl text-white"
             >
               Bedriftsnavn <span className="text-red-500">*</span>
             </label>
@@ -72,7 +72,7 @@ export const ContactForm = () => {
               onChange={handleInputChange}
               required
               placeholder="Navn på bedriften"
-              className="w-full border-3 border-black bg-white px-3 py-3 text-lg"
+              className="w-full border-3 border-black bg-white px-3 py-3 text-lg text-black placeholder:text-gray-500"
             />
           </div>
 
@@ -81,7 +81,7 @@ export const ContactForm = () => {
             <div className="space-y-3">
               <label
                 htmlFor="kontaktperson"
-                className="text-lg font-bold text-gray-800"
+                className="text-xl text-white"
               >
                 Kontaktperson <span className="text-red-500">*</span>
               </label>
@@ -93,13 +93,13 @@ export const ContactForm = () => {
                 onChange={handleInputChange}
                 required
                 placeholder="Ditt navn"
-                className="w-full border-3 border-black bg-white px-3 py-3 text-lg"
+                className="w-full border-3 border-black bg-white px-3 py-3 text-lg text-black placeholder:text-gray-500"
               />
             </div>
             <div className="space-y-3">
               <label
                 htmlFor="stilling"
-                className="text-lg font-bold text-gray-800"
+                className="text-xl text-white"
               >
                 Stilling <span className="text-red-500">*</span>
               </label>
@@ -111,14 +111,14 @@ export const ContactForm = () => {
                 onChange={handleInputChange}
                 required
                 placeholder="Din stilling"
-                className="w-full border-3 border-black bg-white px-3 py-3 text-lg"
+                className="w-full border-3 border-black bg-white px-3 py-3 text-lg text-black placeholder:text-gray-500"
               />
             </div>
           </div>
 
           {/* E-post: full line */}
           <div className="space-y-3">
-            <label htmlFor="epost" className="text-lg font-bold text-gray-800">
+            <label htmlFor="epost" className="text-xl text-white">
               E-post <span className="text-red-500">*</span>
             </label>
             <input
@@ -129,7 +129,7 @@ export const ContactForm = () => {
               onChange={handleInputChange}
               required
               placeholder="din@bedrift.no"
-              className="w-full border-3 border-black bg-white px-3 py-3 text-lg"
+              className="w-full border-3 border-black bg-white px-3 py-3 text-lg text-black placeholder:text-gray-500"
             />
           </div>
 
@@ -137,9 +137,9 @@ export const ContactForm = () => {
           <div className="space-y-3">
             <label
               htmlFor="melding"
-              className="text-lg font-bold text-gray-800"
+              className="text-xl text-white"
             >
-              Melding
+              Melding <span className="text-red-500">*</span>
             </label>
             <textarea
               id="melding"
@@ -148,12 +148,12 @@ export const ContactForm = () => {
               onChange={handleInputChange}
               rows={6}
               placeholder="Fortell oss om deres interesse for dotDAGENE, hvilke studenter dere ønsker å møte, eller andre spørsmål..."
-              className="min-h-40 resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg"
+              className="min-h-40 resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg text-black placeholder:text-gray-500"
             />
           </div>
 
           <div className="flex flex-col items-stretch justify-center">
-            <Button color="primary" type="submit" disabled={isSubmitting}>
+            <Button color="white" type="submit" disabled={isSubmitting}>
               Send melding
             </Button>
           </div>

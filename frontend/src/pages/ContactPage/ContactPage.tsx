@@ -1,9 +1,17 @@
+import { useMemo } from 'react';
 import { Footer } from '../../components/PageSections/Footer';
 import { Header } from '../../components/PageSections/Header';
 import { AppLayout } from '../../components/Layout/AppLayout';
 import { ContactForm } from './ContactForm';
+import backImg from '../../assets/backgroundInv.svg';
+
+const getRandomBackImageRotation = () => {
+  return Math.random() < 0.5 ? 'rotate-180' : '';
+};
 
 export const ContactPage = () => {
+  const backImageRotation = useMemo(() => getRandomBackImageRotation(), []);
+
   return (
     <>
       <Header />
@@ -18,22 +26,30 @@ export const ContactPage = () => {
             </h1>
             <p className="mt-4 text-lg text-gray-700">
               Fyll ut interesseskjemaet, så tar vi kontakt for å diskutere
-              samarbeid, stand og muligheter for årets arrangement.
+              samarbeid, stand og muligheter for neste års arrangement.
             </p>
           </div>
 
           <section className="mt-12">
-            <div className="bg-tertiary mx-auto flex w-full max-w-4xl flex-col gap-4 border-3 border-black p-8 text-black">
-              <div className="text-center">
+            <div className="relative mx-auto flex w-full max-w-4xl flex-col gap-4 overflow-hidden border-3 border-black bg-primary p-8 text-white">
+              <div
+                className={`absolute inset-0 bg-cover bg-center opacity-[0.07] ${backImageRotation}`}
+                style={{ backgroundImage: `url(${backImg})` }}
+                aria-hidden="true"
+              />
+
+              <div className="relative z-10 text-center">
                 <h2 className="text-3xl">Interesseskjema</h2>
                 <p className="mt-2">
                   Fyll ut skjemaet så tar vi kontakt for å diskutere
                   mulighetene.
                 </p>
               </div>
-              <ContactForm />
+
+              <div className="relative z-10">
+                <ContactForm />
+              </div>
             </div>
-           
           </section>
         </section>
       </AppLayout>

@@ -23,17 +23,16 @@ export const BannerSmall = () => {
           className="h-auto w-full min-w-[800px] max-w-none"
         >
           <g transform="translate(0,-6)">
-            {/* linje 1: primary */}
+            {/* linje 1 */}
             <MaskedStroke
               id="m-svart-sm"
-
-d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280"              stroke="#677B4C"
+              d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280" stroke="#677B4C"
               width={stroke}
               dur={d1}
               delay={LINE_ANIMATION_DELAY_SEC}
             />
 
-            {/* linje 2: secondary */}
+            {/* linje 2 */}
             <MaskedStroke
               id="m-lilla-sm"
               d="M520,80 L555,80 A16,16 0 0,1 555,115 L484,115"
@@ -43,7 +42,7 @@ d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280"              str
               delay={LINE_ANIMATION_DELAY_SEC + t2}
             />
 
-            {/* linje 3: tertiary */}
+            {/* linje 3 */}
             <MaskedStroke
               id="m-gronn-sm"
               d="M315,118 L240,118 A16,16 0 0,0 240,153 L285,153"
@@ -53,7 +52,7 @@ d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280"              str
               delay={LINE_ANIMATION_DELAY_SEC + t3}
             />
 
-            {/* linje 4: tertiary (tidligere quaternary) */}
+            {/* linje 4 */}
             <MaskedStroke
               id="m-gul-sm"
               d="M515,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
@@ -63,7 +62,7 @@ d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280"              str
               delay={LINE_ANIMATION_DELAY_SEC + t4}
             />
 
-            {/* tekst – sentrert */}
+            {/* tekst hardkodet på kordinater*/}
             <text
               x="400"
               y="52"
