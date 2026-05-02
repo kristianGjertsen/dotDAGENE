@@ -20,7 +20,7 @@ export const AboutUsPage = () => {
                 OM OSS
               </p>
               <h1 className="text-4xl font-semibold md:text-5xl">
-                Karrieredag skredder for IT-studenter
+                Karrieredager skreddersydd for IT-studenter
               </h1>
               
               <p className="text-left">
