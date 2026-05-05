@@ -95,7 +95,7 @@ export const HomePage = () => {
                   Se dotDAGENE 2026
                 </LinkButton>}
               >
-                Se tilbake på forrige arrangement. Her kan vi samle høydepunkter, bilder, program og annet innhold fra tidligere dotDAGENE.
+                Se tilbake på dotDAGENE 2026 med deltakende bedrifter og standkart.
               </InfoWithButton>
             </div>
 
