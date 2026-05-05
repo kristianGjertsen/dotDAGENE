@@ -92,7 +92,7 @@ export const HomePage = () => {
                 backImg="green"
                 icon={ClockIcon}
                 button={<LinkButton link="/forrige-dotdagene" color="white" size="md">
-                  Se forrige dotDAGENE
+                  Se dotDAGENE 2026
                 </LinkButton>}
               >
                 Se tilbake på forrige arrangement. Her kan vi samle høydepunkter, bilder, program og annet innhold fra tidligere dotDAGENE.
@@ -102,7 +102,7 @@ export const HomePage = () => {
           </section>
         </section>
 
-        <section className="px-6 py-20  sm:px-12 lg:px-20">
+        <section className="px-6 pt-10 pb-30 sm:px-12 lg:px-20">
           <div className="flex flex-col flex-wrap items-center gap-20">
             <div className="mx-auto max-w-5xl">
               <h2 className="text-center text-4xl font-medium">

@@ -37,7 +37,7 @@ export const BannerBig = () => {
           {/* linje 2 */}
           <MaskedStroke
             id="m-lilla"
-            d="M555,90 L630,90 A20,20 0 0,1 630,130 L590,130"
+            d="M574,90 L630,90 A20,20 0 0,1 630,130 L590,130"
             stroke="#677B4C"
             width={stroke}
             dur={d2}
@@ -78,7 +78,7 @@ export const BannerBig = () => {
             fontWeight="bold"
             fill="#677B4C"
           >
-            karrieredagen
+            karrieredagene
           </text>
 
           <text x="455" y="140" fontSize="32" fontWeight="bold">

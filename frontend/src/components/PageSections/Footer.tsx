@@ -17,15 +17,15 @@ export const Footer = () => {
   const backImageRotation = useMemo(() => getRandomBackImageRotation(), []);
 
   return (
-    <footer className="relative overflow-hidden border-t-3 border-black bg-footer">
+    <footer className="relative overflow-hidden border-t-2 border-black bg-footer">
       <div
-        className={`absolute inset-0 bg-cover bg-center opacity-[0.28] ${backImageRotation}`}
+        className={`absolute inset-0 bg-cover bg-center opacity-[0.18] ${backImageRotation}`}
         style={{ backgroundImage: `url(${backtemp})` }}
         aria-hidden="true"
       />
 
-      <section className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 py-12 sm:px-12 lg:px-16">
-        <div className="flex flex-col gap-8 border-b-1 border-gray-100/80 pb-8 md:flex-row md:items-start md:justify-between">
+      <section className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 pb-4 pt-8 sm:px-12 lg:px-16">
+        <div className="flex flex-col gap-8 border-b-1 border-gray-100/80 pb-5 md:flex-row md:items-start md:justify-between">
           <section className="max-w-md">
             <img src={Logo} alt="Logo" className="w-16 md:mb-4" />
             <p className="mt-4 max-w-sm text-gray-100 md:text-xl">
@@ -53,7 +53,7 @@ export const Footer = () => {
           <div className="flex items-start gap-4 md:justify-self-center">
             <EnvelopeIcon className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[220px]">
-              <p className="text-md font-semibold tracking-[0.2em]">E-Post</p>
+              <p className="text-md font-semibold tracking-[0.2em]">E-post</p>
               <a
                 href="mailto:kontakt@dotdagene.no"
                 className="transition-colors duration-150 hover:text-tertiary"
