@@ -26,7 +26,7 @@ export const BannerSmall = () => {
             {/* linje 1 */}
             <MaskedStroke
               id="m-svart-sm"
-              d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H280" stroke="#677B4C"
+              d="M0,47 H215 A17,17 0 0,1 232,64 V65 A17,17 0 0,0 249,82 H267" stroke="#677B4C"
               width={stroke}
               dur={d1}
               delay={LINE_ANIMATION_DELAY_SEC}
@@ -35,7 +35,7 @@ export const BannerSmall = () => {
             {/* linje 2 */}
             <MaskedStroke
               id="m-lilla-sm"
-              d="M520,80 L555,80 A16,16 0 0,1 555,115 L484,115"
+              d="M535,80 L555,80 A16,16 0 0,1 555,115 L479,115"
               stroke="#677B4C"
               width={stroke}
               dur={d2}
@@ -82,7 +82,7 @@ export const BannerSmall = () => {
               fontWeight="bold"
               fill="#677B4C"
             >
-              karrieredagen
+              karrieredagene
             </text>
 
             <text
