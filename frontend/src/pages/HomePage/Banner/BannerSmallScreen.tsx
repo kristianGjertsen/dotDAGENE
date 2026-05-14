@@ -45,7 +45,7 @@ export const BannerSmall = () => {
             {/* linje 3 */}
             <MaskedStroke
               id="m-gronn-sm"
-              d="M315,118 L240,118 A16,16 0 0,0 240,153 L285,153"
+              d="M315,118 L240,118 A16,16 0 0,0 240,153 L265,153"
               stroke="#677B4C"
               width={stroke}
               dur={d3}
@@ -55,7 +55,7 @@ export const BannerSmall = () => {
             {/* linje 4 */}
             <MaskedStroke
               id="m-gul-sm"
-              d="M515,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
+              d="M535,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
               stroke="#677B4C"
               width={stroke}
               dur={d4}
@@ -104,7 +104,7 @@ export const BannerSmall = () => {
               fontWeight="bold"
               fill="#000000"
             >
-              <tspan fill="#00000">9 og 10. mars</tspan>
+              9 og 10. februar
             </text>
           </g>
         </svg>
