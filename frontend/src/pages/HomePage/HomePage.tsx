@@ -138,11 +138,8 @@ export const HomePage = () => {
                   backImg="white"
                   icon={SparklesIcon}
                 >
-
-                  Etter en dag full av stands , inviterer vi til et sosialt kveldsarrangement. Her kan studenter og bedrifter mingle i en mer uformell setting, bygge relasjoner
-                </Info>
+                  Etter en dag fylt med stands og faglige samtaler inviterer vi til et sosialt kveldsarrangement. Her får studenter og bedrifter mulighet til å møtes i en mer uformell setting, fortsette samtalene fra dagen og bygge relasjoner                </Info>
               </div>
-
             </section>
           </div>
         </section>
