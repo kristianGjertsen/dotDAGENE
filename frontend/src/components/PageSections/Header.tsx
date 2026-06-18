@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/Logo_No_Text.svg';
+import Logo from './Logo';
 import { LinkButton } from '../Elements/LinkButton';
 
 type NavItem = {
@@ -36,12 +36,10 @@ export const Header = () => {
         <Link
           to="/"
           onClick={scrollToTop}
-          className="min-w-0 px-3 py-2">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="w-80 max-w-full min-w-[10rem]"
-          />
+          draggable={false}
+          onDragStart={(event) => event.preventDefault()}
+          className="block min-w-0 px-3 py-2 leading-none">
+          <Logo />
         </Link>
         <nav className="hidden items-center gap-2 sm:gap-2 lg:flex">
           {navItems.map((item) => (
