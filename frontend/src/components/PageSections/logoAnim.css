@@ -1,0 +1,38 @@
+.logo-dot {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.logo-dot-animate {
+  animation: dot-jump 1.2s;
+}
+
+@keyframes dot-jump {
+   0% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+  8% {
+    transform: translateY(0) scaleX(0.92) scaleY(1.1);
+  }
+  22% {
+    transform: translateY(-65px) scaleX(1) scaleY(1);
+  }
+  36% {
+    transform: translateY(0) scaleX(1.35) scaleY(0.6);
+  }
+  44% {
+    transform: translateY(-28px) scaleX(0.95) scaleY(1.05);
+  }
+  52% {
+    transform: translateY(0) scaleX(1.15) scaleY(0.8);
+  }
+  60% {
+    transform: translateY(-10px) scaleX(1) scaleY(1);
+  }
+  68% {
+    transform: translateY(0) scaleX(1.07) scaleY(0.92);
+  }
+  100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+}
