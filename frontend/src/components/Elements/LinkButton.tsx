@@ -52,6 +52,7 @@ export const LinkButton = ({
     <a
       href={link}
       onClick={onClick}
+      draggable={false}
       className={`group relative inline-block cursor-pointer select-none focus:outline-none whitespace-nowrap ${className}`}
     >
       <span aria-hidden="true" className="absolute inset-0 bg-black" />

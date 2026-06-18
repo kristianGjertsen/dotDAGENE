@@ -36,6 +36,8 @@ export const Header = () => {
         <Link
           to="/"
           onClick={scrollToTop}
+          draggable={false}
+          onDragStart={(event) => event.preventDefault()}
           className="block min-w-0 px-3 py-2 leading-none">
           <Logo />
         </Link>

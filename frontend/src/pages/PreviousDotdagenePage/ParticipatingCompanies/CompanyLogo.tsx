@@ -43,6 +43,7 @@ export const CompanyLogo = ({
             className={`max-h-full max-w-full object-contain scale-[var(--logo-scale-mobile)] xl:scale-[var(--logo-scale-desktop)] ${imageClassName}`}
             style={getLogoStyle(scale, scaleMobile, scaleDesktop)}
             loading="lazy"
+            draggable={false}
         />
     </div>
 );

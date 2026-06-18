@@ -27,7 +27,7 @@ export const Footer = () => {
       <section className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 pb-4 pt-8 sm:px-12 lg:px-16">
         <div className="flex flex-col gap-8 border-b-1 border-gray-100/80 pb-5 md:flex-row md:items-start md:justify-between">
           <section className="max-w-md">
-            <img src={Logo} alt="Logo" className="w-16 md:mb-4" />
+            <img src={Logo} alt="Logo" className="w-16 md:mb-4" draggable={false} />
             <p className="mt-4 max-w-sm text-gray-100 md:text-xl">
               NTNUs nyeste karrieredag innen digitalisering og teknologi.
             </p>
@@ -37,13 +37,13 @@ export const Footer = () => {
             <h2 className="text-lg md:text-2xl">Følg oss</h2>
             <section className="flex gap-3">
               <a className="w-10" href="https://www.instagram.com/dotdagene/">
-                <img src={Instagram} alt="dotDAGENE på Instagram" />
+                <img src={Instagram} alt="dotDAGENE på Instagram" draggable={false} />
               </a>
               <a
                 className="w-10"
                 href="https://www.linkedin.com/company/dotdagene/about/"
               >
-                <img src={Linkedin} alt="dotDAGENE på LinkedIn" />
+                <img src={Linkedin} alt="dotDAGENE på LinkedIn" draggable={false} />
               </a>
             </section>
           </section>

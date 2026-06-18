@@ -29,6 +29,7 @@ export const Button = ({
       disabled={disabled}
       aria-label={ariaLabel}
       className={mergedWrapperClass}
+      draggable={false}
     >
       {/* Bottom "shadow" chip */}
       <span aria-hidden="true" className="absolute inset-0 bg-black" />

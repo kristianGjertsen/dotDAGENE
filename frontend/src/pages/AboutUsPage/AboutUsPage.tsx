@@ -55,6 +55,7 @@ export const AboutUsPage = () => {
                   src={GroupImg}
                   alt="Gruppebilde"
                   className="w-full h-[28rem] md:h-[32rem] object-cover object-[center_top]"
+                  draggable={false}
                 />
               </div>
             </div>
