@@ -37,7 +37,7 @@ export const BannerBig = () => {
           {/* linje 2 */}
           <MaskedStroke
             id="m-lilla"
-            d="M574,90 L630,90 A20,20 0 0,1 630,130 L590,130"
+            d="M574,90 L630,90 A20,20 0 0,1 630,130 L598,130"
             stroke="#677B4C"
             width={stroke}
             dur={d2}
@@ -57,7 +57,7 @@ export const BannerBig = () => {
           {/* linje 4:*/}
           <MaskedStroke
             id="m-gul"
-            d="M760,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
+            d="M765,170 L850,170 A30,30 0 0,1 880,200 A30,30 0 0,0 910,230 L1030,230"
             stroke="#677B4C"
             width={stroke}
             dur={d4}

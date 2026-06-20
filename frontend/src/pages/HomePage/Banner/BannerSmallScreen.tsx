@@ -35,7 +35,7 @@ export const BannerSmall = () => {
             {/* linje 2 */}
             <MaskedStroke
               id="m-lilla-sm"
-              d="M535,80 L555,80 A16,16 0 0,1 555,115 L479,115"
+              d="M535,80 L555,80 A16,16 0 0,1 555,115 L482,115"
               stroke="#677B4C"
               width={stroke}
               dur={d2}
@@ -45,7 +45,7 @@ export const BannerSmall = () => {
             {/* linje 3 */}
             <MaskedStroke
               id="m-gronn-sm"
-              d="M315,118 L240,118 A16,16 0 0,0 240,153 L265,153"
+              d="M315,118 L240,118 A16,16 0 0,0 240,153 L260,153"
               stroke="#677B4C"
               width={stroke}
               dur={d3}
@@ -55,7 +55,7 @@ export const BannerSmall = () => {
             {/* linje 4 */}
             <MaskedStroke
               id="m-gul-sm"
-              d="M535,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
+              d="M539,153 H545 A17,17 0 0,1 562,170 V171 A17,17 0 0,0 579,188 H900"
               stroke="#677B4C"
               width={stroke}
               dur={d4}

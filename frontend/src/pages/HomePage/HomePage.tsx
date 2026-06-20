@@ -20,6 +20,15 @@ export const HomePage = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const previousOverflowX = document.body.style.overflowX;
+    document.body.style.overflowX = 'hidden';
+
+    return () => {
+      document.body.style.overflowX = previousOverflowX;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!location.hash) {
       return;
     }
