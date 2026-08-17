@@ -1,5 +1,5 @@
-import { Footer } from '../../components/PageSections/Footer';
-import { Header } from '../../components/PageSections/Header';
+import { Footer } from '../../components/PageSections/Footer/Footer';
+import { Header } from '../../components/PageSections/Header/Header';
 import { LinkButton } from '../../components/Elements/LinkButton';
 import GroupImg from '../../assets/groupImg.jpg';
 //import TeamSection from './TeamSection';

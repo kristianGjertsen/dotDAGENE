@@ -1,0 +1,113 @@
+.footer-logo {
+  display: block;
+  overflow: visible;
+}
+
+.footer-logo-letter-outline,
+.footer-logo-letter-fill,
+.footer-logo-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Static/final state */
+.footer-logo-letter-outline {
+  opacity: 0;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+}
+
+.footer-logo-letter-fill {
+  opacity: 1;
+}
+
+.footer-logo-dot {
+  opacity: 1;
+}
+
+/* Animated state */
+.footer-logo-animate .footer-logo-letter-outline {
+  animation: footer-logo-letter-draw var(--footer-logo-duration)
+    cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.footer-logo-animate .footer-logo-letter-fill {
+  animation: footer-logo-letter-fill var(--footer-logo-duration) ease-out both;
+}
+
+.footer-logo-animate .footer-logo-dot {
+  animation: footer-logo-dot-fall var(--footer-logo-duration)
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes footer-logo-letter-draw {
+  0% {
+    opacity: 1;
+    stroke-dashoffset: 100;
+  }
+  45% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  58% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  70% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes footer-logo-letter-fill {
+  0% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 0;
+  }
+  58% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes footer-logo-dot-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-180px) scale(0.92);
+  }
+  52% {
+    opacity: 0;
+    transform: translateY(-180px) scale(0.92);
+  }
+  78% {
+    opacity: 1;
+    transform: translateY(10px) scale(1.04);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(-4px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-logo-animate .footer-logo-letter-outline,
+  .footer-logo-animate .footer-logo-letter-fill,
+  .footer-logo-animate .footer-logo-dot {
+    animation: none;
+  }
+}
