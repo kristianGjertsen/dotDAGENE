@@ -1,20 +1,19 @@
-import { useMemo } from 'react';
-import {
-  CalendarIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-} from '@heroicons/react/20/solid';
+import { useMemo, useRef } from 'react';
+import type { IconHandle } from '@animateicons/react';
 import Logo from '../../assets/litenDfarget.svg';
-import Instagram from '../../assets/instagram.svg';
-import Linkedin from '../../assets/linkedin.svg';
 import backtemp from '../../assets/backgroundInv.svg';
+import { CalendarDays, MapPinIcon, Mail, Instagram, Linkedin } from '@animateicons/react/lucide';
 
+// Function to randomly return a rotation class for the background image
 const getRandomBackImageRotation = () => {
   return Math.random() < 0.5 ? 'rotate-180' : '';
 };
 
 export const Footer = () => {
   const backImageRotation = useMemo(() => getRandomBackImageRotation(), []);
+  const mailIconRef = useRef<IconHandle>(null);
+  const calendarIconRef = useRef<IconHandle>(null);
+  const mapPinIconRef = useRef<IconHandle>(null);
 
   return (
     <footer className="relative overflow-hidden border-t-2 border-black bg-footer">
@@ -33,25 +32,27 @@ export const Footer = () => {
             </p>
           </section>
 
-          <section className="flex flex-col gap-3 text-gray-100 md:items-end">
+          <section className="flex flex-col gap-3 text-gray-100">
             <h2 className="text-lg md:text-2xl">Følg oss</h2>
-            <section className="flex gap-3">
-              <a className="w-10" href="https://www.instagram.com/dotdagene/">
-                <img src={Instagram} alt="dotDAGENE på Instagram" draggable={false} />
+            <div className="flex justify-between w-full">
+              <a href="https://www.instagram.com/dotdagene/" target="_blank" rel="noreferrer" >
+                <Instagram size={35} />
               </a>
-              <a
-                className="w-10"
-                href="https://www.linkedin.com/company/dotdagene/about/"
-              >
-                <img src={Linkedin} alt="dotDAGENE på LinkedIn" draggable={false} />
+              <a href="https://www.linkedin.com/company/dotdagene/" target="_blank" rel="noreferrer" >
+                <Linkedin size={35} />
               </a>
-            </section>
+            </div>
+
           </section>
         </div>
 
         <section className="mx-auto grid w-full max-w-5xl gap-8 text-gray-100 md:grid-cols-3 md:gap-10">
-          <div className="flex items-start gap-4 md:justify-self-center">
-            <EnvelopeIcon className="h-8 w-8 shrink-0 text-tertiary" />
+          <div
+            className="flex items-start gap-4 md:justify-self-center"
+            onMouseEnter={() => mailIconRef.current?.startAnimation()}
+            onMouseLeave={() => mailIconRef.current?.stopAnimation()}
+          >
+            <Mail ref={mailIconRef} className="h-8 w-8 shrink-0 text-tertiary" />
             <div className="max-w-[220px]">
               <p className="text-md font-semibold tracking-[0.2em]">E-post</p>
               <a
@@ -62,17 +63,29 @@ export const Footer = () => {
               </a>
             </div>
           </div>
-
-          <div className="flex items-start gap-4 md:justify-self-center">
-            <CalendarIcon className="h-8 w-8 shrink-0 text-tertiary" />
+          <div
+            className="flex items-start gap-4 md:justify-self-center"
+            onMouseEnter={() => calendarIconRef.current?.startAnimation()}
+            onMouseLeave={() => calendarIconRef.current?.stopAnimation()}
+          >
+            <CalendarDays
+              ref={calendarIconRef}
+              className="h-8 w-8 shrink-0 text-tertiary"
+            />
             <div className="max-w-[220px]">
               <p className="text-md font-semibold tracking-[0.2em]">Dato</p>
               <p>9 og 10. februar 2027</p>
             </div>
           </div>
-
-          <div className="flex items-start gap-4 md:justify-self-center">
-            <MapPinIcon className="h-8 w-8 shrink-0 text-tertiary" />
+          <div
+            className="flex items-start gap-4 md:justify-self-center"
+            onMouseEnter={() => mapPinIconRef.current?.startAnimation()}
+            onMouseLeave={() => mapPinIconRef.current?.stopAnimation()}
+          >
+            <MapPinIcon
+              ref={mapPinIconRef}
+              className="h-8 w-8 shrink-0 text-tertiary"
+            />
             <div className="max-w-[260px]">
               <p className="text-md font-semibold tracking-[0.2em]">
                 Lokasjon

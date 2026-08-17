@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from './Logo';
+import Logo from './AnimatedLogo/Logo';
 import { LinkButton } from '../Elements/LinkButton';
 
 type NavItem = {
