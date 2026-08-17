@@ -29,12 +29,12 @@ const LETTER_PATH =
 const AnimatedLogo = forwardRef<AnimatedLogoHandle, AnimatedLogoProps>(
   (
     {
-      size = 64,
+      size = 90,
       className = '',
-      duration = 1.15,
+      duration = 1.5,
       isAnimated = true,
-      animateOnLoad = true,
-      backgroundColor = '#677b4c',
+      animateOnLoad = false,
+      backgroundColor = '#677b4c00',
       foregroundColor = '#ffffff',
     },
     ref,
@@ -71,14 +71,16 @@ const AnimatedLogo = forwardRef<AnimatedLogoHandle, AnimatedLogoProps>(
       return () => window.clearTimeout(timeout);
     }, [isAnimating, duration, animationKey]);
 
+    const resolvedSize = typeof size === 'number' ? `${size}px` : size;
+
     const animationStyle = {
       '--footer-logo-duration': `${duration}s`,
+      height: resolvedSize,
+      width: resolvedSize,
     } as CSSProperties;
 
     return (
       <svg
-        width={size}
-        height={size}
         viewBox="187 365 463 435"
         xmlns="http://www.w3.org/2000/svg"
         className={`footer-logo ${className}`.trim()}

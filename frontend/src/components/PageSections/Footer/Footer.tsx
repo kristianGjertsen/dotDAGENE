@@ -36,7 +36,7 @@ export const Footer = () => {
       <section className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 pb-4 pt-8 sm:px-12 lg:px-16">
         <div className="flex flex-col gap-8 border-b-1 border-gray-100/80 pb-5 md:flex-row md:items-start md:justify-between">
           <section className="max-w-md">
-            <AnimatedLogo size={64} className="md:mb-4" />
+            <AnimatedLogo className="md:mb-4" />
             <p className="mt-4 max-w-sm text-gray-100 md:text-xl">
               NTNUs nyeste karrieredag innen digitalisering og teknologi.
             </p>
