@@ -1,6 +1,7 @@
 import { useMemo, useRef } from 'react';
 import type { IconHandle } from '@animateicons/react';
 import Logo from '../../assets/litenDfarget.svg';
+import { backgroundPatternOpacity } from '../../lib/backgroundPattern';
 import backtemp from '../../assets/backgroundInv.svg';
 import { CalendarDays, MapPinIcon, Mail, Instagram, Linkedin } from '@animateicons/react/lucide';
 
@@ -18,8 +19,11 @@ export const Footer = () => {
   return (
     <footer className="relative overflow-hidden border-t-2 border-black bg-footer">
       <div
-        className={`absolute inset-0 bg-cover bg-center opacity-[0.18] ${backImageRotation}`}
-        style={{ backgroundImage: `url(${backtemp})` }}
+        className={`absolute inset-0 bg-cover bg-center ${backImageRotation}`}
+        style={{
+          backgroundImage: `url(${backtemp})`,
+          opacity: backgroundPatternOpacity.footer,
+        }}
         aria-hidden="true"
       />
 

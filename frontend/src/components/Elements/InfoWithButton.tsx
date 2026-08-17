@@ -1,13 +1,12 @@
 import { useMemo, type ElementType, type ReactNode } from 'react';
 import { colorMap, type color } from '../../lib/colors';
+import {
+  backgroundPatternOpacity,
+  type BackgroundPatternVariant,
+} from '../../lib/backgroundPattern';
 import backgroundImage from '../../assets/backgroundInv.svg';
 
-type BackImg = boolean | 'green' | 'white';
-
-const backImgOpacity = {
-  green: 0.07,
-  white: 0.03,
-} as const;
+type BackImg = boolean | BackgroundPatternVariant;
 
 interface InfoWithButtonProps {
   titelChildren: string;
@@ -45,14 +44,14 @@ export const InfoWithButton = ({
       : backImg || undefined;
 
   const resolvedBackImgOpacity = resolvedBackImgVariant
-    ? backImgOpacity[resolvedBackImgVariant]
+    ? backgroundPatternOpacity.infoCard[resolvedBackImgVariant]
     : undefined;
 
   return (
     <section
       className={`${colorMap.get(color)} relative flex h-full flex-1 basis-0 min-w-0 flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center text-${resolvedTextColor} ${className}`}
     >
-      {resolvedBackImgOpacity && (
+      {resolvedBackImgOpacity !== undefined && resolvedBackImgOpacity > 0 && (
         <div
           className={`absolute inset-0 bg-cover bg-center ${
             isBackImgUpsideDown ? 'rotate-180' : ''

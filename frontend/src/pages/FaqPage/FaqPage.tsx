@@ -8,6 +8,7 @@ import {
   faqsForStudents,
 } from './FaqQuestions';
 import { AppLayout } from '../../components/Layout/AppLayout';
+import { backgroundPatternOpacity } from '../../lib/backgroundPattern';
 import backtemp from '../../assets/backgroundInv.svg';
 
 // Alternerende farger, tonet ned
@@ -102,8 +103,11 @@ export const FaqPage = () => {
                   className={`relative overflow-hidden border-3 border-black shadow-[8px_8px_0_0_rgba(0,0,0,0.1)] ${backgroundColor}`}
                 >
                   <div
-                    className={`absolute left-0 top-0 h-[260px] w-full bg-cover bg-top opacity-[0.03] ${backImageRotation}`}
-                    style={{ backgroundImage: `url(${backtemp})` }}
+                    className={`absolute left-0 top-0 h-[260px] w-full bg-cover bg-top ${backImageRotation}`}
+                    style={{
+                      backgroundImage: `url(${backtemp})`,
+                      opacity: backgroundPatternOpacity.faq,
+                    }}
                     aria-hidden="true"
                   />
 
