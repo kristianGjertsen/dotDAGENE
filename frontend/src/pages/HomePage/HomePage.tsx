@@ -4,8 +4,8 @@ import {
   BuildingOffice2Icon, ClockIcon, SparklesIcon, UserGroupIcon,
 } from '@heroicons/react/20/solid';
 
-import { Footer } from '../../components/PageSections/Footer';
-import { Header } from '../../components/PageSections/Header';
+import { Footer } from '../../components/PageSections/Footer/Footer';
+import { Header } from '../../components/PageSections/Header/Header';
 import { Info } from '../../components/Elements/Info';
 import { InfoWithButton } from '../../components/Elements/InfoWithButton';
 import { LinkButton } from '../../components/Elements/LinkButton';

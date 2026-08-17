@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LogoImg from "../../assets/Logo_No_Text_No_Dot.svg";
+import LogoImg from "../../../../assets/Logo_No_Text_No_Dot.svg";
 import "./logoAnim.css";
 
 type LogoProps = {

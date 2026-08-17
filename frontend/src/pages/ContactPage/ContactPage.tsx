@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { Footer } from '../../components/PageSections/Footer';
-import { Header } from '../../components/PageSections/Header';
+import { Footer } from '../../components/PageSections/Footer/Footer';
+import { Header } from '../../components/PageSections/Header/Header';
 import { AppLayout } from '../../components/Layout/AppLayout';
 import { ContactForm } from './ContactForm';
+import { backgroundPatternOpacity } from '../../lib/backgroundPattern';
 import backImg from '../../assets/backgroundInv.svg';
 
 const getRandomBackImageRotation = () => {
@@ -33,8 +34,11 @@ export const ContactPage = () => {
           <section className="mt-12">
             <div className="relative mx-auto flex w-full max-w-4xl flex-col gap-4 overflow-hidden border-3 border-black bg-primary p-8 text-white">
               <div
-                className={`absolute inset-0 bg-cover bg-center opacity-[0.07] ${backImageRotation}`}
-                style={{ backgroundImage: `url(${backImg})` }}
+                className={`absolute inset-0 bg-cover bg-center ${backImageRotation}`}
+                style={{
+                  backgroundImage: `url(${backImg})`,
+                  opacity: backgroundPatternOpacity.contact,
+                }}
                 aria-hidden="true"
               />
 

@@ -1,6 +1,6 @@
 import { AppLayout } from '../../components/Layout/AppLayout';
-import { Footer } from '../../components/PageSections/Footer';
-import { Header } from '../../components/PageSections/Header';
+import { Footer } from '../../components/PageSections/Footer/Footer';
+import { Header } from '../../components/PageSections/Header/Header';
 import { CompLayout } from './ParticipatingCompanies/CompLayout';
 import StandMap from './StandMap/StandMap';
 
