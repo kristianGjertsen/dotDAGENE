@@ -25,6 +25,10 @@ export const faqsForStudents: FaqItem[] = [
     answer:
       'Følg med på nettsiden og våre kanaler for oppdateringer. Vi legger også ut viktig informasjon via linjeforeningene og relevante grupper.',
   },
+  {
+    question: 'Hvorfor skal jeg delta på dotDAGENE?',
+    answer:
+      'dotDAGENE gir deg muligheten til å møte spennende bedrifter, lære om karrieremuligheter og få innsikt i bransjen. Det er en god anledning til å knytte kontakter og utforske fremtidige jobbmuligheter.',},
 ];
 //FAQ-innhold for bedrifter
 export const faqsForCompanies: FaqItem[] = [
