@@ -17,6 +17,13 @@ export type StandData = {
   company: string;
 };
 
+export type StandDay = 'february-9' | 'february-10';
+
+export type StandDayData = {
+  label: string;
+  stands: Record<StandId, StandData>;
+};
+
 const standIds: StandId[] = [
   'stand-1',
   'stand-2',
@@ -32,12 +39,24 @@ const standIds: StandId[] = [
   'stand-12',
 ];
 
-export const standMap = Object.fromEntries(
-  standIds.map((id, index) => [
-    id,
-    {
-      label: String(index + 1),
-      company: 'Kommer snart',
-    },
-  ]),
-) as Record<StandId, StandData>;
+const createComingSoonStandMap = () =>
+  Object.fromEntries(
+    standIds.map((id, index) => [
+      id,
+      {
+        label: String(index + 1),
+        company: 'Kommer snart',
+      },
+    ]),
+  ) as Record<StandId, StandData>;
+
+export const standDays: Record<StandDay, StandDayData> = {
+  'february-9': {
+    label: '9. februar',
+    stands: createComingSoonStandMap(),
+  },
+  'february-10': {
+    label: '10. februar',
+    stands: createComingSoonStandMap(),
+  },
+};

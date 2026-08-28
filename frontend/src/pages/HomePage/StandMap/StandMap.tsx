@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { standMap, type StandId } from './StandData';
+import { ToggleSlider } from '../../../components/Elements/ToggleSlider';
+import { standDays, type StandDay, type StandId } from './StandData';
 
 type HoverState = {
   id: StandId;
@@ -18,6 +19,7 @@ function StandMap({
 }: StandMapProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState<HoverState | null>(null);
+  const [activeDay, setActiveDay] = useState<StandDay>('february-9');
   const [error, setError] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{
     left: number;
@@ -61,11 +63,11 @@ function StandMap({
 
         const tooltipWidth = 260;
         const edgePadding = 12;
-        const offsetY = 8;
+        const offsetY = 40;
 
         hotspots.forEach((el) => {
           const id = el.id as StandId;
-          const data = standMap[id];
+          const data = standDays[activeDay].stands[id];
 
           if (!data) return;
 
@@ -82,8 +84,7 @@ function StandMap({
                 containerRect.width - half - edgePadding,
               );
 
-              const topRaw =
-                rect.top - containerRect.top + rect.height / 2 + offsetY;
+              const topRaw = rect.bottom - containerRect.top + offsetY;
               const maxTop = containerRect.height - edgePadding;
               const clampedTop = Math.min(
                 Math.max(edgePadding, topRaw),
@@ -126,7 +127,7 @@ function StandMap({
     })();
 
     return () => cleanup?.();
-  }, []);
+  }, [activeDay]);
 
   return (
     <div className="relative mx-auto mt-20 mb-20 max-w-4xl">
@@ -135,6 +136,20 @@ function StandMap({
         <p className="text-m font-meduim p-4 text-center text-slate-600">
           {description}
         </p>
+        <div className="flex justify-center pb-10">
+          <ToggleSlider
+            ariaLabel="Velg dag for standkart"
+            value={activeDay}
+            onChange={(nextDay) => {
+              setActiveDay(nextDay);
+              setHovered(null);
+            }}
+            options={[
+              { value: 'february-9', label: '9. februar' },
+              { value: 'february-10', label: '10. februar' },
+            ]}
+          />
+        </div>
       </div>
 
       <div ref={ref} className="w-full [&_svg]:h-auto [&_svg]:w-full" />
@@ -158,7 +173,7 @@ function StandMap({
           style={{
             left: tooltipPos.left,
             top: tooltipPos.top,
-            transform: 'translate(-50%, calc(-100% + 32px))',
+            transform: 'translateX(-50%)',
             pointerEvents: 'none',
           }}
         >

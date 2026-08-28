@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Footer } from '../../components/PageSections/Footer/Footer';
 import { Header } from '../../components/PageSections/Header/Header';
 import { LinkButton } from '../../components/Elements/LinkButton';
+import { ToggleSlider } from '../../components/Elements/ToggleSlider';
 import {
   contactLinkClasses,
   faqsForCompanies,
@@ -13,10 +14,6 @@ import backtemp from '../../assets/backgroundInv.svg';
 
 // Alternerende farger, tonet ned
 const colorCycle = ['bg-white'];
-
-// Toggle knapp felles-stil
-const baseToggleButtonClasses =
-  'relative z-10 flex-1 px-6 py-2 text-base font-semibold cursor-pointer transition-colors duration-300 sm:px-8 sm:py-2 sm:text-lg';
 
 const getAlternatingBackImageRotation = (index: number) => {
   return index % 2 === 0 ? '' : 'rotate-180';
@@ -52,43 +49,22 @@ export const FaqPage = () => {
               </p>
             </div>
 
-            <p className="mt-2 pt-5 font-semibold uppercase tracking-[0.2em] text-gray-700">
+            <p className="mt-2 pt-5 font-semibold tracking-[0.2em] text-gray-700 uppercase">
               Velg målgruppe
             </p>
 
-            <div className="relative mt-4 inline-flex w-full max-w-md items-stretch overflow-hidden border-3 border-black bg-white shadow-[6px_6px_0_0_rgba(0,0,0,0.15)]">
-              <span
-                aria-hidden="true"
-                className={`absolute inset-y-0 left-0 w-1/2 bg-primary transition-transform duration-300 ${audience === 'bedrift' ? 'translate-x-full' : ''
-                  }`}
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  setAudience('student');
-                  setOpenIndex(null);
-                }}
-                className={`${baseToggleButtonClasses} ${audience === 'student'
-                    ? 'text-white'
-                    : 'text-black hover:text-black/80'
-                  }`}
-              >
-                For studenter
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setAudience('bedrift');
-                  setOpenIndex(null);
-                }}
-                className={`border-l-3 border-black ${baseToggleButtonClasses} ${audience === 'bedrift'
-                    ? 'text-white'
-                    : 'text-black hover:text-black/80'
-                  }`}
-              >
-                For bedrifter
-              </button>
-            </div>
+            <ToggleSlider
+              ariaLabel="Velg målgruppe"
+              value={audience}
+              onChange={(nextAudience) => {
+                setAudience(nextAudience);
+                setOpenIndex(null);
+              }}
+              options={[
+                { value: 'student', label: 'For studenter' },
+                { value: 'bedrift', label: 'For bedrifter' },
+              ]}
+            />
           </section>
 
           <section className="mx-auto mt-12 grid max-w-5xl gap-4">
@@ -103,7 +79,7 @@ export const FaqPage = () => {
                   className={`relative overflow-hidden border-3 border-black shadow-[8px_8px_0_0_rgba(0,0,0,0.1)] ${backgroundColor}`}
                 >
                   <div
-                    className={`absolute left-0 top-0 h-[260px] w-full bg-cover bg-top ${backImageRotation}`}
+                    className={`absolute top-0 left-0 h-[260px] w-full bg-cover bg-top ${backImageRotation}`}
                     style={{
                       backgroundImage: `url(${backtemp})`,
                       opacity: backgroundPatternOpacity.faq,
@@ -119,18 +95,20 @@ export const FaqPage = () => {
                   >
                     <h2 className="text-2xl font-semibold">{faq.question}</h2>
                     <span
-                      className={`text-3xl font-bold text-black transition-transform duration-300 ${isOpen ? 'rotate-180' : ''
-                        }`}
+                      className={`text-3xl font-bold text-black transition-transform duration-300 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
                     >
                       {isOpen ? '−' : '+'}
                     </span>
                   </button>
 
                   <div
-                    className={`relative z-10 grid transition-[grid-template-rows,opacity] duration-300 ease-out ${isOpen
+                    className={`relative z-10 grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                      isOpen
                         ? 'grid-rows-[1fr] opacity-100'
                         : 'grid-rows-[0fr] opacity-0'
-                      }`}
+                    }`}
                   >
                     <div className="overflow-hidden">
                       <p className="px-6 pb-6 text-lg leading-relaxed text-black">

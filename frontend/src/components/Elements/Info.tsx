@@ -51,7 +51,7 @@ export const Info = ({
 
   return (
     <section
-      className={`${colorMap.get(color)} relative flex h-full flex-1 basis-0 min-w-0 flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center ${resolvedTextColorClass} ${className}`}
+      className={`${colorMap.get(color)} relative flex h-full min-w-0 flex-1 basis-0 flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center ${resolvedTextColorClass} ${className}`}
     >
       {resolvedBackImgOpacity !== undefined && resolvedBackImgOpacity > 0 && (
         <div
@@ -70,8 +70,8 @@ export const Info = ({
         {Icon && <Icon className="h-16 w-16" />}
       </section>
 
-      <p className="relative z-10 text-2xl">{titelChildren}</p>
-      <p className="relative z-10">{children}</p>
+      <h2 className="relative z-10 text-2xl font-medium">{titelChildren}</h2>
+      <div className="relative z-10">{children}</div>
     </section>
   );
 };

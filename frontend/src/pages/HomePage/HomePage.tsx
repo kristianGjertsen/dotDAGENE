@@ -69,7 +69,7 @@ export const HomePage = () => {
             backImg="white"
             button={
               <LinkButton link="/kontakt" color="primary" size="md">
-                Kontakt oss
+                Meld interesse
               </LinkButton>
             }
           >
