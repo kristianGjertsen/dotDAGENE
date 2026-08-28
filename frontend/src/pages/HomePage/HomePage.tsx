@@ -125,8 +125,8 @@ export const HomePage = () => {
               </p>
             </div>
 
-            <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
-              <div className="flex w-full sm:w-1/2">
+            <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10">
+              <div className="flex w-full">
                 <InfoWithButton
                   titelChildren="Stands"
                   color="primary"
@@ -134,20 +134,32 @@ export const HomePage = () => {
                   button={<CalendarButton color="white" />}
                   icon={BuildingOffice2Icon}
                 >
-                  Få egen stand på dotDAGENE og møt direkte med
+                  <div className="w-full flex items-center justify-center">
+                  <p className="w-[80%]">Få egen stand på dotDAGENE og møt direkte med
                   informatikkstudenter. Perfekt mulighet til å rekruttere de beste
-                  talentene innen digitalisering og teknologi.
+                  talentene innen digitalisering og teknologi.</p>
+                  </div>
                 </InfoWithButton>
               </div>
 
-              <div className="flex w-full sm:w-1/2">
+              <div className="w-full border h-80 p-2 rounded bg-red-500">
+                  Sett standskart her!!!
+              </div>
+
+              <div className="flex w-full ">
                 <Info
                   titelChildren="Kveldsarrangement"
                   color="white"
                   backImg="white"
                   icon={SparklesIcon}
                 >
-                  Etter en dag fylt med stands og faglige samtaler inviterer vi til et sosialt kveldsarrangement. Her får studenter og bedrifter mulighet til å møtes i en mer uformell setting, fortsette samtalene fra dagen og bygge relasjoner                </Info>
+                  <div className="w-[full] flex items-center justify-center">
+                    <p className="w-[80%]">
+                      Etter en dag fylt med stands og faglige samtaler inviterer vi til et sosialt kveldsarrangement. Her får studenter og bedrifter mulighet til å møtes i en mer uformell setting, fortsette samtalene fra dagen og bygge relasjoner          
+                    </p>
+                  </div>     
+                  
+                  </Info>
               </div>
             </section>
           </div>
