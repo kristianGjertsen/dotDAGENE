@@ -36,6 +36,9 @@ export const InfoWithButton = ({
       ? 'black'
       : 'white');
 
+  const resolvedTextColorClass =
+    resolvedTextColor === 'black' ? 'text-black' : 'text-white';
+
   const resolvedBackImgVariant =
     backImg === true
       ? color === 'white'
@@ -49,7 +52,7 @@ export const InfoWithButton = ({
 
   return (
     <section
-      className={`${colorMap.get(color)} relative flex h-full flex-1 basis-0 min-w-0 flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center text-${resolvedTextColor} ${className}`}
+      className={`${colorMap.get(color)} relative flex h-full min-w-0 flex-1 basis-0 flex-col items-center justify-center gap-4 border-2 border-black p-6 pb-12 text-center ${resolvedTextColorClass} ${className}`}
     >
       {resolvedBackImgOpacity !== undefined && resolvedBackImgOpacity > 0 && (
         <div
@@ -68,8 +71,8 @@ export const InfoWithButton = ({
         {Icon && <Icon className="h-16 w-16" />}
       </section>
 
-      <p className="relative z-10 text-2xl">{titelChildren}</p>
-      <p className="relative z-10">{children}</p>
+      <h2 className="relative z-10 text-2xl font-medium">{titelChildren}</h2>
+      <div className="relative z-10">{children}</div>
 
       {button && (
         <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 translate-y-1/2">
