@@ -80,20 +80,32 @@ function buildICS({
   return lines.join('\r\n');
 }
 
-export default async function handler(req: any, res: any) {
+type EventRequest = {
+  method?: string;
+  url?: string;
+};
+
+type EventResponse = {
+  setHeader: (name: string, value: string) => void;
+  status: (code: number) => EventResponse;
+  json: (body: unknown) => EventResponse;
+  send: (body: string) => EventResponse;
+};
+
+export default async function handler(req: EventRequest, res: EventResponse) {
   try {
     // Log at handler is being called
     console.log('Event API handler called:', {
       method: req.method,
       url: req.url,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     if (req.method !== 'GET') {
-      return res.status(405).json({ 
+      return res.status(405).json({
         error: 'Method not allowed',
         allowed: 'GET',
-        received: req.method
+        received: req.method,
       });
     }
 
@@ -114,11 +126,10 @@ export default async function handler(req: any, res: any) {
     return res.status(200).send(ics);
   } catch (err) {
     console.error('event-api error:', err);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal error',
       message: err instanceof Error ? err.message : 'Unknown error',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 }
-
