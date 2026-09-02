@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { Button } from '../../components/Elements/Button';
 
 export const ContactForm = () => {
@@ -13,7 +13,7 @@ export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
 
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -21,7 +21,7 @@ export const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
@@ -146,14 +146,14 @@ export const ContactForm = () => {
               name="melding"
               value={formData.melding}
               onChange={handleInputChange}
-              rows={6}
+              rows={2}
               placeholder="Fortell oss om deres interesse for dotDAGENE, hvilke studenter dere ønsker å møte, eller andre spørsmål..."
               className="min-h-40 resize-vertical w-full border-3 border-black bg-white px-3 py-3 text-lg text-black placeholder:text-gray-500"
             />
           </div>
 
           <div className="flex flex-col items-stretch justify-center">
-            <Button color="white" type="submit" disabled={isSubmitting}>
+            <Button color="secondary" type="submit" disabled={isSubmitting}>
               Send melding
             </Button>
           </div>

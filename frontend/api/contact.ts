@@ -1,35 +1,76 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+export type ContactRequest = {
+  method?: string;
+  body?: unknown;
+  [Symbol.asyncIterator]?: () => AsyncIterator<Buffer | string>;
+};
 
-export default async function handler(req: any, res: any) {
-  try {
-    if (req.method !== 'POST') return res.status(405).end();
+export type ContactResponse = {
+  status: (code: number) => ContactResponse;
+  json: (body: unknown) => ContactResponse;
+  end: () => ContactResponse;
+};
 
-    let body: any = req.body;
-    if (!body) {
-      // Vercel Node kan gi en stream
-      const chunks: Buffer[] = [];
-      for await (const chunk of req) chunks.push(chunk as Buffer);
-      const raw = Buffer.concat(chunks).toString('utf8');
-      body = raw ? JSON.parse(raw) : {};
-    } else if (typeof body === 'string') {
-      body = JSON.parse(body);
-    }
+type ContactPayload = {
+  bedriftsnavn?: string;
+  kontaktperson?: string;
+  stilling?: string;
+  epost?: string;
+  melding?: string;
+};
 
-    const { bedriftsnavn, kontaktperson, stilling, epost, melding } = body || {};
+type EmailPayload = {
+  from: string;
+  to: string[];
+  subject: string;
+  text: string;
+  replyTo?: string;
+};
 
-    // Valider felter
-    if (!bedriftsnavn || !kontaktperson || !stilling || !epost) {
-      return res.status(400).json({ error: 'Mangler felt' });
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(epost)) {
-      return res.status(400).json({ error: 'Ugyldig e-post' });
-    }
+export type EmailClient = {
+  send: (payload: EmailPayload) => Promise<unknown>;
+};
 
-    // Send e-post til oss
-    await resend.emails.send({
+async function readBody(req: ContactRequest) {
+  if (req.body) {
+    return typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+  }
+
+  if (!req[Symbol.asyncIterator]) {
+    return {};
+  }
+
+  const chunks: Buffer[] = [];
+  const stream = req as AsyncIterable<Buffer | string>;
+  for await (const chunk of stream) {
+    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+  }
+
+  const raw = Buffer.concat(chunks).toString('utf8');
+  return raw ? JSON.parse(raw) : {};
+}
+
+function validatePayload(body: ContactPayload) {
+  const { bedriftsnavn, kontaktperson, stilling, epost } = body;
+
+  if (!bedriftsnavn || !kontaktperson || !stilling || !epost) {
+    return 'Mangler felt';
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(epost)) {
+    return 'Ugyldig e-post';
+  }
+
+  return null;
+}
+
+function buildEmails(body: Required<Pick<ContactPayload, 'bedriftsnavn' | 'kontaktperson' | 'stilling' | 'epost'>> & Pick<ContactPayload, 'melding'>) {
+  const { bedriftsnavn, kontaktperson, stilling, epost, melding } = body;
+
+  return [
+    {
       from: 'dotDAGENE <kontakt@dotdagene.no>',
       to: ['kontakt@dotdagene.no'],
       subject: `Henvendelse fra ${bedriftsnavn}`,
@@ -43,10 +84,8 @@ Melding:
 ${melding || '(tom)'}
 `.trim(),
       replyTo: epost,
-    }); 
-
-    // Vertifikasjon til avsender
-    await resend.emails.send({
+    },
+    {
       from: 'dotDAGENE <kontakt@dotdagene.no>',
       to: [epost],
       subject: 'Vi har mottatt henvendelsen din',
@@ -62,12 +101,51 @@ ${melding || '(ingen melding sendt inn)'}
 
 Hilsen dotDAGENE
 `.trim(),
-    });
+    },
+  ];
+}
 
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    //Error i mail, mailen kommer fortsatt frem til resend.com
-    console.error('contact-api error:', err);
-    return res.status(500).json({ error: 'Internal error' });
-  }
+export function createResendClient(): EmailClient {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  return {
+    send: (payload) => resend.emails.send(payload),
+  };
+}
+
+export function createContactHandler(emailClient: EmailClient = createResendClient()) {
+  return async function handler(req: ContactRequest, res: ContactResponse) {
+    try {
+      if (req.method !== 'POST') return res.status(405).end();
+
+      let body: ContactPayload;
+      try {
+        body = await readBody(req);
+      } catch {
+        return res.status(400).json({ error: 'Ugyldig JSON' });
+      }
+
+      const validationError = validatePayload(body || {});
+      if (validationError) {
+        return res.status(400).json({ error: validationError });
+      }
+
+      const emails = buildEmails(
+        body as Required<Pick<ContactPayload, 'bedriftsnavn' | 'kontaktperson' | 'stilling' | 'epost'>> &
+          Pick<ContactPayload, 'melding'>,
+      );
+
+      await emailClient.send(emails[0]);
+      await emailClient.send(emails[1]);
+
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('contact-api error:', err);
+      return res.status(500).json({ error: 'Internal error' });
+    }
+  };
+}
+
+export default async function handler(req: ContactRequest, res: ContactResponse) {
+  return createContactHandler()(req, res);
 }
