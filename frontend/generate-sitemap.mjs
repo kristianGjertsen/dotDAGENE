@@ -19,7 +19,7 @@ async function loadRoutes() {
 }
 
 function buildUrlEntry(route, lastmod) {
-  const { path, priority, changefreq, excludeFromSitemap } = route;
+  const { path, priority, changefreq, excludeFromSitemap, lastmod: routeLastmod } = route;
 
   if (excludeFromSitemap) {
     return null;
@@ -35,7 +35,7 @@ function buildUrlEntry(route, lastmod) {
 
   return `  <url>
     <loc>${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
+    <lastmod>${routeLastmod ?? lastmod}</lastmod>
     <changefreq>${changefreq ?? 'weekly'}</changefreq>
     <priority>${safePriority.toFixed(1)}</priority>
   </url>`;
