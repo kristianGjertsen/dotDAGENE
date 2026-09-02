@@ -10,11 +10,13 @@ const EVENT_LOC = 'NTNU Realfagbygget, U1';
 const EVENT_DESC = 'Stands under dotDAGENE – velkommen!';
 
 /**
- * 3. mars 2026 kl. 10:00–17:00 Europe/Oslo (CET = UTC+1)
- * UTC blir 09:00–16:00Z (ingen DST i starten av mars).
+ * 9. og 10. mars 2027 kl. 10:00-15:00 Europe/Oslo (CET = UTC+1)
+ * UTC blir 09:00-14:00Z (ingen DST i starten av mars).
  */
-const DTSTART_UTC = '20260303T090000Z';
-const DTEND_UTC = '20260303T160000Z';
+const DTSTART_UTC_DAY_1 = '20270309T090000Z';
+const DTEND_UTC_DAY_1 = '20270309T140000Z';
+const DTSTART_UTC_DAY_2 = '20270310T090000Z';
+const DTEND_UTC_DAY_2 = '20270310T140000Z';
 
 // --- Hjelpefunksjoner ---
 function escapeICS(s: string) {
@@ -40,7 +42,7 @@ function nowUtcStamp() {
   );
 }
 
-function buildICS({
+function buildEvent({
   uid,
   dtstampUtc,
   dtstartUtc,
@@ -59,12 +61,7 @@ function buildICS({
   description?: string;
   url?: string;
 }) {
-  const lines = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//dotDAGENE//Add-to-Calendar//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
+  return [
     'BEGIN:VEVENT',
     `UID:${uid}`,
     `DTSTAMP:${dtstampUtc}`,
@@ -75,8 +72,40 @@ function buildICS({
     description ? `DESCRIPTION:${escapeICS(description)}` : '',
     url ? `URL:${url}` : '',
     'END:VEVENT',
-    'END:VCALENDAR',
   ].filter(Boolean);
+}
+
+function buildICS() {
+  const dtstampUtc = nowUtcStamp();
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//dotDAGENE//Add-to-Calendar//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    ...buildEvent({
+      uid: `${crypto.randomUUID()}@${HOSTNAME}`,
+      dtstampUtc,
+      dtstartUtc: DTSTART_UTC_DAY_1,
+      dtendUtc: DTEND_UTC_DAY_1,
+      summary: `${EVENT_TITLE} - 9. mars`,
+      location: EVENT_LOC,
+      description: EVENT_DESC,
+      url: `${BASE_HTTP}/`,
+    }),
+    ...buildEvent({
+      uid: `${crypto.randomUUID()}@${HOSTNAME}`,
+      dtstampUtc,
+      dtstartUtc: DTSTART_UTC_DAY_2,
+      dtendUtc: DTEND_UTC_DAY_2,
+      summary: `${EVENT_TITLE} - 10. mars`,
+      location: EVENT_LOC,
+      description: EVENT_DESC,
+      url: `${BASE_HTTP}/`,
+    }),
+    'END:VCALENDAR',
+  ];
+
   return lines.join('\r\n');
 }
 
@@ -94,13 +123,6 @@ type EventResponse = {
 
 export default async function handler(req: EventRequest, res: EventResponse) {
   try {
-    // Log at handler is being called
-    console.log('Event API handler called:', {
-      method: req.method,
-      url: req.url,
-      timestamp: new Date().toISOString(),
-    });
-
     if (req.method !== 'GET') {
       return res.status(405).json({
         error: 'Method not allowed',
@@ -109,17 +131,7 @@ export default async function handler(req: EventRequest, res: EventResponse) {
       });
     }
 
-    const uid = `${crypto.randomUUID()}@${HOSTNAME}`;
-    const ics = buildICS({
-      uid,
-      dtstampUtc: nowUtcStamp(),
-      dtstartUtc: DTSTART_UTC,
-      dtendUtc: DTEND_UTC,
-      summary: EVENT_TITLE,
-      location: EVENT_LOC,
-      description: EVENT_DESC,
-      url: `${BASE_HTTP}/`,
-    });
+    const ics = buildICS();
 
     res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
     res.setHeader('Content-Disposition', 'inline; filename="dotdagene-stands.ics"');

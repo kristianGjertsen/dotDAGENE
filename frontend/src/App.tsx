@@ -39,7 +39,7 @@ const ScrollManager = () => {
     if (!location.hash) {
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
-  }, [location.pathname, location.search]);
+  }, [location.hash, location.pathname, location.search]);
 
   return null;
 };

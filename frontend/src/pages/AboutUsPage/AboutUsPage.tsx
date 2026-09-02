@@ -2,7 +2,6 @@ import { Footer } from '../../components/PageSections/Footer/Footer';
 import { Header } from '../../components/PageSections/Header/Header';
 import { LinkButton } from '../../components/Elements/LinkButton';
 import GroupImg from '../../assets/groupImg.jpg';
-//import TeamSection from './TeamSection';
 import { AppLayout } from '../../components/Layout/AppLayout';
 import { InfoWithButton } from '../../components/Elements/InfoWithButton';
 
