@@ -80,8 +80,8 @@ export const HomeJourneyLine = () => {
           const rect = anchor.getBoundingClientRect();
           const xRatio = clamp(
             Number.parseFloat(anchor.dataset.journeyX ?? '0.5'),
-            0,
-            1,
+            -0.15,
+            1.15,
           );
           const yRatio = clamp(
             Number.parseFloat(anchor.dataset.journeyY ?? '0.5'),
