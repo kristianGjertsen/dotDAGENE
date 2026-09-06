@@ -66,16 +66,11 @@ export const Countdown = () => {
 
   return (
     <section className="flex flex-col items-center gap-6 px-4">
-      <p className="text-primary text-sm font-semibold tracking-[0.18em] uppercase">
-        Neste dotDAGENE
-      </p>
-
       <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {countdownItems.map(({ key, label }, index) => (
+        {countdownItems.map(({ key, label }) => (
           <div
             key={key}
-            className="countdown-card-enter bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-2 border-black text-white transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none sm:h-28 sm:w-28 sm:hover:-translate-y-1 sm:hover:shadow-[6px_6px_0_0_#000] md:h-30 md:w-30"
-            style={{ animationDelay: `${index * 90}ms` }}
+            className="bg-primary mx-auto flex h-24 w-24 flex-col items-center justify-center border-2 border-black text-white sm:h-28 sm:w-28 md:h-30 md:w-30"
           >
             <div className="number-container h-12 sm:h-16">
               <div
@@ -95,14 +90,12 @@ export const Countdown = () => {
           </div>
         ))}
       </div>
-
-      <div className="text-center">
+      <div>
         9 og 10. februar 2027 ·&nbsp;
         <a
           href="https://link.mazemap.com/aev0cjsq"
-          className="font-medium underline decoration-1 underline-offset-4 transition-[text-underline-offset] hover:underline-offset-8"
+          className="font-medium underline"
           target="_blank"
-          rel="noreferrer"
         >
           Realfagbygget U1, Gløshaugen
         </a>
