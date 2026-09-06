@@ -1,30 +1,15 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from 'react';
-
-type RevealDirection = 'up' | 'left' | 'right';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
-  direction?: RevealDirection;
-};
-
-const hiddenTransform: Record<RevealDirection, string> = {
-  up: 'translate-y-8',
-  left: '-translate-x-8',
-  right: 'translate-x-8',
 };
 
 export const Reveal = ({
   children,
   className = '',
   delay = 0,
-  direction = 'up',
 }: RevealProps) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -49,8 +34,8 @@ export const Reveal = ({
         observer.disconnect();
       },
       {
-        threshold: 0.16,
-        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.12,
+        rootMargin: '0px 0px -6% 0px',
       },
     );
 
@@ -61,8 +46,8 @@ export const Reveal = ({
   return (
     <div
       ref={elementRef}
-      className={`transition-[opacity,transform] duration-700 ease-out ${
-        visible ? 'translate-x-0 translate-y-0 opacity-100' : `opacity-0 ${hiddenTransform[direction]}`
+      className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -73,12 +58,14 @@ export const Reveal = ({
 
 export const ScrollJourney = ({ children }: { children: ReactNode }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const activePathRef = useRef<SVGPathElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const activePath = activePathRef.current;
-    if (!container || !activePath) return;
+    const progressLine = progressRef.current;
+    const dot = dotRef.current;
+    if (!container || !progressLine || !dot) return;
 
     const motionPreference = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
@@ -89,24 +76,17 @@ export const ScrollJourney = ({ children }: { children: ReactNode }) => {
     const update = () => {
       frame = 0;
 
-      if (motionPreference.matches) {
-        activePath.style.strokeDashoffset = '0';
-        activePath.style.opacity = '0.45';
-        return;
-      }
-
       const rect = container.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      const startOffset = viewportHeight * 0.72;
-      const travelDistance = Math.max(
-        rect.height - viewportHeight * 0.35,
-        viewportHeight,
-      );
-      const travelled = startOffset - rect.top;
-      const progress = Math.min(Math.max(travelled / travelDistance, 0), 1);
+      const start = viewportHeight * 0.7;
+      const distance = Math.max(rect.height - viewportHeight * 0.35, 1);
+      const progress = motionPreference.matches
+        ? 1
+        : Math.min(Math.max((start - rect.top) / distance, 0), 1);
 
-      activePath.style.strokeDashoffset = `${1 - progress}`;
-      activePath.style.opacity = `${0.35 + progress * 0.65}`;
+      progressLine.style.transform = `scaleY(${progress})`;
+      dot.style.top = `${progress * 100}%`;
+      dot.style.opacity = progress > 0.01 ? '1' : '0';
     };
 
     const requestUpdate = () => {
@@ -128,51 +108,23 @@ export const ScrollJourney = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative">
-      <svg
-        className="pointer-events-none absolute inset-0 z-[5] hidden h-full w-full sm:block"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+    <div ref={containerRef} className="relative w-full">
+      <div
+        className="pointer-events-none absolute top-12 bottom-12 left-2 z-0 hidden w-4 lg:block"
         aria-hidden="true"
       >
-        <path
-          d="M8 0 C8 8 92 7 92 18 S8 28 8 40 S92 50 92 62 S8 72 8 82 S92 92 92 100"
-          fill="none"
-          stroke="#677B4C"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          opacity="0.13"
+        <div className="bg-primary/15 absolute top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2" />
+        <div
+          ref={progressRef}
+          className="bg-primary absolute top-0 bottom-0 left-1/2 w-1 origin-top -translate-x-1/2 scale-y-0 rounded-full"
         />
-        <path
-          ref={activePathRef}
-          d="M8 0 C8 8 92 7 92 18 S8 28 8 40 S92 50 92 62 S8 72 8 82 S92 92 92 100"
-          pathLength="1"
-          fill="none"
-          stroke="#677B4C"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeDasharray="1"
-          strokeDashoffset="1"
-          vectorEffect="non-scaling-stroke"
+        <div
+          ref={dotRef}
+          className="bg-dotbackground border-primary absolute left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 opacity-0 transition-opacity duration-200"
         />
-        {[18, 40, 62, 82].map((y, index) => (
-          <circle
-            key={y}
-            cx={index % 2 === 0 ? 92 : 8}
-            cy={y}
-            r="1.1"
-            fill="#FFFBF1"
-            stroke="#677B4C"
-            strokeWidth="0.45"
-            vectorEffect="non-scaling-stroke"
-          />
-        ))}
-      </svg>
+      </div>
 
-      <div className="relative">{children}</div>
+      <div className="relative z-10 w-full">{children}</div>
     </div>
   );
 };
