@@ -15,6 +15,10 @@ import { LinkButton } from '../../components/Elements/LinkButton';
 import { BannerBig, BannerSmall, CalendarButton, Countdown } from '.';
 import { AppLayout } from '../../components/Layout/AppLayout';
 import StandMap from './StandMap/StandMap';
+import { Reveal, ScrollJourney } from './HomeMotion';
+
+const interactiveCardClass =
+  'transition-[transform,box-shadow] duration-300 ease-out motion-reduce:transition-none sm:hover:-translate-y-1 sm:hover:shadow-[8px_8px_0_0_#000]';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -34,7 +38,6 @@ export const HomePage = () => {
     }
 
     const hash = location.hash.replace('#', '');
-
     const element = document.getElementById(hash);
 
     if (element) {
@@ -51,8 +54,7 @@ export const HomePage = () => {
     <>
       <Header />
       <AppLayout>
-        {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
-        <h1 className="sr-only">dotDAGENE 2025</h1>
+        <h1 className="sr-only">dotDAGENE 2027</h1>
 
         <div className="relative left-1/2 block w-screen -translate-x-1/2 md:hidden">
           <BannerSmall />
@@ -61,119 +63,148 @@ export const HomePage = () => {
           <BannerBig />
         </div>
 
-        <Countdown />
-        <section className="px-6 py-20 sm:px-12 lg:px-20">
-          <InfoWithButton
-            titelChildren="Vi gjentar suksessen fra i fjor"
-            color="white"
-            backImg="white"
-            button={
-              <LinkButton link="/kontakt" color="primary" size="md">
-                Meld interesse
-              </LinkButton>
-            }
-          >
-            dotDAGENE er karrieredagene innen digitalisering og teknologi, og
-            etter suksessen fra i fjor gjennomføres arrangementet nå for andre
-            gang av informatikkstudenter ved NTNU. Vi bygger videre på
-            erfaringene fra det første arrangementet og samler fremtidens
-            IT-talenter med bransjeledende bedrifter.
-          </InfoWithButton>
-        </section>
-        <section className="px-6 py-20 sm:px-12 lg:px-20">
-          <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
-            <div className="flex w-full sm:w-1/2">
+        <Reveal delay={120}>
+          <Countdown />
+        </Reveal>
+
+        <ScrollJourney>
+          <Reveal>
+            <section className="px-6 py-20 sm:px-12 lg:px-20">
               <InfoWithButton
-                titelChildren="Flere hundre studenter"
+                titelChildren="Vi gjentar suksessen fra i fjor"
                 color="white"
                 backImg="white"
-                button={null}
-                icon={UserGroupIcon}
-              >
-                Velkommen til neste års møteplass for morgendagens teknologer!
-                Karrieredagene samler flere hundre studenter fra informatikk og
-                relaterte studieretninger.
-              </InfoWithButton>
-            </div>
-
-            <div className="flex w-full sm:w-1/2">
-              <InfoWithButton
-                titelChildren="Forrige dotDAGENE"
-                color="primary"
-                backImg="green"
-                icon={ClockIcon}
+                className={interactiveCardClass}
                 button={
-                  <LinkButton link="/forrige-dotdagene" color="white" size="md">
-                    Se dotDAGENE 2026
+                  <LinkButton link="/kontakt" color="primary" size="md">
+                    Meld interesse
                   </LinkButton>
                 }
               >
-                Se tilbake på dotDAGENE 2026 med deltakende bedrifter og
-                standkart.
+                dotDAGENE er karrieredagene innen digitalisering og teknologi,
+                og etter suksessen fra i fjor gjennomføres arrangementet nå for
+                andre gang av informatikkstudenter ved NTNU. Vi bygger videre
+                på erfaringene fra det første arrangementet og samler
+                fremtidens IT-talenter med bransjeledende bedrifter.
               </InfoWithButton>
-            </div>
-          </section>
-        </section>
+            </section>
+          </Reveal>
 
-        <section className="px-6 pt-10 pb-30 sm:px-12 lg:px-20">
-          <div className="flex flex-col flex-wrap items-center gap-20">
-            <div className="mx-auto max-w-5xl">
-              <h2 className="text-center text-4xl font-medium">
-                Oppdag mulighetene
-              </h2>
-              <p className="mt-5 text-center">
-                dotDAGENE 2027 samler studenter og bedrifter innen teknologi og
-                digitalisering. Her kan du bygge nettverk, utforske
-                karrieremuligheter og møte aktører fra bransjen. Arrangementet
-                er en arena for nye kontakter, faglig inspirasjon og samarbeid
-                mellom studenter og næringsliv.
-              </p>
-            </div>
-
-            <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10">
-              <div className="flex w-full">
+          <section className="px-6 py-20 sm:px-12 lg:px-20">
+            <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
+              <Reveal
+                className="flex w-full sm:w-1/2"
+                direction="left"
+                delay={80}
+              >
                 <InfoWithButton
-                  titelChildren="Stands"
-                  color="primary"
-                  backImg="green"
-                  button={<CalendarButton color="white" />}
-                  icon={BuildingOffice2Icon}
-                >
-                  <div className="flex w-full items-center justify-center">
-                    <p className="w-[80%]">
-                      Få egen stand på dotDAGENE og møt direkte med
-                      informatikkstudenter. Perfekt mulighet til å rekruttere de
-                      beste talentene innen digitalisering og teknologi.
-                    </p>
-                  </div>
-                </InfoWithButton>
-              </div>
-
-              <StandMap
-                title="Standkart for dotDAGENE 2027"
-                description="Hover eller trykk på standene for å se hvem som står hvor."
-              />
-
-              <div className="flex w-full">
-                <Info
-                  titelChildren="Kveldsarrangement"
+                  titelChildren="Flere hundre studenter"
                   color="white"
                   backImg="white"
-                  icon={SparklesIcon}
+                  button={null}
+                  icon={UserGroupIcon}
+                  className={interactiveCardClass}
                 >
-                  <div className="flex w-full items-center justify-center">
-                    <p className="w-[80%]">
-                      Etter en dag fylt med stands og faglige samtaler inviterer
-                      vi til et sosialt kveldsarrangement. Her får studenter og
-                      bedrifter mulighet til å møtes i en mer uformell setting,
-                      fortsette samtalene fra dagen og bygge relasjoner
-                    </p>
-                  </div>
-                </Info>
-              </div>
+                  Velkommen til neste års møteplass for morgendagens teknologer!
+                  Karrieredagene samler flere hundre studenter fra informatikk og
+                  relaterte studieretninger.
+                </InfoWithButton>
+              </Reveal>
+
+              <Reveal
+                className="flex w-full sm:w-1/2"
+                direction="right"
+                delay={180}
+              >
+                <InfoWithButton
+                  titelChildren="Forrige dotDAGENE"
+                  color="primary"
+                  backImg="green"
+                  icon={ClockIcon}
+                  className={interactiveCardClass}
+                  button={
+                    <LinkButton
+                      link="/forrige-dotdagene"
+                      color="white"
+                      size="md"
+                    >
+                      Se dotDAGENE 2026
+                    </LinkButton>
+                  }
+                >
+                  Se tilbake på dotDAGENE 2026 med deltakende bedrifter og
+                  standkart.
+                </InfoWithButton>
+              </Reveal>
             </section>
-          </div>
-        </section>
+          </section>
+
+          <section className="px-6 pt-10 pb-30 sm:px-12 lg:px-20">
+            <div className="flex flex-col flex-wrap items-center gap-20">
+              <Reveal className="mx-auto max-w-5xl">
+                <div>
+                  <h2 className="text-center text-4xl font-medium">
+                    Oppdag mulighetene
+                  </h2>
+                  <p className="mt-5 text-center">
+                    dotDAGENE 2027 samler studenter og bedrifter innen teknologi
+                    og digitalisering. Her kan du bygge nettverk, utforske
+                    karrieremuligheter og møte aktører fra bransjen.
+                    Arrangementet er en arena for nye kontakter, faglig
+                    inspirasjon og samarbeid mellom studenter og næringsliv.
+                  </p>
+                </div>
+              </Reveal>
+
+              <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10">
+                <Reveal className="flex w-full" direction="left">
+                  <InfoWithButton
+                    titelChildren="Stands"
+                    color="primary"
+                    backImg="green"
+                    button={<CalendarButton color="white" />}
+                    icon={BuildingOffice2Icon}
+                    className={interactiveCardClass}
+                  >
+                    <div className="flex w-full items-center justify-center">
+                      <p className="w-[80%]">
+                        Få egen stand på dotDAGENE og møt direkte med
+                        informatikkstudenter. Perfekt mulighet til å rekruttere
+                        de beste talentene innen digitalisering og teknologi.
+                      </p>
+                    </div>
+                  </InfoWithButton>
+                </Reveal>
+
+                <Reveal delay={100}>
+                  <StandMap
+                    title="Standkart for dotDAGENE 2027"
+                    description="Hover eller trykk på standene for å se hvem som står hvor."
+                  />
+                </Reveal>
+
+                <Reveal className="flex w-full" direction="right" delay={120}>
+                  <Info
+                    titelChildren="Kveldsarrangement"
+                    color="white"
+                    backImg="white"
+                    icon={SparklesIcon}
+                    className={interactiveCardClass}
+                  >
+                    <div className="flex w-full items-center justify-center">
+                      <p className="w-[80%]">
+                        Etter en dag fylt med stands og faglige samtaler inviterer
+                        vi til et sosialt kveldsarrangement. Her får studenter og
+                        bedrifter mulighet til å møtes i en mer uformell setting,
+                        fortsette samtalene fra dagen og bygge relasjoner.
+                      </p>
+                    </div>
+                  </Info>
+                </Reveal>
+              </section>
+            </div>
+          </section>
+        </ScrollJourney>
       </AppLayout>
       <Footer />
     </>
