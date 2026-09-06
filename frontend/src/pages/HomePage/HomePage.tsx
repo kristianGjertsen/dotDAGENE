@@ -75,7 +75,6 @@ export const HomePage = () => {
     }
 
     const hash = location.hash.replace('#', '');
-
     const element = document.getElementById(hash);
 
     if (element) {
@@ -102,7 +101,7 @@ export const HomePage = () => {
           <BannerBig />
         </div>
 
-        <div className="relative">
+        <div className="relative isolate">
           <HomeJourneyLine />
 
           <div className="home-scroll-reveal relative z-[6]">
@@ -110,35 +109,46 @@ export const HomePage = () => {
           </div>
 
           <section className="px-6 py-20 sm:px-12 lg:px-20">
-            <InfoWithButton
-              titelChildren="Vi gjentar suksessen fra i fjor"
-              color="white"
-              backImg="white"
-              className="home-card-motion home-scroll-reveal"
-              button={
-                <LinkButton link="/kontakt" color="primary" size="md">
-                  Meld interesse
-                </LinkButton>
-              }
+            <div
+              data-journey-anchor
+              data-journey-x="0.86"
+              data-journey-y="0.56"
             >
-              dotDAGENE er karrieredagene innen digitalisering og teknologi, og
-              etter suksessen fra i fjor gjennomføres arrangementet nå for andre
-              gang av informatikkstudenter ved NTNU. Vi bygger videre på
-              erfaringene fra det første arrangementet og samler fremtidens
-              IT-talenter med bransjeledende bedrifter.
-            </InfoWithButton>
+              <InfoWithButton
+                titelChildren="Vi gjentar suksessen fra i fjor"
+                color="white"
+                backImg="white"
+                className="home-card-motion"
+                button={
+                  <LinkButton link="/kontakt" color="primary" size="md">
+                    Meld interesse
+                  </LinkButton>
+                }
+              >
+                dotDAGENE er karrieredagene innen digitalisering og teknologi, og
+                etter suksessen fra i fjor gjennomføres arrangementet nå for andre
+                gang av informatikkstudenter ved NTNU. Vi bygger videre på
+                erfaringene fra det første arrangementet og samler fremtidens
+                IT-talenter med bransjeledende bedrifter.
+              </InfoWithButton>
+            </div>
           </section>
 
           <section className="px-6 py-20 sm:px-12 lg:px-20">
             <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
-              <div className="flex w-full sm:w-1/2">
+              <div
+                className="flex w-full sm:w-1/2"
+                data-journey-anchor
+                data-journey-x="0.18"
+                data-journey-y="0.52"
+              >
                 <InfoWithButton
                   titelChildren="Flere hundre studenter"
                   color="white"
                   backImg="white"
                   button={null}
                   icon={UserGroupIcon}
-                  className="home-card-motion home-scroll-reveal"
+                  className="home-card-motion"
                 >
                   Velkommen til neste års møteplass for morgendagens teknologer!
                   Karrieredagene samler flere hundre studenter fra informatikk og
@@ -146,13 +156,18 @@ export const HomePage = () => {
                 </InfoWithButton>
               </div>
 
-              <div className="flex w-full sm:w-1/2">
+              <div
+                className="flex w-full sm:w-1/2"
+                data-journey-anchor
+                data-journey-x="0.82"
+                data-journey-y="0.52"
+              >
                 <InfoWithButton
                   titelChildren="Forrige dotDAGENE"
                   color="primary"
                   backImg="green"
                   icon={ClockIcon}
-                  className="home-card-motion home-scroll-reveal home-scroll-reveal-delay"
+                  className="home-card-motion"
                   button={
                     <LinkButton link="/forrige-dotdagene" color="white" size="md">
                       Se dotDAGENE 2026
@@ -182,14 +197,19 @@ export const HomePage = () => {
               </div>
 
               <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10">
-                <div className="flex w-full">
+                <div
+                  className="flex w-full"
+                  data-journey-anchor
+                  data-journey-x="0.16"
+                  data-journey-y="0.56"
+                >
                   <InfoWithButton
                     titelChildren="Stands"
                     color="primary"
                     backImg="green"
                     button={<CalendarButton color="white" />}
                     icon={BuildingOffice2Icon}
-                    className="home-card-motion home-scroll-reveal"
+                    className="home-card-motion"
                   >
                     <div className="flex w-full items-center justify-center">
                       <p className="w-[80%]">
@@ -208,13 +228,18 @@ export const HomePage = () => {
                   />
                 </div>
 
-                <div className="flex w-full">
+                <div
+                  className="flex w-full"
+                  data-journey-anchor
+                  data-journey-x="0.84"
+                  data-journey-y="0.52"
+                >
                   <Info
                     titelChildren="Kveldsarrangement"
                     color="white"
                     backImg="white"
                     icon={SparklesIcon}
-                    className="home-card-motion home-scroll-reveal"
+                    className="home-card-motion"
                   >
                     <div className="flex w-full items-center justify-center">
                       <p className="w-[80%]">
