@@ -22,6 +22,11 @@
   text-align: center;
 }
 
+.countdown-card-enter {
+  opacity: 0;
+  animation: countdownCardEnter 0.55s ease-out forwards;
+}
+
 @keyframes slideIn {
   0% {
     transform: translateY(-100%);
@@ -37,12 +42,34 @@
 }
 
 @keyframes slideOut {
-  0%, 50% {
+  0%,
+  50% {
     transform: translateY(0);
     opacity: 1;
   }
   100% {
     transform: translateY(100%);
     opacity: 0;
+  }
+}
+
+@keyframes countdownCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .number-slide,
+  .number-slide-exit,
+  .countdown-card-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
