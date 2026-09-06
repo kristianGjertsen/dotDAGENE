@@ -1,0 +1,377 @@
+.footer-pattern-shell {
+  position: relative;
+}
+
+.footer-pattern {
+  --footer-pointer-x: 50%;
+  --footer-pointer-y: 50%;
+  --footer-shift-x: 0px;
+  --footer-shift-y: 0px;
+  --footer-shift-x-inverse: 0px;
+  --footer-shift-y-inverse: 0px;
+  isolation: isolate;
+}
+
+.footer-pattern__layer,
+.footer-pattern__color-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.footer-pattern__layer {
+  overflow: hidden;
+}
+
+.footer-pattern__image {
+  position: absolute;
+  inset: -3%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  will-change: transform, opacity, filter;
+}
+
+.footer-pattern__base {
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.footer-pattern__effect {
+  z-index: 1;
+  opacity: 0;
+}
+
+.footer-pattern__color-wash {
+  z-index: 2;
+  opacity: 0;
+}
+
+/* 1. Pulse: the pattern expands locally from the pointer. */
+.footer-pattern--pulse .footer-pattern__effect--pulse {
+  opacity: 0.62;
+  transform-origin: var(--footer-pointer-x) var(--footer-pointer-y);
+  -webkit-mask-image: radial-gradient(
+    circle 300px at var(--footer-pointer-x) var(--footer-pointer-y),
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 42%,
+    rgba(0, 0, 0, 0.36) 66%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    circle 300px at var(--footer-pointer-x) var(--footer-pointer-y),
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 42%,
+    rgba(0, 0, 0, 0.36) 66%,
+    transparent 82%
+  );
+  animation: footer-pattern-pulse 3.2s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.footer-pattern--pulse .footer-pattern__effect--pulse .footer-pattern__image {
+  filter: contrast(1.06);
+}
+
+@keyframes footer-pattern-pulse {
+  0%,
+  100% {
+    transform: scale(1.005);
+    opacity: 0.34;
+  }
+
+  50% {
+    transform: scale(1.065);
+    opacity: 0.7;
+  }
+}
+
+/* 2. Draw: a brighter band traces across the existing contour shapes. */
+.footer-pattern--draw .footer-pattern__effect--draw {
+  opacity: 0.72;
+  -webkit-mask-image: linear-gradient(
+    108deg,
+    transparent 24%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.82) 45%,
+    #000 50%,
+    rgba(0, 0, 0, 0.82) 55%,
+    rgba(0, 0, 0, 0.12) 66%,
+    transparent 76%
+  );
+  mask-image: linear-gradient(
+    108deg,
+    transparent 24%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.82) 45%,
+    #000 50%,
+    rgba(0, 0, 0, 0.82) 55%,
+    rgba(0, 0, 0, 0.12) 66%,
+    transparent 76%
+  );
+  -webkit-mask-size: 230% 100%;
+  mask-size: 230% 100%;
+  animation: footer-pattern-draw 5.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.footer-pattern--draw .footer-pattern__effect--draw .footer-pattern__image {
+  filter: invert(84%) sepia(14%) saturate(390%) hue-rotate(37deg) brightness(94%)
+    contrast(91%);
+}
+
+@keyframes footer-pattern-draw {
+  0%,
+  8% {
+    -webkit-mask-position: 170% 0;
+    mask-position: 170% 0;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.72;
+  }
+
+  82% {
+    opacity: 0.72;
+  }
+
+  92%,
+  100% {
+    -webkit-mask-position: -70% 0;
+    mask-position: -70% 0;
+    opacity: 0;
+  }
+}
+
+/* 3. Motion: two pattern copies move in opposite directions for soft parallax. */
+.footer-pattern--motion .footer-pattern__effect--motion-a {
+  opacity: 0.28;
+  transform: translate3d(var(--footer-shift-x), var(--footer-shift-y), 0) scale(1.035);
+  transition: transform 220ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.footer-pattern--motion .footer-pattern__effect--motion-b {
+  opacity: 0.38;
+  transform: translate3d(
+      var(--footer-shift-x-inverse),
+      var(--footer-shift-y-inverse),
+      0
+    )
+    scale(1.075);
+  transition: transform 320ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  -webkit-mask-image: radial-gradient(
+    circle 270px at var(--footer-pointer-x) var(--footer-pointer-y),
+    #000 0%,
+    rgba(0, 0, 0, 0.75) 46%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    circle 270px at var(--footer-pointer-x) var(--footer-pointer-y),
+    #000 0%,
+    rgba(0, 0, 0, 0.75) 46%,
+    transparent 78%
+  );
+}
+
+.footer-pattern--motion .footer-pattern__effect--motion-b .footer-pattern__image {
+  filter: contrast(1.1);
+}
+
+/* 4. Color: keep the footer dark while the pattern picks up brand-color light. */
+.footer-pattern--color .footer-pattern__effect--color {
+  opacity: 0.46;
+  -webkit-mask-image: radial-gradient(
+    circle 340px at var(--footer-pointer-x) var(--footer-pointer-y),
+    #000 0%,
+    rgba(0, 0, 0, 0.82) 38%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    circle 340px at var(--footer-pointer-x) var(--footer-pointer-y),
+    #000 0%,
+    rgba(0, 0, 0, 0.82) 38%,
+    transparent 78%
+  );
+}
+
+.footer-pattern--color .footer-pattern__effect--color .footer-pattern__image {
+  filter: invert(84%) sepia(13%) saturate(430%) hue-rotate(37deg) brightness(97%)
+    contrast(94%);
+  animation: footer-pattern-color-breathe 5s ease-in-out infinite;
+}
+
+.footer-pattern--color .footer-pattern__color-wash {
+  opacity: 0.68;
+  background:
+    radial-gradient(
+      circle 260px at var(--footer-pointer-x) var(--footer-pointer-y),
+      rgba(213, 222, 201, 0.24),
+      rgba(171, 188, 147, 0.11) 38%,
+      transparent 72%
+    ),
+    linear-gradient(115deg, rgba(103, 123, 76, 0.06), rgba(135, 160, 103, 0.14));
+  mix-blend-mode: screen;
+}
+
+@keyframes footer-pattern-color-breathe {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: scale(1.01);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.035);
+  }
+}
+
+.footer-animation-control {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 30;
+  width: min(440px, calc(100vw - 2rem));
+  transform: translate(-50%, -50%);
+  border: 1.5px solid #111;
+  border-radius: 14px;
+  background: rgba(255, 251, 241, 0.96);
+  padding: 0.65rem 0.85rem 0.6rem;
+  color: #111;
+  box-shadow: 0 8px 24px rgba(18, 25, 12, 0.12);
+  backdrop-filter: blur(9px);
+}
+
+.footer-animation-control__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.footer-animation-control__eyebrow {
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(17, 17, 17, 0.62);
+}
+
+.footer-animation-control__active {
+  font-weight: 700;
+}
+
+.footer-animation-control__slider {
+  --footer-slider-progress: 0%;
+  width: 100%;
+  height: 18px;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.footer-animation-control__slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    #677b4c 0%,
+    #677b4c var(--footer-slider-progress),
+    rgba(52, 62, 38, 0.18) var(--footer-slider-progress),
+    rgba(52, 62, 38, 0.18) 100%
+  );
+}
+
+.footer-animation-control__slider::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(52, 62, 38, 0.18);
+}
+
+.footer-animation-control__slider::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: #677b4c;
+}
+
+.footer-animation-control__slider::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  appearance: none;
+  border: 2px solid #fffbf1;
+  border-radius: 50%;
+  background: #343e26;
+  box-shadow: 0 0 0 1px #343e26;
+}
+
+.footer-animation-control__slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fffbf1;
+  border-radius: 50%;
+  background: #343e26;
+  box-shadow: 0 0 0 1px #343e26;
+}
+
+.footer-animation-control__slider:focus-visible {
+  outline: 2px solid #677b4c;
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+
+.footer-animation-control__labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 0.05rem;
+  font-size: 0.65rem;
+  color: rgba(17, 17, 17, 0.58);
+}
+
+.footer-animation-control__labels span:nth-child(2),
+.footer-animation-control__labels span:nth-child(3) {
+  text-align: center;
+}
+
+.footer-animation-control__labels span:last-child {
+  text-align: right;
+}
+
+@media (max-width: 520px) {
+  .footer-animation-control {
+    width: min(340px, calc(100vw - 1.25rem));
+    padding-inline: 0.7rem;
+  }
+
+  .footer-animation-control__labels {
+    font-size: 0.59rem;
+  }
+
+  .footer-pattern--pulse .footer-pattern__effect--pulse,
+  .footer-pattern--motion .footer-pattern__effect--motion-b,
+  .footer-pattern--color .footer-pattern__effect--color {
+    -webkit-mask-size: 135% 135%;
+    mask-size: 135% 135%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-pattern__effect,
+  .footer-pattern__effect .footer-pattern__image {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .footer-pattern--pulse .footer-pattern__effect--pulse {
+    transform: scale(1.02);
+    opacity: 0.42;
+  }
+
+  .footer-pattern--draw .footer-pattern__effect--draw {
+    -webkit-mask-position: 50% 0;
+    mask-position: 50% 0;
+    opacity: 0.46;
+  }
+}
