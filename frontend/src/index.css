@@ -49,22 +49,10 @@ body {
   transform: none;
 }
 
-.home-card-motion {
-  transition: box-shadow 180ms ease-out;
-}
-
-.home-card-motion:hover {
-  box-shadow: 6px 6px 0 rgb(103 123 76 / 16%);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .home-scroll-reveal {
     opacity: 1;
     transform: none;
-    transition: none;
-  }
-
-  .home-card-motion {
     transition: none;
   }
 }
