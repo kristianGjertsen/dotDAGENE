@@ -3,19 +3,36 @@ import { useLayoutEffect, useRef } from 'react';
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
-const buildSmoothPath = (points: { x: number; y: number }[]) => {
+type Point = { x: number; y: number };
+
+const buildNaturalPath = (points: Point[]) => {
   if (points.length < 2) {
     return '';
   }
 
+  // Cardinal/Catmull-Rom style interpolation gives us a continuous tangent
+  // through every anchor. That avoids the sharp direction changes the old
+  // midpoint curves could create while still letting the line weave across
+  // the page in the same spirit as the hero graphic.
+  const tension = 0.58;
   let d = `M ${points[0].x} ${points[0].y}`;
 
-  for (let index = 1; index < points.length; index += 1) {
-    const previous = points[index - 1];
-    const current = points[index];
-    const middleY = previous.y + (current.y - previous.y) / 2;
+  for (let index = 0; index < points.length - 1; index += 1) {
+    const p0 = points[index - 1] ?? points[index];
+    const p1 = points[index];
+    const p2 = points[index + 1];
+    const p3 = points[index + 2] ?? p2;
 
-    d += ` C ${previous.x} ${middleY}, ${current.x} ${middleY}, ${current.x} ${current.y}`;
+    const control1 = {
+      x: p1.x + ((p2.x - p0.x) * tension) / 6,
+      y: p1.y + ((p2.y - p0.y) * tension) / 6,
+    };
+    const control2 = {
+      x: p2.x - ((p3.x - p1.x) * tension) / 6,
+      y: p2.y - ((p3.y - p1.y) * tension) / 6,
+    };
+
+    d += ` C ${control1.x} ${control1.y}, ${control2.x} ${control2.y}, ${p2.x} ${p2.y}`;
   }
 
   return d;
@@ -24,17 +41,15 @@ const buildSmoothPath = (points: { x: number; y: number }[]) => {
 export const HomeJourneyLine = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const haloPathRef = useRef<SVGPathElement>(null);
   const linePathRef = useRef<SVGPathElement>(null);
 
   useLayoutEffect(() => {
     const root = rootRef.current;
     const svg = svgRef.current;
-    const haloPath = haloPathRef.current;
     const linePath = linePathRef.current;
     const container = root?.parentElement;
 
-    if (!root || !svg || !haloPath || !linePath || !container) {
+    if (!root || !svg || !linePath || !container) {
       return;
     }
 
@@ -60,10 +75,8 @@ export const HomeJourneyLine = () => {
       const progress = reducedMotion.matches
         ? 1
         : clamp((startLine - rect.top) / Math.max(distance, 1), 0, 1);
-      const offset = pathLength * (1 - progress);
 
-      haloPath.style.strokeDashoffset = `${offset}`;
-      linePath.style.strokeDashoffset = `${offset}`;
+      linePath.style.strokeDashoffset = `${pathLength * (1 - progress)}`;
     };
 
     const measure = () => {
@@ -101,20 +114,14 @@ export const HomeJourneyLine = () => {
         .sort((a, b) => a.y - b.y);
 
       const points = [
-        { x: rootRect.width + 24, y: 0 },
+        { x: rootRect.width + 32, y: 0 },
         ...measuredAnchors,
-        { x: -24, y: rootRect.height },
+        { x: -32, y: rootRect.height },
       ];
-      const d = buildSmoothPath(points);
 
-      haloPath.setAttribute('d', d);
-      linePath.setAttribute('d', d);
-
+      linePath.setAttribute('d', buildNaturalPath(points));
       pathLength = linePath.getTotalLength();
-      const dash = `${pathLength} ${pathLength}`;
-
-      haloPath.style.strokeDasharray = dash;
-      linePath.style.strokeDasharray = dash;
+      linePath.style.strokeDasharray = `${pathLength} ${pathLength}`;
       updateProgress();
     };
 
@@ -150,25 +157,15 @@ export const HomeJourneyLine = () => {
   return (
     <div
       ref={rootRef}
-      className="pointer-events-none absolute inset-y-0 left-1/2 z-[5] w-screen -translate-x-1/2 overflow-hidden"
+      className="pointer-events-none absolute inset-y-0 left-1/2 z-0 w-screen -translate-x-1/2 overflow-hidden"
       aria-hidden="true"
     >
       <svg ref={svgRef} className="h-full w-full" preserveAspectRatio="xMidYMid meet">
         <path
-          ref={haloPathRef}
-          fill="none"
-          stroke="#FFFBF1"
-          strokeWidth="11"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-          opacity="0.92"
-        />
-        <path
           ref={linePathRef}
           fill="none"
           stroke="#677B4C"
-          strokeWidth="5"
+          strokeWidth="10"
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
