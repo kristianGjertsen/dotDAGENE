@@ -84,19 +84,15 @@ export const HomePage = () => {
                 dotDAGENE er karrieredagene innen digitalisering og teknologi,
                 og etter suksessen fra i fjor gjennomføres arrangementet nå for
                 andre gang av informatikkstudenter ved NTNU. Vi bygger videre
-                på erfaringene fra det første arrangementet og samler
-                fremtidens IT-talenter med bransjeledende bedrifter.
+                på erfaringene fra det første arrangementet og samler fremtidens
+                IT-talenter med bransjeledende bedrifter.
               </InfoWithButton>
             </section>
           </Reveal>
 
           <section className="px-6 py-20 sm:px-12 lg:px-20">
             <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10 sm:flex-row">
-              <Reveal
-                className="flex w-full sm:w-1/2"
-                direction="left"
-                delay={80}
-              >
+              <Reveal className="flex w-full sm:w-1/2" delay={80}>
                 <InfoWithButton
                   titelChildren="Flere hundre studenter"
                   color="white"
@@ -111,11 +107,7 @@ export const HomePage = () => {
                 </InfoWithButton>
               </Reveal>
 
-              <Reveal
-                className="flex w-full sm:w-1/2"
-                direction="right"
-                delay={180}
-              >
+              <Reveal className="flex w-full sm:w-1/2" delay={160}>
                 <InfoWithButton
                   titelChildren="Forrige dotDAGENE"
                   color="primary"
@@ -149,15 +141,15 @@ export const HomePage = () => {
                   <p className="mt-5 text-center">
                     dotDAGENE 2027 samler studenter og bedrifter innen teknologi
                     og digitalisering. Her kan du bygge nettverk, utforske
-                    karrieremuligheter og møte aktører fra bransjen.
-                    Arrangementet er en arena for nye kontakter, faglig
-                    inspirasjon og samarbeid mellom studenter og næringsliv.
+                    karrieremuligheter og møte aktører fra bransjen. Arrangementet
+                    er en arena for nye kontakter, faglig inspirasjon og samarbeid
+                    mellom studenter og næringsliv.
                   </p>
                 </div>
               </Reveal>
 
               <section className="flex w-full flex-col items-stretch justify-center gap-x-4 gap-y-10">
-                <Reveal className="flex w-full" direction="left">
+                <Reveal className="flex w-full">
                   <InfoWithButton
                     titelChildren="Stands"
                     color="primary"
@@ -169,8 +161,8 @@ export const HomePage = () => {
                     <div className="flex w-full items-center justify-center">
                       <p className="w-[80%]">
                         Få egen stand på dotDAGENE og møt direkte med
-                        informatikkstudenter. Perfekt mulighet til å rekruttere
-                        de beste talentene innen digitalisering og teknologi.
+                        informatikkstudenter. Perfekt mulighet til å rekruttere de
+                        beste talentene innen digitalisering og teknologi.
                       </p>
                     </div>
                   </InfoWithButton>
@@ -183,7 +175,7 @@ export const HomePage = () => {
                   />
                 </Reveal>
 
-                <Reveal className="flex w-full" direction="right" delay={120}>
+                <Reveal className="flex w-full" delay={120}>
                   <Info
                     titelChildren="Kveldsarrangement"
                     color="white"
