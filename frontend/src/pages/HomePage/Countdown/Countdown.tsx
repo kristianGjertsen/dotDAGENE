@@ -67,6 +67,7 @@ export const Countdown = () => {
   return (
     <section className="flex flex-col items-center gap-6 px-4">
       <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {/*  */}
         {countdownItems.map(({ key, label }) => (
           <div
             key={key}
