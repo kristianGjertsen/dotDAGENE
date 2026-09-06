@@ -36,6 +36,43 @@ body {
   opacity: 0; /* Start usynlig før animasjonen starter */
 }
 
+.home-scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.99);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease-out;
+  will-change: opacity, transform;
+}
+
+.home-scroll-reveal-delay {
+  transition-delay: 110ms;
+}
+
+.home-scroll-reveal-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+.home-card-motion.home-scroll-reveal-visible:hover {
+  box-shadow: 8px 8px 0 rgb(103 123 76 / 20%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .home-card-motion.home-scroll-reveal-visible:hover {
+    box-shadow: none;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
