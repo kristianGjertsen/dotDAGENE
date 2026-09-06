@@ -100,11 +100,10 @@ export const HomeJourneyLine = () => {
         )
         .sort((a, b) => a.y - b.y);
 
-      const sideInset = clamp(rootRect.width * 0.055, 24, 78);
       const points = [
-        { x: rootRect.width - sideInset, y: 0 },
+        { x: rootRect.width + 24, y: 0 },
         ...measuredAnchors,
-        { x: sideInset, y: rootRect.height },
+        { x: -24, y: rootRect.height },
       ];
       const d = buildSmoothPath(points);
 
@@ -159,17 +158,17 @@ export const HomeJourneyLine = () => {
           ref={haloPathRef}
           fill="none"
           stroke="#FFFBF1"
-          strokeWidth="14"
+          strokeWidth="11"
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
-          opacity="0.94"
+          opacity="0.92"
         />
         <path
           ref={linePathRef}
           fill="none"
           stroke="#677B4C"
-          strokeWidth="6"
+          strokeWidth="5"
           strokeLinecap="round"
           strokeLinejoin="round"
           vectorEffect="non-scaling-stroke"
