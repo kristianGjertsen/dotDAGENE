@@ -116,7 +116,8 @@ export const ScrollJourney = ({ children }: { children: ReactNode }) => {
         <div className="bg-primary/15 absolute top-0 bottom-0 left-1/2 w-0.5 -translate-x-1/2" />
         <div
           ref={progressRef}
-          className="bg-primary absolute top-0 bottom-0 left-1/2 w-1 origin-top -translate-x-1/2 scale-y-0 rounded-full"
+          className="bg-primary absolute top-0 bottom-0 left-1/2 w-1 origin-top -translate-x-1/2 rounded-full"
+          style={{ transform: 'scaleY(0)' }}
         />
         <div
           ref={dotRef}
