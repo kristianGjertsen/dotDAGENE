@@ -183,7 +183,12 @@ export const HomePage = () => {
 
           <section className="px-6 pt-10 pb-30 sm:px-12 lg:px-20">
             <div className="flex flex-col flex-wrap items-center gap-20">
-              <div className="home-scroll-reveal relative z-[6] mx-auto max-w-5xl">
+              <div
+                className="home-scroll-reveal relative z-[6] mx-auto max-w-5xl"
+                data-journey-anchor
+                data-journey-x="1.08"
+                data-journey-y="0.5"
+              >
                 <h2 className="text-center text-4xl font-medium">
                   Oppdag mulighetene
                 </h2>
@@ -221,7 +226,12 @@ export const HomePage = () => {
                   </InfoWithButton>
                 </div>
 
-                <div className="home-scroll-reveal relative z-[6]">
+                <div
+                  className="home-scroll-reveal relative z-[6]"
+                  data-journey-anchor
+                  data-journey-x="-0.08"
+                  data-journey-y="0.5"
+                >
                   <StandMap
                     title="Standkart for dotDAGENE 2027"
                     description="Hover eller trykk på standene for å se hvem som står hvor."
