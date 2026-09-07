@@ -88,7 +88,6 @@ const AnimatedLogo = forwardRef<AnimatedLogoHandle, AnimatedLogoProps>(
         role="img"
         aria-label="dotDAGENE logo"
         onMouseEnter={startAnimation}
-        onMouseLeave={stopAnimation}
       >
         <rect
           x="187.198"
