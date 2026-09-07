@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -19,19 +20,20 @@ import AnimatedLogo from './AnimatedLogo';
 import './FooterPattern.css';
 
 type FooterAnimationMode =
-  | 'pulse'
   | 'draw'
   | 'motion'
   | 'color'
   | 'fusion'
-  | 'chaos';
+  | 'chaos'
+  | 'warp';
 
 type AnimationSettings = {
+  warpRadius: number;
+  warpMovement: number;
+  warpSoftness: number;
+  warpOpacity: number;
+
   baseOpacity: number;
-  pulseRadius: number;
-  pulseOpacity: number;
-  pulseScale: number;
-  pulseDuration: number;
   drawRadius: number;
   drawOpacity: number;
   drawBrightness: number;
@@ -44,8 +46,6 @@ type AnimationSettings = {
   colorRadius: number;
   colorOpacity: number;
   glowOpacity: number;
-  colorScale: number;
-  colorDuration: number;
   contentShift: number;
   chaosRotate: number;
 };
@@ -59,27 +59,28 @@ type ControlDefinition = {
   max: number;
   step: number;
   unit?: string;
-  modes: FooterAnimationMode[];
+  modes: readonly FooterAnimationMode[];
 };
 
 const footerAnimationModes: ReadonlyArray<{
   id: FooterAnimationMode;
   label: string;
 }> = [
-  { id: 'pulse', label: 'Puls' },
   { id: 'draw', label: 'Tegn' },
   { id: 'motion', label: 'Bevegelse' },
   { id: 'color', label: 'Farge' },
   { id: 'fusion', label: 'Alt' },
   { id: 'chaos', label: 'Kaos' },
+  { id: 'warp', label: 'Warp' },
 ];
 
 const baseSettings: AnimationSettings = {
+  warpRadius: 200,
+  warpMovement: 14,
+  warpSoftness: 90,
+  warpOpacity: 1,
+
   baseOpacity: 0.2,
-  pulseRadius: 340,
-  pulseOpacity: 0.82,
-  pulseScale: 1.18,
-  pulseDuration: 2.7,
   drawRadius: 125,
   drawOpacity: 0.86,
   drawBrightness: 1.22,
@@ -92,20 +93,12 @@ const baseSettings: AnimationSettings = {
   colorRadius: 340,
   colorOpacity: 0.46,
   glowOpacity: 0.68,
-  colorScale: 1.035,
-  colorDuration: 5,
   contentShift: 0,
   chaosRotate: 0,
 };
 
 const defaultsByMode: Record<FooterAnimationMode, AnimationSettings> = {
-  pulse: {
-    ...baseSettings,
-    baseOpacity: 0.16,
-    pulseRadius: 370,
-    pulseOpacity: 0.9,
-    pulseScale: 1.2,
-  },
+  warp: { ...baseSettings },
   draw: {
     ...baseSettings,
     baseOpacity: 0.055,
@@ -129,15 +122,11 @@ const defaultsByMode: Record<FooterAnimationMode, AnimationSettings> = {
     colorRadius: 370,
     colorOpacity: 0.58,
     glowOpacity: 0.76,
-    colorScale: 1.045,
   },
   fusion: {
     ...baseSettings,
+    warpMovement: 12,
     baseOpacity: 0.11,
-    pulseRadius: 320,
-    pulseOpacity: 0.55,
-    pulseScale: 1.1,
-    pulseDuration: 3.1,
     drawRadius: 115,
     drawOpacity: 0.68,
     drawBrightness: 1.25,
@@ -150,17 +139,12 @@ const defaultsByMode: Record<FooterAnimationMode, AnimationSettings> = {
     colorRadius: 330,
     colorOpacity: 0.36,
     glowOpacity: 0.48,
-    colorScale: 1.03,
-    colorDuration: 4.2,
     contentShift: 2,
   },
   chaos: {
     ...baseSettings,
+    warpMovement: 20,
     baseOpacity: 0.08,
-    pulseRadius: 430,
-    pulseOpacity: 1,
-    pulseScale: 1.32,
-    pulseDuration: 1.65,
     drawRadius: 185,
     drawOpacity: 1,
     drawBrightness: 1.65,
@@ -173,8 +157,6 @@ const defaultsByMode: Record<FooterAnimationMode, AnimationSettings> = {
     colorRadius: 500,
     colorOpacity: 0.82,
     glowOpacity: 1,
-    colorScale: 1.09,
-    colorDuration: 1.6,
     contentShift: 9,
     chaosRotate: 2.4,
   },
@@ -184,6 +166,43 @@ const combinedModes: FooterAnimationMode[] = ['fusion', 'chaos'];
 
 const controls: ControlDefinition[] = [
   {
+    key: 'warpRadius',
+    label: 'Warp radius',
+    min: 0,
+    max: 600,
+    step: 5,
+    unit: 'px',
+    modes: ['warp', ...combinedModes],
+  },
+  {
+    key: 'warpMovement',
+    label: 'Warp draglengde',
+    min: 0,
+    max: 40,
+    step: 1,
+    unit: 'px',
+    modes: ['warp', ...combinedModes],
+  },
+  {
+    key: 'warpSoftness',
+    label: 'Warp myk kant',
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: '%',
+    modes: ['warp', ...combinedModes],
+  },
+  {
+    key: 'warpOpacity',
+    label: 'Warp styrke',
+    min: 0,
+    max: 2,
+    step: 0.01,
+    unit: '',
+    modes: ['warp', ...combinedModes],
+  },
+
+  {
     key: 'baseOpacity',
     label: 'Bakgrunn opacity',
     min: 0,
@@ -192,43 +211,9 @@ const controls: ControlDefinition[] = [
     modes: footerAnimationModes.map((mode) => mode.id),
   },
   {
-    key: 'pulseRadius',
-    label: 'Puls radius',
-    min: 120,
-    max: 620,
-    step: 10,
-    unit: 'px',
-    modes: ['pulse', ...combinedModes],
-  },
-  {
-    key: 'pulseOpacity',
-    label: 'Puls styrke',
-    min: 0,
-    max: 1,
-    step: 0.02,
-    modes: ['pulse', ...combinedModes],
-  },
-  {
-    key: 'pulseScale',
-    label: 'Puls distortion',
-    min: 1,
-    max: 1.5,
-    step: 0.01,
-    modes: ['pulse', ...combinedModes],
-  },
-  {
-    key: 'pulseDuration',
-    label: 'Puls hastighet',
-    min: 0.7,
-    max: 7,
-    step: 0.1,
-    unit: 's',
-    modes: ['pulse', ...combinedModes],
-  },
-  {
     key: 'drawRadius',
     label: 'Tegne radius',
-    min: 40,
+    min: 0,
     max: 340,
     step: 5,
     unit: 'px',
@@ -245,7 +230,7 @@ const controls: ControlDefinition[] = [
   {
     key: 'drawBrightness',
     label: 'Tegne lysstyrke',
-    min: 0.8,
+    min: 0,
     max: 2,
     step: 0.02,
     modes: ['draw', ...combinedModes],
@@ -287,7 +272,7 @@ const controls: ControlDefinition[] = [
   {
     key: 'motionAScale',
     label: 'Motion scale 1',
-    min: 1,
+    min: 0,
     max: 1.3,
     step: 0.01,
     modes: ['motion', ...combinedModes],
@@ -295,7 +280,7 @@ const controls: ControlDefinition[] = [
   {
     key: 'motionBScale',
     label: 'Motion scale 2',
-    min: 1,
+    min: 0,
     max: 1.4,
     step: 0.01,
     modes: ['motion', ...combinedModes],
@@ -303,7 +288,7 @@ const controls: ControlDefinition[] = [
   {
     key: 'colorRadius',
     label: 'Farge radius',
-    min: 120,
+    min: 0,
     max: 700,
     step: 10,
     unit: 'px',
@@ -326,23 +311,6 @@ const controls: ControlDefinition[] = [
     modes: ['color', ...combinedModes],
   },
   {
-    key: 'colorScale',
-    label: 'Farge pust',
-    min: 1,
-    max: 1.2,
-    step: 0.005,
-    modes: ['color', ...combinedModes],
-  },
-  {
-    key: 'colorDuration',
-    label: 'Farge hastighet',
-    min: 0.7,
-    max: 9,
-    step: 0.1,
-    unit: 's',
-    modes: ['color', ...combinedModes],
-  },
-  {
     key: 'contentShift',
     label: 'Innhold parallax',
     min: 0,
@@ -361,6 +329,61 @@ const controls: ControlDefinition[] = [
     modes: ['chaos'],
   },
 ];
+
+const PRESETS_STORAGE_KEY = 'dotdagene.footer.presets.v1';
+
+type FooterPreset = {
+  id: string;
+  name: string;
+  activeMode: FooterAnimationMode;
+  settingsByMode: Record<FooterAnimationMode, AnimationSettings>;
+};
+
+// Merge missing controls with defaults, but keep Warp off in presets without it.
+const normalizePreset = (value: unknown): FooterPreset | null => {
+  if (!value || typeof value !== 'object') return null;
+  const preset = value as Partial<FooterPreset>;
+  if (
+    typeof preset.id !== 'string' ||
+    typeof preset.name !== 'string' ||
+    !footerAnimationModes.some(({ id }) => id === preset.activeMode)
+  )
+    return null;
+  const settingsByMode = Object.fromEntries(
+    footerAnimationModes.map(({ id }) => {
+      const settings = { ...defaultsByMode[id], warpOpacity: 0 };
+      const saved = preset.settingsByMode?.[id];
+      controls.forEach(({ key, min, max }) => {
+        const value = saved?.[key];
+        if (typeof value === 'number' && Number.isFinite(value)) {
+          settings[key] = Math.min(max, Math.max(min, value));
+        }
+      });
+      return [id, settings];
+    }),
+  ) as Record<FooterAnimationMode, AnimationSettings>;
+  return {
+    id: preset.id,
+    name: preset.name,
+    activeMode: preset.activeMode!,
+    settingsByMode,
+  };
+};
+
+const readPresets = (): FooterPreset[] => {
+  try {
+    const saved: unknown = JSON.parse(
+      localStorage.getItem(PRESETS_STORAGE_KEY) ?? '[]',
+    );
+    return Array.isArray(saved)
+      ? saved
+          .map(normalizePreset)
+          .filter((preset): preset is FooterPreset => preset !== null)
+      : [];
+  } catch {
+    return [];
+  }
+};
 
 // Function to randomly return a rotation class for the background image
 const getRandomBackImageRotation = () => {
@@ -387,6 +410,12 @@ const formatSettingValue = (control: ControlDefinition, value: number) => {
 };
 
 export const Footer = () => {
+  const warpFilterId = useId();
+  const warpMapRef = useRef<SVGFEImageElement>(null);
+  const warpDisplacementRef = useRef<SVGFEDisplacementMapElement>(null);
+  const warpFollowerRef = useRef({ x: 0.5, y: 0.5 });
+  const warpLastPointerRef = useRef({ x: 0.5, y: 0.5 });
+  const warpDragRef = useRef({ x: 0, y: 0 });
   const backImageRotation = useMemo(() => getRandomBackImageRotation(), []);
   const mailIconRef = useRef<IconHandle>(null);
   const calendarIconRef = useRef<IconHandle>(null);
@@ -395,19 +424,30 @@ export const Footer = () => {
   const pointerFrameRef = useRef<number | null>(null);
   const trailFrameRef = useRef<number | null>(null);
   const pointerTargetRef = useRef({ x: 0.5, y: 0.5 });
-  const trailRef = useRef([
-    { x: 0.5, y: 0.5 },
-    { x: 0.5, y: 0.5 },
-    { x: 0.5, y: 0.5 },
-    { x: 0.5, y: 0.5 },
-  ]);
+  const trailRef = useRef<
+    {
+      x: number;
+      y: number;
+      time: number;
+      offsetX: number;
+      offsetY: number;
+      widthScale: number;
+      fadeDuration: number;
+      fadePower: number;
+    }[]
+  >([]);
   const pointerInsideRef = useRef(false);
   const [animationIndex, setAnimationIndex] = useState(0);
   const [panelOpen, setPanelOpen] = useState(true);
+  const [copyStatus, setCopyStatus] = useState('');
+  const [presets, setPresets] = useState<FooterPreset[]>(readPresets);
+  const [presetName, setPresetName] = useState('');
+  const [presetStatus, setPresetStatus] = useState('');
+  const [activePresetId, setActivePresetId] = useState<string | null>(null);
   const [settingsByMode, setSettingsByMode] = useState<
     Record<FooterAnimationMode, AnimationSettings>
   >(() => ({
-    pulse: { ...defaultsByMode.pulse },
+    warp: { ...defaultsByMode.warp },
     draw: { ...defaultsByMode.draw },
     motion: { ...defaultsByMode.motion },
     color: { ...defaultsByMode.color },
@@ -417,6 +457,10 @@ export const Footer = () => {
 
   const activeAnimation = footerAnimationModes[animationIndex];
   const activeSettings = settingsByMode[activeAnimation.id];
+  const warpSettingsRef = useRef(activeSettings);
+  useEffect(() => {
+    warpSettingsRef.current = activeSettings;
+  }, [activeSettings]);
   const activeControls = controls.filter((control) =>
     control.modes.includes(activeAnimation.id),
   );
@@ -451,15 +495,109 @@ export const Footer = () => {
 
     const target = pointerTargetRef.current;
     const trail = trailRef.current;
-    const follow = [0.22, 0.14, 0.09, 0.055];
-
-    trail.forEach((point, index) => {
-      const leader = index === 0 ? target : trail[index - 1];
-      point.x += (leader.x - point.x) * follow[index];
-      point.y += (leader.y - point.y) * follow[index];
-      footer.style.setProperty(`--footer-trail-${index + 1}-x`, `${point.x * 100}%`);
-      footer.style.setProperty(`--footer-trail-${index + 1}-y`, `${point.y * 100}%`);
-    });
+    // Displace the original pattern smoothly in the direction of travel.
+    // Neutral channels outside the radius leave the rest of the pattern untouched.
+    const settings = warpSettingsRef.current;
+    const follower = warpFollowerRef.current;
+    const width = footer.clientWidth;
+    const height = footer.clientHeight;
+    // Hold the last drag when stationary; only new movement changes it.
+    const previous = warpLastPointerRef.current;
+    if (target.x !== previous.x || target.y !== previous.y) {
+      const dx = (target.x - follower.x) * width;
+      const dy = (target.y - follower.y) * height;
+      const divisor = Math.max(60, Math.hypot(dx, dy));
+      warpDragRef.current = { x: dx / divisor, y: dy / divisor };
+      follower.x += (target.x - follower.x) * 0.14;
+      follower.y += (target.y - follower.y) * 0.14;
+      warpLastPointerRef.current = { ...target };
+    }
+    const red = 50 - warpDragRef.current.x * 50;
+    const green = 50 - warpDragRef.current.y * 50;
+    const radius = Math.max(1, settings.warpRadius);
+    const inner = Math.min(60, 100 - settings.warpSoftness);
+    const map = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><defs><radialGradient id="drag" gradientUnits="userSpaceOnUse" cx="${target.x * width}" cy="${target.y * height}" r="${radius}"><stop offset="${inner}%" stop-color="rgb(${red}%,${green}%,50%)"/><stop offset="100%" stop-color="rgb(50%,50%,50%)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#drag)"/></svg>`;
+    warpMapRef.current?.setAttribute(
+      'href',
+      `data:image/svg+xml,${encodeURIComponent(map)}`,
+    );
+    warpDisplacementRef.current?.setAttribute(
+      'scale',
+      `${2 * Math.min(settings.warpMovement, settings.warpRadius * 0.12) * settings.warpOpacity}`,
+    );
+    // Store the actual path; old sections fade in place instead of chasing the pointer.
+    const now = performance.now();
+    const lifetime = 700;
+    const last = trail[trail.length - 1];
+    if (
+      !last ||
+      Math.hypot((target.x - last.x) * width, (target.y - last.y) * height) > 1
+    ) {
+      // Sample randomness once per point and blend it with the previous point
+      // to get gentle wandering without flickering between animation frames.
+      trail.push({
+        ...target,
+        time: now,
+        fadeDuration: lifetime * (0.65 + Math.random() * 0.9),
+        fadePower: 0.9 + Math.random() * 1.4,
+        offsetX: (last?.offsetX ?? 0) * 0.8 + (Math.random() - 0.5) * 0.4,
+        offsetY: (last?.offsetY ?? 0) * 0.8 + (Math.random() - 0.5) * 0.4,
+        widthScale:
+          (last?.widthScale ?? 1) * 0.8 + (0.7 + Math.random() * 0.6) * 0.2,
+      });
+    }
+    while (
+      trail.length &&
+      (now - trail[0].time > lifetime * 1.55 || trail.length > 180)
+    )
+      trail.shift();
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    const makeMask = (radius: number) => {
+      const strokeWidth = Math.max(8, radius * 0.65);
+      const points = trail.map((point) => ({
+        ...point,
+        x: point.x * width + point.offsetX * Math.min(radius * 0.35, 45),
+        y: point.y * height + point.offsetY * Math.min(radius * 0.35, 45),
+      }));
+      const segments = reducedMotion
+        ? ''
+        : points
+            .slice(1)
+            .map((point, index) => {
+              const previous = points[index];
+              const before = points[Math.max(0, index - 1)];
+              const after = points[Math.min(points.length - 1, index + 2)];
+              // Each section dissolves at its own pace, with randomness fixed
+              // at creation so the fade stays smooth over time.
+              const remaining = Math.max(
+                0,
+                1 - (now - point.time) / point.fadeDuration,
+              );
+              const strength = Math.pow(remaining, point.fadePower);
+              // Catmull–Rom control points keep the path smooth through turns.
+              const c1x = previous.x + (point.x - before.x) / 6;
+              const c1y = previous.y + (point.y - before.y) / 6;
+              const c2x = point.x - (after.x - previous.x) / 6;
+              const c2y = point.y - (after.y - previous.y) / 6;
+              return `<path d="M ${previous.x} ${previous.y} C ${c1x} ${c1y} ${c2x} ${c2y} ${point.x} ${point.y}" stroke="white" stroke-opacity="${strength}" stroke-width="${strokeWidth * (0.6 + remaining * 0.4) * point.widthScale}"/>`;
+            })
+            .join('');
+      // Use the footer's coordinates, not the path's narrow bounding box:
+      // vertical/horizontal trails otherwise clip the blur into straight edges.
+      const filterPadding = Math.ceil(strokeWidth);
+      const mask = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><defs><filter id="soft" filterUnits="userSpaceOnUse" x="${-filterPadding}" y="${-filterPadding}" width="${width + filterPadding * 2}" height="${height + filterPadding * 2}"><feGaussianBlur stdDeviation="${Math.max(2, strokeWidth * 0.12)}"/></filter><radialGradient id="head"><stop stop-color="white"/><stop offset="0.4" stop-color="white" stop-opacity="0.85"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient></defs><g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft)">${segments}</g><circle cx="${target.x * width}" cy="${target.y * height}" r="${radius}" fill="url(#head)"/></svg>`;
+      return `url("data:image/svg+xml,${encodeURIComponent(mask)}")`;
+    };
+    footer.style.setProperty(
+      '--footer-trail-mask',
+      makeMask(settings.drawRadius),
+    );
+    footer.style.setProperty(
+      '--footer-color-trail-mask',
+      makeMask(settings.colorRadius),
+    );
 
     trailFrameRef.current = requestAnimationFrame(updateTrailVariables);
   };
@@ -480,11 +618,24 @@ export const Footer = () => {
     if (!footer) return;
 
     const rect = footer.getBoundingClientRect();
-    const x = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
-    const y = Math.min(Math.max((event.clientY - rect.top) / rect.height, 0), 1);
+    const x = Math.min(
+      Math.max((event.clientX - rect.left) / rect.width, 0),
+      1,
+    );
+    const y = Math.min(
+      Math.max((event.clientY - rect.top) / rect.height, 0),
+      1,
+    );
 
+    if (!pointerInsideRef.current) {
+      trailRef.current = [];
+      warpFollowerRef.current = { x, y };
+      warpLastPointerRef.current = { x, y };
+      warpDragRef.current = { x: 0, y: 0 };
+    }
     pointerTargetRef.current = { x, y };
     pointerInsideRef.current = true;
+    footer.style.setProperty('--footer-pointer-active', '1');
 
     if (trailFrameRef.current === null) {
       trailFrameRef.current = requestAnimationFrame(updateTrailVariables);
@@ -502,6 +653,9 @@ export const Footer = () => {
 
   const handlePointerLeave = () => {
     pointerInsideRef.current = false;
+    warpDragRef.current = { x: 0, y: 0 };
+    footerRef.current?.style.setProperty('--footer-pointer-active', '0');
+    warpDisplacementRef.current?.setAttribute('scale', '0');
 
     if (pointerFrameRef.current !== null) {
       cancelAnimationFrame(pointerFrameRef.current);
@@ -513,11 +667,15 @@ export const Footer = () => {
     }
 
     pointerTargetRef.current = { x: 0.5, y: 0.5 };
-    trailRef.current = trailRef.current.map(() => ({ x: 0.5, y: 0.5 }));
+    trailRef.current = [];
+    footerRef.current?.style.removeProperty('--footer-trail-mask');
+    footerRef.current?.style.removeProperty('--footer-color-trail-mask');
     updatePointerVariables(0.5, 0.5);
   };
 
   const updateSetting = (key: SettingKey, value: number) => {
+    setActivePresetId(null);
+    setCopyStatus('');
     setSettingsByMode((current) => ({
       ...current,
       [activeAnimation.id]: {
@@ -528,18 +686,82 @@ export const Footer = () => {
   };
 
   const resetActiveSettings = () => {
+    setActivePresetId(null);
+    setCopyStatus('');
     setSettingsByMode((current) => ({
       ...current,
       [activeAnimation.id]: { ...defaultsByMode[activeAnimation.id] },
     }));
   };
 
+  const persistPresets = (next: FooterPreset[]) => {
+    try {
+      localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(next));
+      setPresets(next);
+      return true;
+    } catch {
+      setPresetStatus(
+        'Kunne ikke lagre. Nettleserens lagring er full eller utilgjengelig.',
+      );
+      return false;
+    }
+  };
+
+  const savePreset = () => {
+    const preset: FooterPreset = {
+      id: crypto.randomUUID(),
+      name:
+        presetName.trim() || `${activeAnimation.label} ${presets.length + 1}`,
+      activeMode: activeAnimation.id,
+      settingsByMode: structuredClone(settingsByMode),
+    };
+    if (persistPresets([...presets, preset])) {
+      setActivePresetId(preset.id);
+      setPresetName('');
+      setPresetStatus(`Lagret «${preset.name}».`);
+    }
+  };
+
+  const selectPreset = (preset: FooterPreset) => {
+    handlePointerLeave();
+    setSettingsByMode(structuredClone(preset.settingsByMode));
+    setAnimationIndex(
+      footerAnimationModes.findIndex(({ id }) => id === preset.activeMode),
+    );
+    setActivePresetId(preset.id);
+    setCopyStatus('');
+    setPresetStatus(`Valgt «${preset.name}».`);
+  };
+
+  const deletePreset = (preset: FooterPreset) => {
+    if (persistPresets(presets.filter(({ id }) => id !== preset.id))) {
+      if (activePresetId === preset.id) setActivePresetId(null);
+      setPresetStatus(`Slettet «${preset.name}».`);
+    }
+  };
+
+  const copyAllSettings = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        JSON.stringify(
+          {
+            activeMode: activeAnimation.id,
+            settingsByMode,
+          },
+          null,
+          2,
+        ),
+      );
+      setCopyStatus('Alle verdier er kopiert.');
+    } catch {
+      setCopyStatus(
+        'Kunne ikke kopiere. Sjekk nettleserens utklippstavletilgang og prøv igjen.',
+      );
+    }
+  };
+
   const footerStyle = {
     '--footer-base-opacity': activeSettings.baseOpacity,
-    '--footer-pulse-radius': `${activeSettings.pulseRadius}px`,
-    '--footer-pulse-opacity': activeSettings.pulseOpacity,
-    '--footer-pulse-scale': activeSettings.pulseScale,
-    '--footer-pulse-duration': `${activeSettings.pulseDuration}s`,
     '--footer-draw-radius': `${activeSettings.drawRadius}px`,
     '--footer-draw-opacity': activeSettings.drawOpacity,
     '--footer-draw-brightness': activeSettings.drawBrightness,
@@ -550,14 +772,71 @@ export const Footer = () => {
     '--footer-color-radius': `${activeSettings.colorRadius}px`,
     '--footer-color-opacity': activeSettings.colorOpacity,
     '--footer-glow-opacity': activeSettings.glowOpacity,
-    '--footer-color-scale': activeSettings.colorScale,
-    '--footer-color-duration': `${activeSettings.colorDuration}s`,
-    '--footer-chaos-rotate': `${activeSettings.chaosRotate}deg`,
-    '--footer-chaos-rotate-negative': `${-activeSettings.chaosRotate}deg`,
   } as CSSProperties;
 
   return (
     <div className="footer-pattern-shell">
+      <svg
+        width="0"
+        height="0"
+        aria-hidden="true"
+        focusable="false"
+        style={{ position: 'absolute' }}
+      >
+        <defs>
+          <filter
+            id={warpFilterId}
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feImage
+              ref={warpMapRef}
+              result="drag-map"
+              preserveAspectRatio="none"
+            />
+            <feDisplacementMap
+              ref={warpDisplacementRef}
+              scale={0}
+              in="SourceGraphic"
+              in2="drag-map"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+      <nav className="footer-presets" aria-label="Lagrede footer-presets">
+        <strong>Presets</strong>
+        <div className="footer-presets__list">
+          {presets.length === 0 && <span>Ingen lagrede presets ennå.</span>}
+          {presets.map((preset) => (
+            <div className="footer-presets__item" key={preset.id}>
+              <button
+                type="button"
+                aria-pressed={activePresetId === preset.id}
+                onClick={() => selectPreset(preset)}
+              >
+                {preset.name}
+              </button>
+              <button
+                type="button"
+                className="footer-presets__delete"
+                aria-label={`Slett preset ${preset.name}`}
+                title={`Slett ${preset.name}`}
+                onClick={() => deletePreset(preset)}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+        <span className="footer-presets__status" role="status">
+          {presetStatus}
+        </span>
+      </nav>
       <div className="footer-animation-control">
         <div className="footer-animation-control__topline">
           <span className="footer-animation-control__eyebrow">Mønster</span>
@@ -572,7 +851,10 @@ export const Footer = () => {
           max={footerAnimationModes.length - 1}
           step={1}
           value={animationIndex}
-          onChange={(event) => setAnimationIndex(Number(event.currentTarget.value))}
+          onChange={(event) => {
+            setAnimationIndex(Number(event.currentTarget.value));
+            setActivePresetId(null);
+          }}
           aria-label="Velg footer-animasjon"
           aria-valuetext={activeAnimation.label}
           style={
@@ -589,27 +871,55 @@ export const Footer = () => {
       </div>
 
       {panelOpen ? (
-        <aside className="footer-tuning-panel" aria-label="Animasjonsinnstillinger">
+        <aside
+          className="footer-tuning-panel"
+          aria-label="Animasjonsinnstillinger"
+        >
           <div className="footer-tuning-panel__header">
             <div>
-              <span className="footer-tuning-panel__eyebrow">Live controls</span>
+              <span className="footer-tuning-panel__eyebrow">
+                Live controls
+              </span>
               <strong>{activeAnimation.label}</strong>
             </div>
             <button type="button" onClick={() => setPanelOpen(false)}>
               Skjul
             </button>
           </div>
+          <form
+            className="footer-presets__save"
+            onSubmit={(event) => {
+              event.preventDefault();
+              savePreset();
+            }}
+          >
+            <input
+              aria-label="Navn på preset"
+              placeholder="Navn på preset (valgfritt)"
+              maxLength={80}
+              value={presetName}
+              onChange={(event) => setPresetName(event.currentTarget.value)}
+            />
+            <button type="submit">Lagre preset</button>
+          </form>
           <div className="footer-tuning-panel__actions">
             <span>{activeControls.length} variabler</span>
+            <button type="button" onClick={copyAllSettings}>
+              Kopier alle verdier
+            </button>
             <button type="button" onClick={resetActiveSettings}>
               Nullstill
             </button>
           </div>
           <div className="footer-tuning-panel__controls">
+            <span role="status">{copyStatus}</span>
             {activeControls.map((control) => {
               const value = activeSettings[control.key];
               return (
-                <label className="footer-tuning-panel__control" key={control.key}>
+                <label
+                  className="footer-tuning-panel__control"
+                  key={control.key}
+                >
                   <span>
                     <span>{control.label}</span>
                     <output>{formatSettingValue(control, value)}</output>
@@ -621,7 +931,10 @@ export const Footer = () => {
                     step={control.step}
                     value={value}
                     onChange={(event) =>
-                      updateSetting(control.key, Number(event.currentTarget.value))
+                      updateSetting(
+                        control.key,
+                        Number(event.currentTarget.value),
+                      )
                     }
                   />
                 </label>
@@ -642,37 +955,43 @@ export const Footer = () => {
       <footer
         ref={footerRef}
         style={footerStyle}
-        className={`footer-pattern footer-pattern--${activeAnimation.id} relative overflow-hidden border-t-2 border-black bg-footer`}
+        className={`footer-pattern footer-pattern--${activeAnimation.id} bg-footer relative overflow-hidden border-t-2 border-black`}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
       >
-        <PatternLayer
-          className="footer-pattern__layer footer-pattern__base"
-          rotationClass={backImageRotation}
-        />
-        <PatternLayer
-          className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--pulse"
-          rotationClass={backImageRotation}
-        />
-        <PatternLayer
-          className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--draw"
-          rotationClass={backImageRotation}
-        />
-        <PatternLayer
-          className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--motion-a"
-          rotationClass={backImageRotation}
-        />
-        <PatternLayer
-          className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--motion-b"
-          rotationClass={backImageRotation}
-        />
-        <PatternLayer
-          className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--color"
-          rotationClass={backImageRotation}
-        />
-        <div className="footer-pattern__color-wash" aria-hidden="true" />
+        <div
+          className="footer-pattern__background"
+          aria-hidden="true"
+          style={
+            ['warp', 'fusion', 'chaos'].includes(activeAnimation.id)
+              ? { filter: `url(#${warpFilterId})` }
+              : undefined
+          }
+        >
+          <PatternLayer
+            className="footer-pattern__layer footer-pattern__base"
+            rotationClass={backImageRotation}
+          />
+          <PatternLayer
+            className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--draw"
+            rotationClass={backImageRotation}
+          />
+          <PatternLayer
+            className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--motion-a"
+            rotationClass={backImageRotation}
+          />
+          <PatternLayer
+            className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--motion-b"
+            rotationClass={backImageRotation}
+          />
+          <PatternLayer
+            className="footer-pattern__layer footer-pattern__effect footer-pattern__effect--color"
+            rotationClass={backImageRotation}
+          />
+          <div className="footer-pattern__color-wash" aria-hidden="true" />
+        </div>
 
-        <section className="footer-pattern__content relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 pb-4 pt-14 sm:px-12 sm:pt-12 lg:px-16 lg:pt-10">
+        <section className="footer-pattern__content relative z-10 mx-auto flex w-full max-w-[1400px] flex-col gap-8 px-8 pt-14 pb-4 sm:px-12 sm:pt-12 lg:px-16 lg:pt-10">
           <div className="flex flex-col gap-8 border-b-1 border-gray-100/80 pb-5 md:flex-row md:items-start md:justify-between">
             <section className="max-w-md">
               <AnimatedLogo className="md:mb-4" />
@@ -710,13 +1029,13 @@ export const Footer = () => {
             >
               <Mail
                 ref={mailIconRef}
-                className="h-8 w-8 shrink-0 text-tertiary"
+                className="text-tertiary h-8 w-8 shrink-0"
               />
               <div className="max-w-[220px]">
                 <p className="text-md font-semibold tracking-[0.2em]">E-post</p>
                 <a
                   href="mailto:kontakt@dotdagene.no"
-                  className="transition-colors duration-150 hover:text-tertiary"
+                  className="hover:text-tertiary transition-colors duration-150"
                 >
                   kontakt@dotdagene.no
                 </a>
@@ -729,7 +1048,7 @@ export const Footer = () => {
             >
               <CalendarDays
                 ref={calendarIconRef}
-                className="h-8 w-8 shrink-0 text-tertiary"
+                className="text-tertiary h-8 w-8 shrink-0"
               />
               <div className="max-w-[220px]">
                 <p className="text-md font-semibold tracking-[0.2em]">Dato</p>
@@ -743,7 +1062,7 @@ export const Footer = () => {
             >
               <MapPinIcon
                 ref={mapPinIconRef}
-                className="h-8 w-8 shrink-0 text-tertiary"
+                className="text-tertiary h-8 w-8 shrink-0"
               />
               <div className="max-w-[260px]">
                 <p className="text-md font-semibold tracking-[0.2em]">
@@ -753,7 +1072,7 @@ export const Footer = () => {
                   href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
                   target="_blank"
                   rel="noreferrer"
-                  className="transition-colors duration-150 hover:text-tertiary"
+                  className="hover:text-tertiary transition-colors duration-150"
                 >
                   Realfagbygget U1 NTNU Gløshaugen, Trondheim
                 </a>
