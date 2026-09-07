@@ -28,7 +28,7 @@ export const Footer = () => {
 
           <section className="flex flex-col gap-3 text-gray-100">
             <h2 className="text-lg md:text-2xl">Følg oss</h2>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full gap-4">
               <a
                 href="https://www.instagram.com/dotdagene/"
                 target="_blank"
@@ -53,12 +53,13 @@ export const Footer = () => {
             onMouseEnter={() => mailIconRef.current?.startAnimation()}
             onMouseLeave={() => mailIconRef.current?.stopAnimation()}
           >
-            <Mail
-              ref={mailIconRef}
-              className="text-tertiary h-8 w-8 shrink-0"
-            />
-            <div className="max-w-[220px]">
-              <p className="text-md font-semibold tracking-[0.2em]">E-post</p>
+
+            <div className="max-w-[220px] flex flex-col items-center">
+              <Mail
+                ref={mailIconRef}
+                size={35}
+                className="text-tertiary h-8 w-8 shrink-0 mb-2"
+              />
               <a
                 href="mailto:kontakt@dotdagene.no"
                 className="hover:text-tertiary transition-colors duration-150"
@@ -72,12 +73,12 @@ export const Footer = () => {
             onMouseEnter={() => calendarIconRef.current?.startAnimation()}
             onMouseLeave={() => calendarIconRef.current?.stopAnimation()}
           >
-            <CalendarDays
-              ref={calendarIconRef}
-              className="text-tertiary h-8 w-8 shrink-0"
-            />
-            <div className="max-w-[220px]">
-              <p className="text-md font-semibold tracking-[0.2em]">Dato</p>
+            <div className="max-w-[220px] flex flex-col items-center">
+              <CalendarDays
+                ref={calendarIconRef}
+                size={35}
+                className="text-tertiary h-8 w-8 shrink-0 mb-2"
+              />
               <p>9 og 10. februar 2027</p>
             </div>
           </div>
@@ -86,12 +87,13 @@ export const Footer = () => {
             onMouseEnter={() => mapPinIconRef.current?.startAnimation()}
             onMouseLeave={() => mapPinIconRef.current?.stopAnimation()}
           >
-            <MapPinIcon
-              ref={mapPinIconRef}
-              className="text-tertiary h-8 w-8 shrink-0"
-            />
-            <div className="max-w-[260px]">
-              <p className="text-md font-semibold tracking-[0.2em]">Lokasjon</p>
+
+            <div className="max-w-[220px] flex flex-col items-center text-center">
+              <MapPinIcon
+                ref={mapPinIconRef}
+                size={35}
+                className="text-tertiary h-8 w-8 shrink-0 mb-2"
+              />
               <a
                 href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
                 target="_blank"

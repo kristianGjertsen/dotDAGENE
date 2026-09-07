@@ -29,10 +29,10 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  will-change: transform, opacity, filter;
 }
 
 .footer-pattern__effect--draw {
+  display: none;
   opacity: var(--footer-draw-opacity);
   -webkit-mask-image: var(
     --footer-trail-mask,
@@ -50,14 +50,29 @@
     brightness(var(--footer-draw-brightness)) contrast(1.08);
 }
 
-.footer-pattern__effect--motion-a {
-  opacity: var(--footer-motion-a-opacity);
-  transform: translate3d(0, 0, 0) scale(var(--footer-motion-a-scale));
+.footer-pattern__static {
+  opacity: var(--footer-pattern-opacity);
+  transform: translate3d(0, 0, 0) scale(var(--footer-pattern-scale));
   transition: transform 150ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-.footer-pattern__effect--motion-a .footer-pattern__image {
+.footer-pattern__static .footer-pattern__image {
   filter: contrast(1.35) saturate(1.35);
+}
+
+/* Match animationMediaQuery in FooterPattern.tsx. */
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .footer-pattern__background {
+    filter: var(--footer-warp-filter);
+  }
+
+  .footer-pattern__effect--draw {
+    display: block;
+  }
+
+  .footer-pattern__image {
+    will-change: transform, opacity, filter;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
