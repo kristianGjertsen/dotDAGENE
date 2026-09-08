@@ -34,18 +34,12 @@
 .footer-pattern__effect--draw {
   display: none;
   opacity: var(--footer-draw-opacity);
-  -webkit-mask-image: var(
-    --footer-trail-mask,
-    linear-gradient(transparent, transparent)
-  );
-  mask-image: var(
-    --footer-trail-mask,
-    linear-gradient(transparent, transparent)
-  );
   mix-blend-mode: screen;
 }
 
-.footer-pattern__effect--draw .footer-pattern__image {
+.footer-pattern__draw-surface {
+  position: absolute;
+  inset: 0;
   filter: invert(84%) sepia(14%) saturate(390%) hue-rotate(37deg)
     brightness(var(--footer-draw-brightness)) contrast(1.08);
 }
