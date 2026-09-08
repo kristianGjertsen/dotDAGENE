@@ -143,6 +143,44 @@ const patternStyle = {
 } as CSSProperties;
 
 export const FooterPattern = ({ children }: { children: ReactNode }) => {
+  const isSafari =
+    typeof navigator !== 'undefined' &&
+    navigator.vendor === 'Apple Computer, Inc.' &&
+    /Safari\//.test(navigator.userAgent) &&
+    !/Chrome|Chromium|CriOS|Firefox|FxiOS|Edg|OPR/.test(navigator.userAgent);
+
+  return isSafari ? (
+    <StaticFooterPattern>{children}</StaticFooterPattern>
+  ) : (
+    <AnimatedFooterPattern>{children}</AnimatedFooterPattern>
+  );
+};
+
+const StaticFooterPattern = ({ children }: { children: ReactNode }) => {
+  const rotationClass = useMemo(
+    () => (Math.random() < 0.5 ? 'rotate-180' : ''),
+    [],
+  );
+
+  return (
+    <div className="footer-pattern-shell">
+      <footer
+        style={patternStyle}
+        className="footer-pattern bg-footer relative overflow-hidden border-t-2 border-black"
+      >
+        <div className="footer-pattern__background" aria-hidden="true">
+          <PatternLayer
+            className="footer-pattern__layer footer-pattern__static"
+            rotationClass={rotationClass}
+          />
+        </div>
+        {children}
+      </footer>
+    </div>
+  );
+};
+
+const AnimatedFooterPattern = ({ children }: { children: ReactNode }) => {
   const warpFilterId = useId();
   const renderWarpRef = useRef<ReturnType<typeof createWarpMap> | null>(null);
   const warpMapRef = useRef<SVGFEImageElement>(null);
