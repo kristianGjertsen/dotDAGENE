@@ -10,6 +10,7 @@ import {
 } from 'react';
 import backtemp from '../../../assets/backgroundInv.svg';
 import './FooterPattern.css';
+import { createSvgImageLoader } from './svgImageLoader';
 
 // Edit the appearance here. The static pattern remains visible behind the trail.
 const footerPatternSettings = {
@@ -48,6 +49,8 @@ type TrailPoint = Point & {
   fadePower: number;
 };
 
+// Intrinsic viewBox ratio of backgroundInv.svg, used to match CSS background-size: cover.
+const patternAspectRatio = 841.76 / 844.89;
 const { drawRadius } = footerPatternSettings;
 const strokeWidth = Math.max(8, drawRadius * 0.65);
 const filterPadding = Math.ceil(strokeWidth);
@@ -66,22 +69,30 @@ const warpScale =
 const animationMediaQuery =
   '(min-width: 768px) and (hover: hover) and (pointer: fine)';
 const lifetime = 700;
-const svgUrl = (svg: string) => `data:image/svg+xml,${encodeURIComponent(svg)}`;
-
-const makeWarpMap = (
-  target: Point,
-  drag: Point,
-  width: number,
-  height: number,
-) => {
-  const red = 50 - drag.x * 50;
-  const green = 50 - drag.y * 50;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><defs><radialGradient id="drag" gradientUnits="userSpaceOnUse" cx="${target.x * width}" cy="${target.y * height}" r="${warpRadius}"><stop offset="${warpInner}%" stop-color="rgb(${red}%,${green}%,50%)"/><stop offset="100%" stop-color="rgb(50%,50%,50%)"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#drag)"/></svg>`;
+// Draw the same gradient directly, without decoding an intermediate SVG image.
+const createWarpMap = () => {
+  const canvas = document.createElement('canvas');
+  const context = canvas.getContext('2d');
+  return (target: Point, drag: Point, width: number, height: number) => {
+    if (!context) return null;
+    if (canvas.width !== width) canvas.width = width;
+    if (canvas.height !== height) canvas.height = height;
+    const x = target.x * width;
+    const y = target.y * height;
+    const gradient = context.createRadialGradient(x, y, 0, x, y, warpRadius);
+    gradient.addColorStop(
+      warpInner / 100,
+      `rgb(${50 - drag.x * 50}%, ${50 - drag.y * 50}%, 50%)`,
+    );
+    gradient.addColorStop(1, 'rgb(50%, 50%, 50%)');
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, width, height);
+    return canvas.toDataURL('image/png');
+  };
 };
 
-const makeTrailMask = (
+const makeTrailPaths = (
   trail: TrailPoint[],
-  target: Point,
   width: number,
   height: number,
   now: number,
@@ -92,35 +103,36 @@ const makeTrailMask = (
     y: point.y * height + point.offsetY * trailOffset,
   }));
   const segments = reducedMotion
-    ? ''
-    : points
-        .map((point, pointIndex) => {
-          if (pointIndex === 0) return '';
-          const index = pointIndex - 1;
-          const sample = trail[pointIndex];
-          const previous = points[index];
-          const before = points[Math.max(0, index - 1)];
-          const after = points[Math.min(points.length - 1, index + 2)];
-          // Each section dissolves at its own pace, with randomness fixed
-          // at creation so the fade stays smooth over time.
-          const remaining = Math.max(
-            0,
-            1 - (now - sample.time) / sample.fadeDuration,
-          );
-          if (remaining === 0) return '';
-          const strength = Math.pow(remaining, sample.fadePower);
-          // Catmull–Rom control points keep the path smooth through turns.
-          const c1x = previous.x + (point.x - before.x) / 6;
-          const c1y = previous.y + (point.y - before.y) / 6;
-          const c2x = point.x - (after.x - previous.x) / 6;
-          const c2y = point.y - (after.y - previous.y) / 6;
-          return `<path d="M ${previous.x} ${previous.y} C ${c1x} ${c1y} ${c2x} ${c2y} ${point.x} ${point.y}" stroke="white" stroke-opacity="${strength}" stroke-width="${strokeWidth * (0.6 + remaining * 0.4) * sample.widthScale}"/>`;
-        })
-        .join('');
-  // Use the footer's coordinates, not the path's narrow bounding box:
-  // vertical/horizontal trails otherwise clip the blur into straight edges.
-  const mask = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><defs><filter id="soft" filterUnits="userSpaceOnUse" x="${-filterPadding}" y="${-filterPadding}" width="${width + filterPadding * 2}" height="${height + filterPadding * 2}"><feGaussianBlur stdDeviation="${trailBlur}"/></filter><radialGradient id="head"><stop stop-color="white"/><stop offset="0.4" stop-color="white" stop-opacity="0.85"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient></defs><g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft)">${segments}</g><circle cx="${target.x * width}" cy="${target.y * height}" r="${drawRadius}" fill="url(#head)"/></svg>`;
-  return `url("${svgUrl(mask)}")`;
+    ? []
+    : points.flatMap((point, pointIndex) => {
+        if (pointIndex === 0) return [];
+        const index = pointIndex - 1;
+        const sample = trail[pointIndex];
+        const previous = points[index];
+        const before = points[Math.max(0, index - 1)];
+        const after = points[Math.min(points.length - 1, index + 2)];
+        // Each section dissolves at its own pace, with randomness fixed
+        // at creation so the fade stays smooth over time.
+        const remaining = Math.max(
+          0,
+          1 - (now - sample.time) / sample.fadeDuration,
+        );
+        if (remaining === 0) return [];
+        const strength = Math.pow(remaining, sample.fadePower);
+        // Catmull–Rom control points keep the path smooth through turns.
+        const c1x = previous.x + (point.x - before.x) / 6;
+        const c1y = previous.y + (point.y - before.y) / 6;
+        const c2x = point.x - (after.x - previous.x) / 6;
+        const c2y = point.y - (after.y - previous.y) / 6;
+        return [
+          {
+            d: `M ${previous.x} ${previous.y} C ${c1x} ${c1y} ${c2x} ${c2y} ${point.x} ${point.y}`,
+            opacity: `${strength}`,
+            width: `${strokeWidth * (0.6 + remaining * 0.4) * sample.widthScale}`,
+          },
+        ];
+      });
+  return segments;
 };
 
 const patternStyle = {
@@ -132,9 +144,22 @@ const patternStyle = {
 
 export const FooterPattern = ({ children }: { children: ReactNode }) => {
   const warpFilterId = useId();
+  const renderWarpRef = useRef<ReturnType<typeof createWarpMap> | null>(null);
   const warpMapRef = useRef<SVGFEImageElement>(null);
   const warpDisplacementRef = useRef<SVGFEDisplacementMapElement>(null);
   const footerRef = useRef<HTMLElement>(null);
+  const trailSvgRef = useRef<SVGSVGElement>(null);
+  const trailPathsRef = useRef<SVGGElement>(null);
+  const trailHeadRef = useRef<SVGCircleElement>(null);
+  const trailBlurRef = useRef<SVGFilterElement>(null);
+  const trailImageRef = useRef<SVGGElement>(null);
+  const patternImageRef = useRef<SVGImageElement>(null);
+  const warpImageLoaderRef = useRef<ReturnType<
+    typeof createSvgImageLoader
+  > | null>(null);
+  const trailMaskId = `${warpFilterId}-trail`;
+  const trailBlurId = `${warpFilterId}-blur`;
+  const trailHeadId = `${warpFilterId}-head`;
   const mediaRef = useRef<MediaQueryList | null>(null);
   const animationMediaRef = useRef<MediaQueryList | null>(null);
   const backImageRotation = useMemo(
@@ -151,6 +176,7 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
     frame: null as number | null,
     warpKey: '',
     headKey: '',
+    sizeKey: '',
   });
 
   const updateTrail = () => {
@@ -163,6 +189,35 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
     const { target, trail, follower } = state;
     const width = footer.clientWidth;
     const height = footer.clientHeight;
+    const sizeKey = `${width},${height}`;
+    if (sizeKey !== state.sizeKey) {
+      trailSvgRef.current?.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      trailBlurRef.current?.setAttribute(
+        'width',
+        `${width + filterPadding * 2}`,
+      );
+      trailBlurRef.current?.setAttribute(
+        'height',
+        `${height + filterPadding * 2}`,
+      );
+      trailImageRef.current?.setAttribute(
+        'transform',
+        backImageRotation ? `rotate(180 ${width / 2} ${height / 2})` : '',
+      );
+      const imageWidth = Math.max(
+        width * 1.1,
+        height * 1.1 * patternAspectRatio,
+      );
+      const imageHeight = imageWidth / patternAspectRatio;
+      patternImageRef.current?.setAttribute('x', `${(width - imageWidth) / 2}`);
+      patternImageRef.current?.setAttribute(
+        'y',
+        `${(height - imageHeight) / 2}`,
+      );
+      patternImageRef.current?.setAttribute('width', `${imageWidth}`);
+      patternImageRef.current?.setAttribute('height', `${imageHeight}`);
+      state.sizeKey = sizeKey;
+    }
     // Hold the last drag when stationary; only new movement changes it.
     const previous = state.previous;
     if (target.x !== previous.x || target.y !== previous.y) {
@@ -178,11 +233,8 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
     // The warp map is unchanged during the fade; avoid decoding it again.
     const warpKey = `${target.x},${target.y},${width},${height}`;
     if (warpKey !== state.warpKey) {
-      warpMapRef.current?.setAttribute(
-        'href',
-        svgUrl(makeWarpMap(target, state.drag, width, height)),
-      );
-      warpDisplacementRef.current?.setAttribute('scale', `${warpScale}`);
+      const map = renderWarpRef.current?.(target, state.drag, width, height);
+      if (map) warpImageLoaderRef.current?.update(map);
       state.warpKey = warpKey;
     }
     // Store the actual path; old sections fade in place instead of chasing the pointer.
@@ -219,12 +271,38 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
       );
     const headKey = `${warpKey},${reducedMotion}`;
     // Keep the same sampling cadence and random sequence. Once only the head
-    // is visible, skip SVG generation and browser repaints until it changes.
+    // is visible, leave the mask untouched until the pointer changes.
     if (fading || headKey !== state.headKey) {
-      footer.style.setProperty(
-        '--footer-trail-mask',
-        makeTrailMask(trail, target, width, height, now, reducedMotion),
-      );
+      if (trailPathsRef.current) {
+        const group = trailPathsRef.current;
+        const segments = makeTrailPaths(
+          trail,
+          width,
+          height,
+          now,
+          reducedMotion,
+        );
+        // Reuse SVG nodes instead of reparsing/replacing the whole trail each frame.
+        segments.forEach((segment, index) => {
+          let path = group.children[index];
+          if (!path) {
+            path = document.createElementNS(
+              'http://www.w3.org/2000/svg',
+              'path',
+            );
+            path.setAttribute('stroke', 'white');
+            group.appendChild(path);
+          }
+          path.setAttribute('d', segment.d);
+          path.setAttribute('stroke-opacity', segment.opacity);
+          path.setAttribute('stroke-width', segment.width);
+        });
+        while (group.children.length > segments.length)
+          group.lastElementChild?.remove();
+      }
+      trailHeadRef.current?.setAttribute('cx', `${target.x * width}`);
+      trailHeadRef.current?.setAttribute('cy', `${target.y * height}`);
+      trailSvgRef.current?.style.setProperty('visibility', 'visible');
       state.headKey = fading ? '' : headKey;
     }
     state.frame = requestAnimationFrame(updateTrail);
@@ -265,10 +343,22 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
     if (state.frame !== null) cancelAnimationFrame(state.frame);
     state.frame = null;
     warpDisplacementRef.current?.setAttribute('scale', '0');
-    footerRef.current?.style.removeProperty('--footer-trail-mask');
+    warpImageLoaderRef.current?.reset();
+    trailSvgRef.current?.style.setProperty('visibility', 'hidden');
+    if (trailPathsRef.current) trailPathsRef.current.innerHTML = '';
   }, []);
 
   useEffect(() => {
+    renderWarpRef.current = createWarpMap();
+    warpImageLoaderRef.current = createSvgImageLoader((url) => {
+      warpMapRef.current?.setAttribute('href', url);
+      warpMapRef.current?.setAttributeNS(
+        'http://www.w3.org/1999/xlink',
+        'xlink:href',
+        url,
+      );
+      warpDisplacementRef.current?.setAttribute('scale', `${warpScale}`);
+    });
     mediaRef.current = window.matchMedia('(prefers-reduced-motion: reduce)');
     const media = window.matchMedia(animationMediaQuery);
     animationMediaRef.current = media;
@@ -285,11 +375,11 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
   return (
     <div className="footer-pattern-shell">
       <svg
-        width="0"
-        height="0"
+        width="100%"
+        height="100%"
         aria-hidden="true"
         focusable="false"
-        style={{ position: 'absolute' }}
+        style={{ position: 'absolute', pointerEvents: 'none' }}
       >
         <defs>
           <filter
@@ -331,10 +421,65 @@ export const FooterPattern = ({ children }: { children: ReactNode }) => {
             { '--footer-warp-filter': `url(#${warpFilterId})` } as CSSProperties
           }
         >
-          <PatternLayer
-            className="footer-pattern__layer footer-pattern__effect--draw"
-            rotationClass={backImageRotation}
-          />
+          <div className="footer-pattern__layer footer-pattern__effect--draw">
+            <div className="footer-pattern__draw-surface">
+              <svg
+                ref={trailSvgRef}
+                width="100%"
+                height="100%"
+                style={{ visibility: 'hidden' }}
+                aria-hidden="true"
+              >
+                <defs>
+                  <filter
+                    ref={trailBlurRef}
+                    id={trailBlurId}
+                    filterUnits="userSpaceOnUse"
+                    x={-filterPadding}
+                    y={-filterPadding}
+                  >
+                    <feGaussianBlur stdDeviation={trailBlur} />
+                  </filter>
+                  <radialGradient id={trailHeadId}>
+                    <stop offset="0" stopColor="white" />
+                    <stop offset="0.4" stopColor="white" stopOpacity="0.85" />
+                    <stop offset="1" stopColor="white" stopOpacity="0" />
+                  </radialGradient>
+                  <mask
+                    id={trailMaskId}
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    style={{ maskType: 'alpha' }}
+                  >
+                    <g
+                      ref={trailPathsRef}
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      filter={`url(#${trailBlurId})`}
+                    />
+                    <circle
+                      ref={trailHeadRef}
+                      r={drawRadius}
+                      fill={`url(#${trailHeadId})`}
+                    />
+                  </mask>
+                </defs>
+                <g mask={`url(#${trailMaskId})`}>
+                  <g ref={trailImageRef}>
+                    <image
+                      ref={patternImageRef}
+                      href={backtemp}
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
           <PatternLayer
             className="footer-pattern__layer footer-pattern__static"
             rotationClass={backImageRotation}

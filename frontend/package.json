@@ -15,7 +15,8 @@
     "generate-favicons": "node generate-favicons.js",
     "generate-og-image": "node generate-og-image.js",
     "generate-assets": "npm run generate-favicons && npm run generate-og-image",
-    "generate-qr": "node generate-qr.js"
+    "generate-qr": "node generate-qr.js",
+    "test:footer": "tsx --test tests/svgImageLoader.test.ts && playwright test"
   },
   "dependencies": {
     "@animateicons/react": "^0.4.3",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^24.10.0",
     "@types/react": "^19.1.10",
