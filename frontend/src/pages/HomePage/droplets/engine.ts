@@ -18,12 +18,25 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
     stage.className = 'stage';
     stage.style.backgroundColor = options.backgroundColor;
     stage.style.color = options.textColor;
+    const titleOffset = 0.08;
+    stage.style.setProperty('--title-offset', `${titleOffset * 100}svh`);
     const title = document.createElement('p');
     title.className = 'title';
     title.textContent = options.title;
     title.style.fontFamily = options.fontFamily;
     title.style.color = options.textColor;
     stage.append(title);
+    const details = document.createElement('div');
+    details.className = 'details';
+    details.style.fontFamily = options.fontFamily;
+    const subtitle = document.createElement('p');
+    subtitle.className = 'subtitle';
+    subtitle.textContent = 'Nyeste karrieredagene på NTNU';
+    const date = document.createElement('p');
+    date.className = 'date';
+    date.textContent = '9 og 10. februar';
+    details.append(subtitle, date);
+    stage.append(details);
     section.append(stage);
     root.replaceChildren(style, section);
     const events = new AbortController();
@@ -75,6 +88,7 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         uTextOverlay: { value: false }, uTextMask: { value: texture },
         uTextHoverColor: { value: rgb(options.hoverTextColor) },
         uResolution: { value: new THREE.Vector2(1, 1) },
+        uTitleOffset: { value: titleOffset },
         uPointerTrail: { value: trail }, uShowStaticBlob: { value: true },
     };
     const geometry = new THREE.PlaneGeometry(2, 2);

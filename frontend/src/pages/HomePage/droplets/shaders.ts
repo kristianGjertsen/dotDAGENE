@@ -22,6 +22,7 @@ uniform bool uTextOverlay;
 uniform sampler2D uTextMask;
 uniform vec3 uTextHoverColor;
 uniform vec2 uResolution;
+uniform float uTitleOffset;
 uniform vec2 uPointerTrail[TRAIL_LENGTH];
 uniform bool uShowStaticBlob;
 
@@ -130,9 +131,10 @@ float map(vec3 p) {
         d = addBlob(d, p, blobMotion(vec2(vp.x - 0.20, -0.50),
             vec2(vp.x * 0.25, 0.12), 0.28, 0.30, 0.24), mix(0.24, 0.18, progress), k);
 
-        // New large blob at the top.
+        // Move the upper blob by the same viewport fraction as the title.
         d = addBlob(d, p, blobMotion(vec2(-vp.x * 0.30, vp.y * 0.66),
-            vec2(-vp.x * 0.06, vp.y * 0.78), 0.50, 0.06, 0.42), mix(0.42, 0.36, progress), k);
+            vec2(-vp.x * 0.06, vp.y * 0.78), 0.50, 0.06, 0.42)
+            + vec2(0.0, 2.0 * uTitleOffset * vp.y), mix(0.42, 0.36, progress), k);
 
         // New small blob at the bottom.
         d = addBlob(d, p, blobMotion(vec2(-vp.x * 0.35, -vp.y * 0.68),

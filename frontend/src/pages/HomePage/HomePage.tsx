@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon,
@@ -20,6 +20,48 @@ import DropletHero from './droplets';
 
 export const HomePage = () => {
   const location = useLocation();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    const header = headerRef.current;
+    if (!hero || !header) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0;
+    const updateHeader = () => {
+      frame = 0;
+      // Fade in as the last part of the hero leaves the viewport.
+      const fadeStart = window.innerHeight * 0.6;
+      const fadeEnd = header.offsetHeight;
+      const progress = Math.max(0, Math.min(1,
+        (fadeStart - hero.getBoundingClientRect().bottom) / Math.max(1, fadeStart - fadeEnd),
+      ));
+      const opacity = reducedMotion.matches ? Number(progress > 0) : progress;
+      header.style.opacity = String(opacity);
+      header.style.visibility = opacity > 0 ? 'visible' : 'hidden';
+      header.inert = opacity === 0;
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateHeader);
+    };
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(hero);
+    observer.observe(header);
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    reducedMotion.addEventListener('change', scheduleUpdate);
+    updateHeader();
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      reducedMotion.removeEventListener('change', scheduleUpdate);
+    };
+  }, []);
 
   useEffect(() => {
     const previousOverflowX = document.body.style.overflowX;
@@ -51,12 +93,20 @@ export const HomePage = () => {
 
   return (
     <>
-      <Header />
+      <div
+        ref={headerRef}
+        className="fixed inset-x-0 top-0 z-40"
+        style={{ opacity: 0, visibility: 'hidden' }}
+      >
+        <Header />
+      </div>
       <AppLayout>
         {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
         <h1 className="sr-only">dotDAGENE 2025</h1>
 
-        <DropletHero scrollTarget="innhold" className="w-screen self-center" />
+        <div ref={heroRef} className="w-screen self-center">
+          <DropletHero scrollTarget="innhold" />
+        </div>
         <Countdown />
         <section className="px-6 py-20 sm:px-12 lg:px-20">
           <InfoWithButton
