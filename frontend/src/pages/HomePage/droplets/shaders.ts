@@ -93,7 +93,7 @@ vec2 blobMotion(vec2 start, vec2 end, float dip, float delay, float radius) {
     vec2 center = mix(start, end, smoothstep(0.0, 1.0, t));
     float arcDepth = dip * 1.8;
     center.y = start.y - 2.0 * arcDepth * t * (1.0 - t)
-        + (end.y - start.y + 0.16) * t * t;
+        + (end.y - start.y) * t * t;
 
     float fall = smoothstep(0.0, uIntroDuration, uIntroTime - delay * 0.7);
     float top = uResolution.y / min(uResolution.x, uResolution.y);
@@ -111,40 +111,42 @@ float map(vec3 p) {
     // Visible extents in your shader space.
     // On a wide screen this becomes roughly vec2(1.7, 1.0).
     vec2 vp = uResolution / min(uResolution.x, uResolution.y);
+    // Keep the final cluster compact even on wide or tall viewports.
+    vec2 clusterCenter = vec2(0.0, 2.0 * uTitleOffset * vp.y);
 
     // --- Decorative blobs: entrance drop + scroll arcs ---
     if (uShowStaticBlob) {
         float progress = smoothstep(0.0, 1.0, uScroll);
         // Left-middle: dip down, then rise toward the title.
         d = addBlob(d, p, blobMotion(vec2(-vp.x + 0.14, 0.0),
-            vec2(-vp.x * 0.32, 0.25), 0.42, 0.10, 0.32), mix(0.20, 0.32, progress), k);
+            clusterCenter + vec2(-0.24, -0.06), 0.42, 0.10, 0.32), mix(0.20, 0.32, progress), k);
 
         // Upper-left accent.
         d = addBlob(d, p, blobMotion(vec2(-vp.x + 0.38, 0.55),
-            vec2(-vp.x * 0.22, 0.72), 0.38, 0.0, 0.20), mix(0.14, 0.20, progress), k);
+            clusterCenter + vec2(-0.16, 0.20), 0.38, 0.0, 0.20), mix(0.14, 0.20, progress), k);
 
         // Upper-right, larger.
         d = addBlob(d, p, blobMotion(vec2(vp.x - 0.28, 0.42),
-            vec2(vp.x * 0.32, 0.64), 0.48, 0.18, 0.44), mix(0.34, 0.44, progress), k);
+            clusterCenter + vec2(0.22, 0.12), 0.48, 0.18, 0.44), mix(0.34, 0.44, progress), k);
 
         // Lower-right.
         d = addBlob(d, p, blobMotion(vec2(vp.x - 0.20, -0.50),
-            vec2(vp.x * 0.25, 0.12), 0.28, 0.30, 0.24), mix(0.24, 0.18, progress), k);
+            clusterCenter + vec2(0.20, -0.20), 0.28, 0.30, 0.24), mix(0.24, 0.18, progress), k);
 
-        // Move the upper blob by the same viewport fraction as the title.
-        d = addBlob(d, p, blobMotion(vec2(-vp.x * 0.30, vp.y * 0.66),
-            vec2(-vp.x * 0.06, vp.y * 0.78), 0.50, 0.06, 0.42)
-            + vec2(0.0, 2.0 * uTitleOffset * vp.y), mix(0.42, 0.36, progress), k);
+        // Preserve the raised starting position, then join the central cluster.
+        d = addBlob(d, p, blobMotion(vec2(-vp.x * 0.30, vp.y * 0.66) + clusterCenter,
+            clusterCenter + vec2(0.0, 0.26), 0.50, 0.06, 0.42), mix(0.42, 0.36, progress), k);
 
         // New small blob at the bottom.
         d = addBlob(d, p, blobMotion(vec2(-vp.x * 0.35, -vp.y * 0.68),
-            vec2(-vp.x * 0.08, -vp.y * 0.12), 0.20, 0.40, 0.15), mix(0.12, 0.15, progress), k);
+            clusterCenter + vec2(-0.06, -0.28), 0.20, 0.40, 0.15), mix(0.12, 0.15, progress), k);
     }
 
     // --- Pointer trail blobs ---
     for (int i = 0; i < TRAIL_LENGTH; i++) {
         float fi = float(i);
         vec2 pointerTrail = uPointerTrail[i] * uResolution / min(uResolution.x, uResolution.y);
+        pointerTrail = mix(pointerTrail, clusterCenter, smoothstep(0.4, 1.0, uScroll));
 
         float sphere = sdSphere(
             translate(p, vec3(pointerTrail, 0.0)),
