@@ -35,6 +35,8 @@ Komponenten har seks dekorative blobs, intro, scrollbuer, museblob med myk start
 | `blobColor` | `#78b74c` | Din siste grunnfarge; endelig farge påvirkes av glass/blanding |
 | `textColor` | `#1b7c20` | Vanlig tekstfarge |
 | `hoverTextColor` | `#000000` | Tekst under blobene |
+| `outlineColor` | `#000000` | Konturfarge utenfor blobene |
+| `outlineHoverColor` | `#ffffff` | Konturfarge under blobene, uten fargeinvertering |
 | `fontFamily` | `"Bricolage Grotesque", sans-serif` | Font, se nedenfor |
 | `colorSpeed` | `0.4` | Fargebevegelse; 0 stopper denne |
 | `introDuration` | `0.7` | Falltid i sekunder, pluss litt forsinkelse per blob |
@@ -42,7 +44,12 @@ Komponenten har seks dekorative blobs, intro, scrollbuer, museblob med myk start
 | `scrollTarget` | utelatt | ID til neste seksjon; viser scroll-lenke når angitt |
 | `className`, `style` | utelatt | Stil på komponentens ytre wrapper |
 
-Standardene følger de siste verdiene i kildekoden før oppryddingen. Ved endring av props startes effekten på nytt.
+Hero-fargene kan settes samlet i `frontend/src/index.css` med
+`--hero-background-color`, `--hero-blob-color`, `--hero-text-color`,
+`--hero-hover-text-color`, `--hero-outline-color` og `--hero-outline-hover-color`. Variablene leses ved
+montering; last siden på nytt etter CSS-fargeendringer. Eksplisitte farge-props
+overstyrer CSS-variablene. Uten variabler brukes standardene i tabellen.
+Ved endring av props startes effekten på nytt.
 
 ```tsx
 <DropletHero

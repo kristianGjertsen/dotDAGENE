@@ -21,6 +21,9 @@ uniform float uIntroTime;
 uniform bool uTextOverlay;
 uniform sampler2D uTextMask;
 uniform vec3 uTextHoverColor;
+uniform sampler2D uOutlineMask;
+uniform vec3 uOutlineColor;
+uniform vec3 uOutlineHoverColor;
 uniform vec2 uResolution;
 uniform float uTitleOffset;
 uniform vec2 uPointerTrail[TRAIL_LENGTH];
@@ -191,9 +194,11 @@ vec3 dropletColor(vec3 normal, vec3 rayDir) {
 
 void main() {
     float textMask = 0.0;
+    float outlineMask = 0.0;
     if (uTextOverlay) {
         textMask = texture2D(uTextMask, gl_FragCoord.xy / uResolution).a;
-        if (textMask < 0.001) discard;
+        outlineMask = texture2D(uOutlineMask, gl_FragCoord.xy / uResolution).a;
+        if (max(textMask, outlineMask) < 0.001) discard;
     }
     vec2 p = (gl_FragCoord.xy * 2.0 - uResolution) / min(uResolution.x, uResolution.y);
 
@@ -210,8 +215,14 @@ void main() {
     }
 
     if (uTextOverlay) {
-        if (dist >= EPS) discard;
-        gl_FragColor = vec4(uTextHoverColor, textMask);
+        bool underBlob = dist < EPS;
+        float fillAlpha = underBlob ? textMask : 0.0;
+        vec3 outlineColor = underBlob ? uOutlineHoverColor : uOutlineColor;
+        float alpha = outlineMask + fillAlpha * (1.0 - outlineMask);
+        if (alpha < 0.001) discard;
+        vec3 color = (outlineColor * outlineMask
+            + uTextHoverColor * fillAlpha * (1.0 - outlineMask)) / alpha;
+        gl_FragColor = vec4(color, alpha);
         return;
     }
 

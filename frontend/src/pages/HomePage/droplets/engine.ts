@@ -25,6 +25,7 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
     title.textContent = options.title;
     title.style.fontFamily = options.fontFamily;
     title.style.color = options.textColor;
+    title.style.webkitTextStrokeColor = options.outlineColor;
     stage.append(title);
     const details = document.createElement('div');
     details.className = 'details';
@@ -72,6 +73,7 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
     renderer.domElement.className = 'glass';
     overlay.domElement.className = 'hover';
     const titleCanvas = document.createElement('canvas');
+    const outlineCanvas = document.createElement('canvas');
     for (const canvas of [titleCanvas, renderer.domElement, overlay.domElement]) {
         canvas.setAttribute('aria-hidden', 'true');
         stage.append(canvas);
@@ -80,6 +82,7 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
     const rgb = (value: string) => new THREE.Color(value).convertLinearToSRGB();
     const mask = document.createElement('canvas');
     let texture = new THREE.CanvasTexture(mask);
+    let outlineTexture = new THREE.CanvasTexture(outlineCanvas);
     const trail = Array.from({ length: 15 }, () => new THREE.Vector2());
     const uniforms = {
         uTime: { value: 0 }, uScroll: { value: 0 }, uIntroTime: { value: 0 },
@@ -87,6 +90,9 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         uBlobColor: { value: rgb(options.blobColor) }, uBackgroundColor: { value: rgb(options.backgroundColor) },
         uTextOverlay: { value: false }, uTextMask: { value: texture },
         uTextHoverColor: { value: rgb(options.hoverTextColor) },
+        uOutlineMask: { value: outlineTexture },
+        uOutlineColor: { value: rgb(options.outlineColor) },
+        uOutlineHoverColor: { value: rgb(options.outlineHoverColor) },
         uResolution: { value: new THREE.Vector2(1, 1) },
         uTitleOffset: { value: titleOffset },
         uPointerTrail: { value: trail }, uShowStaticBlob: { value: true },
@@ -122,12 +128,18 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
             texture.dispose();
             texture = new THREE.CanvasTexture(mask);
             uniforms.uTextMask.value = texture;
+            outlineTexture.dispose();
+            outlineTexture = new THREE.CanvasTexture(outlineCanvas);
+            uniforms.uOutlineMask.value = outlineTexture;
         }
         titleCanvas.width = width;
         titleCanvas.height = height;
+        outlineCanvas.width = width;
+        outlineCanvas.height = height;
         const context = mask.getContext('2d');
         const titleContext = titleCanvas.getContext('2d');
-        if (!context || !titleContext) return;
+        const outlineContext = outlineCanvas.getContext('2d');
+        if (!context || !titleContext || !outlineContext) return;
         const computed = getComputedStyle(title);
         const range = document.createRange();
         range.selectNodeContents(title);
@@ -147,14 +159,21 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         // Use the same glyph raster for the visible fill and the hover mask.
         // Recreating HTML text independently in canvas can shift glyphs with
         // variable fonts, font stretch and responsive letter spacing.
-        titleContext.setTransform(context.getTransform());
-        titleContext.font = context.font;
-        titleContext.letterSpacing = context.letterSpacing;
-        titleContext.lineWidth = parseFloat(computed.webkitTextStrokeWidth) || 0;
-        titleContext.strokeStyle = computed.webkitTextStrokeColor;
-        if (titleContext.lineWidth > 0) titleContext.strokeText(options.title, 0, 0);
-        titleContext.resetTransform();
-        // Color only the fill; preserve the outline beneath it.
+        // Keep the outer stroke above the difference-blended glass. Cut out
+        // the shared fill mask so the outline does not cover the hover color.
+        outlineContext.setTransform(context.getTransform());
+        outlineContext.font = context.font;
+        outlineContext.letterSpacing = context.letterSpacing;
+        const strokeWidth = parseFloat(computed.webkitTextStrokeWidth) || 0;
+        if (strokeWidth > 0) {
+            outlineContext.lineWidth = strokeWidth;
+            outlineContext.strokeStyle = computed.webkitTextStrokeColor;
+            outlineContext.strokeText(options.title, 0, 0);
+        }
+        outlineContext.resetTransform();
+        outlineContext.globalCompositeOperation = 'destination-out';
+        outlineContext.drawImage(mask, 0, 0);
+        // Color only the fill; the shader samples the mask's unchanged alpha.
         context.globalCompositeOperation = 'source-in';
         context.fillStyle = options.textColor;
         context.resetTransform();
@@ -162,6 +181,7 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         titleContext.drawImage(mask, 0, 0);
         title.style.opacity = '0';
         texture.needsUpdate = true;
+        outlineTexture.needsUpdate = true;
     };
 
     const pointer = new THREE.Vector2();
@@ -242,6 +262,7 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         material.dispose();
         textMaterial.dispose();
         texture.dispose();
+        outlineTexture.dispose();
         for (const instance of [renderer, overlay]) { instance.dispose(); instance.forceContextLoss(); }
         root.replaceChildren();
     };

@@ -19,6 +19,16 @@ body {
   --color-footer: #343E26;
 }
 
+/* Hero-farger: separat konturfarge utenfor og under blobene. */
+:root {
+  --hero-background-color: #FFFBF1;
+  --hero-blob-color: #78b74c;
+  --hero-text-color: #1b7c20;
+  --hero-hover-text-color: #000000;
+  --hero-outline-color: #000000;
+  --hero-outline-hover-color: #1b7c20;
+}
+
 /* Header logo animasjon */
 @keyframes headerLogoFadeIn {
   from {
