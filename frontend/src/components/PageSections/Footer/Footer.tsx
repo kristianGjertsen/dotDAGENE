@@ -49,7 +49,7 @@ export const Footer = () => {
 
         <section className="flex flex-col items-center justify-center gap-5 text-center text-gray-100 md:flex-row md:items-stretch md:gap-20">
           <div
-            className="flex w-full max-w-[220px] flex-col items-center border border-red-500"
+            className="flex w-full max-w-[220px] flex-col items-center"
             onMouseEnter={() => mailIconRef.current?.startAnimation()}
             onMouseLeave={() => mailIconRef.current?.stopAnimation()}
           >
@@ -66,7 +66,7 @@ export const Footer = () => {
             </a>
           </div>
           <div
-            className="flex w-full max-w-[220px] flex-col items-center border border-red-500"
+            className="flex w-full max-w-[220px] flex-col items-center"
             onMouseEnter={() => mapPinIconRef.current?.startAnimation()}
             onMouseLeave={() => mapPinIconRef.current?.stopAnimation()}
           >
@@ -85,7 +85,7 @@ export const Footer = () => {
             </a>
           </div>
           <div
-            className="flex w-full max-w-[220px] flex-col items-center border border-red-500"
+            className="flex w-full max-w-[220px] flex-col items-center"
             onMouseEnter={() => calendarIconRef.current?.startAnimation()}
             onMouseLeave={() => calendarIconRef.current?.stopAnimation()}
           >
