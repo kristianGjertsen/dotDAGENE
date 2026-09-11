@@ -12,9 +12,11 @@ import { Header } from '../../components/PageSections/Header/Header';
 import { Info } from '../../components/Elements/Info';
 import { InfoWithButton } from '../../components/Elements/InfoWithButton';
 import { LinkButton } from '../../components/Elements/LinkButton';
-import { BannerBig, BannerSmall, CalendarButton, Countdown } from '.';
+import { CalendarButton, Countdown } from '.';
 import { AppLayout } from '../../components/Layout/AppLayout';
 import StandMap from './StandMap/StandMap';
+
+import DropletHero from './droplets';
 
 export const HomePage = () => {
   const location = useLocation();
@@ -54,13 +56,7 @@ export const HomePage = () => {
         {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
         <h1 className="sr-only">dotDAGENE 2025</h1>
 
-        <div className="relative left-1/2 block w-screen -translate-x-1/2 md:hidden">
-          <BannerSmall />
-        </div>
-        <div className="relative left-1/2 hidden w-screen -translate-x-1/2 md:block">
-          <BannerBig />
-        </div>
-
+        <DropletHero scrollTarget="innhold" className="w-screen self-center" />
         <Countdown />
         <section className="px-6 py-20 sm:px-12 lg:px-20">
           <InfoWithButton
