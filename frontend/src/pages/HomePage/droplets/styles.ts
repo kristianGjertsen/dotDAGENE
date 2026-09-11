@@ -7,7 +7,7 @@ section { all: initial; display: block; position: relative; }
     overflow: hidden; isolation: isolate; container-type: inline-size; }
 .title { all: initial; display: flex; justify-content: center; align-items: center;
     height: 100%; margin: 0; font-size: 15cqw; font-weight: 700; font-stretch: 85%;
-    letter-spacing: -0.06em; line-height: 1.15; white-space: nowrap;
+    letter-spacing: 0.0em; line-height: 1.15; white-space: nowrap;
     transform: translateY(calc(-1 * var(--title-offset)));
     user-select: none; -webkit-text-stroke: 10px black; paint-order: stroke fill; }
 .details { position: absolute; top: calc(50% - var(--title-offset) + 9cqw);

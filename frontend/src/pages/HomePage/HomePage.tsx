@@ -42,6 +42,8 @@ export const HomePage = () => {
       header.style.opacity = String(opacity);
       header.style.visibility = opacity > 0 ? 'visible' : 'hidden';
       header.inert = opacity === 0;
+      hero.style.opacity = String(1 - opacity);
+      hero.inert = opacity === 1;
     };
     const scheduleUpdate = () => {
       if (!frame) frame = window.requestAnimationFrame(updateHeader);
