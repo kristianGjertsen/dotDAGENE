@@ -146,10 +146,12 @@ float map(vec3 p) {
     }
 
     // --- Pointer trail blobs ---
+    // Keep the pointer responsive late in the scroll; fully gather only at 100%.
+    float pointerGather = pow(clamp(uScroll, 0.0, 1.0), 6.0);
     for (int i = 0; i < TRAIL_LENGTH; i++) {
         float fi = float(i);
         vec2 pointerTrail = uPointerTrail[i] * uResolution / min(uResolution.x, uResolution.y);
-        pointerTrail = mix(pointerTrail, clusterCenter, smoothstep(0.4, 1.0, uScroll));
+        pointerTrail = mix(pointerTrail, clusterCenter, pointerGather);
 
         float sphere = sdSphere(
             translate(p, vec3(pointerTrail, 0.0)),

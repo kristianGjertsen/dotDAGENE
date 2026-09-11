@@ -22,7 +22,18 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
     stage.style.setProperty('--title-offset', `${titleOffset * 100}svh`);
     const title = document.createElement('p');
     title.className = 'title';
-    title.textContent = options.title;
+    const titleText = document.createElement('span');
+    const titleParts = options.title === 'dotDAGENE'
+        ? [{ text: 'dot', weight: '400' }, { text: 'DAGENE', weight: '700' }]
+        : [{ text: options.title, weight: '700' }];
+    const titleRuns = titleParts.map(({ text, weight }) => {
+        const run = document.createElement('span');
+        run.textContent = text;
+        run.style.fontWeight = weight;
+        titleText.append(run);
+        return run;
+    });
+    title.append(titleText);
     title.style.fontFamily = options.fontFamily;
     title.style.color = options.textColor;
     title.style.webkitTextStrokeColor = options.outlineColor;
@@ -140,36 +151,39 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         const titleContext = titleCanvas.getContext('2d');
         const outlineContext = outlineCanvas.getContext('2d');
         if (!context || !titleContext || !outlineContext) return;
-        const computed = getComputedStyle(title);
-        const range = document.createRange();
-        range.selectNodeContents(title);
-        const bounds = range.getBoundingClientRect();
         const parent = stage.getBoundingClientRect();
-        context.font = `${computed.fontStyle} ${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
-        context.letterSpacing = computed.letterSpacing;
-        const metrics = context.measureText(options.title);
-        const ascent = metrics.fontBoundingBoxAscent;
-        const descent = metrics.fontBoundingBoxDescent;
-        context.translate(bounds.left - parent.left,
-            bounds.top - parent.top + (bounds.height - ascent - descent) / 2 + ascent);
-        context.scale(bounds.width / Math.max(metrics.width, 1), 1);
-        context.fillStyle = '#fff';
-        context.fillText(options.title, 0, 0);
+        // Measure each font weight in the DOM and use the same positioned
+        // glyphs for the visible title, hover mask and both outline colors.
+        for (const run of titleRuns) {
+            const computed = getComputedStyle(run);
+            const range = document.createRange();
+            range.selectNodeContents(run);
+            const bounds = range.getBoundingClientRect();
+            const text = run.textContent ?? '';
+            context.resetTransform();
+            context.font = `${computed.fontStyle} ${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
+            context.letterSpacing = computed.letterSpacing;
+            const metrics = context.measureText(text);
+            const ascent = metrics.fontBoundingBoxAscent;
+            const descent = metrics.fontBoundingBoxDescent;
+            context.translate(bounds.left - parent.left,
+                bounds.top - parent.top + (bounds.height - ascent - descent) / 2 + ascent);
+            context.scale(bounds.width / Math.max(metrics.width, 1), 1);
+            context.fillStyle = '#fff';
+            context.fillText(text, 0, 0);
 
-        // Use the same glyph raster for the visible fill and the hover mask.
-        // Recreating HTML text independently in canvas can shift glyphs with
-        // variable fonts, font stretch and responsive letter spacing.
-        // Keep the outer stroke above the difference-blended glass. Cut out
-        // the shared fill mask so the outline does not cover the hover color.
-        outlineContext.setTransform(context.getTransform());
-        outlineContext.font = context.font;
-        outlineContext.letterSpacing = context.letterSpacing;
-        const strokeWidth = parseFloat(computed.webkitTextStrokeWidth) || 0;
-        if (strokeWidth > 0) {
-            outlineContext.lineWidth = strokeWidth;
-            outlineContext.strokeStyle = computed.webkitTextStrokeColor;
-            outlineContext.strokeText(options.title, 0, 0);
+            outlineContext.setTransform(context.getTransform());
+            outlineContext.font = context.font;
+            outlineContext.letterSpacing = context.letterSpacing;
+            const strokeWidth = parseFloat(computed.webkitTextStrokeWidth) || 0;
+            if (strokeWidth > 0) {
+                outlineContext.lineWidth = strokeWidth;
+                outlineContext.strokeStyle = computed.webkitTextStrokeColor;
+                outlineContext.strokeText(text, 0, 0);
+            }
         }
+        // Cut out the complete fill after drawing all runs so adjoining
+        // outlines cannot cover the neighboring letters' hover color.
         outlineContext.resetTransform();
         outlineContext.globalCompositeOperation = 'destination-out';
         outlineContext.drawImage(mask, 0, 0);
