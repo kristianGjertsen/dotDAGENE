@@ -58,14 +58,15 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
     overlay.setClearColor(0x000000, 0);
     renderer.domElement.className = 'glass';
     overlay.domElement.className = 'hover';
-    for (const canvas of [renderer.domElement, overlay.domElement]) {
+    const titleCanvas = document.createElement('canvas');
+    for (const canvas of [titleCanvas, renderer.domElement, overlay.domElement]) {
         canvas.setAttribute('aria-hidden', 'true');
         stage.append(canvas);
     }
 
     const rgb = (value: string) => new THREE.Color(value).convertLinearToSRGB();
     const mask = document.createElement('canvas');
-    const texture = new THREE.CanvasTexture(mask);
+    let texture = new THREE.CanvasTexture(mask);
     const trail = Array.from({ length: 15 }, () => new THREE.Vector2());
     const uniforms = {
         uTime: { value: 0 }, uScroll: { value: 0 }, uIntroTime: { value: 0 },
@@ -98,10 +99,21 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         renderer.setSize(width, height);
         overlay.setSize(width, height);
         uniforms.uResolution.value.set(width, height);
+        const maskSizeChanged = mask.width !== width || mask.height !== height;
         mask.width = width;
         mask.height = height;
+        if (maskSizeChanged) {
+            // GPU texture storage cannot change dimensions after its first upload.
+            // Both materials share this uniform, so replace the texture together.
+            texture.dispose();
+            texture = new THREE.CanvasTexture(mask);
+            uniforms.uTextMask.value = texture;
+        }
+        titleCanvas.width = width;
+        titleCanvas.height = height;
         const context = mask.getContext('2d');
-        if (!context) return;
+        const titleContext = titleCanvas.getContext('2d');
+        if (!context || !titleContext) return;
         const computed = getComputedStyle(title);
         const range = document.createRange();
         range.selectNodeContents(title);
@@ -117,6 +129,24 @@ export function mountDroplets(host: HTMLElement, options: Options): () => void {
         context.scale(bounds.width / Math.max(metrics.width, 1), 1);
         context.fillStyle = '#fff';
         context.fillText(options.title, 0, 0);
+
+        // Use the same glyph raster for the visible fill and the hover mask.
+        // Recreating HTML text independently in canvas can shift glyphs with
+        // variable fonts, font stretch and responsive letter spacing.
+        titleContext.setTransform(context.getTransform());
+        titleContext.font = context.font;
+        titleContext.letterSpacing = context.letterSpacing;
+        titleContext.lineWidth = parseFloat(computed.webkitTextStrokeWidth) || 0;
+        titleContext.strokeStyle = computed.webkitTextStrokeColor;
+        if (titleContext.lineWidth > 0) titleContext.strokeText(options.title, 0, 0);
+        titleContext.resetTransform();
+        // Color only the fill; preserve the outline beneath it.
+        context.globalCompositeOperation = 'source-in';
+        context.fillStyle = options.textColor;
+        context.resetTransform();
+        context.fillRect(0, 0, width, height);
+        titleContext.drawImage(mask, 0, 0);
+        title.style.opacity = '0';
         texture.needsUpdate = true;
     };
 
