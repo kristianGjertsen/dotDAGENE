@@ -33,9 +33,6 @@ export const AboutUsPage = () => {
                 dotDAGENE er for deg som ønsker mer enn bare en rask introduksjon. Her legger vi til rette for ekte dialog mellom studenter og bransjen.
               </p>
 
-              <p className='text-left'>
-                dotDAGENE er for deg som ønsker mer enn bare en rask introduksjon. Her legger vi til rette for ekte dialog mellom studenter og bransjen.
-              </p>
 
 
               <div className="relative mt-20">
