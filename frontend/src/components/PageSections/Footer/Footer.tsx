@@ -47,62 +47,54 @@ export const Footer = () => {
           </section>
         </div>
 
-        <section className="mx-auto grid w-full max-w-5xl gap-8 text-gray-100 md:grid-cols-3 md:gap-10">
+        <section className="flex flex-col items-center justify-center gap-5 text-center text-gray-100 md:flex-row md:items-stretch md:gap-20">
           <div
-            className="flex items-start gap-4 md:justify-self-center"
+            className="flex w-full max-w-[220px] flex-col items-center border border-red-500"
             onMouseEnter={() => mailIconRef.current?.startAnimation()}
             onMouseLeave={() => mailIconRef.current?.stopAnimation()}
           >
-
-            <div className="max-w-[220px] flex flex-col items-center">
-              <Mail
-                ref={mailIconRef}
-                size={35}
-                className="text-tertiary h-8 w-8 shrink-0 mb-2"
-              />
-              <a
-                href="mailto:kontakt@dotdagene.no"
-                className="hover:text-tertiary transition-colors duration-150"
-              >
-                kontakt@dotdagene.no
-              </a>
-            </div>
+            <Mail
+              ref={mailIconRef}
+              size={35}
+              className="text-tertiary h-8 w-8 shrink-0 mb-2"
+            />
+            <a
+              href="mailto:kontakt@dotdagene.no"
+              className="hover:text-tertiary transition-colors duration-150"
+            >
+              kontakt@dotdagene.no
+            </a>
           </div>
           <div
-            className="flex items-start gap-4 md:justify-self-center"
-            onMouseEnter={() => calendarIconRef.current?.startAnimation()}
-            onMouseLeave={() => calendarIconRef.current?.stopAnimation()}
-          >
-            <div className="max-w-[220px] flex flex-col items-center">
-              <CalendarDays
-                ref={calendarIconRef}
-                size={35}
-                className="text-tertiary h-8 w-8 shrink-0 mb-2"
-              />
-              <p>9 og 10. februar 2027</p>
-            </div>
-          </div>
-          <div
-            className="flex items-start gap-4 md:justify-self-center"
+            className="flex w-full max-w-[220px] flex-col items-center border border-red-500"
             onMouseEnter={() => mapPinIconRef.current?.startAnimation()}
             onMouseLeave={() => mapPinIconRef.current?.stopAnimation()}
           >
-
-            <div className="max-w-[220px] flex flex-col items-center text-center">
-              <MapPinIcon
-                ref={mapPinIconRef}
-                size={35}
-                className="text-tertiary h-8 w-8 shrink-0 mb-2"
-              />
-              <a
-                href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:text-tertiary transition-colors duration-150"
-              >
-                Realfagbygget U1 NTNU Gløshaugen, Trondheim
-              </a>
-            </div>
+            <MapPinIcon
+              ref={mapPinIconRef}
+              size={35}
+              className="text-tertiary h-8 w-8 shrink-0 mb-2"
+            />
+            <a
+              href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-tertiary transition-colors duration-150"
+            >
+              Realfagbygget U1 NTNU Gløshaugen, Trondheim
+            </a>
+          </div>
+          <div
+            className="flex w-full max-w-[220px] flex-col items-center border border-red-500"
+            onMouseEnter={() => calendarIconRef.current?.startAnimation()}
+            onMouseLeave={() => calendarIconRef.current?.stopAnimation()}
+          >
+            <CalendarDays
+              ref={calendarIconRef}
+              size={35}
+              className="text-tertiary h-8 w-8 shrink-0 mb-2"
+            />
+            <p>9 og 10. februar 2027</p>
           </div>
         </section>
 
