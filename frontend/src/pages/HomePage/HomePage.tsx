@@ -139,7 +139,7 @@ export const HomePage = () => {
                 icon={UserGroupIcon}
               >
                 Velkommen til neste års møteplass for morgendagens teknologer!
-                Karrieredagene samler flere hundre studenter fra informatikk og
+                Karrieredagene samler flere hundre IT studenter fra informatikk og
                 relaterte studieretninger.
               </InfoWithButton>
             </div>
