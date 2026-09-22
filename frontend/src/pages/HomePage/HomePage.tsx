@@ -3,13 +3,13 @@ import { useLocation } from 'react-router-dom';
 import {
   BuildingOffice2Icon,
   ClockIcon,
-  SparklesIcon,
+ // SparklesIcon,
   UserGroupIcon,
 } from '@heroicons/react/20/solid';
 
 import { Footer } from '../../components/PageSections/Footer/Footer';
 import { Header } from '../../components/PageSections/Header/Header';
-import { Info } from '../../components/Elements/Info';
+//import { Info } from '../../components/Elements/Info';
 import { InfoWithButton } from '../../components/Elements/InfoWithButton';
 import { LinkButton } from '../../components/Elements/LinkButton';
 import { BannerBig, BannerSmall, CalendarButton, Countdown } from '.';
@@ -154,6 +154,7 @@ export const HomePage = () => {
                 description="Hover eller trykk på standene for å se hvem som står hvor."
               />
 
+              { /* 
               <div className="flex w-full">
                 <Info
                   titelChildren="Kveldsarrangement"
@@ -171,6 +172,9 @@ export const HomePage = () => {
                   </div>
                 </Info>
               </div>
+              */}
+
+
             </section>
           </div>
         </section>
