@@ -33,6 +33,11 @@ export const faqsForStudents: FaqItem[] = [
 //FAQ-innhold for bedrifter
 export const faqsForCompanies: FaqItem[] = [
   {
+    question: 'Hvilke studenter kan vi forvente å møte på dotDAGENE?',
+    answer:
+      'Dere kan forvente å møte studenter fra informatikk og andre relevante studieretninger ved NTNU, med interesse for IT, teknologi og digitalisering.',
+  },
+  {
     question: 'Hvem kan delta som bedrift på dotDAGENE?',
     answer:
       'dotDAGENE er åpent for bedrifter innen IT, teknologi og digitalisering som ønsker å møte studenter ved NTNU. Ta kontakt via interesseskjemaet for mer informasjon.',
