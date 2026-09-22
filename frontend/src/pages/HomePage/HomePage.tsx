@@ -154,6 +154,7 @@ export const HomePage = () => {
                 description="Hover eller trykk på standene for å se hvem som står hvor."
               />
 
+              { /* 
               <div className="flex w-full">
                 <Info
                   titelChildren="Kveldsarrangement"
@@ -171,6 +172,9 @@ export const HomePage = () => {
                   </div>
                 </Info>
               </div>
+              */}
+
+              
             </section>
           </div>
         </section>
