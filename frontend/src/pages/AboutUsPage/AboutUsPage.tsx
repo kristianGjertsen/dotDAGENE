@@ -10,8 +10,8 @@ export const AboutUsPage = () => {
     <>
       <Header />
       <AppLayout>
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-8 lg:w-full lg:max-w-none lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:items-start">
 
             <div className="space-y-6">
 
@@ -40,17 +40,17 @@ export const AboutUsPage = () => {
               </div>
             </div>
 
-            <div className="border-3 border-black bg-white p-6 space-y-4">
+            <div className="border-3 border-black bg-white p-3 sm:p-6 space-y-4">
               <div>
                 <h2 className="text-3xl pb-4 font-semibold">Menneskene bak dotDAGENE</h2>
-                <p>Vi representerer bachelor- og masterstudenter i informatikk ved NTNU.
+                <p>Vi representerer bachelor- og masterstudenter på informatikk ved NTNU.
                   Sammen legger vi til rette for samarbeid, læring og faglige muligheter.</p>
               </div>
               <div className="overflow-hidden border-3 border-black bg-secondary/10">
                 <img
                   src={GroupImg}
                   alt="Gruppebilde"
-                  className="w-full h-[28rem] md:h-[32rem] object-cover object-[center_top]"
+                  className="w-full aspect-square sm:aspect-[4/3] lg:aspect-[6/5] object-cover object-top"
                   draggable={false}
                 />
               </div>

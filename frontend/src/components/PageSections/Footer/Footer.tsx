@@ -76,7 +76,7 @@ export const Footer = () => {
               className="text-tertiary h-8 w-8 shrink-0 mb-2"
             />
             <a
-              href="https://use.mazemap.com/#v=1&config=ntnu&campusid=1&zlevel=-1&center=10.405303,63.415515&zoom=17.9&search=realfagbygget&sharepoitype=poi&sharepoi=1000459313"
+              href="https://link.mazemap.com/aev0cjsq"
               target="_blank"
               rel="noreferrer"
               className="hover:text-tertiary transition-colors duration-150"
