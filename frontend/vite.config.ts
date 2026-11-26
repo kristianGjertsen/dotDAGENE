@@ -9,6 +9,10 @@ import { playDodle } from './server/dodle';
 import { saveCompletion } from './api/dodle';
 import { loadDodleWords } from './server/dodleWords';
 import {
+  createCheckWordHandler,
+  loadDotillionQuestions,
+} from './api/check-word';
+import {
   createContactHandler,
   createResendClient,
   type ContactRequest,
@@ -91,6 +95,43 @@ function localContactApiPlugin() {
       console.info(
         `[Dodle] Blob-lagring: ${blobConfig.token ? 'tilkoblet' : 'mangler BLOB_READ_WRITE_TOKEN i frontend/.env.local'}`,
       );
+      const checkWord = createCheckWordHandler(() =>
+        loadDotillionQuestions(blobConfig.token),
+      );
+      server.middlewares.use('/api/check-word', async (req, res) => {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        const response = {
+          setHeader(name: string, value: string) {
+            res.setHeader(name, value);
+          },
+          status(code: number) {
+            res.statusCode = code;
+            return this;
+          },
+          json(body: unknown) {
+            res.end(JSON.stringify(body));
+          },
+        };
+        if (req.method !== 'POST') {
+          await checkWord({ method: req.method }, response);
+          return;
+        }
+        try {
+          let raw = '';
+          for await (const chunk of req) {
+            raw += chunk.toString();
+            if (raw.length > 4096) {
+              res.statusCode = 413;
+              res.end(JSON.stringify({ error: 'For stor forespørsel.' }));
+              return;
+            }
+          }
+          await checkWord({ method: req.method, body: raw }, response);
+        } catch {
+          res.statusCode = 400;
+          res.end(JSON.stringify({ error: 'Kunne ikke lese forespørselen.' }));
+        }
+      });
       server.middlewares.use('/api/dodle', async (req, res) => {
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.setHeader('Cache-Control', 'no-store');
