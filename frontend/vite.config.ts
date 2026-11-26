@@ -7,6 +7,7 @@ import { publicEntries } from './api/advent';
 import { randomBytes } from 'node:crypto';
 import { playDodle } from './server/dodle';
 import { saveCompletion } from './api/dodle';
+import { createDotillionHandler } from './api/dotillion';
 import { loadDodleWords } from './server/dodleWords';
 import {
   createCheckWordHandler,
@@ -98,40 +99,50 @@ function localContactApiPlugin() {
       const checkWord = createCheckWordHandler(() =>
         loadDotillionQuestions(blobConfig.token),
       );
-      server.middlewares.use('/api/check-word', async (req, res) => {
-        res.setHeader('Content-Type', 'application/json; charset=utf-8');
-        const response = {
-          setHeader(name: string, value: string) {
-            res.setHeader(name, value);
-          },
-          status(code: number) {
-            res.statusCode = code;
-            return this;
-          },
-          json(body: unknown) {
-            res.end(JSON.stringify(body));
-          },
-        };
-        if (req.method !== 'POST') {
-          await checkWord({ method: req.method }, response);
-          return;
-        }
-        try {
-          let raw = '';
-          for await (const chunk of req) {
-            raw += chunk.toString();
-            if (raw.length > 4096) {
-              res.statusCode = 413;
-              res.end(JSON.stringify({ error: 'For stor forespørsel.' }));
-              return;
-            }
+      const dotillion = createDotillionHandler((result) =>
+        saveCompletion(result, blobConfig),
+      );
+      for (const [path, handler] of [
+        ['/api/check-word', checkWord],
+        ['/api/dotillion', dotillion],
+      ] as const) {
+        server.middlewares.use(path, async (req, res) => {
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          const response = {
+            setHeader(name: string, value: string) {
+              res.setHeader(name, value);
+            },
+            status(code: number) {
+              res.statusCode = code;
+              return this;
+            },
+            json(body: unknown) {
+              res.end(JSON.stringify(body));
+            },
+          };
+          if (req.method !== 'POST') {
+            await handler({ method: req.method }, response);
+            return;
           }
-          await checkWord({ method: req.method, body: raw }, response);
-        } catch {
-          res.statusCode = 400;
-          res.end(JSON.stringify({ error: 'Kunne ikke lese forespørselen.' }));
-        }
-      });
+          try {
+            let raw = '';
+            for await (const chunk of req) {
+              raw += chunk.toString();
+              if (raw.length > 4096) {
+                res.statusCode = 413;
+                res.end(JSON.stringify({ error: 'For stor forespørsel.' }));
+                return;
+              }
+            }
+            await handler({ method: req.method, body: raw }, response);
+          } catch {
+            res.statusCode = 400;
+            res.end(
+              JSON.stringify({ error: 'Kunne ikke lese forespørselen.' }),
+            );
+          }
+        });
+      }
       server.middlewares.use('/api/dodle', async (req, res) => {
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.setHeader('Cache-Control', 'no-store');

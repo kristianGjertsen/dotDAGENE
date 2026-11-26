@@ -1,0 +1,80 @@
+.advent-popup.advent-popup--dotillion {
+  height: calc(100dvh - 3rem);
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: pan-x;
+}
+
+.dotillion {
+  container-type: inline-size;
+  background: #001538;
+}
+
+.dotillion__world {
+  /* Keep the ice and rod anchored to the original image as the world grows. */
+  --rod-top: calc(51.52859cqw - min(17.46535cqw, 138.26733px));
+  position: relative;
+  min-height: 177.68332cqw;
+  height: calc(var(--hook-depth) + max(100cqw, 600px));
+  overflow-anchor: none;
+}
+
+.dotillion__background {
+  position: absolute;
+  inset: 0 0 auto;
+  aspect-ratio: 941 / 1672;
+  background-size: cover;
+  background-position: center;
+  mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  pointer-events: none;
+}
+
+.dotillion__fisher,
+.dotillion__line-track {
+  top: var(--rod-top);
+}
+
+.dotillion__line {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: calc(var(--hook-depth) - var(--rod-top));
+  background: #e2e8f0;
+  box-shadow: 1px 0 0 #334155;
+  transform: translateX(-50%);
+  animation: dotillion-lower-hook 1.8s ease-in-out both;
+}
+
+.dotillion__hook {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 24px;
+  height: 32px;
+  transform: translateX(-50%);
+  color: #e2e8f0;
+  filter: drop-shadow(1px 1px 0 #334155);
+}
+
+.dotillion__feedback {
+  position: absolute;
+  top: calc(100% + 42px);
+  left: 50%;
+  width: min(240px, 80cqw);
+  transform: translateX(-50%);
+}
+
+.dotillion__card {
+  top: calc(var(--hook-depth) + 52px);
+}
+
+@keyframes dotillion-lower-hook {
+  from { height: calc(var(--from-depth) - var(--rod-top)); }
+  to { height: calc(var(--hook-depth) - var(--rod-top)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotillion__line {
+    animation-duration: 1ms;
+  }
+}

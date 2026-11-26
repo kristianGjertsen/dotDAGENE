@@ -5,5 +5,5 @@ import type { AdventDay } from '../types';
 export const day = {
   Popup,
   Challenge,
-  challengeEnabled: false,
+  challengeEnabled: true,
 } satisfies AdventDay;

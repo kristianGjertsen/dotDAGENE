@@ -2,8 +2,18 @@ import { put } from '@vercel/blob';
 import { publicEntries } from './advent';
 import { encrypt, playDodle, type Completion } from '../server/dodle';
 
+export interface DotillionCompletion {
+  id: string;
+  name: string;
+  mobile: string;
+  score: number;
+  challenge: 'dotillion-2026-12-09';
+  completed: true;
+  completedAt: string;
+}
+
 export async function saveCompletion(
-  result: Completion,
+  result: Completion | DotillionCompletion,
   config = {
     token: process.env.BLOB_READ_WRITE_TOKEN,
     secret: process.env.DODLE_SECRET || process.env.BLOB_READ_WRITE_TOKEN,
@@ -19,7 +29,9 @@ export async function saveCompletion(
     access === 'public'
       ? { encrypted: encrypt(result, secret), version: 1 }
       : result;
-  await put(`dodle/submissions/${result.id}.json`, JSON.stringify(data), {
+  const game = result.challenge === 'dotillion-2026-12-09' ? 'dotillion' : 'dodle';
+  const path = `${game}/submissions/${result.id}.json`;
+  await put(path, JSON.stringify(data), {
     access,
     token: config.token,
     addRandomSuffix: false,
@@ -27,8 +39,8 @@ export async function saveCompletion(
     contentType: 'application/json',
   });
   console.info(
-    '[Dodle] Resultat lagret i Blob:',
-    `dodle/submissions/${result.id}.json`,
+    `[${game}] Resultat lagret i Blob:`,
+    path,
   );
 }
 
