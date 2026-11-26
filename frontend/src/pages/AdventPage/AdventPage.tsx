@@ -23,10 +23,12 @@ export const AdventPage = () => {
                   status: 'published',
                   title:
                     index === 0
-                      ? 'En liten førjulsoverraskelse'
+                      ? 'Dodle – gjett juleordet'
                       : 'Dagens juleutfordring',
                   description:
-                    'Dette er eksempelinnhold. Her kan dere presentere dagens premie, oppgave eller aktivitet og forklare hvordan man deltar.',
+                    index === 0
+                      ? 'Skriv inn navnet ditt og gjett juleordet på seks forsøk. Når du klarer det, kan du sende inn resultatet til konkurransen.'
+                      : 'Dette er eksempelinnhold. Her kan dere presentere dagens premie, oppgave eller aktivitet og forklare hvordan man deltar.',
                   link: '#preview-info',
                   linkLabel: 'Se eksempel på deltakelse',
                 }

@@ -5,5 +5,5 @@ import type { AdventDay } from '../types';
 export const day = {
   Popup,
   Challenge,
-  challengeEnabled: import.meta.env.DEV,
+  challengeEnabled: true,
 } satisfies AdventDay;

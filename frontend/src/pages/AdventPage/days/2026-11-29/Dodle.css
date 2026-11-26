@@ -1,18 +1,97 @@
-.dodle { max-width: 35rem; margin: auto; }
-.dodle form { margin-top: 1rem; }
-.dodle label { display: block; font-weight: 600; margin-bottom: .4rem; }
-.dodle input { width: 100%; border: 2px solid black; background: white; color: black; padding: .75rem; font-size: 1rem; }
-.dodle input:focus-visible, .dodle button:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
-.dodle__board { display: grid; gap: .4rem; margin: 1.5rem auto; max-width: 21rem; }
-.dodle__row { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
-.dodle__tile { display: grid; place-items: center; aspect-ratio: 1; border: 2px solid #6c7166; font-size: clamp(1.2rem, 5vw, 1.75rem); font-weight: 700; text-transform: uppercase; background: white; }
-.dodle [data-state='correct'] { background: #46713b; border-color: #46713b; color: white; }
-.dodle [data-state='present'] { background: #94721a; border-color: #94721a; color: white; }
-.dodle [data-state='absent'] { background: #666; border-color: #666; color: white; }
-.dodle__keyboard { display: grid; gap: .35rem; margin-top: 1rem; }
-.dodle__keys { display: flex; justify-content: center; gap: .25rem; }
-.dodle__keys button { min-width: 0; flex: 1; padding: .7rem 0; border: 1px solid black; background: var(--color-quaternary); font-weight: 600; cursor: pointer; }
-.dodle__keyboard .dodle__wide { flex: 2; font-size: .8rem; }
-.dodle__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
-.dodle__feedback { min-height: 1.6rem; margin-top: 1rem; }
-.dodle__hint { font-size: .875rem; margin-top: .75rem; }
+.dodle {
+  max-width: 35rem;
+  margin: auto;
+}
+.dodle form {
+  margin-top: 1rem;
+}
+.dodle label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.dodle input {
+  width: 100%;
+  border: 2px solid black;
+  background: white;
+  color: black;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+.dodle input:focus-visible,
+.dodle button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+.dodle__board {
+  display: grid;
+  gap: 0.4rem;
+  margin: 1.5rem auto;
+  max-width: 21rem;
+}
+.dodle__row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.4rem;
+}
+.dodle__tile {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 2px solid #6c7166;
+  font-size: clamp(1.2rem, 5vw, 1.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  background: white;
+}
+.dodle [data-state='correct'] {
+  background: #46713b;
+  border-color: #46713b;
+  color: white;
+}
+.dodle [data-state='present'] {
+  background: #94721a;
+  border-color: #94721a;
+  color: white;
+}
+.dodle [data-state='absent'] {
+  background: #666;
+  border-color: #666;
+  color: white;
+}
+.dodle__keyboard {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+.dodle__keys {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.dodle__keys button {
+  min-width: 0;
+  flex: 1;
+  padding: 0.7rem 0;
+  border: 1px solid black;
+  background: var(--color-quaternary);
+  font-weight: 600;
+  cursor: pointer;
+}
+.dodle__keyboard .dodle__wide {
+  flex: 2;
+  font-size: 0.8rem;
+}
+.dodle__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.dodle__feedback {
+  min-height: 1.6rem;
+  margin-top: 1rem;
+}
+.dodle__hint {
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}

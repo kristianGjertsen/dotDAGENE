@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { ViteDevServer } from 'vite';
 import { publicEntries } from './api/advent';
+import { randomBytes } from 'node:crypto';
+import { playDodle } from './server/dodle';
 import {
   createContactHandler,
   createResendClient,
@@ -69,6 +71,22 @@ function localContactApiPlugin() {
   return {
     name: 'local-contact-api',
     configureServer(server: ViteDevServer) {
+      const dodlePreviewSecret = randomBytes(32).toString('hex');
+      server.middlewares.use('/api/dodle', async (req, res) => {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-store');
+        if (req.method !== 'POST') { res.statusCode = 405; res.end(JSON.stringify({ error: 'Bruk POST.' })); return; }
+        try {
+          let raw = '';
+          for await (const chunk of req) {
+            raw += chunk.toString();
+            if (raw.length > 12000) { res.statusCode = 413; res.end(JSON.stringify({ error: 'For stor forespørsel.' })); return; }
+          }
+          const result = await playDodle(JSON.parse(raw), { secret: dodlePreviewSecret, preview: true, save: async () => {} });
+          res.statusCode = result.code;
+          res.end(JSON.stringify(result.body));
+        } catch { res.statusCode = 400; res.end(JSON.stringify({ error: 'Kunne ikke behandle forespørselen.' })); }
+      });
       server.middlewares.use('/api/advent', (_req, res) => {
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.setHeader('Cache-Control', 'no-store');

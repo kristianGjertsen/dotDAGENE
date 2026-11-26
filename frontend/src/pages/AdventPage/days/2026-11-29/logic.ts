@@ -1,6 +1,7 @@
 export type LetterState = 'correct' | 'present' | 'absent';
 export const MAX_ATTEMPTS = 6;
-export const normalizeWord = (word: string) => word.normalize('NFC').toLocaleLowerCase('nb-NO').trim();
+export const normalizeWord = (word: string) =>
+  word.normalize('NFC').toLocaleLowerCase('nb-NO').trim();
 
 export function scoreGuess(guess: string, answer: string): LetterState[] {
   const result: LetterState[] = Array(5).fill('absent');
