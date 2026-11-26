@@ -6,8 +6,9 @@ import {
   randomInt,
   randomUUID,
 } from 'node:crypto';
-import { WORDS } from '../src/pages/AdventPage/days/2026-11-29/words';
+import { loadDodleWords, parseDodleWords } from './dodleWords';
 import { isValidWord } from './dictionary';
+import { normalizeMobile } from '../src/pages/AdventPage/days/2026-11-29/mobile';
 import {
   MAX_ATTEMPTS,
   normalizeWord,
@@ -17,6 +18,7 @@ import {
 export interface Game {
   id: string;
   name: string;
+  mobile?: string;
   answer: string;
   guesses: string[];
   expires: number;
@@ -24,6 +26,8 @@ export interface Game {
 export interface Completion {
   id: string;
   name: string;
+  mobile: string;
+  word: string;
   challenge: 'dodle-2026-11-29';
   completed: true;
   completedAt: string;
@@ -63,12 +67,12 @@ export function gameView(game: Game, secret: string) {
   return {
     token: encrypt(game, secret),
     name: game.name,
+    hasMobile: !!normalizeMobile(game.mobile),
     guesses: game.guesses.map((word) => ({
       word,
       scores: scoreGuess(word, game.answer),
     })),
     status: won ? 'won' : lost ? 'lost' : 'playing',
-    ...(lost ? { answer: game.answer } : {}),
   };
 }
 export async function playDodle(
@@ -77,7 +81,7 @@ export async function playDodle(
     secret: string;
     save: (result: Completion) => Promise<void>;
     preview?: boolean;
-    answer?: string;
+    loadWords?: () => Promise<string[]>;
     validateWord?: (word: string) => Promise<boolean>;
   },
 ) {
@@ -91,10 +95,41 @@ export async function playDodle(
         : '';
     if (!name || name.length > 80 || /[\x00-\x1f<>]/.test(name))
       return { code: 400, body: { error: 'Skriv inn et navn på 1–80 tegn.' } };
+    const mobile = normalizeMobile(input.mobile);
+    if (!mobile)
+      return {
+        code: 400,
+        body: {
+          error:
+            'Skriv inn et mobilnummer med 8 siffer, eventuelt med +47 foran.',
+        },
+      };
+    let answer: string;
+    {
+      try {
+        const words = parseDodleWords(
+          await (options.loadWords ?? loadDodleWords)(),
+        );
+        answer = words[randomInt(words.length)];
+      } catch (error) {
+        console.error(
+          '[Dodle] Kunne ikke hente dodle/words/words.json fra Blob:',
+          error instanceof Error ? error.name : 'Unknown error',
+        );
+        return {
+          code: 503,
+          body: {
+            error:
+              'Kunne ikke hente fasitord fra Vercel Blob. Sjekk dodle/words/words.json og Blob-tilkoblingen.',
+          },
+        };
+      }
+    }
     const game: Game = {
       id: randomUUID(),
       name,
-      answer: options.answer ?? WORDS[randomInt(WORDS.length)],
+      mobile,
+      answer,
       guesses: [],
       expires: Date.now() + 24 * 60 * 60 * 1000,
     };
@@ -117,10 +152,18 @@ export async function playDodle(
         code: 400,
         body: { error: 'Du må løse ordet før resultatet kan sendes inn.' },
       };
+    const mobile = normalizeMobile(game.mobile ?? input.mobile);
+    if (!mobile)
+      return {
+        code: 400,
+        body: { error: 'Legg til mobilnummer før du sender inn resultatet.' },
+      };
     if (!options.preview)
       await options.save({
         id: game.id,
         name: game.name,
+        mobile,
+        word: game.answer,
         challenge: 'dodle-2026-11-29',
         completed: true,
         completedAt: new Date().toISOString(),

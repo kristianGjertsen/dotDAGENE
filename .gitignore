@@ -4,3 +4,5 @@ node_modules/
 # Browser test output
 frontend/test-results/
 frontend/playwright-report/
+.vercel
+.env*

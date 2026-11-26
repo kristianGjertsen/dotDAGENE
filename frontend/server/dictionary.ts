@@ -8,11 +8,15 @@ export async function isValidWord(
   if (!/^[a-zæøå]{5}$/.test(normalized)) return false;
 
   const response = await fetcher(
-    `https://ordbank.uib.no/api/lemmas?query=${encodeURIComponent(normalized)}&language=nob&search_inflection=true`,
+    `https://ord.uib.no/api/articles?w=${encodeURIComponent(normalized)}&dict=bm&scope=ei`,
     { signal: AbortSignal.timeout(8000) },
   );
   if (!response.ok) throw new Error('Dictionary unavailable');
   const data: unknown = await response.json();
-  if (!Array.isArray(data)) throw new Error('Unexpected dictionary response');
-  return data.length > 0;
+  // Exact headwords (e) and inflected forms (i), never fuzzy suggestions.
+  const articles = (data as { articles?: { bm?: unknown } } | null)?.articles
+    ?.bm;
+  if (!Array.isArray(articles))
+    throw new Error('Unexpected dictionary response');
+  return articles.length > 0;
 }

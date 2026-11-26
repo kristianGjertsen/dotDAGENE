@@ -1,14 +1,9 @@
-import groupImage from '../../../../assets/groupImg.jpg';
 import type { DayPopupProps } from '../types';
 
 export const DayPopupContent = ({ entry, onStart, onClose }: DayPopupProps) => (
   <>
     {entry.status === 'published' && (
-      <img
-        className="advent-popup__image"
-        src={groupImage}
-        alt="Gruppen bak dotDAGENE"
-      />
+      <div className="advent-popup__image aspect-video" aria-hidden="true" />
     )}
     <div className="advent-popup__body">
       <h2 id="package-title">{entry.title}</h2>

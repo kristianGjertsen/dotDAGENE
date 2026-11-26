@@ -2,13 +2,14 @@ import { useRef, useState, type FormEvent } from 'react';
 import type { ChallengeProps } from '../types';
 import { MAX_ATTEMPTS, normalizeWord, type LetterState } from './logic';
 import './Dodle.css';
+import { normalizeMobile } from './mobile';
 
 interface GameView {
   token: string;
   name: string;
+  hasMobile?: boolean;
   guesses: { word: string; scores: LetterState[] }[];
   status: 'playing' | 'won' | 'lost';
-  answer?: string;
 }
 const STORAGE_KEY = 'dotdagene-dodle-2026-11-29';
 const stateLabels = {
@@ -18,21 +19,32 @@ const stateLabels = {
 };
 const priority = { absent: 1, present: 2, correct: 3 };
 
-function loadGame(): GameView | null {
+function loadWonGame(): GameView | null {
   try {
     const game = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? 'null');
-    return game &&
+    // Remove answers retained by earlier local test versions.
+    if (
+      game &&
+      typeof game === 'object' &&
+      ('debugAnswer' in game || 'answer' in game)
+    ) {
+      delete game.debugAnswer;
+      delete game.answer;
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(game));
+    }
+    return game?.status === 'won' &&
       typeof game.token === 'string' &&
       typeof game.name === 'string' &&
       Array.isArray(game.guesses) &&
-      game.guesses.length <= 6 &&
-      ['playing', 'won', 'lost'].includes(game.status)
+      game.guesses.length > 0 &&
+      game.guesses.length <= MAX_ATTEMPTS
       ? game
       : null;
   } catch {
     return null;
   }
 }
+
 async function request<T>(body: unknown): Promise<T> {
   const response = await fetch('/api/dodle', {
     method: 'POST',
@@ -45,8 +57,9 @@ async function request<T>(body: unknown): Promise<T> {
 }
 
 export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
-  const [game, setGame] = useState<GameView | null>(loadGame);
+  const [game, setGame] = useState<GameView | null>(loadWonGame);
   const [name, setName] = useState('');
+  const [mobile, setMobile] = useState('');
   const [guess, setGuess] = useState('');
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
@@ -70,6 +83,11 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
     try {
       await action();
     } catch (error) {
+      if (import.meta.env.DEV)
+        console.error(
+          '[Dodle]',
+          error instanceof Error ? error.message : 'Forespørselen feilet',
+        );
       setMessage(error instanceof Error ? error.message : 'Prøv igjen.');
     } finally {
       inFlight.current = false;
@@ -79,7 +97,14 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
   function start(event: FormEvent) {
     event.preventDefault();
     void run(async () => {
-      remember(await request<GameView>({ action: 'start', name: name.trim() }));
+      const next = await request<GameView>({
+        action: 'start',
+        name: name.trim(),
+        mobile,
+      });
+      setGuess('');
+      setSaved(null);
+      remember(next);
     });
   }
   function submitGuess(event?: FormEvent) {
@@ -147,26 +172,34 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
             required
             disabled={busy}
           />
+          <label htmlFor="dodle-mobile" className="mt-4">
+            Mobilnummer
+          </label>
+          <input
+            id="dodle-mobile"
+            type="tel"
+            inputMode="tel"
+            autoComplete="tel"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
+            maxLength={30}
+            placeholder="8 siffer, eventuelt +47"
+            required
+            disabled={busy}
+          />
           <p className="dodle__hint">
-            Når du klarer ordet, kan du sende inn navn og fullført-status til
-            konkurransen. Tapte spill sendes ikke inn.
+            Når du klarer ordet, kan du sende inn navn, mobilnummer og
+            fullført-status til konkurransen. Tapte spill sendes ikke inn.
           </p>
           <button
             className="calendar-card__link"
-            disabled={busy || !name.trim()}
+            disabled={busy || !name.trim() || !normalizeMobile(mobile)}
           >
             {busy ? 'Starter …' : 'Start Dodle'}
           </button>
         </form>
       ) : (
         <>
-          <p className="mt-3">
-            Spiller: <strong>{game.name}</strong> · {game.guesses.length}/
-            {MAX_ATTEMPTS} forsøk
-          </p>
-          <p className="dodle__hint">
-            Grønn: riktig plass · Gul: feil plass · Grå: ikke i ordet
-          </p>
           <div className="dodle__board" aria-label="Spillbrett">
             {Array.from({ length: MAX_ATTEMPTS }, (_, rowIndex) => {
               const row = game.guesses[rowIndex];
@@ -269,6 +302,23 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
             <div role="status" className="mt-5">
               <h3 className="text-xl font-bold">Du klarte det, {game.name}!</h3>
               <p>Du fant ordet på {game.guesses.length} forsøk.</p>
+              {!game.hasMobile && !saved && (
+                <div className="mt-4">
+                  <label htmlFor="dodle-result-mobile">Mobilnummer</label>
+                  <input
+                    id="dodle-result-mobile"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    maxLength={30}
+                    placeholder="8 siffer, eventuelt +47"
+                    required
+                    disabled={busy}
+                  />
+                </div>
+              )}
               {saved ? (
                 <>
                   <p>
@@ -286,13 +336,24 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
                   disabled={busy}
                   onClick={() =>
                     void run(async () => {
+                      if (import.meta.env.DEV)
+                        console.info(
+                          '[Dodle] Sender fullført-status til serveren.',
+                        );
                       const result = await request<{
                         saved: boolean;
                         preview: boolean;
-                      }>({ action: 'complete', token: game.token });
+                      }>({ action: 'complete', token: game.token, mobile });
                       if (!result.saved && !result.preview)
                         throw new Error(
                           'Resultatet ble ikke lagret. Prøv igjen.',
+                        );
+                      if (import.meta.env.DEV)
+                        console.info(
+                          '[Dodle] Innsending:',
+                          result.saved
+                            ? 'lagret i Blob'
+                            : 'kun forhåndsvisning',
                         );
                       setSaved(result.saved ? 'saved' : 'preview');
                     })
@@ -307,8 +368,8 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
             <div role="status" className="mt-5">
               <h3 className="text-xl font-bold">Ingen forsøk igjen</h3>
               <p>
-                Ordet var <strong>{game.answer?.toUpperCase()}</strong>. Dette
-                spillet blir ikke sendt inn.
+                Dette spillet blir ikke sendt inn. Du kan prøve igjen med et
+                nytt ord.
               </p>
               <button className="calendar-card__link" onClick={reset}>
                 Prøv et nytt ord
@@ -329,11 +390,15 @@ export const Challenge = ({ onComplete, onBack }: ChallengeProps) => {
         >
           Tilbake til pakken
         </button>
-        {game && message.includes('utløpt') && (
-          <button type="button" className="calendar-card__link" onClick={reset}>
-            Start på nytt
-          </button>
-        )}
+        {/* Temporary reset for testing, including completed games. */}
+        <button
+          type="button"
+          className="calendar-card__link"
+          onClick={reset}
+          disabled={busy}
+        >
+          Reset (midlertidig)
+        </button>
       </div>
     </div>
   );

@@ -6,16 +6,19 @@ test('dictionary uses normalized Bokmål inflection query and handles empty matc
   let requested = '';
   const fetcher: typeof fetch = async (url) => {
     requested = String(url);
-    return new Response(JSON.stringify([{ lemma: 'ønske' }]));
+    return new Response(JSON.stringify({ articles: { bm: [42738] } }));
   };
   assert.equal(await isValidWord(' ØNSKE ', fetcher), true);
   const url = new URL(requested);
-  assert.equal(url.origin, 'https://ordbank.uib.no');
-  assert.equal(url.searchParams.get('query'), 'ønske');
-  assert.equal(url.searchParams.get('language'), 'nob');
-  assert.equal(url.searchParams.get('search_inflection'), 'true');
+  assert.equal(url.origin, 'https://ord.uib.no');
+  assert.equal(url.searchParams.get('w'), 'ønske');
+  assert.equal(url.searchParams.get('dict'), 'bm');
+  assert.equal(url.searchParams.get('scope'), 'ei');
   assert.equal(
-    await isValidWord('abcde', async () => new Response('[]')),
+    await isValidWord(
+      'abcde',
+      async () => new Response('{"articles":{"bm":[]}}'),
+    ),
     false,
   );
 });
