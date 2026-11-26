@@ -1,5 +1,11 @@
 [
   {
+    "path": "/advent",
+    "lastmod": "2026-11-26",
+    "priority": 0.8,
+    "changefreq": "daily"
+  },
+  {
     "path": "/",
     "lastmod": "2026-08-17",
     "priority": 1.0,

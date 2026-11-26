@@ -10,6 +10,7 @@ body {
 }
 
 @theme {
+  --color-advent: #B74747;
   --color-dotbackground: #FFFBF1;
   --color-primary: #677B4C;
   --color-secondary: #87A067;

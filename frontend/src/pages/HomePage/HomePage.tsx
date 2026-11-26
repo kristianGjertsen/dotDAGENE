@@ -51,9 +51,18 @@ export const HomePage = () => {
     <>
       <Header />
       <AppLayout>
-        {/* H1 For at google/bing skal kunne lese overskrift, ikke synelig*/}
+        {/* H1 For at google/bing skal kunne lese overskrift, ikke synlig på siden*/}
         <h1 className="sr-only">dotDAGENE 2025</h1>
-
+        <div className="my-10 px-3 text-center">
+          <LinkButton
+            link="/advent"
+            color="advent"
+            size="xl"
+            className="w-full max-w-2xl whitespace-normal! [&>span:last-child]:py-6 sm:[&>span:last-child]:text-4xl"
+          >
+            Se adventskalenderen
+          </LinkButton>
+        </div>
         <div className="relative left-1/2 block w-screen -translate-x-1/2 md:hidden">
           <BannerSmall />
         </div>

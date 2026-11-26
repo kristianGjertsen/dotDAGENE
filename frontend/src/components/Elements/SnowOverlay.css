@@ -1,0 +1,35 @@
+.snow-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  container-type: size;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.snow-overlay__flake {
+  position: absolute;
+  top: -40px;
+  animation: snow-overlay-fall linear infinite;
+}
+
+@keyframes snow-overlay-fall {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(var(--snow-drift), calc(100cqh + 80px), 0)
+      rotate(240deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow-overlay {
+    display: none;
+  }
+
+  .snow-overlay__flake {
+    animation: none;
+  }
+}

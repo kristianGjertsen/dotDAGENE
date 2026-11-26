@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { ViteDevServer } from 'vite';
+import { publicEntries } from './api/advent';
 import {
   createContactHandler,
   createResendClient,
@@ -68,6 +69,11 @@ function localContactApiPlugin() {
   return {
     name: 'local-contact-api',
     configureServer(server: ViteDevServer) {
+      server.middlewares.use('/api/advent', (_req, res) => {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-store');
+        res.end(JSON.stringify(publicEntries()));
+      });
       const contactHandler = createContactHandler(createLocalEmailClient());
 
       server.middlewares.use('/api/contact', (req: IncomingMessage, res: ServerResponse) => {

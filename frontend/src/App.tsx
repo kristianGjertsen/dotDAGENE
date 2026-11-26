@@ -11,6 +11,7 @@ import { AboutUsPage } from './pages/AboutUsPage/AboutUsPage';
 import { ContactPage } from './pages/ContactPage/ContactPage';
 import { PreviousDotdagenePage } from './pages/PreviousDotdagenePage/PreviousDotdagenePage';
 import routeManifest from './routes.json';
+import { AdventPage } from './pages/AdventPage/AdventPage';
 
 type RouteDefinition = {
   path: string;
@@ -19,6 +20,7 @@ type RouteDefinition = {
 const routes: RouteDefinition[] = routeManifest;
 
 const routeComponents: Record<string, JSX.Element> = {
+  '/advent': <AdventPage />,
   '/': <HomePage />,
   '/kontakt': <ContactPage />,
   '/forrige-dotdagene': <PreviousDotdagenePage />,

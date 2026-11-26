@@ -1,0 +1,248 @@
+.advent-page {
+  width: 100%;
+  max-width: 90rem;
+  margin: auto;
+  padding: 3rem 1rem 5rem;
+  color: var(--color-footer);
+}
+.advent-page__intro {
+  padding: clamp(2rem, 6vw, 5rem) 1.5rem;
+  text-align: center;
+  background: var(--color-quaternary);
+  border: 2px solid black;
+  box-shadow: 8px 8px 0 #343e2630;
+}
+.advent-page__eyebrow {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+.advent-page__intro h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  margin: 1rem 0;
+}
+.advent-page__intro p {
+  max-width: 32rem;
+  margin: auto;
+  font-size: 1.125rem;
+}
+.advent-page__season {
+  display: inline-block;
+  border: 1px solid currentColor;
+  padding: 0.5rem 1rem;
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+.advent-page__section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 3.5rem 0 1.5rem;
+}
+.advent-page__section-heading h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.advent-page__grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.calendar-card {
+  min-width: 0;
+  border: 2px solid black;
+  background: var(--color-dotbackground);
+  box-shadow: 5px 5px 0 #343e2625;
+  scroll-margin-top: 7rem;
+}
+.calendar-card__package {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  min-height: 11rem;
+  background: var(--color-advent);
+  color: white;
+  border-bottom: 2px solid black;
+}
+.calendar-card__ribbon {
+  position: absolute;
+  inset: 0 22% 0 auto;
+  width: 2rem;
+  background: #ffffff12;
+  border-inline: 1px solid #ffffff30;
+}
+.calendar-card__package time {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  z-index: 1;
+}
+.calendar-card__package strong {
+  font-size: 4.5rem;
+  letter-spacing: -0.06em;
+}
+.calendar-card__package time span {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  letter-spacing: 0.1em;
+}
+.calendar-card__body {
+  padding: 1.5rem;
+}
+.calendar-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  background: var(--color-quaternary);
+}
+.calendar-card--published .calendar-card__status {
+  background: var(--color-footer);
+  color: white;
+}
+.calendar-card__body h3 {
+  margin: 1rem 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.calendar-card__body p {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+.calendar-card__link,
+.advent-page__notice button {
+  display: inline-block;
+  background: var(--color-primary);
+  color: white;
+  border: 2px solid black;
+  padding: 0.65rem 1rem;
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+.calendar-card__link:hover {
+  background: var(--color-footer);
+}
+.calendar-card__link:focus-visible,
+.advent-page__notice button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 4px;
+}
+.calendar-card__closed {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+.advent-page__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 2px solid black;
+  margin-top: 3rem;
+  background: var(--color-quaternary);
+}
+.advent-page__note svg {
+  flex-shrink: 0;
+}
+.advent-page__note h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 640px) {
+  .advent-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .advent-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.advent-popup {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(48rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
+  padding: 0;
+  border: 2px solid black;
+  background: var(--color-dotbackground);
+  color: var(--color-footer);
+  box-shadow: 8px 8px 0 #00000030;
+}
+.advent-popup::backdrop {
+  background: #17201299;
+}
+.advent-popup__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 4rem 2rem 1.5rem;
+  background: var(--color-advent);
+  color: white;
+  border-bottom: 2px solid black;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.advent-popup__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+.advent-popup__close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+.advent-popup__body {
+  padding: 1.5rem;
+}
+.advent-popup__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid black;
+}
+.advent-popup__body h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.advent-popup__body p {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+
+.advent-challenge__choices {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.advent-challenge__choices button {
+  padding: 1.25rem;
+  border: 2px solid black;
+  background: var(--color-quaternary);
+  cursor: pointer;
+}
+.advent-challenge__choices button:hover {
+  background: var(--color-tertiary);
+}
+.advent-challenge__choices button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
